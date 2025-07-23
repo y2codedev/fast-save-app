@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900  duration-300">
+    <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700  transition-colors duration-300">
       <nav className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
@@ -43,7 +43,7 @@ const Navbar = () => {
             {NAVITEMS.map((item) => (
               <li key={item.id} className="shrink-0">
                 <Link href={item.href} className="group">
-                  <div className="flex flex-col hover:bg-gray-200  dark:text-white text-gray-600 hover:text-gray-900 dark:hover:bg-gray-800  px-2 py-2 rounded-md items-center  gap-1 transition-colors duration-200  ">
+                  <div className="flex flex-col hover:bg-gray-200  dark:text-white text-gray-600 hover:text-gray-900 dark:hover:bg-gray-800  px-3 py-2 rounded-md items-center  gap-1 transition-colors duration-200  ">
                     <span >
                       {item.ariaLabel}
                     </span>
@@ -108,11 +108,11 @@ const Navbar = () => {
               </div>
 
               <ul className="space-y-4">
-                {NAVITEMS.map((item) => (
+                {NAVITEMS?.map((item) => (
                   <li key={item.id}>
                     <Link
                       href={item.href}
-                      className="flex items-center gap-3  py-3 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                      className="flex items-center gap-3  py-3 px-3 rounded-lg text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <item.icon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
