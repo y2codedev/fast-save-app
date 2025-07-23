@@ -38,12 +38,12 @@ const Navbar = () => {
           </div>
 
           <ul className="hidden sm:flex gap-3 text-sm whitespace-nowrap font-medium">
-            {NAVITEMS.map((item) => (
+            {NAVITEMS?.map((item) => (
               <li key={item.id} className="shrink-0">
                 <Link href={item.href} className="group">
                   <div className="flex flex-col hover:bg-gray-200  dark:text-white text-gray-600 hover:text-gray-900 dark:hover:bg-gray-800  px-3 py-2 rounded-md items-center  gap-1 transition-colors duration-200  ">
                     <span >
-                      {item.ariaLabel}
+                      {item?.ariaLabel}
                     </span>
                   </div>
                 </Link>
@@ -57,9 +57,9 @@ const Navbar = () => {
               className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-white dark:bg-gray-800 transition-all duration-200 cursor-pointer"
             >
               {theme === 'dark' ? (
-                <FaSun className="h-5 w-5" aria-hidden="true" />
+                <FaSun className="h-5 w-5" />
               ) : (
-                <FaMoon className="h-5 w-5" aria-hidden="true" />
+                <FaMoon className="h-5 w-5" />
               )}
             </div>
 
@@ -67,7 +67,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(true)}
               className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-gray-100 dark:bg-gray-800 transition-all duration-200 cursor-pointer"
             >
-              <FaShareAlt className="h-5 w-5" aria-hidden="true" />
+              <FaShareAlt className="h-5 w-5" />
             </div>
           </div>
         </div>
