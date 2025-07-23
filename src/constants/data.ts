@@ -241,7 +241,7 @@ export const TopHeader_Item: TopHeaderItem[] = [
     },
     {
         path: '/photo',
-        title: 'Download Photos & Images',
+        title: 'Download Photos & Videos',
         description: 'Save high resolution images to your device',
         highlight: 'Photos'
     },
