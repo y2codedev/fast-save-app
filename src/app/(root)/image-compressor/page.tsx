@@ -81,7 +81,7 @@ export default function Home() {
         <>
             <main className="bg-white dark:bg-gray-900  pt-12 px-4 sm:px-6">
                 <div className="max-w-7xl mx-auto">
-                    <div className="bg-white dark:bg-gray-800 rounded-lg  p-6 mb-8">
+                    <div className="bg-white dark:bg-gray-800 rounded-lg  p-6">
                         <div className="flex flex-col items-center">
                             <label
                                 htmlFor="file-upload"
