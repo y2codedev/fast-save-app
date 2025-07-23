@@ -2,8 +2,7 @@
 
 import { useRef, useState } from 'react'
 import imageCompression from 'browser-image-compression'
-import { Button, Group, Loader } from '@/constants'
-import Image from 'next/image'
+import { Button, Group, ImagePreview, Loader, StatsDisplay } from '@/constants'
 
 export default function Home() {
     const fileRef = useRef<HTMLInputElement | null>(null)
@@ -131,63 +130,23 @@ export default function Home() {
                     </div>
 
                     {compressionRatio !== null && (
-                        <div className="p-4 mb-8 text-center">
-                            <p className="text-indigo-800 dark:text-gray-300 font-semibold">
-                                Success! Reduced file size by <span className="text-indigo-600 dark:text-indigo-600">{compressionRatio}%</span>
-                            </p>
-                            {compressionRatio > 70 ? (
-                                <p className="text-green-600 dark:text-green-400 text-sm mt-1">Excellent compression!</p>
-                            ) : compressionRatio > 40 ? (
-                                <p className="text-blue-600 dark:text-blue-400 text-sm mt-1">Good compression</p>
-                            ) : (
-                                <p className="text-yellow-600 dark:text-yellow-400 text-sm mt-1">Moderate compression</p>
-                            )}
-                        </div>
+                        <StatsDisplay compressionRatio={compressionRatio} />
                     )}
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {original && (
-                            <div className="space-y-3">
-                                <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                                    <Image
-                                        src={original.src}
-                                        alt="Original"
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                        priority
-                                    />
-                                </div>
-                                <div className="text-center">
-                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Original Image
-                                    </p>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                        {(original.size / 1024).toFixed(2)} KB
-                                    </p>
-                                </div>
-                            </div>
+                            <ImagePreview
+                                imageSrc={original.src}
+                                size={original.size}
+                                label="Original Image"
+                            />
                         )}
                         {compressed && (
-                            <div className="space-y-3">
-                                <div className="relative w-full aspect-square rounded-lg overflow-hidden bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-                                    <Image
-                                        src={compressed.src}
-                                        alt="Compressed"
-                                        fill
-                                        className="object-cover"
-                                        sizes="(max-width: 768px) 100vw, 50vw"
-                                    />
-                                </div>
-                                <div className="text-center">
-                                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                                        Compressed Image
-                                    </p>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                                        {(compressed.size / 1024).toFixed(2)} KB
-                                    </p>
-                                </div>
-                            </div>
+                            <ImagePreview
+                                imageSrc={compressed.src}
+                                size={compressed.size}
+                                label="Compressed Image"
+                            />
                         )}
                     </div>
 
