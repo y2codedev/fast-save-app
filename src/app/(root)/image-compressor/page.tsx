@@ -79,7 +79,7 @@ export default function Home() {
 
     return (
         <>
-            <main className="bg-white dark:bg-gray-900  pt-12 px-4 sm:px-6">
+            <main className="bg-white dark:bg-gray-900  sm:pt-12 pt-0  px-4 sm:px-6">
                 <div className="max-w-7xl mx-auto">
                     <div className="bg-transparent  pt-6">
                         <div className="flex flex-col items-center">
