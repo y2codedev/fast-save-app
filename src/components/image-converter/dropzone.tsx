@@ -268,7 +268,7 @@ export default function Dropzone() {
                   className="w-32 px-3 py-1 rounded-md border bg-white text-gray-900 border-gray-300 bg-background text-muted-foreground text-sm font-medium focus:outline-none "
                 >
                   <option value="" disabled className="rounded-md">
-                    Select format
+                    Select Format
                   </option>
 
                   {action.file_type.includes("image") &&
