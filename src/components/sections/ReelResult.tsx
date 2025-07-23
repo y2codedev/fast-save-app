@@ -44,7 +44,9 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                                 alt={data.title || 'Instagram Reel'}
                                 fill
                                 className="object-cover"
-                                unoptimized
+                                loading="lazy"
+                                quality={80}
+                                priority
                             />
                         ) : (
                             <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">

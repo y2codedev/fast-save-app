@@ -116,6 +116,8 @@ const BackgroundRemover = () => {
                     fill
                     className="object-cover"
                     loading="lazy"
+                    quality={80}
+                    priority
                   />
                 ) : (mode === 'url' && imageUrl) ? (
                   <Image
@@ -124,6 +126,8 @@ const BackgroundRemover = () => {
                     fill
                     className="object-cover"
                     loading="lazy"
+                    quality={80}
+                    priority
                   />
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full text-gray-400">

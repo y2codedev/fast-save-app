@@ -133,6 +133,9 @@ export default function SocialMediaDownloader() {
                         alt={result?.title || 'Media thumbnail'}
                         fill
                         className="object-cover"
+                        loading="lazy"
+                        quality={80}
+                        priority
                         unoptimized
                       />
                     ) : (
