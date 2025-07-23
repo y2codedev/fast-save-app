@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, FileUploader, AudioPlayer, LyricsDisplay } from "@/constants";
+import { Button, FileUploader, AudioPlayer } from "@/constants";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import { useRef, useState, useEffect } from "react";
@@ -14,7 +14,6 @@ function VideoToAudioConverter() {
   const [audioURL, setAudioURL] = useState<string | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [albumArt, setAlbumArt] = useState<string | null>(null);
-  const [lyrics, setLyrics] = useState<string>("Lyrics will appear here...");
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -118,11 +117,6 @@ function VideoToAudioConverter() {
       const audioBlob = new Blob([data], { type: "audio/mp3" });
       const url = URL.createObjectURL(audioBlob);
       setAudioURL(url);
-
-      setLyrics("Fetching lyrics...");
-      setTimeout(() => {
-        setLyrics("🎵 Example lyrics line 1\n🎵 Example lyrics line 2\n🎵 Example lyrics line 3");
-      }, 1500);
     } catch (error) {
       console.error("Conversion error:", error);
       if (messageRef.current) messageRef.current.innerHTML = `Error: ${error instanceof Error ? error.message : String(error)}`;
@@ -182,9 +176,6 @@ function VideoToAudioConverter() {
                 albumArt={albumArt}
                 videoFile={videoFile}
               />
-
-              <LyricsDisplay lyrics={lyrics} />
-
             </div>
           </div>
         </div>
