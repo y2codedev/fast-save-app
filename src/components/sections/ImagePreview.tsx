@@ -34,9 +34,8 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
-          loading="lazy"
           quality={80}
-          priority
+          priority={true}
         />
       </div>
     </div>

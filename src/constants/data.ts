@@ -216,8 +216,7 @@ export const NAVITEMS: SocialLink[] = [
         href: '/image-compressor',
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
-    }
-
+    },
 ];
 
 
