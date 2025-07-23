@@ -93,11 +93,6 @@ export default function Dropzone() {
     setIsReady(false);
     setIsConverting(false);
   };
-  const downloadAll = (): void => {
-    for (let action of actions) {
-      !action.is_error && download(action);
-    }
-  };
   const download = (action: Action) => {
     const a = document.createElement("a");
     a.style.display = "none";
@@ -155,7 +150,6 @@ export default function Dropzone() {
     setFiles(data);
     const tmp: Action[] = [];
     data.forEach((file: any) => {
-      const formData = new FormData();
       tmp.push({
         file_name: file.name,
         file_size: file.size,
@@ -273,9 +267,9 @@ export default function Dropzone() {
                   value={selcted}
                   className="w-32 px-3 py-1 rounded-md border bg-white text-gray-900 border-gray-300 bg-background text-muted-foreground text-sm font-medium focus:outline-none "
                 >
-                  <option value="" disabled className="rounded-md">
+                  {/* <option value="" disabled className="rounded-md">
                     ...
-                  </option>
+                  </option> */}
 
                   {action.file_type.includes("image") &&
                     extensions.image.map((elt, i) => (
