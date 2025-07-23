@@ -33,7 +33,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
           alt={label}
           fill
           sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain"
+          className="object-cover"
           priority
         />
       </div>
