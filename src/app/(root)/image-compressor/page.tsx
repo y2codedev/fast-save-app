@@ -153,7 +153,7 @@ export default function Home() {
                                         src={original.src}
                                         alt="Original"
                                         fill
-                                        className="object-contain"
+                                        className="object-cover"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                         priority
                                     />
@@ -175,7 +175,7 @@ export default function Home() {
                                         src={compressed.src}
                                         alt="Compressed"
                                         fill
-                                        className="object-contain"
+                                        className="object-cover"
                                         sizes="(max-width: 768px) 100vw, 50vw"
                                     />
                                 </div>
