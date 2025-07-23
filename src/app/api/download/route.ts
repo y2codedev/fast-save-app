@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   try {
 
     const apiResponse = await fetch(`${process.env.API_URL}?url=${encodeURIComponent(url)}`);
-
+    
     if (!apiResponse.ok) {
       throw new Error(`API request failed with status ${apiResponse.status}`);
     }
