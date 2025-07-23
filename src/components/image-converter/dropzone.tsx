@@ -267,9 +267,9 @@ export default function Dropzone() {
                   value={selcted}
                   className="w-32 px-3 py-1 rounded-md border bg-white text-gray-900 border-gray-300 bg-background text-muted-foreground text-sm font-medium focus:outline-none "
                 >
-                  {/* <option value="" disabled className="rounded-md">
-                    ...
-                  </option> */}
+                  <option value="" disabled className="rounded-md">
+                    Select format
+                  </option>
 
                   {action.file_type.includes("image") &&
                     extensions.image.map((elt, i) => (
