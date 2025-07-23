@@ -99,7 +99,7 @@ export default function ImageToSVG() {
         Image to SVG Converter
       </h1>
 
-      <FileUploadArea onFileUpload={handleFile} loading={loading} />
+      <FileUploadArea onFileUpload={handleFile} loading={loading}  />
 
       {preview && <ImagePreview imageSrc={preview} />}
 
