@@ -101,7 +101,7 @@ export default function ImageToSVG() {
 
       <FileUploadArea onFileUpload={handleFile} loading={loading}  />
 
-      {preview && <ImagePreview imageSrc={preview} />}
+      {preview && <ImagePreview imageSrc={preview} label="Preview" />}
 
       <canvas ref={canvasRef} className="hidden" />
 
