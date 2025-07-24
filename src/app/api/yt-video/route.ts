@@ -12,9 +12,6 @@ export async function GET(request: Request) {
   try {
 
     const info = await ytdl.getInfo(url);
-    console.log('====================================');
-    console.log('Video Info:', info);
-    console.log('====================================');
     const videoFormat = ytdl.filterFormats(info.formats, 'videoonly');
     const format = ytdl.chooseFormat(videoFormat, {quality: 'highest'});
     const fileName = `${info.videoDetails.title}.${format.container}`;

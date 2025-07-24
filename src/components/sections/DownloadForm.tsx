@@ -2,22 +2,26 @@
 
 import { useState } from 'react';
 import { ReelResult, Toast, Button, InputField } from '@/constants';
+import { usePathname } from 'next/navigation';
+import { TopHeader_Item } from '@/constants/data';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [downloadData, setDownloadData] = useState<any>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const pathName = usePathname();
+  const urlPath = TopHeader_Item.find(item => item.path === pathName) || TopHeader_Item.find(item => item.path === '')!;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    if (!url.includes("instagram.com/reel/")) {
-      Toast('error', 'Please enter a valid Instagram Reel URL.');
-      setIsLoading(false);
-      return;
-    }
+    // if (!url.includes("instagram.com/reel/" )) {
+    //   Toast('error', 'Please enter a valid Instagram Reel URL.');
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     try {
       const apiUrl = `/api/download?url=${encodeURIComponent(url)}`;
@@ -38,7 +42,6 @@ export default function DownloadForm() {
       const data = await response.json();
       setDownloadData(data);
       setUrl('');
-      // Toast('success', 'Reel data fetched successfully!');
     } catch (err) {
       console.error('Download error:', err);
       Toast(
@@ -59,10 +62,10 @@ export default function DownloadForm() {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <InputField
-                label='Enter Instagram Reel URL'
+                label={`Enter ${urlPath?.highlight} URL`}
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://www.instagram.com/reel/..."
+                placeholder="https://www.example.com/..."
               />
             </div>
             <Button

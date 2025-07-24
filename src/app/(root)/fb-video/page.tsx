@@ -1,12 +1,13 @@
-import ComingSoonBanner from '@/components/ui/ComingSoonBanner'
-import React from 'react'
+'use client';
 
-const page = () => {
-    return (
-        <div className=' min-h-screen bg-white dark:bg-slate-900'>
-            <ComingSoonBanner />
-        </div>
-    )
+import { DownloadForm, Group } from "@/constants";
+
+export default function Home() {
+    
+  return (
+    <div className=" bg-white dark:bg-gray-900">
+      <DownloadForm />
+      <Group />
+    </div>
+  );
 }
-
-export default page
