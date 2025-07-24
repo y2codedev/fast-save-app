@@ -1,5 +1,6 @@
 import { FiInstagram } from 'react-icons/fi';
-import { FaSnapchat } from "react-icons/fa";
+import { FaSnapchat,FaPinterest ,FaVideo,FaFacebook } from "react-icons/fa";
+import { MdAudiotrack,MdInsertPhoto } from "react-icons/md";
 
 import {
     DevicePhoneMobileIcon,
@@ -33,31 +34,31 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     {
         id: 2,
         href: '/pinterest',
-        icon: RectangleStackIcon,
+        icon: FaPinterest,
         ariaLabel: 'Pinterest',
     },
     {
         id: 3,
         href: '/video',
-        icon: PlayCircleIcon,
+        icon: FaVideo ,
         ariaLabel: 'Video',
     },
     {
         id: 4,
         href: '/audio',
-        icon: SpeakerWaveIcon,
+        icon: MdAudiotrack,
         ariaLabel: 'Audio',
     },
     {
         id: 5,
         href: '/photo',
-        icon: PhotoIcon,
+        icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
     {
         id: 6,
         href: '/fb-video',
-        icon: PlayCircleIcon,
+        icon: FaFacebook,
         ariaLabel: 'FB Video',
     },
     {
@@ -172,25 +173,25 @@ export const NAVITEMS: SocialLink[] = [
     {
         id: 1,
         href: '/pinterest',
-        icon: RectangleStackIcon,
+        icon: FaPinterest,
         ariaLabel: 'Pinterest',
     },
     {
         id: 2,
         href: '/video',
-        icon: PlayCircleIcon,
+        icon: FaVideo ,
         ariaLabel: 'Video',
     },
     {
         id: 3,
         href: '/audio',
-        icon: SpeakerWaveIcon,
+        icon: MdAudiotrack,
         ariaLabel: 'Audio',
     },
     {
         id: 4,
         href: '/photo',
-        icon: PhotoIcon,
+        icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
     // {
@@ -202,7 +203,7 @@ export const NAVITEMS: SocialLink[] = [
     {
         id: 5,
         href: '/fb-video',
-        icon: PlayCircleIcon,
+        icon: FaFacebook,
         ariaLabel: 'FB Video',
     },
     {
