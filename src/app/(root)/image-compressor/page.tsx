@@ -28,8 +28,8 @@ export default function Home() {
             return
         }
 
-        if (file.size > 10 * 1024 * 1024) {
-            setError('File size exceeds 10MB limit')
+        if (file.size > 100 * 1024 * 1024) {
+            setError('File size exceeds 100MB limit')
             setLoading(false)
             return
         }

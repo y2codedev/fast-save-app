@@ -5,7 +5,7 @@ import Image from 'next/image';
 interface ImagePreviewProps {
   imageSrc: string;
   label: string;
-  size?: number;
+  size?: number; 
   className?: string;
 }
 
@@ -15,19 +15,28 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   size,
   className = ""
 }) => {
+  const formatFileSize = (bytes: number) => {
+    if (bytes < 1024) {
+      return `${bytes} B`;
+    } else if (bytes < 1024 * 1024) {
+      const kb = bytes / 1024;
+      return `${kb.toFixed(kb < 100 ? 1 : 0)} KB`;
+    } else {
+      const mb = bytes / (1024 * 1024);
+      return `${mb.toFixed(1)} MB`;
+    }
+  };
+
   return (
     <div className={`mb-6 bg-gray-50 dark:bg-gray-800 rounded-lg p-4 ${className}`}>
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-medium text-sm sm:text-lg text-gray-700 dark:text-gray-300">
           {label}
         </h2>
-        {size && (
+        {size !== undefined && (
           <span className="text-xs text-gray-500 dark:text-gray-400">
-            {size < 1024
-              ? `${size.toFixed(2)} KB`
-              : `${(size / 1024).toFixed(2)} MB`}
+            {formatFileSize(size)}
           </span>
-
         )}
       </div>
       <div className="relative w-full aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
