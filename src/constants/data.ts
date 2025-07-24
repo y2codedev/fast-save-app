@@ -1,6 +1,6 @@
-import {
-    FiInstagram
-} from 'react-icons/fi';
+import { FiInstagram } from 'react-icons/fi';
+import { FaSnapchat } from "react-icons/fa";
+
 import {
     DevicePhoneMobileIcon,
     LockClosedIcon,
@@ -17,7 +17,7 @@ import {
     GlobeAltIcon,
     LifebuoyIcon,
     ArrowPathIcon,
-     
+
 } from '@heroicons/react/24/outline'
 
 import type { Feature, LegalLink, SocialLink, Step, TopHeaderItem } from './types';
@@ -217,6 +217,13 @@ export const NAVITEMS: SocialLink[] = [
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
+    {
+        id: 8,
+        href: '/snapchat',
+        icon: FaSnapchat,
+        ariaLabel: 'Snapchat'
+    }
+
 ];
 
 
@@ -269,10 +276,16 @@ export const TopHeader_Item: TopHeaderItem[] = [
         description: 'Paste your Instagram Reel URL below to download the video without watermark',
         highlight: 'Without Watermark'
     },
-     {
+    {
         path: '/image-compressor',
         title: 'Image Compressor',
         description: 'Instantly Image Compressor without losing quality Reduce image file size without sacrificing quality',
         highlight: 'Image Compressor'
+    },
+    {
+        path: '/snapchat',
+        title: 'Snapchat Video Downloader',
+        description: 'Download Snapchat videos easily',
+        highlight: 'Snapchat'
     },
 ]
