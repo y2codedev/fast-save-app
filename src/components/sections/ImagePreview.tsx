@@ -23,8 +23,11 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
         </h2>
         {size && (
           <span className="text-xs text-gray-500 dark:text-gray-400">
-            {size?.toFixed(2)} KB
+            {size < 1024
+              ? `${size.toFixed(2)} KB`
+              : `${(size / 1024).toFixed(2)} MB`}
           </span>
+
         )}
       </div>
       <div className="relative w-full aspect-square bg-gray-100 dark:bg-gray-700 rounded-lg overflow-hidden">
