@@ -21,15 +21,15 @@ export default function AdvancedBackgroundRemover() {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [settings, setSettings] = useState({
-    segmentationThreshold: 0.7,
-    edgeBlurAmount: 3,
+    segmentationThreshold: 100,
+    edgeBlurAmount: 10,
     transparency: true,
   });
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const downloadLinkRef = useRef<HTMLAnchorElement>(null);
-  
+
   type BodyPixModelConfig = {
     architecture: 'MobileNetV1' | 'ResNet50';
     outputStride: 8 | 16 | 32;
@@ -115,137 +115,84 @@ export default function AdvancedBackgroundRemover() {
     reader.readAsDataURL(file);
   };
 
-  const removeBackground = async () => {
-    if (!image || !model || !canvasRef.current) return;
+const removeBackground = async () => {
+  if (!image || !model || !canvasRef.current) return;
 
-    setIsProcessing(true);
-    setError(null);
-    setProgress(0);
+  setIsProcessing(true);
+  setError(null);
+  setProgress(0);
 
-    try {
-      const canvas = canvasRef.current;
-      const img = new Image();
+  try {
+    const canvas = canvasRef.current;
+    const img = new Image();
 
-      img.onload = async () => {
-        // Calculate dimensions while maintaining aspect ratio
-        const maxDimension = 1024; // Better balance between quality and performance
-        let width = img.width;
-        let height = img.height;
+    img.onload = async () => {
+      // Calculate dimensions while maintaining aspect ratio
+      const maxDimension = 1024;
+      let width = img.width;
+      let height = img.height;
 
-        if (width > maxDimension || height > maxDimension) {
-          const ratio = Math.min(maxDimension / width, maxDimension / height);
-          width = Math.floor(width * ratio);
-          height = Math.floor(height * ratio);
-        }
+      if (width > maxDimension || height > maxDimension) {
+        const ratio = Math.min(maxDimension / width, maxDimension / height);
+        width = Math.floor(width * ratio);
+        height = Math.floor(height * ratio);
+      }
 
-        canvas.width = width;
-        canvas.height = height;
+      canvas.width = width;
+      canvas.height = height;
 
-        const ctx = canvas.getContext('2d');
-        if (!ctx) throw new Error('Could not get canvas context');
+      const ctx = canvas.getContext('2d');
+      if (!ctx) throw new Error('Could not get canvas context');
 
-        // Draw the original image
-        ctx.drawImage(img, 0, 0, width, height);
-        setProgress(20);
+      // Draw the original image
+      ctx.drawImage(img, 0, 0, width, height);
+      setProgress(20);
 
-        // Use higher quality segmentation settings
-        const segmentation = await model.segmentPerson(img, {
-          flipHorizontal: false,
-          internalResolution: 'high', // Increased from 'medium'
-          segmentationThreshold: settings.segmentationThreshold,
-          maxDetections: 5, // Better for multiple subjects
-          scoreThreshold: 0.4, // More inclusive initial threshold
-          nmsRadius: 20, // Better for close objects
-        });
-        setProgress(60);
+      // Get segmentation mask
+      const segmentation = await model.segmentPerson(img, {
+        flipHorizontal: false,
+        internalResolution: 'high',
+        segmentationThreshold: settings.segmentationThreshold,
+      });
+      setProgress(60);
 
-        // Create refined mask with edge smoothing
-        const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
-        const backgroundColor = { r: 0, g: 0, b: 0, a: 0 };
-        const mask = bodyPix.toMask(segmentation, foregroundColor, backgroundColor);
+      // Create mask (1-bit per pixel)
+      const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
+      const backgroundColor = { r: 0, g: 0, b: 0, a: 0 };
+      const mask = bodyPix.toMask(segmentation, foregroundColor, backgroundColor);
 
-        const maskCanvas = document.createElement('canvas');
-        maskCanvas.width = width;
-        maskCanvas.height = height;
-        const maskCtx = maskCanvas.getContext('2d');
-        if (!maskCtx) throw new Error('Could not get mask canvas context');
+      // Convert to RGBA (4 bytes per pixel)
+      const rgbaData = new Uint8ClampedArray(width * height * 4);
+      for (let i = 0; i < mask.data.length; i++) {
+        const val = mask.data[i];
+        rgbaData[i * 4] = val;     // R
+        rgbaData[i * 4 + 1] = val; // G
+        rgbaData[i * 4 + 2] = val; // B
+        rgbaData[i * 4 + 3] = val; // A
+      }
 
-        const maskImageData = maskCtx.createImageData(width, height);
-        maskImageData.data.set(mask.data);
-        maskCtx.putImageData(maskImageData, 0, 0);
+      // Apply mask
+      const maskImageData = new ImageData(rgbaData, width, height);
+      ctx.putImageData(maskImageData, 0, 0);
+      ctx.globalCompositeOperation = 'destination-in';
+      ctx.drawImage(canvas, 0, 0);
 
-        // Apply mask with feathering for smoother edges
-        ctx.save();
+      // Final result
+      const format = settings.transparency ? 'png' : 'jpeg';
+      const result = canvas.toDataURL(`image/${format}`, 0.95);
 
-        // First pass - main mask
-        ctx.globalCompositeOperation = 'destination-in';
-        ctx.drawImage(maskCanvas, 0, 0);
+      setProcessedImage(result);
+      setProgress(100);
+    };
 
-        // Second pass - edge feathering
-        if (settings.edgeBlurAmount > 0) {
-          ctx.filter = `blur(${settings.edgeBlurAmount}px)`;
-          ctx.globalCompositeOperation = 'destination-atop';
-          ctx.drawImage(maskCanvas, 0, 0);
-          ctx.filter = 'none';
-        }
-
-        ctx.restore();
-        setProgress(90);
-
-        // Post-processing - fill small holes in the mask
-        const imageData = ctx.getImageData(0, 0, width, height);
-        const data = imageData.data;
-        const filledData = new Uint8ClampedArray(data);
-
-        // Simple hole filling algorithm
-        for (let y = 1; y < height - 1; y++) {
-          for (let x = 1; x < width - 1; x++) {
-            const i = (y * width + x) * 4;
-            if (data[i + 3] === 0) { // If pixel is transparent
-              // Check surrounding pixels
-              let opaqueNeighbors = 0;
-              for (let dy = -1; dy <= 1; dy++) {
-                for (let dx = -1; dx <= 1; dx++) {
-                  const ni = ((y + dy) * width + (x + dx)) * 4;
-                  if (data[ni + 3] > 128) opaqueNeighbors++;
-                }
-              }
-              // If most neighbors are opaque, make this pixel opaque
-              if (opaqueNeighbors > 5) {
-                filledData[i] = data[i - width * 4]; // Copy color from above
-                filledData[i + 1] = data[i - width * 4 + 1];
-                filledData[i + 2] = data[i - width * 4 + 2];
-                filledData[i + 3] = 255;
-              }
-            }
-          }
-        }
-
-        ctx.putImageData(new ImageData(filledData, width, height), 0, 0);
-        setProgress(95);
-
-        // Final result
-        const format = settings.transparency ? 'png' : 'jpeg';
-        const result = canvas.toDataURL(`image/${format}`, 0.95);
-
-        setProcessedImage(result);
-        setProgress(100);
-      };
-
-      img.onerror = () => {
-        throw new Error('Failed to load image');
-      };
-
-      img.src = image;
-    } catch (err) {
-      console.error('Background removal error:', err);
-      setError('Error processing image. Please try a different image or adjust settings.');
-      setProgress(0);
-    } finally {
-      setIsProcessing(false);
-    }
-  };
-
+    img.src = image;
+  } catch (err) {
+    console.error('Background removal error:', err);
+    setError('Error processing image. Please try again.');
+  } finally {
+    setIsProcessing(false);
+  }
+};
   const reset = () => {
     setImage(null);
     setProcessedImage(null);
