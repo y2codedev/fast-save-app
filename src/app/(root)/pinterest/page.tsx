@@ -87,16 +87,13 @@ const PinterestDownloader = () => {
                         {mediaItem.title}
                       </h3>
                     )}
-                   
+
                     <div className="relative">
                       <div className="flex justify-center bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
-                        <video
-                          src={mediaItem?.sourceUrl}
-                          className="max-h-96 w-full"
-                          controls
-                          poster={mediaItem?.url}
-                          
-                        />
+                        <video className="max-h-96 w-full" controls autoPlay>
+                          <source src={mediaItem?.sourceUrl} type="video/mp4" />
+                          Your browser does not support the video tag.
+                        </video>
                       </div>
                     </div>
                     <div className="mt-4 px-4 sm:px-4 flex justify-end">

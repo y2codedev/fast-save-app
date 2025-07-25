@@ -2,7 +2,7 @@
 
 import { DownloadForm, Group } from "@/constants";
 
-export default function Home() {
+export default function page() {
     
   return (
     <div className=" bg-white dark:bg-gray-900">
