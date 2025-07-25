@@ -61,6 +61,11 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                                 {data?.title || 'Untitled Reel'}
                             </p>
                         </div>
+                        {/* <div>
+                             <p className="text-lg font-semibold text-gray-900 dark:text-white">
+                                {data?.description || 'Untitled Reel'}
+                            </p>
+                        </div> */}
                     </div>
                 </div>
 
