@@ -44,7 +44,7 @@ const InputField = forwardRef(
                         id='input field'
                         type='text'
                         ref={ref}
-                        className={`flex-1 min-w-0 block w-full px-3 py-2 rounded-none rounded-r-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white focus:outline-none  ${className}`}
+                        className={`flex-1 min-w-0 block w-full bg-gray-100 text-gray-900 px-3 py-2 rounded-none rounded-r-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 focus:outline-none  ${className}`}
                         {...props}
                     />
                 </div>
