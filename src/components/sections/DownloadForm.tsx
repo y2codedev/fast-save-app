@@ -55,6 +55,13 @@ export default function DownloadForm() {
     }
   };
 
+  const resetForm = () => {
+    setUrl('');
+    setDownloadData(null);
+    setIsSaving(false);
+    setIsLoading(false);
+  };
+
   return (
     <div id="download-section" className="bg-white dark:bg-gray-900 pt-10 px-4">
       <div className="mx-auto max-w-7xl">
@@ -73,7 +80,7 @@ export default function DownloadForm() {
               labal='Click Here'
             />
           </form>
-          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
+          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} resetForm={resetForm} />}
         </div>
       </div>
     </div>
