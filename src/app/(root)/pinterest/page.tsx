@@ -21,14 +21,9 @@ const PinterestDownloader = () => {
                 onChange={handleUrlChange}
                 placeholder="https://www.pinterest.com/pin/123456789/"
               />
-              <div className="flex flex-col py-2">
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Works with pins, boards, and profile URLs
-                </p>
-              </div>
             </div>
 
-            <div className="flex flex-wrap gap-3 mt-2">
+            <div className="flex flex-wrap gap-3 mt-4">
               <Button
                 onClick={fetchPinterestData}
                 isProcessing={isLoading}
@@ -44,14 +39,14 @@ const PinterestDownloader = () => {
               )}
             </div>
 
-            {mediaItems.length > 0 && (
+            {mediaItems?.length > 0 && (
               <div className="space-y-6">
                 <div className="flex justify-between items-center">
                   <h2 className="text-xl font-semibold text-gray-800 dark:text-white mt-3">
                     Downloadable Media
                   </h2>
                   <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {mediaItems.length} item{mediaItems.length !== 1 ? 's' : ''} found
+                    {mediaItems.length} item{mediaItems?.length !== 1 ? 's' : ''} found
                   </span>
                 </div>
 
@@ -114,20 +109,6 @@ const PinterestDownloader = () => {
                     </div>
                   ))}
                 </div>
-              </div>
-            )}
-
-            {mediaItems.length === 0 && !isLoading && (
-              <div className="text-center py-12">
-                <div className="mx-auto h-24 w-24 text-gray-400 dark:text-gray-500">
-                  <LinkIcon className="w-full h-full" />
-                </div>
-                <h3 className="mt-2 text-lg font-medium text-gray-900 dark:text-white">
-                  No media fetched yet
-                </h3>
-                <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  Enter a Pinterest URL and click "Fetch Media" to get started
-                </p>
               </div>
             )}
           </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from '@/constants';
+import { Button, Toast } from '@/constants';
 import { ReelResultProps } from '@/constants/types';
 import Image from 'next/image';
 
@@ -8,7 +8,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
 
     const handleDownload = async () => {
         if (!data?.videoUrl) {
-            alert('Video URL not found. Please try again.');
+            Toast('error', 'No video URL available for download.');
             return;
         }
 
@@ -26,7 +26,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
             document.body.removeChild(link);
         } catch (error) {
             console.error('Download failed:', error);
-            alert('Download failed. Please try again or check the URL.');
+            Toast('error', 'Failed to download the video. Please try again.');
         } finally {
             setIsSaving(false);
         }
@@ -38,10 +38,10 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Preview</h3>
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="relative w-full md:w-1/3 aspect-square rounded-lg overflow-hidden">
-                        {data.thumbnail ? (
+                        {data?.thumbnail ? (
                             <Image
-                                src={data.thumbnail}
-                                alt={data.title || 'Instagram Reel'}
+                                src={data?.thumbnail}
+                                alt={data?.title || 'Instagram Reel'}
                                 fill
                                 className="object-cover"
                                 quality={80}
@@ -58,7 +58,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         <div>
                             <h4 className="text-sm font-medium text-gray-500 dark:text-gray-400">Title</h4>
                             <p className="text-lg font-semibold text-gray-900 dark:text-white">
-                                {data.title || 'Untitled Reel'}
+                                {data?.title || 'Untitled Reel'}
                             </p>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         <video
                             controls
                             className="w-full h-full object-cover rounded-lg"
-                            poster={data.thumbnail}
+                            poster={data?.thumbnail}
                         >
                             <source src={data?.videoUrl} type="video/mp4" />
                             Your browser does not support the video tag.
@@ -82,7 +82,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                 <Button
                     onClick={handleDownload}
                     isProcessing={isSaving}
-                    labal='Download Reel'
+                    labal='Download Now'
                     icon={true}
                 />
             </div>
