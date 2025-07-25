@@ -1,10 +1,10 @@
 'use client';
 
-import { Button, ResetButton, Toast } from '@/constants';
+import { Button, Toast } from '@/constants';
 import { ReelResultProps } from '@/constants/types';
 import Image from 'next/image';
 
-export default function ReelResult({ data, isSaving, setIsSaving, resetForm }: ReelResultProps) {
+export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultProps) {
 
     const handleDownload = async () => {
         if (!data?.videoUrl) {
@@ -78,20 +78,13 @@ export default function ReelResult({ data, isSaving, setIsSaving, resetForm }: R
                 )}
             </div>
 
-            <div className="flex flex-wrap gap-3 mt-4">
+            <div className=" px-4  sm:px-4 flex justify-end">
                 <Button
                     onClick={handleDownload}
                     isProcessing={isSaving}
                     labal='Download Now'
                     icon={true}
                 />
-
-                {data && (
-                    <ResetButton
-                        onClick={resetForm}
-                        labal='Reset'
-                    />
-                )}
             </div>
         </div>
     );

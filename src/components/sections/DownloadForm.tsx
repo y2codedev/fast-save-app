@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ReelResult, Toast, Button, InputField } from '@/constants';
+import { ReelResult, Toast, Button, InputField, ResetButton } from '@/constants';
 import { usePathname } from 'next/navigation';
 import { TopHeader_Item } from '@/constants/data';
 
@@ -19,6 +19,22 @@ export default function DownloadForm() {
 
     if (!url) {
       Toast('error', 'Please enter a URL.');
+      setIsLoading(false);
+      return;
+    }
+
+    const supportedPlatforms = [
+      'https://www.instagram.com/reel',
+      'https://x.com/',
+      'youtube.com',
+      'youtu.be',
+      'https://www.facebook.com/share',
+    ];
+
+    const isValidUrl = supportedPlatforms?.some(platform => url?.includes(platform));
+
+    if (!isValidUrl) {
+      Toast('error', 'Please enter a valid URL');
       setIsLoading(false);
       return;
     }
@@ -75,12 +91,21 @@ export default function DownloadForm() {
                 placeholder="https://www.example.com/..."
               />
             </div>
-            <Button
-              isProcessing={isLoading}
-              labal='Click Here'
-            />
+            <div className="flex flex-wrap gap-3">
+              <Button
+                isProcessing={isLoading}
+                labal='Click Here'
+              />
+
+              {url && (
+                <ResetButton
+                  onClick={resetForm}
+                  labal='Reset'
+                />
+              )}
+            </div>
           </form>
-          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} resetForm={resetForm} />}
+          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
         </div>
       </div>
     </div>

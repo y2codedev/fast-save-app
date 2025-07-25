@@ -45,7 +45,6 @@ interface ReelData {
 }
 
 export interface ReelResultProps {
-    resetForm: () => void;
     data: ReelData;
     isSaving: boolean;
     setIsSaving: (value: boolean) => void;
