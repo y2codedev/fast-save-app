@@ -9,10 +9,7 @@ import {
     ArrowRightIcon,
     ArrowDownTrayIcon,
     FilmIcon,
-    PhotoIcon,
-    SpeakerWaveIcon,
     RectangleStackIcon,
-    PlayCircleIcon,
     ScissorsIcon,
     ShieldCheckIcon,
     GlobeAltIcon,
@@ -239,7 +236,7 @@ export const TopHeader_Item: TopHeaderItem[] = [
         path: '/video',
         title: 'Download High Quality Videos',
         description: 'Save videos from various platforms in best quality',
-        highlight: 'High Quality'
+        highlight: 'Videos'
     },
     {
         path: '/audio',
@@ -275,7 +272,7 @@ export const TopHeader_Item: TopHeaderItem[] = [
         path: '',
         title: 'Download Instagram Reels',
         description: 'Paste your Instagram Reel URL below to download the video without watermark',
-        highlight: 'Without Watermark'
+        highlight: 'Instagram Reels'
     },
     {
         path: '/image-compressor',

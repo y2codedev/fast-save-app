@@ -17,11 +17,11 @@ export default function DownloadForm() {
     e.preventDefault();
     setIsLoading(true);
 
-    // if (!url.includes("instagram.com/reel/" )) {
-    //   Toast('error', 'Please enter a valid Instagram Reel URL.');
-    //   setIsLoading(false);
-    //   return;
-    // }
+    if (!url) {
+      Toast('error', 'Please enter a URL.');
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const apiUrl = `/api/download?url=${encodeURIComponent(url)}`;
@@ -70,7 +70,7 @@ export default function DownloadForm() {
             </div>
             <Button
               isProcessing={isLoading}
-              labal='Download Now'
+              labal='Click Here'
             />
           </form>
           {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
