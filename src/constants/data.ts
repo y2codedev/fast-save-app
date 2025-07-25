@@ -201,7 +201,7 @@ export const NAVITEMS: SocialLink[] = [
         id: 5,
         href: '/fb-video',
         icon: FaFacebook,
-        ariaLabel: 'FB Video',
+        ariaLabel: 'Facebook',
     },
     {
         id: 6,
