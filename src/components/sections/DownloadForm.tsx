@@ -29,6 +29,7 @@ export default function DownloadForm() {
       'youtube.com',
       'youtu.be',
       'https://www.facebook.com/share',
+      'https://pin.it',
     ];
 
     const isValidUrl = supportedPlatforms?.some(platform => url?.includes(platform));
