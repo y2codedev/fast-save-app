@@ -1,20 +1,53 @@
 'use client';
 
-import { Link as LinkIcon, Image as ImageIcon, Film } from 'lucide-react';
-import { Button, Group, InputField, ResetButton, usePinterestDownloader } from '@/constants';
-import Link from 'next/link';
-import { ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import { Button, Group, InputField, ResetButton, Toast, usePinterestDownloader } from '@/constants';
+import { useState } from 'react';
+
 const PinterestDownloader = () => {
-  const { pinterestUrl, mediaItems, isLoading, handleUrlChange, fetchPinterestData, resetForm } = usePinterestDownloader();
+  const { pinterestUrl, mediaItem, isLoading, handleUrlChange, fetchPinterestData, resetForm } = usePinterestDownloader();
+  const [isDownloading, setIsDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    if (!mediaItem?.url) {
+      Toast('error', 'No media item to download');
+      return;
+    }
+
+    try {
+      setIsDownloading(true);
+      const response = await fetch(mediaItem.url);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = `${mediaItem.title || 'pinterest-video'}.mp4`;
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(link);
+
+    } catch (error) {
+      console.error('Download failed:', error);
+    } finally {
+      setIsDownloading(false);
+    }
+  };
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900  px-4  ">
-        <div className='pt-10'>
-          <div className="w-full max-w-5xl mx-auto p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl">
+      <div className="bg-white dark:bg-gray-900 px-4">
+        <div className="mx-auto max-w-7xl pt-10">
+          <div className="mx-auto max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
             <div className="">
               <InputField
-                label='Enter Pinterest URL'
+                label='Enter Pinterest Video URL'
                 type="url"
                 id="pinterest-url"
                 value={pinterestUrl}
@@ -27,7 +60,7 @@ const PinterestDownloader = () => {
               <Button
                 onClick={fetchPinterestData}
                 isProcessing={isLoading}
-                labal='Fetch Media'
+                labal='Fetch Video'
               />
 
               {pinterestUrl && (
@@ -39,75 +72,42 @@ const PinterestDownloader = () => {
               )}
             </div>
 
-            {mediaItems?.length > 0 && (
-              <div className="space-y-6">
+            {mediaItem && (
+              <div className="space-y-6 mt-6">
                 <div className="flex justify-between items-center">
-                  <h2 className="text-xl font-semibold text-gray-800 dark:text-white mt-3">
-                    Downloadable Media
+                  <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
+                    Pinterest Video
                   </h2>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {mediaItems.length} item{mediaItems?.length !== 1 ? 's' : ''} found
-                  </span>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6">
-                  {mediaItems?.map((item, index) => (
-                    <div
-                      key={`${index}`}
-                      className="bg-white dark:bg-gray-800 rounded-lg  overflow-hidden border border-gray-200 dark:border-gray-600"
-                    >
-                      <div className="p-4">
-                        {item.title && (
-                          <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-2 line-clamp-2">
-                            {item.title}
-                          </h3>
-                        )}
-                        <div className="relative">
-                          {item.type === 'image' ? (
-                            <div className="flex justify-center bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
-                              <img
-                                src={item.url}
-                                alt={item.title || `Pinterest image ${index + 1}`}
-                                className="max-h-96 object-contain"
-                                loading="lazy"
-                              />
-                            </div>
-                          ) : (
-                            <div className="flex justify-center bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
-                              <video
-                                src={item.url}
-                                className="max-h-96"
-                                controls
-                                playsInline
-                              />
-                            </div>
-                          )}
-                        </div>
-                        <div className="mt-4 flex justify-between items-center">
-                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                            {item.type === 'image' ? (
-                              <ImageIcon className="h-4 w-4 mr-1" />
-                            ) : (
-                              <Film className="h-4 w-4 mr-1" />
-                            )}
-                            <span>{item.type.toUpperCase()}</span>
-                            {item.width && item.height && (
-                              <span className="ml-2">
-                                {item.width}×{item.height}
-                              </span>
-                            )}
-                          </div>
-
-                          <Link
-                            href={item.url}
-                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
-                          >
-                            <ArrowDownTrayIcon className="h-5 w-5 mr-2" />  Download
-                          </Link>
-                        </div>
+                <div className="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-600">
+                  <div className="p-4">
+                    {mediaItem.title && (
+                      <h3 className="text-lg font-medium text-gray-800 dark:text-white mb-2 line-clamp-2">
+                        {mediaItem.title}
+                      </h3>
+                    )}
+                   
+                    <div className="relative">
+                      <div className="flex justify-center bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden">
+                        <video
+                          src={mediaItem?.sourceUrl}
+                          className="max-h-96 w-full"
+                          controls
+                          poster={mediaItem?.url}
+                          
+                        />
                       </div>
                     </div>
-                  ))}
+                    <div className="mt-4 px-4 sm:px-4 flex justify-end">
+                      <Button
+                        onClick={handleDownload}
+                        isProcessing={isDownloading}
+                        labal='Download Now'
+                        icon={true}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
