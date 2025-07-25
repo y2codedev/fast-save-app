@@ -71,7 +71,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                             className="w-full h-full object-cover rounded-lg"
                             poster={data?.thumbnail}
                         >
-                            <source src={data?.videoUrl} type="video/mp4" />
+                            <source src={data?.sourceUrl || data?.videoUrl} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </div>

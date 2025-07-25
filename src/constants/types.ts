@@ -37,6 +37,7 @@ export interface Step {
 
 interface ReelData {
     url: string;
+    sourceUrl?: string;
     title: string;
     thumbnail: string;
     username: string;
@@ -46,6 +47,7 @@ interface ReelData {
 
 export interface ReelResultProps {
     data: ReelData;
+    sourceUrl?: string;
     isSaving: boolean;
     setIsSaving: (value: boolean) => void;
 }
