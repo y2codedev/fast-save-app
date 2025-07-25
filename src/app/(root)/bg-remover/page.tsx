@@ -211,9 +211,9 @@ export default function AdvancedBackgroundRemover() {
   };
 
   return (
-    <div id="download-section" className="bg-white dark:bg-gray-900 pt-10 px-4">
+    <div id="download-section" className="bg-white dark:bg-gray-900 py-10 px-4">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
+        <div className="mx-auto max-w-6xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <div className="text-center mb-8">
             <h1 className="text-3xl font-bold mb-2">Advanced Background Remover</h1>
             <p className="text-muted-foreground">
