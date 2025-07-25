@@ -29,32 +29,43 @@ export default function AdvancedBackgroundRemover() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const downloadLinkRef = useRef<HTMLAnchorElement>(null);
+  
+  type BodyPixModelConfig = {
+    architecture: 'MobileNetV1' | 'ResNet50';
+    outputStride: 8 | 16 | 32;
+    multiplier?: 0.5 | 0.75 | 1.0;
+    quantBytes?: 1 | 2 | 4;
+    progressCallback?: (percent: number) => void;
+  };
 
-  // Load the BodyPix model with progress callback
+
   useEffect(() => {
     let isMounted = true;
-    const modelConfig = {
-      architecture: 'MobileNetV1',
-      outputStride: 16,
-      multiplier: 0.75,
-      quantBytes: 2,
-    };
 
     const loadModel = async () => {
       try {
         setIsLoading(true);
         setError(null);
-        
+
         // Initialize TF.js with progress tracking
         tf.env().set('WEBGL_CPU_FORWARD', false);
-        
+
         // Show progress for model loading
         const progressCallback = (p: number) => {
           if (isMounted) setProgress(Math.floor(p * 100));
         };
 
-        const loadedModel = await bodyPix.load(modelConfig, progressCallback);
-        
+        // Updated: Include progressCallback inside modelConfig
+        const modelConfig: BodyPixModelConfig = {
+          architecture: 'MobileNetV1',
+          outputStride: 16,
+          multiplier: 0.75,
+          quantBytes: 2,
+          progressCallback, // <-- Progress callback is now part of config
+        };
+
+        const loadedModel = await bodyPix.load(modelConfig); // <-- Only pass modelConfig
+
         if (isMounted) {
           setModel(loadedModel);
           setProgress(100);
@@ -84,7 +95,7 @@ export default function AdvancedBackgroundRemover() {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     setError(null);
     const file = e.target.files?.[0];
-    
+
     if (!file) return;
 
     // Validate image size
@@ -104,7 +115,7 @@ export default function AdvancedBackgroundRemover() {
     reader.readAsDataURL(file);
   };
 
- const removeBackground = async () => {
+  const removeBackground = async () => {
     if (!image || !model || !canvasRef.current) return;
 
     setIsProcessing(true);
@@ -114,13 +125,13 @@ export default function AdvancedBackgroundRemover() {
     try {
       const canvas = canvasRef.current;
       const img = new Image();
-      
+
       img.onload = async () => {
         // Calculate dimensions while maintaining aspect ratio
         const maxDimension = 1024; // Better balance between quality and performance
         let width = img.width;
         let height = img.height;
-        
+
         if (width > maxDimension || height > maxDimension) {
           const ratio = Math.min(maxDimension / width, maxDimension / height);
           width = Math.floor(width * ratio);
@@ -129,7 +140,7 @@ export default function AdvancedBackgroundRemover() {
 
         canvas.width = width;
         canvas.height = height;
-        
+
         const ctx = canvas.getContext('2d');
         if (!ctx) throw new Error('Could not get canvas context');
 
@@ -152,7 +163,7 @@ export default function AdvancedBackgroundRemover() {
         const foregroundColor = { r: 255, g: 255, b: 255, a: 255 };
         const backgroundColor = { r: 0, g: 0, b: 0, a: 0 };
         const mask = bodyPix.toMask(segmentation, foregroundColor, backgroundColor);
-        
+
         const maskCanvas = document.createElement('canvas');
         maskCanvas.width = width;
         maskCanvas.height = height;
@@ -165,11 +176,11 @@ export default function AdvancedBackgroundRemover() {
 
         // Apply mask with feathering for smoother edges
         ctx.save();
-        
+
         // First pass - main mask
         ctx.globalCompositeOperation = 'destination-in';
         ctx.drawImage(maskCanvas, 0, 0);
-        
+
         // Second pass - edge feathering
         if (settings.edgeBlurAmount > 0) {
           ctx.filter = `blur(${settings.edgeBlurAmount}px)`;
@@ -177,7 +188,7 @@ export default function AdvancedBackgroundRemover() {
           ctx.drawImage(maskCanvas, 0, 0);
           ctx.filter = 'none';
         }
-        
+
         ctx.restore();
         setProgress(90);
 
@@ -185,7 +196,7 @@ export default function AdvancedBackgroundRemover() {
         const imageData = ctx.getImageData(0, 0, width, height);
         const data = imageData.data;
         const filledData = new Uint8ClampedArray(data);
-        
+
         // Simple hole filling algorithm
         for (let y = 1; y < height - 1; y++) {
           for (let x = 1; x < width - 1; x++) {
@@ -209,14 +220,14 @@ export default function AdvancedBackgroundRemover() {
             }
           }
         }
-        
+
         ctx.putImageData(new ImageData(filledData, width, height), 0, 0);
         setProgress(95);
 
         // Final result
         const format = settings.transparency ? 'png' : 'jpeg';
         const result = canvas.toDataURL(`image/${format}`, 0.95);
-        
+
         setProcessedImage(result);
         setProgress(100);
       };
@@ -265,7 +276,7 @@ export default function AdvancedBackgroundRemover() {
         {/* Settings Panel */}
         <div className="bg-card rounded-lg border p-6 h-fit">
           <h2 className="text-xl font-semibold mb-4">Settings</h2>
-          
+
           <div className="space-y-6">
             <div>
               <label className="block text-sm font-medium mb-2">
@@ -276,7 +287,7 @@ export default function AdvancedBackgroundRemover() {
                 max={0.9}
                 step={0.1}
                 value={[settings.segmentationThreshold]}
-                onValueChange={(val) => setSettings({...settings, segmentationThreshold: val[0]})}
+                onValueChange={(val) => setSettings({ ...settings, segmentationThreshold: val[0] })}
                 disabled={isProcessing}
               />
               <p className="text-xs text-muted-foreground mt-1">
@@ -293,7 +304,7 @@ export default function AdvancedBackgroundRemover() {
                 max={10}
                 step={1}
                 value={[settings.edgeBlurAmount]}
-                onValueChange={(val) => setSettings({...settings, edgeBlurAmount: val[0]})}
+                onValueChange={(val) => setSettings({ ...settings, edgeBlurAmount: val[0] })}
                 disabled={isProcessing}
               />
               <p className="text-xs text-muted-foreground mt-1">
@@ -306,7 +317,7 @@ export default function AdvancedBackgroundRemover() {
                 type="checkbox"
                 id="transparency"
                 checked={settings.transparency}
-                onChange={(e) => setSettings({...settings, transparency: e.target.checked})}
+                onChange={(e) => setSettings({ ...settings, transparency: e.target.checked })}
                 className="h-4 w-4"
                 disabled={isProcessing}
               />
@@ -326,7 +337,7 @@ export default function AdvancedBackgroundRemover() {
                   disabled={isLoading || isProcessing}
                   className="cursor-pointer"
                 />
-                
+
                 {image && (
                   <div className="flex gap-2">
                     <Button
@@ -390,9 +401,9 @@ export default function AdvancedBackgroundRemover() {
               </div>
               <div className="p-4 flex items-center justify-center min-h-64">
                 {image ? (
-                  <img 
-                    src={image} 
-                    alt="Original" 
+                  <img
+                    src={image}
+                    alt="Original"
                     className="max-w-full max-h-[400px] object-contain rounded"
                   />
                 ) : (
@@ -422,9 +433,9 @@ export default function AdvancedBackgroundRemover() {
               <div className="p-4 flex items-center justify-center min-h-64">
                 {processedImage ? (
                   <div className="relative">
-                    <img 
-                      src={processedImage} 
-                      alt="Processed" 
+                    <img
+                      src={processedImage}
+                      alt="Processed"
                       className="max-w-full max-h-[400px] object-contain rounded"
                     />
                     {settings.transparency && (
