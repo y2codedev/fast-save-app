@@ -1,6 +1,6 @@
 import { FiInstagram } from 'react-icons/fi';
-import { FaSnapchat,FaPinterest ,FaVideo,FaFacebook } from "react-icons/fa";
-import { MdAudiotrack,MdInsertPhoto } from "react-icons/md";
+import { FaSnapchat, FaPinterest, FaVideo, FaFacebook } from "react-icons/fa";
+import { MdAudiotrack, MdInsertPhoto } from "react-icons/md";
 
 import {
     DevicePhoneMobileIcon,
@@ -36,9 +36,9 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     },
     {
         id: 3,
-        href: '/video',
-        icon: FaVideo ,
-        ariaLabel: 'Video',
+        href: '/youtube-video',
+        icon: FaVideo,
+        ariaLabel: 'Youtube',
     },
     {
         id: 4,
@@ -175,9 +175,9 @@ export const NAVITEMS: SocialLink[] = [
     },
     {
         id: 2,
-        href: '/video',
-        icon: FaVideo ,
-        ariaLabel: 'Video',
+        href: '/youtube-video',
+        icon: FaVideo,
+        ariaLabel: 'Youtube',
     },
     {
         id: 3,
@@ -233,10 +233,10 @@ export const TopHeader_Item: TopHeaderItem[] = [
         highlight: 'Pinterest'
     },
     {
-        path: '/video',
-        title: 'Download High Quality Videos',
-        description: 'Save videos from various platforms in best quality',
-        highlight: 'Videos'
+        path: '/youtube-video',
+        title: 'Download YouTube Videos',
+        description: 'Save YouTube videos in high quality',
+        highlight: 'YouTube Videos'
     },
     {
         path: '/audio',
