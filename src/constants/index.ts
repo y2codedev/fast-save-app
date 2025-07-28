@@ -25,7 +25,7 @@ import FileUploadArea from '@/components/sections/FileUploadArea';
 import ImagePreview from '@/components/sections/ImagePreview';
 import SVGOutput from '@/components/sections/SVGOutput';
 import Group from '@/components/sections/Group';
-
+import StatsDisplay from '@/components/sections/StatsDisplay';
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
 
@@ -56,5 +56,6 @@ export {
     FileUploadArea,
     ImagePreview,
     SVGOutput,
+    StatsDisplay,
     Group,
 };
