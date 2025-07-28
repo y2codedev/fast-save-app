@@ -1,11 +1,12 @@
 import { FiInstagram } from 'react-icons/fi';
-import { FaSnapchat, FaPinterest, FaVideo, FaFacebook } from "react-icons/fa";
+import { FaSnapchat, FaFacebook } from "react-icons/fa";
 import { MdAudiotrack, MdInsertPhoto } from "react-icons/md";
 
 import {
     DevicePhoneMobileIcon,
     LockClosedIcon,
     ClipboardDocumentIcon,
+    ArrowRightIcon,
     ArrowDownTrayIcon,
     FilmIcon,
     RectangleStackIcon,
@@ -19,7 +20,6 @@ import {
 
 import type { Feature, LegalLink, SocialLink, Step, TopHeaderItem } from './types';
 import { HiLightningBolt } from 'react-icons/hi';
-import { SparklesIcon } from 'lucide-react';
 
 export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     {
@@ -30,46 +30,41 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     },
     {
         id: 2,
-        href: '/pinterest',
-        icon: FaPinterest,
-        ariaLabel: 'Pinterest',
-    },
-    {
-        id: 3,
-        href: '/youtube-video',
-        icon: FaVideo,
-        ariaLabel: 'Youtube',
-    },
-    {
-        id: 4,
         href: '/audio',
         icon: MdAudiotrack,
         ariaLabel: 'Audio',
     },
     {
-        id: 5,
+        id: 3,
         href: '/photo',
         icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
     {
-        id: 6,
+        id: 4,
         href: '/fb-video',
         icon: FaFacebook,
         ariaLabel: 'FB Video',
     },
     {
-        id: 7,
+        id: 5,
         href: '/bg-remover',
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
     },
     {
-        id: 8,
+        id: 6,
         href: '/image-compressor',
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
-    }
+    },
+    {
+        id: 7,
+        href: '/snapchat',
+        icon: FaSnapchat,
+        ariaLabel: 'Snapchat'
+    },
+
 ];
 
 
@@ -142,85 +137,68 @@ export const FEATURES: Feature[] = [
 export const STEP: Step[] = [
     {
         id: 1,
-        name: 'Select Content',
-        description: 'Choose the photo, video, or media you want to process',
+        name: 'Find',
+        description: 'Open  find the Reel you want to download',
         icon: DevicePhoneMobileIcon,
     },
     {
         id: 2,
-        name: 'Get Link/Upload',
-        description: 'Copy the URL or upload the file directly',
+        name: 'Copy Link',
+        description: 'Tap the three dots menu and select "Copy link"',
         icon: ClipboardDocumentIcon,
     },
     {
         id: 3,
-        name: 'Process',
-        description: 'Our tool will download, convert, or enhance your media',
-        icon: SparklesIcon,
+        name: 'Paste URL',
+        description: 'Paste the Instagram link in our downloader',
+        icon: ArrowRightIcon,
     },
     {
         id: 4,
-        name: 'Download Result',
-        description: 'Save your processed file in high quality',
+        name: 'Download',
+        description: 'Click download and save to your device',
         icon: ArrowDownTrayIcon,
-    }
+    },
 ]
 
 export const NAVITEMS: SocialLink[] = [
     {
         id: 1,
-        href: '/pinterest',
-        icon: FaPinterest,
-        ariaLabel: 'Pinterest',
-    },
-    {
-        id: 2,
-        href: '/youtube-video',
-        icon: FaVideo,
-        ariaLabel: 'Youtube',
-    },
-    {
-        id: 3,
         href: '/audio',
         icon: MdAudiotrack,
         ariaLabel: 'Audio',
     },
     {
-        id: 4,
+        id: 2,
         href: '/photo',
         icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
-    // {
-    //     id: 5,
-    //     href: '/stories',
-    //     icon: CameraIcon,
-    //     ariaLabel: 'Stories',
-    // },
     {
-        id: 5,
+        id: 3,
         href: '/fb-video',
         icon: FaFacebook,
         ariaLabel: 'Facebook',
     },
     {
-        id: 6,
+        id: 4,
         href: '/bg-remover',
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
     },
     {
-        id: 7,
+        id: 5,
         href: '/image-compressor',
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
     {
-        id: 8,
+        id: 6,
         href: '/snapchat',
         icon: FaSnapchat,
         ariaLabel: 'Snapchat'
-    }
+    },
+
 
 ];
 

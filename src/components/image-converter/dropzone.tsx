@@ -391,13 +391,14 @@ export default function Dropzone() {
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                   <span className="font-semibold">Click to upload</span> or drag and drop
                 </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG (MAX. 5MB)</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)
+                </p>
               </>
             )}
           </div>
         </div>
       )}
     </ReactDropzone>
-
   );
 }

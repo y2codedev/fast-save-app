@@ -30,6 +30,7 @@ export interface Feature {
 
 export interface Step {
     id: number;
+    path?: string;
     name: string;
     description: string;
     icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;

@@ -42,7 +42,7 @@ export function AudioPlayer({
                         </div>
                     </div>
                 ) : (
-                    <div className="aspect-square w-full h-64 sm:h-80 mx-auto rounded-xl bg-gray-100 dark:bg-gray-700 flex items-center justify-center">
+                    <div className="aspect-square w-full h-64 sm:h-80 mx-auto border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
                         <FiMusic className="text-5xl sm:text-6xl text-gray-400 dark:text-gray-500" />
                     </div>
                 )}

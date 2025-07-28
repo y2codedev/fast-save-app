@@ -4,7 +4,7 @@ import { STEP, TopHeader_Item } from "@/constants/data";
 import { usePathname } from "next/navigation";
 export default function DownloadSteps() {
     const pathName = usePathname();
-    const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item?.path === '')!;
+    const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item.path === '')!;
     return (
         <div className="bg-white  dark:bg-gray-900 flex items-center justify-center">
             <div className="bg-gray-50 max-w-7xl  rounded-xl dark:bg-gray-800 mx-4 py-10">
