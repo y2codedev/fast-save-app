@@ -131,7 +131,7 @@ function VideoToAudioConverter() {
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Upload & Convert Panel */}
-          <div className="bg-gray-50 dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden">
+          <div className="bg-gray-50 dark:bg-gray-800 h-[25rem] rounded-xl sm:rounded-2xl overflow-hidden">
             <div className="p-4 sm:p-6">
               <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                 <FiUpload className="mr-2" /> Upload & Convert
