@@ -87,7 +87,7 @@ export default function BackgroundRemovalPage() {
                         src={image}
                         alt="Uploaded preview"
                         fill
-                        className="object-cover p-2"
+                        className="object-cover p-1 rounded-lg"
                       />
                     </div>
                     <p className="mt-2 text-xs text-green-600 dark:text-green-400 flex items-center">
