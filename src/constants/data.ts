@@ -6,7 +6,6 @@ import {
     DevicePhoneMobileIcon,
     LockClosedIcon,
     ClipboardDocumentIcon,
-    ArrowRightIcon,
     ArrowDownTrayIcon,
     FilmIcon,
     RectangleStackIcon,
@@ -20,6 +19,7 @@ import {
 
 import type { Feature, LegalLink, SocialLink, Step, TopHeaderItem } from './types';
 import { HiLightningBolt } from 'react-icons/hi';
+import { SparklesIcon } from 'lucide-react';
 
 export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     {
@@ -142,28 +142,28 @@ export const FEATURES: Feature[] = [
 export const STEP: Step[] = [
     {
         id: 1,
-        name: 'Find',
-        description: 'Select the  you want to download',
+        name: 'Select Content',
+        description: 'Choose the photo, video, or media you want to process',
         icon: DevicePhoneMobileIcon,
     },
     {
         id: 2,
-        name: 'Copy Link',
-        description: 'Tap the three dots menu and select "Copy link"',
+        name: 'Get Link/Upload',
+        description: 'Copy the URL or upload the file directly',
         icon: ClipboardDocumentIcon,
     },
     {
         id: 3,
-        name: 'Paste URL',
-        description: 'Paste the Instagram link in our downloader',
-        icon: ArrowRightIcon,
+        name: 'Process',
+        description: 'Our tool will download, convert, or enhance your media',
+        icon: SparklesIcon,
     },
     {
         id: 4,
-        name: 'Download',
-        description: 'Click download and save to your device',
+        name: 'Download Result',
+        description: 'Save your processed file in high quality',
         icon: ArrowDownTrayIcon,
-    },
+    }
 ]
 
 export const NAVITEMS: SocialLink[] = [
