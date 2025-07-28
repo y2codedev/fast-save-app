@@ -4,7 +4,7 @@ import { Button, FileUploadArea, Group, ResetButton } from "@/constants"
 import { removeBackground } from "@imgly/background-removal"
 import Image from "next/image"
 import { useState, useRef } from 'react'
-import { FiUpload, FiDownload, FiImage } from 'react-icons/fi'
+import { FiUpload, FiDownload, FiImage, FiCheckCircle } from 'react-icons/fi'
 
 export default function BackgroundRemovalPage() {
   const [image, setImage] = useState<string | null>(null)
@@ -62,7 +62,7 @@ export default function BackgroundRemovalPage() {
 
   return (
     <>
-      <div className="bg-whit dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             <div className="bg-gray-50 dark:bg-gray-800 h-fit rounded-xl sm:rounded-2xl overflow-hidden">
@@ -75,6 +75,27 @@ export default function BackgroundRemovalPage() {
                   onFileUpload={handleFileUpload}
                   loading={isProcessing}
                 />
+
+                {/* Image preview section */}
+                {image && (
+                  <div className="mt-4 relative group">
+                    <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1 z-10">
+                      <FiCheckCircle className="h-4 w-4" />
+                    </div>
+                    <div className="relative bg-gray-100 dark:bg-gray-700 h-48 rounded-lg overflow-hidden border-2 border-green-500">
+                      <Image
+                        src={image}
+                        alt="Uploaded preview"
+                        fill
+                        className="object-contain p-2"
+                      />
+                    </div>
+                    <p className="mt-2 text-xs text-green-600 dark:text-green-400 flex items-center">
+                      <FiCheckCircle className="mr-1" />
+                      Image selected and ready for processing
+                    </p>
+                  </div>
+                )}
 
                 <div className="mt-6">
                   <Button
@@ -109,7 +130,7 @@ export default function BackgroundRemovalPage() {
                         alt="Background removed"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width): 1024px 50vw, 33vw"
-                        className="w-full h-auto object-conver"
+                        className="w-full h-auto object-contain"
                       />
                     </div>
 
@@ -134,7 +155,7 @@ export default function BackgroundRemovalPage() {
                       <FiImage className="h-16 w-16" />
                     </div>
                     <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
-                      Upload an image to remove its background
+                      {image ? 'Click "Remove Background" to process' : 'Upload an image to remove its background'}
                     </p>
                   </div>
                 )}
