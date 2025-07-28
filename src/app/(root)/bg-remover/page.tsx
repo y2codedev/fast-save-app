@@ -103,13 +103,13 @@ export default function BackgroundRemovalPage() {
 
                 {resultImage ? (
                   <div className="space-y-6">
-                    <div className="relative bg-gray-50 dark:bg-gray-800 rounded-lg p-4">
+                    <div className="relative bg-gray-50 dark:bg-gray-800 h-96 rounded-lg p-4">
                       <Image
                         src={resultImage}
                         alt="Background removed"
-                        width={500}
-                        height={300}
-                        className="w-full h-auto object-contain mx-auto max-h-64"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width): 1024px 50vw, 33vw"
+                        className="w-full h-auto object-conver"
                       />
                     </div>
 
