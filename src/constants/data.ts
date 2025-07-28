@@ -142,8 +142,8 @@ export const FEATURES: Feature[] = [
 export const STEP: Step[] = [
     {
         id: 1,
-        name: 'Find a Reel',
-        description: 'Open Instagram and find the Reel you want to download',
+        name: 'Find',
+        description: 'Select the  you want to download',
         icon: DevicePhoneMobileIcon,
     },
     {
