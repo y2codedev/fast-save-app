@@ -164,7 +164,7 @@ function VideoToAudioConverter() {
           </div>
 
           {/* Music Player Panel */}
-          <div className="bg-gray-50 dark:bg-gray-800  rounded-xl sm:rounded-2xl overflow-hidden">
+          <div className="bg-gray-50 dark:bg-gray-800   rounded-xl sm:rounded-2xl overflow-hidden">
               <AudioPlayer
                 audioURL={audioURL}
                 isPlaying={isPlaying}

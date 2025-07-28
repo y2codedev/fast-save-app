@@ -28,7 +28,7 @@ export function AudioPlayer({
 
             <div className="">
                 {albumArt ? (
-                    <div className="relative aspect-square w-full  mx-auto rounded-xl overflow-hidden">
+                    <div className="relative aspect-square w-full h-96  mx-auto rounded-xl overflow-hidden">
                         <Image
                             src={albumArt}
                             alt="Album art"
@@ -50,7 +50,7 @@ export function AudioPlayer({
 
             {audioURL && (
                 <div className="mb-8">
-                    <div className="flex items-center justify-center mb-6">
+                    <div className="flex items-center justify-center my-5">
                         <button
                             onClick={togglePlayback}
                             className="p-3 sm:p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors duration-200 focus:outline-none "
