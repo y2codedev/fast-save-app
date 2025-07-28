@@ -319,7 +319,7 @@ export default function Dropzone() {
             )}
           </div>
         ))}
-        <div className="flex w-full justify-end">
+        <div className="flex w-full justify-end mt-4">
           {is_done ? (
             <div className="space-y-4 w-fit">
               <Button
