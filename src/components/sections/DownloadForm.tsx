@@ -30,6 +30,8 @@ export default function DownloadForm() {
       'youtu.be',
       'https://www.facebook.com/share',
       'https://pin.it',
+      'https://t.snapchat.com/',
+      'https://snapchat.com/'
     ];
 
     const isValidUrl = supportedPlatforms?.some(platform => url?.includes(platform));

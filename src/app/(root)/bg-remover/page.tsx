@@ -4,7 +4,7 @@ import { Button, FileUploadArea, Group, Loader, ResetButton } from "@/constants"
 import { removeBackground } from "@imgly/background-removal"
 import Image from "next/image"
 import { useState, useRef } from 'react'
-import { FiUpload, FiDownload, FiImage, FiCheckCircle, FiLoader } from 'react-icons/fi'
+import { FiUpload, FiDownload, FiImage, FiCheckCircle } from 'react-icons/fi'
 
 export default function BackgroundRemovalPage() {
   const [image, setImage] = useState<string | null>(null)
