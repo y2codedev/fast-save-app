@@ -127,11 +127,11 @@ function VideoToAudioConverter() {
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto">
+    <div className="w-full overflow-x-hidden bg-gray-50 dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Upload & Convert Panel */}
-          <div className="bg-white dark:bg-gray-800 h-fit rounded-xl sm:rounded-2xl overflow-hidden">
+          <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden">
             <div className="p-4 sm:p-6">
               <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                 <FiUpload className="mr-2" /> Upload & Convert
@@ -164,8 +164,7 @@ function VideoToAudioConverter() {
           </div>
 
           {/* Music Player Panel */}
-          <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden">
-            <div className="p-4 sm:p-6">
+          <div className="bg-white dark:bg-gray-800  rounded-xl sm:rounded-2xl overflow-hidden">
               <AudioPlayer
                 audioURL={audioURL}
                 isPlaying={isPlaying}
@@ -176,19 +175,7 @@ function VideoToAudioConverter() {
                 albumArt={albumArt}
                 videoFile={videoFile}
               />
-            </div>
           </div>
-        </div>
-
-        {messageRef.current && (
-          <p
-            ref={messageRef}
-            className="mt-6 text-center text-xs sm:text-sm text-gray-500 dark:text-gray-400 italic"
-          />
-        )}
-
-        <div className="py-8 sm:mt-12 text-center text-xs sm:text-sm text-gray-500 dark:text-gray-400">
-          <p>Note: Conversion happens in your browser. Your files are never uploaded to any server.</p>
         </div>
       </div>
     </div>

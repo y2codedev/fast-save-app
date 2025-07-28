@@ -11,7 +11,7 @@ export default function DownloadForm() {
   const [downloadData, setDownloadData] = useState<any>(null);
   const [isSaving, setIsSaving] = useState(false);
   const pathName = usePathname();
-  const urlPath = TopHeader_Item.find(item => item.path === pathName) || TopHeader_Item.find(item => item.path === '')!;
+  const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item?.path === '')!;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

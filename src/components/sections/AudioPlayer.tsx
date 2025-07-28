@@ -4,6 +4,7 @@ import { FiPlay, FiPause, FiMusic } from "react-icons/fi";
 import { formatTime } from "@/utils";
 import { AudioLoader } from "@/constants";
 import { AudioPlayerProps } from "@/constants/types";
+import Image from "next/image";
 
 export function AudioPlayer({
     audioURL,
@@ -16,7 +17,7 @@ export function AudioPlayer({
     videoFile
 }: AudioPlayerProps) {
     return (
-        <>
+        <div className="p-4 sm:p-6">
             <div className="flex items-center justify-between pb-5">
                 <span className="flex items-center gap-2 text-sm sm:text-base">
                     <FiMusic className="mr-2" />
@@ -25,13 +26,16 @@ export function AudioPlayer({
                 {isPlaying && <AudioLoader />}
             </div>
 
-            <div className="mb-6">
+            <div className="">
                 {albumArt ? (
-                    <div className="relative aspect-square w-full h-64 sm:h-80 mx-auto rounded-xl overflow-hidden">
-                        <img
+                    <div className="relative aspect-square w-full  mx-auto rounded-xl overflow-hidden">
+                        <Image
                             src={albumArt}
                             alt="Album art"
                             className="w-full h-full object-cover"
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            loading="lazy"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                             <span className="text-white font-medium text-sm">{videoFile?.name.replace(/\.[^/.]+$/, "")}</span>
@@ -78,6 +82,6 @@ export function AudioPlayer({
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }

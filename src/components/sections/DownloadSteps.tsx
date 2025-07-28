@@ -1,7 +1,10 @@
 'use client';
 
-import { STEP } from "@/constants/data";
+import { STEP, TopHeader_Item } from "@/constants/data";
+import { usePathname } from "next/navigation";
 export default function DownloadSteps() {
+    const pathName = usePathname();
+    const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item?.path === '')!;
     return (
         <div className="bg-white  dark:bg-gray-900 flex items-center justify-center">
             <div className="bg-gray-50 max-w-7xl  rounded-xl dark:bg-gray-800 mx-4 py-10">
@@ -9,7 +12,7 @@ export default function DownloadSteps() {
                     <div className="mx-auto max-w-2xl lg:text-center">
                         <h2 className="text-base font-semibold leading-7 text-indigo-600">How it works</h2>
                         <p className="mt-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
-                            Download Instagram Reels in 4 Easy Steps
+                            Download {urlPath?.highlight} in 4 Easy Steps
                         </p>
                         <p className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
                             Our process is designed to be simple and fast, with no technical knowledge required.
