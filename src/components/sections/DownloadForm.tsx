@@ -41,12 +41,15 @@ export default function DownloadForm() {
     }
 
     try {
+
+      setIsSaving(true);
       const apiUrl = `/api/download?url=${encodeURIComponent(url)}`;
       const response = await fetch(apiUrl, {
         method: 'GET',
         headers: {
           'Accept': 'application/json',
         },
+        cache: 'no-store'
       });
 
       if (!response.ok) {
@@ -69,6 +72,7 @@ export default function DownloadForm() {
       );
     } finally {
       setIsLoading(false);
+      setIsSaving(false);
     }
   };
 
@@ -102,6 +106,7 @@ export default function DownloadForm() {
                 <ResetButton
                   onClick={resetForm}
                   labal='Reset'
+                  isProcessing={isSaving}
                 />
               )}
             </div>

@@ -30,7 +30,7 @@ const usePinterestDownloader = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/pinterest-download?url=${encodeURIComponent(pinterestUrl)}`);
+      const response = await fetch(`/api/pinterest-download?url=${encodeURIComponent(pinterestUrl)}`,);
       const data = await response.json();
 
       if (!response.ok) {
