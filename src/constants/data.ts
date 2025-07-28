@@ -164,22 +164,29 @@ export const STEP: Step[] = [
 export const NAVITEMS: SocialLink[] = [
     {
         id: 1,
+        href: '/fb-video',
+        icon: FaFacebook,
+        ariaLabel: 'Facebook',
+    },
+    {
+        id: 2,
+        href: '/snapchat',
+        icon: FaSnapchat,
+        ariaLabel: 'Snapchat'
+    },
+    {
+        id: 3,
         href: '/audio',
         icon: MdAudiotrack,
         ariaLabel: 'Audio',
     },
     {
-        id: 2,
+        id: 4,
         href: '/photo',
         icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
-    {
-        id: 3,
-        href: '/fb-video',
-        icon: FaFacebook,
-        ariaLabel: 'Facebook',
-    },
+
     {
         id: 4,
         href: '/bg-remover',
@@ -187,17 +194,12 @@ export const NAVITEMS: SocialLink[] = [
         ariaLabel: 'Bg Remove',
     },
     {
-        id: 5,
+        id: 6,
         href: '/image-compressor',
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
-    {
-        id: 6,
-        href: '/snapchat',
-        icon: FaSnapchat,
-        ariaLabel: 'Snapchat'
-    },
+
 
 
 ];
