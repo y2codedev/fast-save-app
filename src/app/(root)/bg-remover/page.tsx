@@ -1,10 +1,10 @@
 'use client'
 
-import { Button, FileUploadArea, Group, ResetButton } from "@/constants"
+import { Button, FileUploadArea, Group, Loader, ResetButton } from "@/constants"
 import { removeBackground } from "@imgly/background-removal"
 import Image from "next/image"
 import { useState, useRef } from 'react'
-import { FiUpload, FiDownload, FiImage, FiCheckCircle } from 'react-icons/fi'
+import { FiUpload, FiDownload, FiImage, FiCheckCircle, FiLoader } from 'react-icons/fi'
 
 export default function BackgroundRemovalPage() {
   const [image, setImage] = useState<string | null>(null)
@@ -39,6 +39,7 @@ export default function BackgroundRemovalPage() {
     try {
       setIsProcessing(true)
       setError(null)
+      setResultImage(null)
 
       const blob = await removeBackground(image)
       const url = URL.createObjectURL(blob)
@@ -76,7 +77,6 @@ export default function BackgroundRemovalPage() {
                   loading={isProcessing}
                 />
 
-                {/* Image preview section */}
                 {image && (
                   <div className="mt-4 relative group">
                     <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1 z-10">
@@ -87,7 +87,7 @@ export default function BackgroundRemovalPage() {
                         src={image}
                         alt="Uploaded preview"
                         fill
-                        className="object-contain p-2"
+                        className="object-cover p-2"
                       />
                     </div>
                     <p className="mt-2 text-xs text-green-600 dark:text-green-400 flex items-center">
@@ -97,12 +97,19 @@ export default function BackgroundRemovalPage() {
                   </div>
                 )}
 
-                <div className="mt-6">
+                <div className="mt-6 flex  gap-4">
                   <Button
                     onClick={handleRemoveBackground}
                     isProcessing={isProcessing}
                     labal={'Remove Background'}
                   />
+
+                  {image && !isProcessing && (
+                    <ResetButton
+                      onClick={resetAll}
+                      labal="Reset All"
+                    />
+                  )}
                 </div>
 
                 {error && (
@@ -116,49 +123,56 @@ export default function BackgroundRemovalPage() {
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden">
+            <div className="bg-gray-50 dark:bg-gray-800 h-[540px] rounded-xl sm:rounded-2xl overflow-hidden">
               <div className="p-4 sm:p-6">
                 <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                   <FiImage className="mr-2" /> Result
                 </h2>
 
-                {resultImage ? (
-                  <div className="space-y-6">
-                    <div className="relative bg-gray-50 dark:bg-gray-800 h-96 rounded-lg p-4">
-                      <Image
-                        src={resultImage}
-                        alt="Background removed"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width): 1024px 50vw, 33vw"
-                        className="w-full h-auto object-contain"
-                      />
+                <div className="bg-gray-50 dark:bg-gray-800 h-96 border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center">
+                  {isProcessing ? (
+                    <div className="text-center">
+                      <div className="flex items-center justify-center space-x-2 ">
+                        <Loader />
+                        <p className="text-gray-600 dark:text-gray-300 font-medium">Removing background...</p>
+                      </div>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                        This may take a few moments depending on image size
+                      </p>
                     </div>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <a
-                        href={resultImage}
-                        download="background-removed.png"
-                        className="flex items-center justify-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium transition-colors"
-                      >
-                        <FiDownload className="mr-2" />
-                        Download Image
-                      </a>
-                      <ResetButton
-                        onClick={resetAll}
-                        labal="Reset All"
-                      />
+                  ) : resultImage ? (
+                    <div className="w-full h-full space-y-6">
+                      <div className="relative h-[calc(100%-10px)]">
+                        <Image
+                          src={resultImage}
+                          alt="Background removed"
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width): 1024px 50vw, 33vw"
+                          className="object-cover "
+                        />
+                      </div>
+                      <div className="flex flex-col sm:flex-row gap-3">
+                        <a
+                          href={resultImage}
+                          download="background-removed.png"
+                          className="flex items-center justify-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-md text-sm font-medium transition-colors"
+                        >
+                          <FiDownload className="mr-2" />
+                          Download Image
+                        </a>
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="bg-gray-50 dark:bg-gray-800 h-96 border border-gray-300 dark:border-gray-700 rounded-lg p-8 text-center">
-                    <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
-                      <FiImage className="h-16 w-16" />
+                  ) : (
+                    <div className="text-center p-8">
+                      <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
+                        <FiImage className="h-16 w-16" />
+                      </div>
+                      <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
+                        {image ? 'Click "Remove Background" to process' : 'Upload an image to remove its background'}
+                      </p>
                     </div>
-                    <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
-                      {image ? 'Click "Remove Background" to process' : 'Upload an image to remove its background'}
-                    </p>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>
