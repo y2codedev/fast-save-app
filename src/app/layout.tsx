@@ -9,7 +9,7 @@ export const generateMetadata = (): Metadata => {
   const title = "FastSave Instagram Reels Downloader – Save IG Reels Online in HD";
 
   const description = "Download Instagram Reels in HD with FastSave. No watermark, no login, 100% free. Save public Reels to MP4 quickly and easily.";
-
+  const image = "https://fast-save.vercel.app/images/insta.png";
   const keywords = [
     "Instagram Reels Downloader", "Download Instagram Reels", "IG Reels to MP4",
     "Save Instagram Reels", "No Watermark Reels Download", "Fast Instagram Downloader",
@@ -32,7 +32,7 @@ export const generateMetadata = (): Metadata => {
       url: "https://fast-save.vercel.app",
       images: [
         {
-          url: "https://fast-save.vercel.app/images/insta.png",
+          url: image,
           width: 1200,
           height: 630,
           alt: "FastSave - Social Media Downloader",
@@ -43,7 +43,7 @@ export const generateMetadata = (): Metadata => {
       card: "summary_large_image",
       title: title,
       description: description,
-      images: ["https://fast-save.vercel.app/images/logo.svg"],
+      images: [image],
     },
   };
 };
