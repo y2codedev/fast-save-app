@@ -1,4 +1,9 @@
+# *
 User-agent: *
 Allow: /
 
+# Host
+Host: https://fast-save.vercel.app
+
+# Sitemaps
 Sitemap: https://fast-save.vercel.app/sitemap.xml
