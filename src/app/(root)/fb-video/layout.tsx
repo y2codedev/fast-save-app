@@ -37,7 +37,7 @@ export const generateMetadata = (): Metadata => {
             url: "https://fast-save.vercel.app",
             images: [
                 {
-                    url: "/images/facebook.webp",
+                    url: "https://fast-save.vercel.app/images/facebook.webp",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Facebook Video Downloader",

@@ -27,7 +27,7 @@ export const generateMetadata = (): Metadata => {
             url: "https://fast-save.vercel.app",
             images: [
                 {
-                    url: "/images/audio.webp",
+                    url: "https://fast-save.vercel.app/images/audio.webp",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Audio Downloader",

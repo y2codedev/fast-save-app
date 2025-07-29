@@ -37,7 +37,7 @@ export const generateMetadata = (): Metadata => {
             url: "https://fast-save.vercel.app",
             images: [
                 {
-                    url: "/images/snapchat.jpeg",
+                    url: "https://fast-save.vercel.app/images/snapchat.jpeg",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Snapchat Video Downloader",
