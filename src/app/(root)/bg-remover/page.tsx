@@ -82,12 +82,12 @@ export default function BackgroundRemovalPage() {
                     <div className="absolute -top-2 -right-2 bg-green-500 text-white rounded-full p-1 z-10">
                       <FiCheckCircle className="h-4 w-4" />
                     </div>
-                    <div className="relative bg-gray-100 dark:bg-gray-700 h-48 rounded-lg overflow-hidden border-2 border-green-500">
+                    <div className="relative bg-gray-100 dark:bg-gray-700 w-full aspect-[16/9]  rounded-lg overflow-hidden border-2 border-green-500">
                       <Image
                         src={image}
                         alt="Uploaded preview"
                         fill
-                        className="object-cover p-1 rounded-lg"
+                        className="object-cover p-1 rounded-lg acc"
                       />
                     </div>
                     <p className="mt-2 text-xs text-green-600 dark:text-green-400 flex items-center">
