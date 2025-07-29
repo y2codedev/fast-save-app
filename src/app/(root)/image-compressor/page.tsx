@@ -88,7 +88,7 @@ export default function Home() {
                             >
                                 {loading ? (
                                     <>
-                                        <Loader /> <span className='ml-2'>Processing...</span>
+                                        <Loader /> <span className='ml-2'>Please Wait...</span>
                                     </>
                                 ) : (
                                     <>

@@ -16,7 +16,7 @@ function Button({ onClick, isProcessing = false, labal, icon }: ButtonProps) {
             {isProcessing ? (
                 <div className="flex items-center gap-2">
                     <Loader />
-                    Processing...
+                    Please Wait...
                 </div>
             ) : (
                 <div className="flex items-center gap-2">
