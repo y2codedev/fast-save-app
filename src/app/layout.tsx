@@ -32,7 +32,7 @@ export const generateMetadata = (): Metadata => {
       url: "https://fast-save.vercel.app",
       images: [
         {
-          url: image,
+          url: image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQAaTyY0RUp9PnPgZoXlo34IRPnsBjcH_zD3w&s",
           width: 1200,
           height: 630,
           alt: "FastSave - Social Media Downloader",
