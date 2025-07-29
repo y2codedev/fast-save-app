@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Image Converter – Convert PNG, JPG, WebP, SVG & More Instantly";
+    const title = "FastSave Image Converter – Convert PNG, JPG, WebP & More Instantly";
+
     const description =
-        "Convert images between PNG, JPG, JPEG, WebP, BMP, SVG, AVIF, and more with FastSave Image Converter. 100% free, fast, and secure — no watermarks or quality loss. Supports batch conversion, transparent backgrounds, and all major formats.";
+        "Convert PNG, JPG, WebP, SVG, and more quickly with FastSave Image Converter. Free, fast, secure, no watermarks. Supports batch conversion and all major formats.";
 
     const keywords = [
-        "Image Converter", "PNG to JPG", "JPG to PNG", "Convert WebP to PNG",
-        "JPEG to PNG", "Image to WebP", "Convert SVG to PNG", "AVIF to JPG",
-        "Free Photo Converter", "Online Image Format Converter", "Fast Image Converter",
-        "Batch Image Converter", "High-Quality Image Conversion", "Convert Images Without Losing Quality",
-        "FastSave Converter Tool", "Image Format Changer", "Transparent PNG Converter",
-        "Online WebP Converter", "Convert Photos Online", "Photo File Format Converter",
-        "Convert Image to JPG", "Convert Image to PNG", "Convert PNG to WebP",
-        "Convert WebP to JPG", "SVG to JPG Converter", "Image File Conversion Online",
-        "Quick Image Converter", "Convert HEIC to JPG", "Free Online Image Converter",
-        "Fast Image Format Tool", "Universal Image Converter"
+        "Image Converter",
+        "PNG to JPG",
+        "JPG to PNG",
+        "Convert WebP to PNG",
+        "JPEG to PNG",
+        "Image to WebP",
+        "Convert SVG to PNG",
+        "Free Photo Converter",
+        "Online Image Format Converter",
+        "Fast Image Converter",
+        "Batch Image Converter",
+        "High-Quality Image Conversion",
+        "Transparent PNG Converter",
     ];
 
     return {

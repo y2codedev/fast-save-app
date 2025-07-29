@@ -1,21 +1,25 @@
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Snapchat Video Downloader – Save Snapchat Videos Online in HD";
+    const title = "FastSave Snapchat Video Downloader – Save Snapchat Videos in HD";
+
     const description =
-        "Download Snapchat videos online in high-quality HD with FastSave Snapchat Video Downloader. Save snaps, stories, and videos quickly with no watermark, no login, and no app install. 100% free, secure, and works on all devices.";
+        "Download Snapchat videos in HD with FastSave. Save snaps, stories, and videos quickly. No watermark, no login, no app needed. Free and works on all devices.";
 
     const keywords = [
-        "Snapchat Video Downloader", "Download Snapchat Videos", "Snapchat Story Saver",
-        "Save Snap Videos", "Snapchat Video Download Online", "HD Snapchat Downloader",
-        "Fast Snapchat Saver", "Snapchat Reels Downloader", "Download Snaps Without Watermark",
-        "Snapchat Video Converter", "Snap Video Grabber", "Online Snapchat Downloader",
-        "Free Snapchat Video Download", "Snapchat Private Video Saver", "Snapchat Video Download Tool",
-        "FastSave Snap Downloader", "Snapchat HD Saver", "Snapchat Video Extractor",
-        "Download Snapchat Story Video", "Snapchat Downloader for Android", "Snapchat Downloader for iPhone",
-        "Save Snapchat Memories", "Snapchat Status Video Download", "Quick Snapchat Video Saver",
-        "Snapchat to MP4 Converter", "Download Snapchat Videos No Login", "Snapchat Clip Saver",
-        "Fast Snapchat Download Site"
+        "Snapchat Video Downloader",
+        "Download Snapchat Videos",
+        "Snapchat Story Saver",
+        "Save Snap Videos",
+        "Snapchat Video Download Online",
+        "HD Snapchat Downloader",
+        "Fast Snapchat Saver",
+        "Download Snaps Without Watermark",
+        "Snapchat Video Converter",
+        "Online Snapchat Downloader",
+        "Free Snapchat Video Download",
+        "Snapchat Private Video Saver",
+        "Snapchat Downloader for Android",
     ];
 
     return {

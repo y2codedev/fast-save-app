@@ -1,19 +1,25 @@
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Background Remover – Remove Image Backgrounds Instantly & Free";
+    const title = "FastSave Background Remover – Remove Image Backgrounds Instantly";
+
     const description =
-        "FastSave Background Remover helps you instantly remove backgrounds from any photo or image online. Use AI-powered technology to create transparent PNGs, profile pictures, product images, and more in seconds. 100% free, high-resolution output with no watermark!";
+        "Remove backgrounds instantly with FastSave Background Remover. AI-powered, free, no watermark, high-res transparent PNGs for photos, products, and more.";
+
     const keywords = [
-        "Background Remover", "Remove Background Online", "AI Background Removal",
-        "Transparent Image Maker", "Remove Background from Photo", "FastSave Background Eraser",
-        "Image Background Cleaner", "Remove Background Free", "No Watermark Background Remover",
-        "Transparent PNG Generator", "Erase Image Background", "Product Image Background Remover",
-        "Remove White Background", "Remove Background Tool", "Photo Cutout", "Remove Background Automatically",
-        "Online Background Remover", "Fast Background Cleaner", "Profile Picture Maker",
-        "FastSave Transparent Maker", "Free Background Removal", "Background Eraser for E-commerce",
-        "Bulk Background Remover", "HD Transparent Background", "Auto Remove Image Background",
-        "Fast Background Extractor", "One-click Background Removal", "AI Cutout Tool"
+        "Background Remover",
+        "Remove Background Online",
+        "AI Background Removal",
+        "Transparent PNG Generator",
+        "Remove Background Free",
+        "No Watermark Background Remover",
+        "Product Image Background Remover",
+        "Online Background Remover",
+        "Background Eraser for E-commerce",
+        "Bulk Background Remover",
+        "HD Transparent Background",
+        "Auto Remove Image Background",
+        "One-click Background Removal",
     ];
 
     return {

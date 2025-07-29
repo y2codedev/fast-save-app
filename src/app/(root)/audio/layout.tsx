@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Audio Converter – Convert Video to MP3, Download High-Quality Audio Online";
-    const description = "Convert videos to MP3, extract audio, and download high-quality audio files from YouTube, Instagram, Facebook, and more with FastSave Audio Converter. Enjoy fast, watermark-free, and free audio conversion with multiple formats and batch support.";
+    const title = "FastSave Audio Converter – Convert Video to MP3 in HD";
+    const description = "Convert videos to MP3 in high-quality with FastSave Audio Converter. Free, fast, and supports YouTube, Instagram, Facebook & more. No watermark.";
+
     const keywords = [
-        "Audio Converter", "MP3 Downloader", "Video to MP3", "FastSave MP3 Converter",
-        "Extract Audio", "Download Audio", "Online MP3 Converter", "High-Quality Audio Download",
-        "Convert YouTube to MP3", "Instagram Audio Download", "Facebook Audio Extractor",
-        "Fast Audio Downloader", "No Watermark Audio", "Free Audio Converter", "Batch Audio Conversion",
-        "Audio to MP3 Tool", "Online Audio Saver", "MP3 Audio Tool", "Fast MP3 Download",
-        "Convert Reels to MP3", "Social Media Audio Downloader", "FastSave Audio", "MP3 Grabber",
-        "YouTube Audio Saver", "Download Podcast MP3", "Audio Extract Tool", "Best Audio Converter",
-        "Quick MP3 Download", "Music Converter", "FastSave Sound Downloader", "HQ Audio Converter"
+        "Audio Converter", "MP3 Downloader", "Video to MP3",
+        "Online MP3 Converter", "Extract Audio", "Free Audio Converter",
+        "Convert YouTube to MP3", "Instagram Audio Download",
+        "Fast MP3 Download", "No Watermark Audio", "Audio to MP3 Tool",
+        "FastSave Audio", "Social Media Audio Downloader"
     ];
 
     return {
