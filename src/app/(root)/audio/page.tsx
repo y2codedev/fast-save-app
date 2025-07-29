@@ -30,7 +30,7 @@ export const generateMetadata = (): Metadata => {
             url: "https://fast-save.vercel.app",
             images: [
                 {
-                    url: "/images/audio.jpg",
+                    url: "/images/audio.webp",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Audio Downloader",
@@ -41,7 +41,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/audio.jpg",],
+            images: ["/images/audio.webp",],
         },
     };
 };

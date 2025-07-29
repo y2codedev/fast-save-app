@@ -1,5 +1,3 @@
-'use client';
-
 import { DownloadForm, Group } from "@/constants";
 
 export default function Home() {
