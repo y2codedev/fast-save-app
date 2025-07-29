@@ -64,7 +64,7 @@ export default function RootLayout({
     <html lang="en" className={inter.className} suppressHydrationWarning>
       <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
       <head>
-        <meta name="google-site-verification" content="tDnK8wGpDutxTfAN-cFdlLdL0AZxiNnDkkvqH08TAIA" />
+        <meta name="google-site-verification" content="t-2LnjOgR1zIIiYZ4lAQWDQOzoGnQ8kruHPwqe-tpSk" />
       </head>
       <body>
         <ThemeProviderWrapper>
