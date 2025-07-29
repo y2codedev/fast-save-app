@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<sitemap><loc>https://fast-save.vercel.app/sitemap-0.xml</loc></sitemap>
-</sitemapindex>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+<url><loc>https://fast-save.vercel.app/photo/</loc><lastmod>2025-07-29T05:48:16.133Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/fb-video/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/image-compressor/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/audio/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/snapchat/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/privacy/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/terms/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+<url><loc>https://fast-save.vercel.app/bg-remover/</loc><lastmod>2025-07-29T05:48:16.135Z</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>
+</urlset>
