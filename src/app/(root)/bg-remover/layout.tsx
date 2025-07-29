@@ -37,7 +37,7 @@ export const generateMetadata = (): Metadata => {
             url: "https://fast-save.vercel.app",
             images: [
                 {
-                    url: "https://fast-save.vercel.app/images/bg-remover.png",
+                    url: "/images/bg-remover.png",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Background Remover",
@@ -48,7 +48,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/logo.svg"],
+            images: ["/images/bg-remover.png"],
         },
     };
 };

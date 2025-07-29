@@ -37,7 +37,7 @@ export const generateMetadata = (): Metadata => {
             url: "https://fast-save.vercel.app",
             images: [
                 {
-                    url: "https://fast-save.vercel.app/images/image-compressor.webp",
+                    url: "/images/image-compressor.webp",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Image Compressor",
@@ -48,7 +48,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/logo.svg"],
+            images: ["/images/image-compressor.webp"],
         },
     };
 };
