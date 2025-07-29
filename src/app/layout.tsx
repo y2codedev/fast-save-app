@@ -32,7 +32,7 @@ export const generateMetadata = (): Metadata => {
       url: "https://fast-save.vercel.app",
       images: [
         {
-          url: "https://fast-save.vercel.app/images/insta.png",
+          url: "https://cdn6.aptoide.com/imgs/0/9/0/0900a3601c6f97066e74cb3ae473910a_screen.png?w=325",
           width: 1200,
           height: 630,
           alt: "FastSave - Social Media Downloader",
