@@ -14,8 +14,6 @@ import ResetButton from '@/components/sections/ResetButton';
 import Button from '@/components/sections/Button';
 import ToastProvider from '@/components/sections/ToastProvider';
 import Toast from '@/lib/tost';
-import usePinterestDownloader from '@/hooks/usePinterestDownloader';
-import useBackgroundRemover from '@/hooks/useBackgroundRemover';
 import InputField from '@/components/sections/InputField';
 import ShareDialog from '@/components/ui/ShareDialog';
 import AudioLoader from "@/components/ui/AudioLoader";
@@ -47,8 +45,6 @@ export {
     ToastProvider,
     Toast,
     InputField,
-    usePinterestDownloader,
-    useBackgroundRemover,
     ShareDialog,
     AudioLoader,
     FileUploader,
