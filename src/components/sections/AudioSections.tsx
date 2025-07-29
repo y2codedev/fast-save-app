@@ -6,7 +6,6 @@ import { fetchFile, toBlobURL } from "@ffmpeg/util";
 import { useRef, useState, useEffect } from "react";
 import { FiDownload, FiUpload } from "react-icons/fi";
 
-
 function VideoToAudioConverter() {
   const ffmpegRef = useRef(new FFmpeg());
   const [loaded, setLoaded] = useState(false);
