@@ -1,22 +1,39 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import imageCompression from 'browser-image-compression'
-import { Button, Group, ImagePreview, Loader, StatsDisplay } from '@/constants'
+import { Button, FileUploadArea, Group, ImagePreview, Loader, ResetButton, StatsDisplay } from '@/constants'
+import { FiUpload, FiCheckCircle, FiImage, FiDownload } from 'react-icons/fi'
+import Image from 'next/image'
+
+type ImageData = {
+    src: string;
+    size: number;
+} | undefined;
 
 export default function Home() {
-    const fileRef = useRef<HTMLInputElement | null>(null)
-    const [original, setOriginal] = useState<{ src: string; size: number }>()
-    const [compressed, setCompressed] = useState<{ src: string; size: number }>()
+    const fileRef = useRef<HTMLInputElement>(null)
+    const [original, setOriginal] = useState<ImageData>()
+    const [compressed, setCompressed] = useState<ImageData>()
     const [loading, setLoading] = useState(false)
     const [compressionRatio, setCompressionRatio] = useState<number | null>(null)
     const [error, setError] = useState<string | null>(null)
+
+    useEffect(() => {
+        return () => {
+            if (original?.src) URL.revokeObjectURL(original.src)
+            if (compressed?.src) URL.revokeObjectURL(compressed.src)
+        }
+    }, [original, compressed])
 
     const handleFileChange = async () => {
         const file = fileRef.current?.files?.[0]
         if (!file) return
 
         setLoading(true)
+        if (original?.src) URL.revokeObjectURL(original.src)
+        if (compressed?.src) URL.revokeObjectURL(compressed.src)
+
         setOriginal(undefined)
         setCompressed(undefined)
         setCompressionRatio(null)
@@ -76,90 +93,110 @@ export default function Home() {
         document.body.removeChild(link)
     }
 
+    const resetAll = () => {
+        if (original?.src) URL.revokeObjectURL(original.src)
+        if (compressed?.src) URL.revokeObjectURL(compressed.src)
+
+        setOriginal(undefined)
+        setCompressed(undefined)
+        setCompressionRatio(null)
+        setError(null)
+        if (fileRef.current) {
+            fileRef.current.value = ''
+        }
+    }
+
     return (
         <>
-            <main className="bg-white dark:bg-gray-900  sm:pt-12 pt-0  px-4 sm:px-6">
+            <main className="bg-white dark:bg-gray-900  sm:pt-10 pt-0  px-4 sm:px-6">
                 <div className="max-w-7xl mx-auto">
-                    <div className="bg-transparent  pt-6">
-                        <div className="flex flex-col items-center">
-                            <label
-                                htmlFor="file-upload"
-                                className={`relative cursor-pointer ${loading ? 'bg-indigo-400 dark:bg-indigo-800' : 'bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700'} text-white font-medium py-3 px-6 rounded-lg transition-colors duration-200 flex items-center`}
-                            >
-                                {loading ? (
-                                    <>
-                                        <Loader /> <span className='ml-2'>Please Wait...</span>
-                                    </>
-                                ) : (
-                                    <>
-                                        <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                        </svg>
-                                        <span className='text-sm md:text-base font-medium'>Choose an Image</span>
-                                    </>
-                                )}
-                                <input
-                                    id="file-upload"
-                                    type="file"
-                                    accept="image/*"
-                                    ref={fileRef}
-                                    onChange={handleFileChange}
-                                    className="sr-only"
-                                    disabled={loading}
-                                />
-                            </label>
-                            <p className="mt-2 sm:text-sm text-xs text-center text-gray-500 dark:text-gray-400">
-                                Supports JPG, PNG, WEBP (Max: 10MB)
-                            </p>
-                        </div>
-
-                        {error && (
-                            <div className="mt-4 text-center text-red-500 dark:text-red-400 text-sm">
-                                {error}
-                            </div>
-                        )}
-
-                        {loading && (
-                            <div className="mt-6 flex flex-col items-center">
-                                <Loader />
-                                <p className="mt-4 text-indigo-600 dark:text-indigo-400 font-medium">
-                                    Compressing your image...
-                                </p>
-                            </div>
-                        )}
-                    </div>
-
-                    {compressionRatio !== null && (
+                     {compressionRatio !== null && (
                         <StatsDisplay compressionRatio={compressionRatio} />
                     )}
+                    <div className="max-w-6xl mx-auto">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+                            <div className="bg-gray-50 dark:bg-gray-800 h-fit rounded-xl sm:rounded-2xl overflow-hidden">
+                                <div className="p-4 sm:p-6">
+                                    <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
+                                        <FiUpload className="mr-2" /> Upload File
+                                    </h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {original && (
-                            <ImagePreview
-                                imageSrc={original.src}
-                                size={original.size}
-                                label="Original Image"
-                            />
-                        )}
-                        {compressed && (
-                            <ImagePreview
-                                imageSrc={compressed.src}
-                                size={compressed.size}
-                                label="Compressed Image"
-                            />
-                        )}
-                    </div>
+                                    <FileUploadArea
+                                        ref={fileRef}
+                                        onFileUpload={handleFileChange}
+                                        loading={loading}
+                                    />
 
-                    {compressed?.src && (
-                        <div className="mt-8 flex justify-center">
-                            <Button
-                                onClick={handleDownload}
-                                isProcessing={false}
-                                labal='Download Image'
-                                icon={true}
-                            />
+                                    {error && (
+                                        <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-sm rounded-lg flex items-start gap-2">
+                                            <svg className="h-4 w-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span>{error}</span>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="bg-gray-50 dark:bg-gray-800 h-[31.5rem] rounded-xl sm:rounded-2xl overflow-hidden">
+                                <div className="p-4 sm:p-6">
+                                    <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
+                                        <FiImage className="mr-2" /> Compressed Image
+                                    </h2>
+
+                                    <div className="bg-gray-50 dark:bg-gray-800 h-[22rem] border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center">
+                                        {loading ? (
+                                            <div className="text-center">
+                                                <div className="flex items-center justify-center space-x-2 ">
+                                                    <Loader />
+                                                    <p className="text-gray-600 dark:text-gray-300 font-medium">Compressing image...</p>
+                                                </div>
+                                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                                    This may take a few moments depending on image size
+                                                </p>
+                                            </div>
+                                        ) : compressed ? (
+                                            <div className="w-full h-full">
+                                                <div className="relative h-full p-2 rounded-lg overflow-hidden">
+                                                    <Image
+                                                        src={compressed?.src}
+                                                        alt="Compressed image"
+                                                        fill
+                                                        sizes="(max-width: 768px) 100vw, (max-width): 1024px 50vw, 33vw"
+                                                        className="object-cover "
+                                                    />
+                                                </div>
+                                                <div className="flex items-center gap-3 mt-5">
+                                                    <Button
+                                                        onClick={handleDownload}
+                                                        isProcessing={loading}
+                                                        labal={'Download Image'}
+                                                        icon={true}
+                                                    />
+
+                                                    {compressed && !loading && (
+                                                        <ResetButton
+                                                            onClick={resetAll}
+                                                            labal="Reset All"
+                                                        />
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="text-center p-8">
+                                                <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
+                                                    <FiImage className="h-16 w-16" />
+                                                </div>
+                                                <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
+                                                    {original ? 'Click "Compress Image" to process' : 'Upload an image to compress it'}
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    )}
+                    </div>
                 </div>
             </main>
             <Group />
