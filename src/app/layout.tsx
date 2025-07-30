@@ -56,6 +56,21 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter?.className} suppressHydrationWarning>
       <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const theme = localStorage.getItem('theme') || 'system';
+                const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                const resolvedTheme = theme === 'system' ? systemTheme : theme;
+                document.documentElement.classList.add(resolvedTheme);
+                document.documentElement.style.colorScheme = resolvedTheme;
+              } catch (e) {}
+            `,
+          }}
+        />
+      </head>
       <body>
         <ThemeProviderWrapper>
           <Navbar />

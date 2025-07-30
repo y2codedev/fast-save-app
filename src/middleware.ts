@@ -1,17 +1,13 @@
-// middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  const response = NextResponse.next()
+  const theme = request.cookies.get('theme')?.value;
+  const response = NextResponse.next();
 
-  // Required for SharedArrayBuffer
-  response.headers.set('Cross-Origin-Opener-Policy', 'same-origin')
-  response.headers.set('Cross-Origin-Embedder-Policy', 'require-corp')
+  if (theme && !request.cookies.get('fastsave-theme')) {
+    response.cookies.set('fastsave-theme', theme);
+  }
 
-  return response
-}
-
-export const config = {
-  matcher: '/remove-background',
+  return response;
 }

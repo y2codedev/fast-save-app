@@ -1,18 +1,28 @@
-import { ThemeProvider } from 'next-themes'
-import React from 'react';
-import "../../app/globals.css";
+'use client';
+
+import { ThemeProvider } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
-    return (
-        <ThemeProvider
-            attribute="class"
-            enableSystem={false}
-            disableTransitionOnChange={true}
-            enableColorScheme={true}
-        >
-            {children}
-        </ThemeProvider>
-    )
-}
+  const [mounted, setMounted] = useState(false);
 
-export default ThemeProviderWrapper
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return <>{children}</>;
+  }
+
+  return (
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem={true}
+      storageKey="fastsave-theme" 
+      disableTransitionOnChange
+    >
+      {children}
+    </ThemeProvider>
+  );
+};
+
+export default ThemeProviderWrapper;
