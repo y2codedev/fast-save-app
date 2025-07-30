@@ -4,22 +4,39 @@ import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { NAVITEMS } from '@/constants/data';
-import { useState } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronRightIcon } from 'lucide-react';
 import { ShareDialog } from '@/constants';
-import { setThemeMode } from '@/utils';
+import { useState, useEffect } from 'react'
+import Image from "next/image";
 
 const Navbar = () => {
-  const toggleTheme = () => {
-    const current = localStorage.getItem('themeMode') === 'dark' ? 'light' : 'dark';
-    setThemeMode(current as 'dark' | 'light');
-  };
-
-  const themeMode = localStorage.getItem('themeMode');
-
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [mounted, setMounted] = useState(false)
+  const { setTheme, resolvedTheme } = useTheme()
+
+  useEffect(() => setMounted(true), [])
+
+  if (!mounted) return (
+    <Image
+      src="data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNGRkZGRkYiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBoZWlnaHQ9IjIwMHB4IiB3aWR0aD0iMjAwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIyIj48L3JlY3Q+PC9zdmc+Cg=="
+      width={36}
+      height={36}
+      sizes="36x36"
+      alt="Loading Light/Dark Toggle"
+      priority={false}
+      title="Loading Light/Dark Toggle"
+    />
+  )
+
+  if (resolvedTheme === 'dark') {
+    return <FaSun onClick={() => setTheme('light')} />
+  }
+
+  if (resolvedTheme === 'light') {
+    return <FaMoon onClick={() => setTheme('dark')} />
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700  transition-colors duration-300">
@@ -60,10 +77,10 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4">
             <div
-              onClick={toggleTheme}
+              onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
               className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-white dark:bg-gray-800 transition-all duration-200 cursor-pointer"
             >
-              {themeMode === 'dark' ? (
+              {resolvedTheme === 'dark' ? (
                 <FaSun className="h-5 w-5" />
               ) : (
                 <FaMoon className="h-5 w-5" />

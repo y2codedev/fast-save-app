@@ -11,10 +11,3 @@ export function formatTime(time: number) {
   const seconds = Math.floor(time % 60);
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
-
-export const setThemeMode = (themeMode: 'dark' | 'light') => {
-  if (typeof window !== 'undefined' && document?.documentElement) {
-    document.documentElement.classList.toggle('dark', themeMode === 'dark');
-    localStorage.setItem('themeMode', themeMode);
-  }
-};
