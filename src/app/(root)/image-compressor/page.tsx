@@ -141,21 +141,23 @@ export default function Home() {
                                 <div className="">
                                     <div className="bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
                                         {loading ? (
-                                            <div className="text-center">
-                                                <div className="flex items-center justify-center space-x-2 ">
-                                                    <Loader />
-                                                    <p className="text-gray-600 dark:text-gray-300 font-medium">Compressing image...</p>
+                                            <div className='flex items-center justify-center h-full w-full p-8'>
+                                                <div className="flex-col">
+                                                    <div className="flex items-center justify-center space-x-2 ">
+                                                        <Loader />
+                                                        <p className="text-gray-600 dark:text-gray-300 font-medium">Compressing image...</p>
+                                                    </div>
+                                                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                                                        This may take a few moments depending on image size
+                                                    </p>
                                                 </div>
-                                                <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                                                    This may take a few moments depending on image size
-                                                </p>
                                             </div>
                                         ) : compressed ? (
                                             <div className="w-full ">
                                                 <div className="relative h-full  rounded-lg overflow-hidden">
                                                     <ImagePreview
-                                                        imageSrc={compressed.src}
-                                                        size={compressed.size}
+                                                        imageSrc={compressed?.src}
+                                                        size={compressed?.size}
                                                         label="Compressed Image"
                                                     />
                                                     <div className="flex items-center gap-3 px-4 pb-4 ">
@@ -176,15 +178,13 @@ export default function Home() {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className='flex items-center justify-center '>
-                                                <div className="text-center  p-8">
-                                                    <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
-                                                        <FiImage className="h-16 w-16" />
-                                                    </div>
-                                                    <p className=" text-gray-500 dark:text-gray-400 text-sm">
-                                                        {original ? 'Click "Compress Image" to process' : 'Upload an image to compress it'}
-                                                    </p>
+                                            <div className="text-center  p-8">
+                                                <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
+                                                    <FiImage className="h-16 w-16" />
                                                 </div>
+                                                <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
+                                                    {original ? 'Click "Compress Image" to process' : 'Upload an image to compress it'}
+                                                </p>
                                             </div>
                                         )}
                                     </div>
