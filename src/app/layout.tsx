@@ -54,9 +54,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
-      <body>
+      <body className={inter?.className}>
         <ThemeProviderWrapper>
           <Navbar />
           <Suspense fallback={<FallbackLoader />}>
