@@ -8,9 +8,16 @@ import { useState } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronRightIcon } from 'lucide-react';
 import { ShareDialog } from '@/constants';
+import { setThemeMode } from '@/utils';
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
+  const toggleTheme = () => {
+    const current = localStorage.getItem('themeMode') === 'dark' ? 'light' : 'dark';
+    setThemeMode(current as 'dark' | 'light');
+  };
+
+  const themeMode = localStorage.getItem('themeMode');
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -53,10 +60,10 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4">
             <div
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={toggleTheme}
               className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100 hover:bg-white dark:bg-gray-800 transition-all duration-200 cursor-pointer"
             >
-              {theme === 'dark' ? (
+              {themeMode === 'dark' ? (
                 <FaSun className="h-5 w-5" />
               ) : (
                 <FaMoon className="h-5 w-5" />
