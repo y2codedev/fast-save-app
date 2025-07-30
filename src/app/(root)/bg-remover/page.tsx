@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { Button, FileUploadArea, Group, Loader, ResetButton } from "@/constants"
 import { removeBackground } from "@imgly/background-removal"

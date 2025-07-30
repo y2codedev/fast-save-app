@@ -188,7 +188,7 @@ export const NAVITEMS: SocialLink[] = [
     },
 
     {
-        id: 4,
+        id: 5,
         href: '/bg-remover',
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
@@ -199,9 +199,6 @@ export const NAVITEMS: SocialLink[] = [
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
-
-
-
 ];
 
 

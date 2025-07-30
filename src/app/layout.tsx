@@ -56,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter?.className} suppressHydrationWarning>
       <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
-      <body className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 antialiased">
+      <body>
         <ThemeProviderWrapper>
           <Navbar />
           <Suspense fallback={<FallbackLoader />}>
