@@ -3,8 +3,8 @@
 import { Button, FileUploader, AudioPlayer } from "@/constants";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile, toBlobURL } from "@ffmpeg/util";
-import { useRef, useState, useEffect } from "react";
-import { FiDownload, FiUpload } from "react-icons/fi";
+import { useRef, useState } from "react";
+import { FiUpload } from "react-icons/fi";
 
 function VideoToAudioConverter() {
   const ffmpegRef = useRef(new FFmpeg());
@@ -13,49 +13,8 @@ function VideoToAudioConverter() {
   const [audioURL, setAudioURL] = useState<string | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
   const [albumArt, setAlbumArt] = useState<string | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const messageRef = useRef<HTMLParagraphElement | null>(null);
-
-  // Handle audio playback
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (!audio) return;
-
-    const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
-    const handleEnd = () => setIsPlaying(false);
-
-    audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('durationchange', updateDuration);
-    audio.addEventListener('ended', handleEnd);
-
-    return () => {
-      audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('durationchange', updateDuration);
-      audio.removeEventListener('ended', handleEnd);
-    };
-  }, [audioURL]);
-
-  const togglePlayback = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = parseFloat(e.target.value);
-      setCurrentTime(parseFloat(e.target.value));
-    }
-  };
 
   // Load FFmpeg
   const loadFFmpeg = async () => {
@@ -80,7 +39,6 @@ function VideoToAudioConverter() {
   const handleFileChange = (file: File) => {
     setVideoFile(file);
     setAudioURL(null);
-    setIsPlaying(false);
 
     const video = document.createElement('video');
     const canvas = document.createElement('canvas');
@@ -146,34 +104,18 @@ function VideoToAudioConverter() {
                     labal='Convert to MP3'
                   />
                 </div>
-
-                {audioURL && (
-                  <a
-                    href={audioURL}
-                    download="converted-audio.mp3"
-                    className="flex items-center px-3 py-2 sm:px-4 sm:py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto justify-center"
-                  >
-                    <FiDownload className="mr-1" /> Download
-                  </a>
-                )}
               </div>
-
               <audio ref={audioRef} src={audioURL || undefined} className="hidden" />
             </div>
           </div>
 
           {/* Music Player Panel */}
           <div className="bg-gray-50 dark:bg-gray-800   rounded-xl sm:rounded-2xl overflow-hidden">
-              <AudioPlayer
-                audioURL={audioURL}
-                isPlaying={isPlaying}
-                currentTime={currentTime}
-                duration={duration}
-                togglePlayback={togglePlayback}
-                handleSeek={handleSeek}
-                albumArt={albumArt}
-                videoFile={videoFile}
-              />
+            <AudioPlayer
+              audioURL={audioURL}
+              albumArt={albumArt}
+              videoFile={videoFile}
+            />
           </div>
         </div>
       </div>

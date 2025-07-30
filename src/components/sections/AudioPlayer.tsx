@@ -1,20 +1,13 @@
 "use client";
 
-import { FiPlay, FiPause, FiMusic } from "react-icons/fi";
-import { formatTime } from "@/utils";
-import { AudioLoader } from "@/constants";
+import { FiMusic, FiDownload } from "react-icons/fi";
 import { AudioPlayerProps } from "@/constants/types";
 import Image from "next/image";
 
 export function AudioPlayer({
-    audioURL,
-    isPlaying,
-    currentTime,
-    duration,
-    togglePlayback,
-    handleSeek,
     albumArt,
-    videoFile
+    videoFile,
+    audioURL
 }: AudioPlayerProps) {
     return (
         <div className="p-4 sm:p-6">
@@ -23,12 +16,11 @@ export function AudioPlayer({
                     <FiMusic className="mr-2" />
                     <span>Music Player</span>
                 </span>
-                {isPlaying && <AudioLoader />}
             </div>
 
             <div className="">
                 {albumArt ? (
-                    <div className="relative aspect-square w-full h-[23rem]  mx-auto rounded-xl overflow-hidden">
+                    <div className="relative aspect-square w-full h-96  mx-auto rounded-xl overflow-hidden">
                         <Image
                             src={albumArt}
                             alt="Album art"
@@ -47,39 +39,15 @@ export function AudioPlayer({
                     </div>
                 )}
             </div>
-
             {audioURL && (
-                <div className="mb-8">
-                    <div className="flex items-center justify-center my-5">
-                        <button
-                            onClick={togglePlayback}
-                            className="p-3 sm:p-4 rounded-full bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600 text-white transition-colors duration-200 focus:outline-none "
-                        >
-                            {isPlaying ? (
-                                <FiPause size={20} className="sm:size-6 flex-shrink-0" />
-                            ) : (
-                                <FiPlay size={20} className="sm:size-6 flex-shrink-0" />
-                            )}
-                        </button>
-                    </div>
-
-                    <div className="space-y-2">
-                        <input
-                            type="range"
-                            min="0"
-                            max={duration || 100}
-                            value={currentTime}
-                            onChange={handleSeek}
-                            className="w-full h-1.5 sm:h-2 bg-gray-200 dark:bg-gray-700 rounded-full appearance-none cursor-pointer accent-indigo-600"
-                            style={{
-                                backgroundImage: `linear-gradient(to right, #4f46e5 ${(currentTime / (duration || 100)) * 100}%, #d1d5db ${(currentTime / (duration || 100)) * 100}%)`
-                            }}
-                        />
-                        <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
-                            <span> {formatTime(currentTime)} </span>
-                            <span>{formatTime(duration)}</span>
-                        </div>
-                    </div>
+                <div className="flex items-center mt-5 justify-end">
+                    <a
+                        href={audioURL}
+                        download="converted-audio.mp3"
+                        className="flex items-center px-3 py-2 sm:px-4 sm:py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto justify-center"
+                    >
+                        <FiDownload className="mr-1" /> Download
+                    </a>
                 </div>
             )}
         </div>

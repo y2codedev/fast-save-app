@@ -128,12 +128,7 @@ export interface BackgroundRemoverProps {
 }
 
 export interface AudioPlayerProps {
-    audioURL: string | null;
-    isPlaying: boolean;
-    currentTime: number;
-    duration: number;
-    togglePlayback: () => void;
-    handleSeek: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    audioURL?: string | null;
     albumArt: string | null;
     videoFile: File | null;
 }
