@@ -3,8 +3,7 @@
 import { useRef, useState, useEffect } from 'react'
 import imageCompression from 'browser-image-compression'
 import { Button, FileUploadArea, Group, ImagePreview, Loader, ResetButton, StatsDisplay } from '@/constants'
-import { FiUpload, FiCheckCircle, FiImage, FiDownload } from 'react-icons/fi'
-import Image from 'next/image'
+import { FiUpload, FiImage } from 'react-icons/fi'
 
 type ImageData = {
     src: string;
@@ -110,7 +109,7 @@ export default function Home() {
         <>
             <main className="bg-white dark:bg-gray-900  sm:pt-10 pt-0  px-4 sm:px-6">
                 <div className="max-w-7xl mx-auto">
-                     {compressionRatio !== null && (
+                    {compressionRatio !== null && (
                         <StatsDisplay compressionRatio={compressionRatio} />
                     )}
                     <div className="max-w-6xl mx-auto">
@@ -138,13 +137,9 @@ export default function Home() {
                                 </div>
                             </div>
 
-                            <div className="bg-gray-50 dark:bg-gray-800 h-[31.5rem] rounded-xl sm:rounded-2xl overflow-hidden">
-                                <div className="p-4 sm:p-6">
-                                    <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
-                                        <FiImage className="mr-2" /> Compressed Image
-                                    </h2>
-
-                                    <div className="bg-gray-50 dark:bg-gray-800 h-[22rem] border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center">
+                            <div className="bg-gray-50 dark:bg-gray-800  rounded-xl sm:rounded-2xl overflow-hidden">
+                                <div className="">
+                                    <div className="bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
                                         {loading ? (
                                             <div className="text-center">
                                                 <div className="flex items-center justify-center space-x-2 ">
@@ -156,40 +151,40 @@ export default function Home() {
                                                 </p>
                                             </div>
                                         ) : compressed ? (
-                                            <div className="w-full h-full">
-                                                <div className="relative h-full p-2 rounded-lg overflow-hidden">
-                                                    <Image
-                                                        src={compressed?.src}
-                                                        alt="Compressed image"
-                                                        fill
-                                                        sizes="(max-width: 768px) 100vw, (max-width): 1024px 50vw, 33vw"
-                                                        className="object-cover "
+                                            <div className="w-full ">
+                                                <div className="relative h-full  rounded-lg overflow-hidden">
+                                                    <ImagePreview
+                                                        imageSrc={compressed.src}
+                                                        size={compressed.size}
+                                                        label="Compressed Image"
                                                     />
-                                                </div>
-                                                <div className="flex items-center gap-3 mt-5">
-                                                    <Button
-                                                        onClick={handleDownload}
-                                                        isProcessing={loading}
-                                                        labal={'Download Image'}
-                                                        icon={true}
-                                                    />
-
-                                                    {compressed && !loading && (
-                                                        <ResetButton
-                                                            onClick={resetAll}
-                                                            labal="Reset All"
+                                                    <div className="flex items-center gap-3 px-4 pb-4 ">
+                                                        <Button
+                                                            onClick={handleDownload}
+                                                            isProcessing={loading}
+                                                            labal={'Download Image'}
+                                                            icon={true}
                                                         />
-                                                    )}
+
+                                                        {compressed && !loading && (
+                                                            <ResetButton
+                                                                onClick={resetAll}
+                                                                labal="Reset All"
+                                                            />
+                                                        )}
+                                                    </div>
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="text-center p-8">
-                                                <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
-                                                    <FiImage className="h-16 w-16" />
+                                            <div className='flex items-center justify-center '>
+                                                <div className="text-center  p-8">
+                                                    <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
+                                                        <FiImage className="h-16 w-16" />
+                                                    </div>
+                                                    <p className=" text-gray-500 dark:text-gray-400 text-sm">
+                                                        {original ? 'Click "Compress Image" to process' : 'Upload an image to compress it'}
+                                                    </p>
                                                 </div>
-                                                <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
-                                                    {original ? 'Click "Compress Image" to process' : 'Upload an image to compress it'}
-                                                </p>
                                             </div>
                                         )}
                                     </div>
