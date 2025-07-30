@@ -53,13 +53,13 @@ const Navbar = () => {
 
           <div className="flex items-center space-x-4">
             <div
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
               className="p-2 rounded-full text-gray-700 dark:text-white hover:text-gray-900 dark:hover:text-white bg-gray-100  dark:bg-gray-800 transition-all duration-200 cursor-pointer"
             >
-              {theme === 'dark' ? (
-                <FaSun className="h-5 w-5" />
-              ) : (
+              {theme === 'light' ? (
                 <FaMoon className="h-5 w-5" />
+              ) : (
+                <FaSun className="h-5 w-5" />
               )}
             </div>
 

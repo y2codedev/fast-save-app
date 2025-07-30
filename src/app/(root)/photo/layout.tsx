@@ -53,14 +53,10 @@ export const generateMetadata = (): Metadata => {
     };
 };
 
-export default function RootLayout({
-    children,
-}: Readonly<{
-    children: React.ReactNode;
-}>) {
-    return (
-        <html lang="en" suppressHydrationWarning>
-            <body>{children}</body>
-        </html>
-    );
+export default function NestedLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      {children}
+    </>
+  );
 }

@@ -1,12 +1,15 @@
 'use client';
 
 import { ThemeProvider } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from "react";
 
 const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
+
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   if (!mounted) {
     return <>{children}</>;
@@ -16,8 +19,7 @@ const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
     <ThemeProvider
       attribute="class"
       defaultTheme="system"
-      enableSystem={true}
-      storageKey="fastsave-theme" 
+      enableSystem
       disableTransitionOnChange
     >
       {children}
