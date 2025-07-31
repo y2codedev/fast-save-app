@@ -6,9 +6,9 @@ import { Inter } from "next/font/google";
 import GA from "@/components/image-converter/GA";
 export const generateMetadata = (): Metadata => {
 
-  const title = "FastSave Instagram Reels Downloader – Save IG Reels Online in HD";
+  const title = "FastSave Instagram Reels Downloader – Save Reels in HD";
 
-  const description = "Download Instagram Reels in HD with FastSave. No watermark, no login, 100% free. Save public Reels to MP4 quickly and easily.";
+  const description = "Download Instagram Reels in HD with FastSave. No watermark, no login, 100% free. Save public Reels as MP4 videos in seconds.";
   const keywords = [
     "Instagram Reels Downloader", "Download Instagram Reels", "IG Reels to MP4",
     "Save Instagram Reels", "No Watermark Reels Download", "Fast Instagram Downloader",
