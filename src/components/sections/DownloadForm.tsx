@@ -26,7 +26,7 @@ export default function DownloadForm() {
     const trimmedUrl = url.trim();
     const isInstagram = pathName === '/' && trimmedUrl?.includes("https://www.instagram.com/reel");
     const isFacebook = pathName === '/fb-video' && trimmedUrl?.includes("https://www.facebook.com/share");
-    const isSnapchat = pathName === '/snapchat' && (trimmedUrl.includes("https://t.snapchat.com/") || trimmedUrl?.includes("https://snapchat.com/"));
+    const isSnapchat = pathName === '/snapchat' && (trimmedUrl?.includes("https://t.snapchat.com/") || trimmedUrl?.includes("https://snapchat.com/"));
 
     if (pathName === '/' && !isInstagram) {
       Toast('error', 'Please enter a valid Instagram URL');

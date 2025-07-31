@@ -44,6 +44,7 @@ interface ReelData {
     username: string;
     profile_pic: string;
     videoUrl: string;
+    description?: string;
 }
 
 export interface ReelResultProps {
