@@ -28,7 +28,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   };
 
   return (
-    <div className={` bg-gray-50 dark:bg-gray-800 rounded-lg  p-4 ${className}`}>
+    <div className={` bg-gray-50 dark:bg-gray-800 rounded-lg   p-4 ${className}`}>
       <div className="flex justify-between items-center mb-3">
         <h2 className="font-medium text-sm sm:text-lg text-gray-700 dark:text-gray-300">
           {label}

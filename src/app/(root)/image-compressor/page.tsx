@@ -129,7 +129,7 @@ export default function Home() {
                                 </div>
                             </div>
 
-                            <div className="bg-gray-50 dark:bg-gray-800  rounded-xl sm:rounded-2xl overflow-hidden">
+                            <div className="bg-gray-50 dark:bg-gray-800   rounded-xl sm:rounded-2xl overflow-hidden">
                                 <div className="p-4 sm:p-6">
                                     <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                                         <FiImage className="mr-2" /> Your Image Preview Will Appear Here
@@ -149,7 +149,7 @@ export default function Home() {
                                             </div>
                                         ) : compressed ? (
                                             <div className="w-full ">
-                                                <div className="relative h-full  rounded-lg overflow-hidden">
+                                                <div className="relative   rounded-lg overflow-hidden">
                                                     <ImagePreview
                                                         imageSrc={compressed?.src}
                                                         size={compressed?.size}
@@ -173,7 +173,7 @@ export default function Home() {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className=" p-6">
+                                            <div className=" p-6 h-fit sm:h-96">
                                                 <div className="h-40 w-40 mx-auto text-gray-300 dark:text-gray-600 flex items-center justify-center">
                                                     <FiImage className="h-16 w-16" />
                                                 </div>
