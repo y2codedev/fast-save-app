@@ -34,7 +34,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
 
     return (
         <main className="mt-6 bg-transparent dark:bg-transparent rounded-xl  overflow-hidden">
-            <div className="p-4">
+            <div className="p-0">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Preview</h3>
                 <div className="flex flex-col md:flex-row gap-4">
                     <div className="relative w-full md:w-1/3 aspect-square rounded-lg overflow-hidden">
@@ -84,7 +84,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                 )}
             </div>
 
-            <div className=" px-4  sm:px-4 flex justify-end">
+            <div className=" px-0 mt-4  sm:px-4 flex justify-end">
                 <Button
                     onClick={handleDownload}
                     isProcessing={isSaving}
