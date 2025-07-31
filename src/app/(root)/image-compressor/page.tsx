@@ -125,13 +125,16 @@ export default function Home() {
                                         onFileUpload={handleFileChange}
                                         loading={loading}
                                     />
-                                   {error && <ErrorMessage message={error} />}
+                                    {error && <ErrorMessage message={error} />}
                                 </div>
                             </div>
 
                             <div className="bg-gray-50 dark:bg-gray-800  rounded-xl sm:rounded-2xl overflow-hidden">
-                                <div className="">
-                                    <div className="bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
+                                <div className="p-4 sm:p-6">
+                                    <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
+                                        <FiImage className="mr-2" /> Your Image Preview Will Appear Here
+                                    </h2>
+                                    <div className="bg-gray-50 dark:bg-gray-800  border border-gray-300 dark:border-gray-700 rounded-lg flex items-center justify-center">
                                         {loading ? (
                                             <div className='flex items-center justify-center h-full w-full p-8'>
                                                 <div className="flex-col">
@@ -170,11 +173,11 @@ export default function Home() {
                                                 </div>
                                             </div>
                                         ) : (
-                                            <div className="text-center  p-8">
-                                                <div className="mx-auto h-40 w-40 text-gray-300 dark:text-gray-600 flex items-center justify-center">
+                                            <div className=" p-6">
+                                                <div className="h-40 w-40 mx-auto text-gray-300 dark:text-gray-600 flex items-center justify-center">
                                                     <FiImage className="h-16 w-16" />
                                                 </div>
-                                                <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm">
+                                                <p className="mt-4 text-gray-500 dark:text-gray-400 text-sm text-center">
                                                     {original ? 'Click "Compress Image" to process' : 'Upload an image to compress it'}
                                                 </p>
                                             </div>
