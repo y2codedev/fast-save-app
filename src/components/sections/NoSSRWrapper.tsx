@@ -8,7 +8,7 @@ type Props = {
 }
 
 const NoSSRWrapper = (props: Props) => (
-    <React.Fragment>{props.children}</React.Fragment>
+    <>{props?.children}</>
 )
 
 export default dynamic(() => Promise.resolve(NoSSRWrapper), {

@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react'
 import imageCompression from 'browser-image-compression'
-import { Button, FileUploadArea, Group, ImagePreview, Loader, ResetButton, StatsDisplay } from '@/constants'
+import { Button, ErrorMessage, FileUploadArea, Group, ImagePreview, Loader, ResetButton, StatsDisplay } from '@/constants'
 import { FiUpload, FiImage } from 'react-icons/fi'
 
 type ImageData = {
@@ -107,7 +107,7 @@ export default function Home() {
 
     return (
         <>
-            <main className="bg-white dark:bg-gray-900  sm:pt-10 pt-0  px-4 sm:px-6">
+            <main className="bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-7xl mx-auto">
                     {compressionRatio !== null && (
                         <StatsDisplay compressionRatio={compressionRatio} />
@@ -125,15 +125,7 @@ export default function Home() {
                                         onFileUpload={handleFileChange}
                                         loading={loading}
                                     />
-
-                                    {error && (
-                                        <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-sm rounded-lg flex items-start gap-2">
-                                            <svg className="h-4 w-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                            </svg>
-                                            <span>{error}</span>
-                                        </div>
-                                    )}
+                                   {error && <ErrorMessage message={error} />}
                                 </div>
                             </div>
 

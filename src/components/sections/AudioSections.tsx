@@ -84,7 +84,7 @@ function VideoToAudioConverter() {
 
 
   return (
-    <div className="w-full overflow-x-hidden bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
+    <main className="w-full overflow-x-hidden bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
           {/* Upload & Convert Panel */}
@@ -119,7 +119,7 @@ function VideoToAudioConverter() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
 

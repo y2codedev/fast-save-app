@@ -47,10 +47,10 @@ export const generateMetadata = (): Metadata => {
 };
 
 export default function Page() {
-    return <div className="bg-white dark:bg-gray-900">
+    return <main className="bg-white dark:bg-gray-900">
         <NoSSRWrapper>
             <AudioSections />
             <Group />
         </NoSSRWrapper>
-    </div>
+    </main>
 }

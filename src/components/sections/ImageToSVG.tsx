@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import ImageTracer from 'imagetracerjs';
-import { FileUploadArea, ImagePreview, Loader, SVGOutput, Toast } from '@/constants';
+import { ErrorMessage, FileUploadArea, ImagePreview, Loader, SVGOutput } from '@/constants';
 
 
 export default function ImageToSVG() {
@@ -88,11 +88,6 @@ export default function ImageToSVG() {
     }, 1000);
   }
 
-  if (error) {
-    Toast("error", error)
-    return
-  }
-
   return (
     <div className="mx-auto bg-transparent dark:bg-gray-800">
       <h1 className="font-medium text-sm sm:text-lg text-gray-700 dark:text-gray-300 mb-6">
@@ -102,6 +97,7 @@ export default function ImageToSVG() {
       <FileUploadArea onFileUpload={handleFile} loading={loading} />
 
       {preview && <ImagePreview imageSrc={preview} label="Preview" />}
+      {error && <ErrorMessage message={error} />}
 
       <canvas ref={canvasRef} className="hidden" />
 

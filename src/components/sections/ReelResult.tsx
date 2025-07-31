@@ -33,7 +33,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
     };
 
     return (
-        <div className="mt-6 bg-transparent dark:bg-transparent rounded-xl  overflow-hidden">
+        <main className="mt-6 bg-transparent dark:bg-transparent rounded-xl  overflow-hidden">
             <div className="p-4">
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Preview</h3>
                 <div className="flex flex-col md:flex-row gap-4">
@@ -91,6 +91,6 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                     icon={true}
                 />
             </div>
-        </div>
+        </main>
     );
 }

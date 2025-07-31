@@ -86,7 +86,7 @@ export default function DownloadForm() {
   };
 
   return (
-    <div id="download-section" className="bg-white dark:bg-gray-900 pt-10 px-4">
+    <main id="download-section" className="bg-white dark:bg-gray-900 pt-10 px-4">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -116,6 +116,6 @@ export default function DownloadForm() {
           {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
         </div>
       </div>
-    </div>
+    </main>
   );
 }

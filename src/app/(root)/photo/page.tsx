@@ -10,7 +10,7 @@ const Page = () => {
 
     return (
         <>
-            <div className="bg-white dark:bg-gray-900 px-4 pt-10">
+            <main className="bg-white dark:bg-gray-900 px-4 pt-10">
                 <div className="max-w-5xl mx-auto overflow-hidden p-4 md:p-6 bg-gray-100 dark:bg-gray-800 rounded-xl">
                     <p className="font-medium text-sm sm:text-lg text-gray-700  dark:text-gray-300 mb-6">
                         Free Unlimited File Converter
@@ -37,7 +37,7 @@ const Page = () => {
                         <ImageToSVG />
                     )}
                 </div>
-            </div>
+            </main>
             <Group />
         </>
     )

@@ -24,6 +24,8 @@ import ImagePreview from '@/components/sections/ImagePreview';
 import SVGOutput from '@/components/sections/SVGOutput';
 import Group from '@/components/sections/Group';
 import StatsDisplay from '@/components/sections/StatsDisplay';
+import ErrorMessage from '@/components/sections/ErrorMessage';
+
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
 
@@ -54,4 +56,5 @@ export {
     SVGOutput,
     StatsDisplay,
     Group,
+    ErrorMessage,
 };

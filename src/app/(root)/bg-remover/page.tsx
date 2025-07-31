@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, FileUploadArea, Group, Loader, ResetButton } from "@/constants"
+import { Button, ErrorMessage, FileUploadArea, Group, Loader, ResetButton } from "@/constants"
 import { removeBackground } from "@imgly/background-removal"
 import Image from "next/image"
 import { useState, useRef } from 'react'
@@ -63,7 +63,7 @@ export default function BackgroundRemovalPage() {
 
   return (
     <>
-      <div className="bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
+      <main className="bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
             <div className="bg-gray-50 dark:bg-gray-800 h-fit rounded-xl sm:rounded-2xl overflow-hidden">
@@ -112,14 +112,7 @@ export default function BackgroundRemovalPage() {
                   )}
                 </div>
 
-                {error && (
-                  <div className="mt-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300 text-sm rounded-lg flex items-start gap-2">
-                    <svg className="h-4 w-4 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>{error}</span>
-                  </div>
-                )}
+                {error && <ErrorMessage message={error} />}
               </div>
             </div>
 
@@ -177,7 +170,7 @@ export default function BackgroundRemovalPage() {
             </div>
           </div>
         </div>
-      </div>
+      </main>
       <Group />
     </>
   )
