@@ -116,7 +116,7 @@ export default function BackgroundRemovalPage() {
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 h-[540px] rounded-xl sm:rounded-2xl overflow-hidden">
+            <div className="bg-gray-50 dark:bg-gray-800  rounded-xl sm:rounded-2xl overflow-hidden">
               <div className="p-4 sm:p-6">
                 <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                   <FiImage className="mr-2" /> Result

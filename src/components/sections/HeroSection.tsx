@@ -7,7 +7,7 @@ export default function HeroSection() {
       <div className='md:py-20 py-10'>
         <TopText />
       </div>
-      <div className="mx-auto max-w-7xl  pb-24">
+      <div className="mx-auto max-w-7xl pb-6  sm:pb-24 ">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES?.map((feature) => (
             <div key={feature?.id} className="bg-gray-50 hover:bg-indigo-50  dark:bg-gray-800 p-6 rounded-xl">
