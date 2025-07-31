@@ -23,35 +23,52 @@ export default function DownloadForm() {
       return;
     }
 
+    const trimmedUrl = url.trim();
+    const isInstagram = pathName === '/' && trimmedUrl?.includes("https://www.instagram.com/reel");
+    const isFacebook = pathName === '/fb-video' && trimmedUrl?.includes("https://www.facebook.com/share");
+    const isSnapchat = pathName === '/snapchat' && (trimmedUrl.includes("https://t.snapchat.com/") || trimmedUrl?.includes("https://snapchat.com/"));
+
+    if (pathName === '/' && !isInstagram) {
+      Toast('error', 'Please enter a valid Instagram URL');
+      setIsLoading(false);
+      return;
+    }
+
+    if (pathName === '/fb-video' && !isFacebook) {
+      Toast('error', 'Please enter a valid Facebook URL');
+      setIsLoading(false);
+      return;
+    }
+
+    if (pathName === '/snapchat' && !isSnapchat) {
+      Toast('error', 'Please enter a valid Snapchat URL');
+      setIsLoading(false);
+      return;
+    }
+
     const supportedPlatforms = [
       'https://www.instagram.com/reel',
-      'https://x.com/',
-      'youtube.com',
-      'youtu.be',
       'https://www.facebook.com/share',
-      'https://pin.it',
       'https://t.snapchat.com/',
-      'https://snapchat.com/'
+      'https://snapchat.com/',
     ];
 
-    const isValidUrl = supportedPlatforms?.some(platform => url?.includes(platform));
+    const isValidUrl = supportedPlatforms.some(platform => trimmedUrl.includes(platform));
 
     if (!isValidUrl) {
-      Toast('error', 'Please enter a valid URL');
+      Toast('error', 'Please enter a valid supported URL.');
       setIsLoading(false);
       return;
     }
 
     try {
-
       setIsSaving(true);
-      const apiUrl = `/api/download?url=${encodeURIComponent(url)}`;
+
+      const apiUrl = `/api/download?url=${encodeURIComponent(trimmedUrl)}`;
       const response = await fetch(apiUrl, {
         method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-        },
-        cache: 'no-store'
+        headers: { 'Accept': 'application/json' },
+        cache: 'no-store',
       });
 
       if (!response.ok) {
