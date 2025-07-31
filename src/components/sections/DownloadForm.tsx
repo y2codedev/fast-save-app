@@ -25,7 +25,7 @@ export default function DownloadForm() {
 
     const trimmedUrl = url.trim();
     const isInstagram = pathName === '/' && trimmedUrl?.includes("https://www.instagram.com/reel");
-    const isFacebook = pathName === '/fb-video' && trimmedUrl?.includes("https://www.facebook.com/share");
+    const isFacebook = pathName === '/fb-video' && trimmedUrl?.includes("https://www.facebook.com/share") || trimmedUrl?.includes("https://www.facebook.com/");
     const isSnapchat = pathName === '/snapchat' && (trimmedUrl?.includes("https://t.snapchat.com/") || trimmedUrl?.includes("https://snapchat.com/"));
 
     if (pathName === '/' && !isInstagram) {
@@ -49,6 +49,7 @@ export default function DownloadForm() {
     const supportedPlatforms = [
       'https://www.instagram.com/reel',
       'https://www.facebook.com/share',
+      'https://www.facebook.com/',
       'https://t.snapchat.com/',
       'https://snapchat.com/',
     ];

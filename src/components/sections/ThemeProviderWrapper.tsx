@@ -19,6 +19,7 @@ const ThemeProviderWrapper = ({ children }: { children: React.ReactNode }) => {
     <ThemeProvider
       attribute="class"
       defaultTheme="system"
+      enableSystem
       disableTransitionOnChange
     >
       {children}
