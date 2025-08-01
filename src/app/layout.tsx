@@ -5,7 +5,6 @@ import { Navbar, Footer, FallbackLoader, ThemeProviderWrapper, ToastProvider, Ad
 import { Inter } from "next/font/google";
 import GA from "@/components/image-converter/GA";
 import { ExampleUsage } from "@/components/sections/SchemaMarkup";
-import Head from "next/head";
 import Script from "next/script";
 export const generateMetadata = (): Metadata => {
 
@@ -94,11 +93,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter?.className} suppressHydrationWarning>
       <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
-      <Head>
         <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
           crossOrigin="anonymous">
         </Script>
-      </Head>
       <body>
         <ThemeProviderWrapper>
           <Navbar />
