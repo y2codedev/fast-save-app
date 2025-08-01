@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer'
 
 type Props = {
   slot: string
-  height?: string 
+  height?: string
   className?: string
 }
 
@@ -16,10 +16,10 @@ export default function AdsenseAd({ slot, height = 'h-[280px]', className = '' }
   useEffect(() => {
     if (inView) {
       try {
-        //@ts-ignore
-        (window.adsbygoogle = window.adsbygoogle || []).push({})
+        (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+        (window as any).adsbygoogle.push({});
       } catch (e) {
-        console.error('Adsense error', e)
+        console.error('Error loading ads:', e);
       }
     }
   }, [inView])
