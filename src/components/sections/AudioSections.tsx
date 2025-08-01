@@ -105,7 +105,7 @@ function VideoToAudioConverter() {
                   />
                 </div>
               </div>
-              <audio ref={audioRef} src={audioURL || undefined} className="block w-full mt-6" />
+              <audio controls ref={audioRef} src={audioURL || undefined} className="block w-full mt-6" />
             </div>
           </div>
 
