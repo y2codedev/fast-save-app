@@ -1,12 +1,17 @@
 'use client';
 
-import { FEATURES, TopText } from '@/constants';
+import { AdsenseAd, FEATURES, TopText } from '@/constants';
 export default function HeroSection() {
+  const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
   return (
     <div className="bg-white dark:bg-gray-900 px-4  ">
       <div className='md:py-20 py-10'>
         <TopText />
+        <div className='mx-auto max-w-7xl pt-10'>
+          <AdsenseAd height="h-[280px]" slot={adsenseSlotId} className="rounded-xl" />
+        </div>
       </div>
+
       <div className="mx-auto max-w-7xl pb-6  sm:pb-24 ">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES?.map((feature) => (
