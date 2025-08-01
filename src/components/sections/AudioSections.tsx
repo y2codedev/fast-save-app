@@ -71,12 +71,13 @@ function VideoToAudioConverter() {
       await ffmpeg.exec(["-i", "input", "-q:a", "0", "-map", "a", "output.mp3"]);
 
       const data = await ffmpeg.readFile("output.mp3");
-      const audioBlob = new Blob([data], { type: "audio/mp3" });
+      const audioBlob = new Blob([data], { type: "audio/mp3" }); 
       const url = URL.createObjectURL(audioBlob);
       setAudioURL(url);
     } catch (error) {
       console.error("Conversion error:", error);
-      if (messageRef.current) messageRef.current.innerHTML = `Error: ${error instanceof Error ? error.message : String(error)}`;
+      if (messageRef.current)
+        messageRef.current.innerHTML = `Error: ${error instanceof Error ? error.message : String(error)}`;
     } finally {
       setIsLoading(false);
     }
