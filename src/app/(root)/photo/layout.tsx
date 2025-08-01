@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Image Converter – Convert PNG, JPG, WebP & More Instantly";
+    const title = "Image Converter – Convert PNG, JPG, WebP & More Instantly";
 
     const description =
         "Convert PNG, JPG, WebP, SVG, and more quickly with FastSave Image Converter. Free, fast, secure, no watermarks. Supports batch conversion and all major formats.";

@@ -4,7 +4,7 @@ import { DownloadForm, Group } from "@/constants";
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Snapchat Video Downloader – Save Snapchat Videos in HD";
+    const title = "Snapchat Story Saver – Download Snaps Online";
 
     const description =
         "Download Snapchat videos in HD with FastSave. Save snaps, stories, and videos quickly. No watermark, no login, no app needed. Free and works on all devices.";

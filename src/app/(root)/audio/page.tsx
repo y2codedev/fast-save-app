@@ -4,7 +4,7 @@ import { Group } from "@/constants";
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Audio Converter – Convert Video to MP3 in HD";
+    const title = "Audio Downloader – Extract MP3 from Any Video";
     const description = "Convert videos to MP3 in high-quality with FastSave Audio Converter. Free, fast, and supports YouTube, Instagram, Facebook & more. No watermark.";
 
     const keywords = [

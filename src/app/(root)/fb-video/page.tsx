@@ -2,7 +2,7 @@ import { DownloadForm, Group } from "@/constants";
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Facebook Video Downloader – Download FB Videos in HD";
+    const title = "Facebook Video Downloader – Save Videos Online Free";
 
     const description =
         "Download Facebook videos in HD quickly and free with FastSave. No watermark, no login needed. Save reels, feeds, pages & private videos on all devices.";

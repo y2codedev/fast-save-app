@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
-    const title = "FastSave Background Remover – Remove Image Backgrounds Instantly";
+    const title = "Background Remover – Erase Image Background Online";
 
     const description =
         "Remove backgrounds instantly with FastSave Background Remover. AI-powered, free, no watermark, high-res transparent PNGs for photos, products, and more.";
