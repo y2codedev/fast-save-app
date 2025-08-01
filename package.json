@@ -41,8 +41,7 @@
     "react-toastify": "^11.0.5",
     "tailwind-merge": "^1.14.0",
     "tailwindcss-animate": "^1.0.7",
-    "ytdl-core": "^4.11.5",
-    "zustand": "^5.0.6"
+    "ytdl-core": "^4.11.5"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
