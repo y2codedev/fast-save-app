@@ -25,13 +25,13 @@ export const generateMetadata = (): Metadata => {
     return {
         metadataBase: new URL("https://fast-save.vercel.app/snapchat"),
         other: {
-            "google-site-verification": "tDnK8wGpDutxTfAN-cFdlLdL0AZxiNnDkkvqH08TAIA",
+            "google-adsense-account": "ca-pub-1504999187644497",
         },
         title,
         description,
         keywords,
 
-         authors: [{ name: "FastSave", url: "https://fast-save.vercel.app/snapchat" }],
+        authors: [{ name: "FastSave", url: "https://fast-save.vercel.app/snapchat" }],
         publisher: "FastSave",
         creator: "FastSave",
         robots: {

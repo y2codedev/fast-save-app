@@ -27,7 +27,7 @@ export const generateMetadata = (): Metadata => {
   return {
     metadataBase: new URL("https://fast-save.vercel.app"),
     other: {
-      "google-site-verification": "tDnK8wGpDutxTfAN-cFdlLdL0AZxiNnDkkvqH08TAIA",
+      "google-adsense-account": "ca-pub-1504999187644497",
     },
     title: title,
     description: description,
