@@ -16,10 +16,7 @@ export const generateMetadata = (): Metadata => {
         "Online Image Optimizer",
         "Free Image Compressor",
         "Lossless Compression Tool",
-        "Image Resizer",
         "Photo Compressor",
-        "Batch Image Compression",
-        "FastSave Photo Optimizer",
     ];
 
     return {

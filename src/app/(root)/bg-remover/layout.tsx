@@ -15,9 +15,6 @@ export const generateMetadata = (): Metadata => {
         "No Watermark Background Remover",
         "Product Image Background Remover",
         "Online Background Remover",
-        "Background Eraser for E-commerce",
-        "Bulk Background Remover",
-        "HD Transparent Background",
         "Auto Remove Image Background",
         "One-click Background Removal",
     ];

@@ -8,11 +8,16 @@ export const generateMetadata = (): Metadata => {
     const description = "Convert videos to MP3 in high-quality with FastSave Audio Converter. Free, fast, and supports YouTube, Instagram, Facebook & more. No watermark.";
 
     const keywords = [
-        "Audio Converter", "MP3 Downloader", "Video to MP3",
-        "Online MP3 Converter", "Extract Audio", "Free Audio Converter",
-        "Convert YouTube to MP3", "Instagram Audio Download",
-        "Fast MP3 Download", "No Watermark Audio", "Audio to MP3 Tool",
-        "FastSave Audio", "Social Media Audio Downloader"
+        "Audio Converter",
+        "MP3 Downloader",
+        "Video to MP3",
+        "Online MP3 Converter",
+        "Convert YouTube to MP3",
+        "Instagram Audio Download",
+        "Fast MP3 Download",
+        "No Watermark Audio",
+        "Audio to MP3 Tool",
+        "FastSave Audio",
     ];
 
     return {

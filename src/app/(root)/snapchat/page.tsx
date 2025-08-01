@@ -14,14 +14,11 @@ export const generateMetadata = (): Metadata => {
         "Download Snapchat Videos",
         "Snapchat Story Saver",
         "Save Snap Videos",
-        "Snapchat Video Download Online",
         "HD Snapchat Downloader",
-        "Fast Snapchat Saver",
         "Download Snaps Without Watermark",
         "Snapchat Video Converter",
         "Online Snapchat Downloader",
         "Free Snapchat Video Download",
-        "Snapchat Private Video Saver",
         "Snapchat Downloader for Android",
     ];
 

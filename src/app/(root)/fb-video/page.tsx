@@ -17,9 +17,6 @@ export const generateMetadata = (): Metadata => {
         "Facebook Private Video Download",
         "FB MP4 Download",
         "Free Facebook Video Downloader",
-        "Online FB Video Download",
-        "No Watermark Facebook Download",
-        "Facebook Story Download",
         "Facebook Video Saver",
     ];
 

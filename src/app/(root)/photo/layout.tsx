@@ -15,11 +15,7 @@ export const generateMetadata = (): Metadata => {
         "Image to WebP",
         "Convert SVG to PNG",
         "Free Photo Converter",
-        "Online Image Format Converter",
-        "Fast Image Converter",
-        "Batch Image Converter",
         "High-Quality Image Conversion",
-        "Transparent PNG Converter",
     ];
 
     return {
