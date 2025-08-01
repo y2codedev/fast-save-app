@@ -27,7 +27,7 @@ export default function AdsenseAd({ slot, height = 'h-[280px]', className = '' }
   return (
     <div
       ref={ref}
-      className={`w-full ${height} ${className} flex justify-center items-center bg-gray-100`}
+      className={`w-full ${height} ${className} flex justify-center items-center bg-gray-100 dark:bg-gray-800`}
     >
       {inView && (
         <ins
