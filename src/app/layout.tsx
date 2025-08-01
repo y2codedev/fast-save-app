@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { Navbar, Footer, FallbackLoader, ThemeProviderWrapper, ToastProvider } from "@/constants";
 import { Inter } from "next/font/google";
 import GA from "@/components/image-converter/GA";
+import { ExampleUsage } from "@/components/sections/SchemaMarkup";
 export const generateMetadata = (): Metadata => {
 
   const title = "FastSave Instagram Reels Downloader – Save Reels in HD";
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body>
         <ThemeProviderWrapper>
           <Navbar />
+          < ExampleUsage />
           <Suspense fallback={<FallbackLoader />}>
             {children}
           </Suspense>
