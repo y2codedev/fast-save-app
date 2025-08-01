@@ -93,9 +93,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter?.className} suppressHydrationWarning>
       <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
-        <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
-          crossOrigin="anonymous">
-        </Script>
+      <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID || 'ca-pub-1504999187644497'}`}
+        crossOrigin="anonymous">
+      </Script>
       <body>
         <ThemeProviderWrapper>
           <Navbar />

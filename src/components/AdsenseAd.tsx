@@ -33,8 +33,8 @@ export default function AdsenseAd({ slot, height = 'h-[280px]', className = '' }
         <ins
           className="adsbygoogle block"
           style={{ display: 'block' }}
-          data-ad-client={clientId}
-          data-ad-slot={slot}
+          data-ad-client={clientId || 'ca-pub-1504999187644497'}
+          data-ad-slot={slot || '2827255494'}
           data-ad-format="auto"
           data-full-width-responsive="true"
         />
