@@ -23,18 +23,41 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL("https://fast-save.vercel.app"),
+        metadataBase: new URL("https://fast-save.vercel.app/image-compressor"),
         other: {
             "google-site-verification": "tDnK8wGpDutxTfAN-cFdlLdL0AZxiNnDkkvqH08TAIA",
         },
         title,
         description,
         keywords,
+
+        authors: [{ name: "FastSave", url: "https://fast-save.vercel.app/image-compressor" }],
+        publisher: "FastSave",
+        creator: "FastSave",
+        robots: {
+            index: true,
+            follow: true,
+            nocache: false,
+            "max-image-preview": "large",
+            "max-video-preview": "-1",
+        },
+
+        alternates: {
+            canonical: "https://fast-save.vercel.app/image-compressor",
+            types: {
+                "application/rss+xml": "https://fast-save.vercel.app/feed.xml",
+                "application/atom+xml": "https://fast-save.vercel.app/feed.xml",
+            },
+        },
+
+
         openGraph: {
             title,
             description,
             type: "website",
-            url: "https://fast-save.vercel.app",
+            url: "https://fast-save.vercel.app/image-compressor",
+            siteName: "FastSave",
+            locale: "en_IN",
             images: [
                 {
                     url: "/images/image-compressor.webp",
@@ -49,7 +72,13 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             images: ["/images/image-compressor.webp"],
+            creator: "@fastsaveapp",
+            site: "@fastsaveapp",
+            creatorId: "fastsaveapp",
+            siteId: "fastsaveapp",
         },
+        category: "Technology",
+        applicationName: "FastSave - Image Compressor",
     };
 };
 

@@ -24,18 +24,40 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL("https://fast-save.vercel.app"),
+        metadataBase: new URL("https://fast-save.vercel.app/fb-video"),
         other: {
             "google-site-verification": "tDnK8wGpDutxTfAN-cFdlLdL0AZxiNnDkkvqH08TAIA",
         },
         title,
         description,
         keywords,
+
+        authors: [{ name: "FastSave", url: "https://fast-save.vercel.app/fb-video" }],
+        publisher: "FastSave",
+        creator: "FastSave",
+        robots: {
+            index: true,
+            follow: true,
+            nocache: false,
+            "max-image-preview": "large",
+            "max-video-preview": "-1",
+        },
+
+        alternates: {
+            canonical: "https://fast-save.vercel.app/fb-video",
+            types: {
+                "application/rss+xml": "https://fast-save.vercel.app/feed.xml",
+                "application/atom+xml": "https://fast-save.vercel.app/feed.xml",
+            },
+        },
+
         openGraph: {
             title,
             description,
             type: "website",
-            url: "https://fast-save.vercel.app",
+            url: "https://fast-save.vercel.app/fb-video",
+            siteName: "FastSave",
+            locale: "en_IN",
             images: [
                 {
                     url: "/images/facebook.webp",
@@ -50,16 +72,22 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             images: ["/images/facebook.webp"],
+            creator: "@fastsaveapp",
+            site: "@fastsaveapp",
+            creatorId: "fastsaveapp",
+            siteId: "fastsaveapp",
         },
+        category: "Technology",
+        applicationName: "FastSave - Facebook Video Downloader",
     };
 };
 
 export default function page() {
-    
-  return (
-    <main className=" bg-white dark:bg-gray-900">
-      <DownloadForm />
-      <Group />
-    </main>
-  );
+
+    return (
+        <main className=" bg-white dark:bg-gray-900">
+            <DownloadForm />
+            <Group />
+        </main>
+    );
 }

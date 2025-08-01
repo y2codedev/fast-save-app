@@ -25,11 +25,32 @@ export const generateMetadata = (): Metadata => {
     description: description,
     keywords: keywords,
 
+    authors: [{ name: "FastSave", url: "https://fast-save.vercel.app" }],
+    publisher: "FastSave",
+    creator: "FastSave",
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      "max-image-preview": "large",
+      "max-video-preview": "-1",
+    },
+
+    alternates: {
+      canonical: "https://fast-save.vercel.app",
+      types: {
+        "application/rss+xml": "https://fast-save.vercel.app/feed.xml",
+        "application/atom+xml": "https://fast-save.vercel.app/feed.xml",
+      },
+    },
+
     openGraph: {
       title: title,
       description: description,
       type: "website",
-      url: "https://fast-save.vercel.app",
+      url: "https://fast-save.vercel.app",  
+      siteName: "FastSave",
+      locale: "en_IN",
       images: [
         {
           url: "/images/insta.png",
@@ -44,7 +65,14 @@ export const generateMetadata = (): Metadata => {
       title: title,
       description: description,
       images: ["/images/insta.png"],
+      creator: "@fastsaveapp",
+      site: "@fastsaveapp",
+      creatorId: "fastsaveapp",
+      siteId: "fastsaveapp",
     },
+    category: "Technology",
+    applicationName: "FastSave - Instagram Reels Downloader",
+    
   };
 };
 
