@@ -66,7 +66,7 @@ export default function BackgroundRemovalPage() {
       <main className="bg-white dark:bg-gray-900 pt-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-            <div className="bg-gray-50 dark:bg-gray-800 h-fit rounded-xl sm:rounded-2xl overflow-hidden">
+            <div className="bg-gray-50 dark:bg-gray-800 h-fit sm:h-fit rounded-xl sm:rounded-2xl overflow-hidden">
               <div className="p-4 sm:p-6">
                 <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                   <FiUpload className="mr-2" /> Upload File
@@ -116,7 +116,7 @@ export default function BackgroundRemovalPage() {
               </div>
             </div>
 
-            <div className="bg-gray-50 dark:bg-gray-800 h-fit  rounded-xl sm:rounded-2xl overflow-hidden">
+            <div className="bg-gray-50 dark:bg-gray-800 h-[33.8rem] rounded-xl sm:rounded-2xl overflow-hidden">
               <div className="p-4 sm:p-6">
                 <h2 className="text-sm sm:text-base text-gray-800 dark:text-white mb-6 flex items-center">
                   <FiImage className="mr-2" /> Result
