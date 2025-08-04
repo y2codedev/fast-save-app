@@ -63,7 +63,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                         </div>
                         <div>
                             <h4 className="text-sm font-medium text-gray-500 dark:text-gray-200">Description</h4>
-                             <p className="text-sm text-gray-400 dark:text-gray-400 line-clamp-6">
+                            <p className="text-sm text-gray-400 dark:text-gray-400 line-clamp-6">
                                 {data?.description || 'No description available'}
                             </p>
                         </div>
@@ -77,7 +77,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                             className="w-full h-full object-cover rounded-lg"
                             poster={data?.thumbnail}
                         >
-                            <source src={data?.sourceUrl || data?.videoUrl} type="video/mp4" />
+                            <source src={data?.videoUrl || data?.sourceUrl} type="video/mp4" />
                             Your browser does not support the video tag.
                         </video>
                     </div>
