@@ -6,7 +6,6 @@ import DownloadSteps from '@/components/sections/DownloadSteps';
 import LegalDisclaimer from '@/components/sections/LegalDisclaimer';
 import Loader from '@/components/ui/Loader';
 import ReelResult from '@/components/sections/ReelResult';
-import CategoryNav from '@/components/sections/CategoryNav';
 import ThemeProviderWrapper from '@/components/sections/ThemeProviderWrapper';
 import TopText from '@/components/sections/TopText';
 import FallbackLoader from '@/components/ui/FallbackLoader';
@@ -37,7 +36,6 @@ export {
     LegalDisclaimer,
     Loader,
     ReelResult,
-    CategoryNav,
     Navbar,
     Footer,
     TopText,
