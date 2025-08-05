@@ -138,7 +138,7 @@ export const STEP: Step[] = [
     {
         id: 1,
         name: 'Find',
-        description: 'Open  find the Reel you want to download',
+        description: 'Open  find the you want to download',
         icon: DevicePhoneMobileIcon,
     },
     {
@@ -150,7 +150,7 @@ export const STEP: Step[] = [
     {
         id: 3,
         name: 'Paste URL',
-        description: 'Paste the Instagram link in our downloader',
+        description: 'Paste the link in our downloader',
         icon: ArrowRightIcon,
     },
     {
