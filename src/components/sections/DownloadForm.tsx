@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { ReelResult, Toast, Button, InputField, ResetButton } from '@/constants';
 import { usePathname } from 'next/navigation';
 import { TopHeader_Item } from '@/constants/data';
+import { Sparkles, Link2, Download } from 'lucide-react';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -46,25 +47,8 @@ export default function DownloadForm() {
       return;
     }
 
-    const supportedPlatforms = [
-      'https://www.instagram.com/reel',
-      'https://www.facebook.com/share',
-      'https://www.facebook.com/',
-      'https://t.snapchat.com/',
-      'https://snapchat.com/',
-    ];
-
-    const isValidUrl = supportedPlatforms.some(platform => trimmedUrl.includes(platform));
-
-    if (!isValidUrl) {
-      Toast('error', 'Please enter a valid supported URL.');
-      setIsLoading(false);
-      return;
-    }
-
     try {
       setIsSaving(true);
-
       const apiUrl = `/api/download?url=${encodeURIComponent(trimmedUrl)}`;
       const response = await fetch(apiUrl, {
         method: 'GET',
@@ -104,35 +88,92 @@ export default function DownloadForm() {
   };
 
   return (
-    <main id="download-section" className="bg-white dark:bg-gray-900 pt-10 px-4">
-      <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-4xl rounded-3xl bg-gray-50 shadow-sm dark:bg-gray-800 p-6 sm:p-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div>
-              <InputField
-                label={`Enter ${urlPath?.highlight} URL`}
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://www.example.com/..."
-              />
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button
-                isProcessing={isLoading}
-                labal='Click Here'
-              />
+    <main id="download-section" className="relative pt-16 px-4">
+      {/* Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+      </div>
 
-              {url && (
-                <ResetButton
-                  onClick={resetForm}
-                  labal='Reset'
-                  isProcessing={isSaving}
-                />
-              )}
-            </div>
-          </form>
-          {downloadData && <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />}
+      <div className="relative mx-auto max-w-4xl">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+            <Sparkles className="h-5 w-5 text-purple-600" />
+            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Fast & Secure Downloads
+            </span>
+          </div>
+          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-violet-600 dark:from-white dark:via-purple-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+            Download Social Media
+            <span className="block text-purple-600 dark:text-purple-400">Videos Instantly</span>
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Download videos from Instagram, Facebook, and Snapchat in high quality. 
+            Plus, enjoy additional tools like background removal and audio extraction.
+          </p>
         </div>
+
+        {/* Download Form */}
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur-lg opacity-30"></div>
+          <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8">
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="relative">
+                <InputField
+                  label={`Enter ${urlPath?.highlight} URL`}
+                  value={url}
+                  onChange={(e) => setUrl(e.target.value)}
+                  placeholder="Paste your video link here..."
+                  icon={<Link2 className="h-5 w-5 text-gray-400" />}
+                />
+              </div>
+              
+              <div className="flex flex-wrap gap-4 justify-center">
+                <Button
+                  isProcessing={isLoading}
+                  labal={isLoading ? "Processing..." : "Download Now"}
+                  icon={<Download className="h-5 w-5" />}
+                  className="flex-1 min-w-[200px]"
+                />
+
+                {url && (
+                  <ResetButton
+                    onClick={resetForm}
+                    labal='Clear'
+                    isProcessing={isSaving}
+                    variant="outline"
+                  />
+                )}
+              </div>
+            </form>
+
+            {/* Quick Tips */}
+            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+                  <span>No Watermark</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                  <span>High Quality</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
+                  <span>Fast Download</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {downloadData && (
+          <div className="mt-8 animate-fade-in">
+            <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />
+          </div>
+        )}
       </div>
     </main>
   );

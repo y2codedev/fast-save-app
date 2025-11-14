@@ -37,6 +37,8 @@ export default function AdsenseAd({ slot, height = 'h-[280px]', className = '' }
           data-ad-slot={slot}
           data-ad-format="auto"
           data-full-width-responsive="true"
+          data-adtest="on"
+
         />
       )}
     </div>

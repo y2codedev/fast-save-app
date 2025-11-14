@@ -92,14 +92,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={inter?.className} suppressHydrationWarning>
-      <GA GA_MEASUREMENT_ID="G-52GQ441X7H" />
-      <Head>
-        <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
-          crossOrigin="anonymous">
-        </Script>
-      </Head>
-      <body>
+  <html lang="en" className={inter.className} suppressHydrationWarning>
+  <head>
+    <Script
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
+      strategy="afterInteractive"
+      crossOrigin="anonymous"
+    />
+  </head>
+  <body>
         <ThemeProviderWrapper>
           <Navbar />
           <AdsenseAd height="h-[100px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="" />

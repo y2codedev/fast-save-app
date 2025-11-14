@@ -1,6 +1,5 @@
 import NoSSRWrapper from "@/components/sections/NoSSRWrapper";
 import AudioSections from "@/components/sections/AudioSections";
-import { Group } from "@/constants";
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
@@ -80,10 +79,11 @@ export const generateMetadata = (): Metadata => {
 };
 
 export default function Page() {
-    return <main className="bg-white dark:bg-gray-900">
-        <NoSSRWrapper>
-            <AudioSections />
-            <Group />
-        </NoSSRWrapper>
-    </main>
+    return (
+        <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+            <NoSSRWrapper>
+                <AudioSections />
+            </NoSSRWrapper>
+        </main>
+    );
 }

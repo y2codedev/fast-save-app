@@ -25,6 +25,7 @@
     "class-variance-authority": "^0.7.0",
     "client-only": "^0.0.1",
     "clsx": "^2.0.0",
+    "framer-motion": "^12.23.24",
     "hls.js": "^1.6.7",
     "imagetracerjs": "^1.2.6",
     "lucide-react": "^0.522.0",
