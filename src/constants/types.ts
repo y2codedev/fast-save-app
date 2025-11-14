@@ -65,7 +65,8 @@ export interface ButtonProps {
     onClick?: () => void;
     isProcessing?: boolean;
     labal: string;
-    icon?: boolean
+    icon?: boolean;
+    className?: string;
 }
 
 interface MediaItem {
