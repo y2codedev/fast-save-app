@@ -67,6 +67,7 @@ export interface ButtonProps {
     labal: string;
     icon?: boolean;
     className?: string;
+     disabled?: boolean;
 }
 
 interface MediaItem {
