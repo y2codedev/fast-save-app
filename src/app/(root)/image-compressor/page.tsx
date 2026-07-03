@@ -125,13 +125,7 @@ export default function Home() {
     ]
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 px-4 sm:px-6 lg:px-8">
-            {/* Background Elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-                <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-            </div>
+        <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
 
             <div className="relative max-w-7xl mx-auto">
                 {/* Header Section */}
@@ -142,14 +136,14 @@ export default function Home() {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-                        <FiZap className="h-5 w-5 text-purple-600" />
+                        <FiZap className="h-5 w-5 text-indigo-600" />
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                             AI Image Compressor
                         </span>
                     </div>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-violet-600 dark:from-white dark:via-purple-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
                         Compress Images
-                        <span className="block text-purple-600 dark:text-purple-400">Without Losing Quality</span>
+                        <span className="block text-indigo-600 dark:text-indigo-400">Without Losing Quality</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         Reduce image file sizes by up to 90% while maintaining excellent quality. 
@@ -170,7 +164,7 @@ export default function Home() {
                             className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                         >
                             <div className="flex justify-center mb-4">
-                                <div className="bg-gradient-to-br from-purple-500 to-blue-500 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                <div className="bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
                                     <feature.icon className="h-6 w-6 text-white" />
                                 </div>
                             </div>
@@ -207,10 +201,9 @@ export default function Home() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur-lg opacity-30"></div>
-                        <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-6 sm:p-8">
+                        <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="flex-shrink-0 bg-gradient-to-br from-purple-500 to-blue-500 p-3 rounded-xl shadow-lg">
+                                <div className="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl shadow-lg">
                                     <FiUpload className="h-6 w-6 text-white" />
                                 </div>
                                 <div>
@@ -227,6 +220,7 @@ export default function Home() {
                                 ref={fileRef}
                                 onFileUpload={handleFileChange}
                                 loading={loading}
+                                subtitle="PNG, JPG, or WEBP (Max. 100MB)"
                             />
 
                             <AnimatePresence>
@@ -277,10 +271,9 @@ export default function Home() {
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-lg opacity-30"></div>
-                        <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 h-full">
+                        <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 h-full">
                             <div className="flex items-center gap-3 mb-6">
-                                <div className="flex-shrink-0 bg-gradient-to-br from-blue-500 to-purple-500 p-3 rounded-xl shadow-lg">
+                                <div className="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl shadow-lg">
                                     <FiImage className="h-6 w-6 text-white" />
                                 </div>
                                 <div>
@@ -307,7 +300,7 @@ export default function Home() {
                                                 <div className="relative">
                                                     <Loader />
                                                     <div className="absolute inset-0 flex items-center justify-center">
-                                                        <FiZap className="h-6 w-6 text-purple-600 animate-pulse" />
+                                                        <FiZap className="h-6 w-6 text-indigo-600 animate-pulse" />
                                                     </div>
                                                 </div>
                                                 <div>
@@ -332,8 +325,6 @@ export default function Home() {
                                                     imageSrc={compressed?.src}
                                                     size={compressed?.size}
                                                     label="Compressed Image"
-                                                    showComparison={!!original}
-                                                    originalSize={original?.size}
                                                 />
                                             </div>
                                             
@@ -418,7 +409,6 @@ export default function Home() {
                                                 imageSrc={original.src}
                                                 size={original.size}
                                                 label="Original"
-                                                showDetails={true}
                                             />
                                         </div>
                                     </div>
@@ -429,7 +419,6 @@ export default function Home() {
                                                 imageSrc={compressed.src}
                                                 size={compressed.size}
                                                 label="Compressed"
-                                                showDetails={true}
                                             />
                                         </div>
                                     </div>

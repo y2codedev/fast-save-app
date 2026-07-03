@@ -43,13 +43,7 @@ const Page = () => {
     ];
 
     return (
-        <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 px-4 sm:px-6 lg:px-8">
-            {/* Background Elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-                <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-                <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-            </div>
+        <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
 
             <div className="relative max-w-6xl mx-auto">
                 {/* Header Section */}
@@ -60,14 +54,14 @@ const Page = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-                        <FiImage className="h-5 w-5 text-purple-600" />
+                        <FiImage className="h-5 w-5 text-indigo-600" />
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                             Professional Image Tools
                         </span>
                     </div>
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-violet-600 dark:from-white dark:via-purple-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
                         Image Converter
-                        <span className="block text-purple-600 dark:text-purple-400">Pro Studio</span>
+                        <span className="block text-indigo-600 dark:text-indigo-400">Pro Studio</span>
                     </h1>
                     <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
                         Convert, optimize, and transform your images with our powerful suite of tools. 
@@ -88,7 +82,7 @@ const Page = () => {
                             className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                         >
                             <div className="flex justify-center mb-4">
-                                <div className="bg-gradient-to-br from-purple-500 to-blue-500 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
+                                <div className="bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
                                     <feature.icon className="h-6 w-6 text-white" />
                                 </div>
                             </div>
@@ -109,7 +103,7 @@ const Page = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur-lg opacity-30"></div>
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl blur-lg opacity-30"></div>
                     <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden">
                         
                         {/* Tab Navigation */}
@@ -121,7 +115,7 @@ const Page = () => {
                                         onClick={() => setActiveTab(tab.id)}
                                         className={`flex items-center gap-3 py-3 px-6 rounded-xl font-medium transition-all duration-300 ${
                                             activeTab === tab.id
-                                                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
+                                                ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-lg'
                                                 : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700'
                                         }`}
                                     >
@@ -175,26 +169,30 @@ const Page = () => {
                     </div>
                 </motion.div>
 
-                {/* Additional Tools Section */}
+                {/* Explore Other Tools Section */}
                 <motion.div 
                     className="mt-12 text-center"
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                    <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20 dark:border-gray-700/50">
+                    <div className="bg-gradient-to-br from-indigo-50/50 to-violet-50/50 dark:from-gray-800/50 dark:to-gray-800/50 backdrop-blur-sm rounded-3xl p-8 shadow-sm border border-indigo-100 dark:border-gray-700">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                            More Image Tools Coming Soon
+                            Explore More Tools
                         </h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
-                            We're constantly expanding our toolkit. Stay tuned for background removal, 
-                            image compression, batch processing, and more advanced features.
+                        <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+                            Need more processing power? Check out our dedicated tools for background removal, media downloading, and image compression.
                         </p>
-                        <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Background Remover</span>
-                            <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Image Compressor</span>
-                            <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">Batch Processor</span>
-                            <span className="bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">AI Enhancer</span>
+                        <div className="flex flex-wrap justify-center gap-4">
+                            <a href="/bg-remover" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                                Background Remover
+                            </a>
+                            <a href="/image-compressor" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                                Image Compressor
+                            </a>
+                            <a href="/" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                                Social Downloader
+                            </a>
                         </div>
                     </div>
                 </motion.div>

@@ -94,13 +94,7 @@ function VideoToAudioConverter() {
   };
 
   return (
-    <main className="w-full min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-8 px-4 sm:px-6 lg:px-8">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-      </div>
+    <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
 
       <div className="relative max-w-7xl mx-auto w-full">
         {/* Header Section */}
@@ -111,14 +105,14 @@ function VideoToAudioConverter() {
           transition={{ duration: 0.6 }}
         >
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-            <FiMusic className="h-5 w-5 text-purple-600" />
+            <FiMusic className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               Video to MP3 Converter
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-violet-600 dark:from-white dark:via-purple-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
             Extract Audio from
-            <span className="block text-purple-600 dark:text-purple-400">Any Video</span>
+            <span className="block text-indigo-600 dark:text-indigo-400">Any Video</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Convert videos to high-quality MP3 files instantly. Supports all major video formats with crystal clear audio extraction.
@@ -142,11 +136,11 @@ function VideoToAudioConverter() {
                 <div key={step} className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
                     conversionStep === step 
-                      ? 'bg-purple-600 border-purple-600 text-white' 
+                      ? 'bg-indigo-600 border-indigo-600 text-white' 
                       : conversionStep === 'complete' && step === 'complete'
                       ? 'bg-green-500 border-green-500 text-white'
                       : index === 0 || (conversionStep === 'convert' && step === 'convert') || (conversionStep === 'complete')
-                      ? 'bg-purple-100 border-purple-600 text-purple-600 dark:bg-purple-900/30 dark:border-purple-400 dark:text-purple-400'
+                      ? 'bg-indigo-100 border-indigo-600 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-400 dark:text-indigo-400'
                       : 'bg-gray-100 border-gray-300 text-gray-400 dark:bg-gray-700 dark:border-gray-600'
                   }`}>
                     {conversionStep === 'complete' && step === 'complete' ? (
@@ -157,7 +151,7 @@ function VideoToAudioConverter() {
                   </div>
                   <span className={`font-medium ${
                     conversionStep === step || (conversionStep === 'complete' && step === 'complete')
-                      ? 'text-purple-600 dark:text-purple-400'
+                      ? 'text-indigo-600 dark:text-indigo-400'
                       : 'text-gray-500 dark:text-gray-400'
                   }`}>
                     {label}
@@ -165,7 +159,7 @@ function VideoToAudioConverter() {
                   {index < 2 && (
                     <div className={`w-8 h-0.5 mx-4 ${
                       index === 0 || conversionStep === 'convert' || conversionStep === 'complete'
-                        ? 'bg-purple-600'
+                        ? 'bg-indigo-600'
                         : 'bg-gray-300 dark:bg-gray-600'
                     }`} />
                   )}
@@ -184,14 +178,24 @@ function VideoToAudioConverter() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur-lg opacity-30"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl blur-lg opacity-30"></div>
             <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
-                <div className="flex-shrink-0 bg-gradient-to-br from-purple-500 to-blue-500 p-3 rounded-xl shadow-lg">
-                  <FiUpload className="h-6 w-6 text-white" />
+                <div className="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl shadow-lg">
+                  {conversionStep === 'complete' ? (
+                    <FiCheck className="h-6 w-6 text-white" />
+                  ) : conversionStep === 'convert' ? (
+                    <FiVideo className="h-6 w-6 text-white" />
+                  ) : (
+                    <FiUpload className="h-6 w-6 text-white" />
+                  )}
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  Upload & Convert
+                  {conversionStep === 'complete' 
+                    ? 'Audio Ready' 
+                    : conversionStep === 'convert' 
+                    ? 'Ready to Convert' 
+                    : 'Upload & Convert'}
                 </h2>
               </div>
 
@@ -271,12 +275,7 @@ function VideoToAudioConverter() {
                       </div>
                     </div>
 
-                    <audio 
-                      controls 
-                      ref={audioRef} 
-                      src={audioURL} 
-                      className="w-full rounded-xl bg-gray-100 dark:bg-gray-700"
-                    />
+
 
                     <div className="flex gap-3">
                       <a
@@ -307,7 +306,7 @@ function VideoToAudioConverter() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-lg opacity-30"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl blur-lg opacity-30"></div>
             <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
               <AudioPlayer
                 audioURL={audioURL}
@@ -344,7 +343,7 @@ function VideoToAudioConverter() {
           ].map((feature, index) => (
             <div key={index} className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl text-center">
               <div className="flex justify-center mb-4">
-                <div className="bg-gradient-to-br from-purple-500 to-blue-500 p-3 rounded-xl">
+                <div className="bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl">
                   <feature.icon className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -358,7 +357,7 @@ function VideoToAudioConverter() {
           ))}
         </motion.div>
       </div>
-    </main>
+    </div>
   );
 }
 

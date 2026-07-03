@@ -25,24 +25,29 @@ export default function DownloadForm() {
     }
 
     const trimmedUrl = url.trim();
-    const isInstagram = pathName === '/' && trimmedUrl?.includes("https://www.instagram.com/reel");
-    const isFacebook = pathName === '/fb-video' && trimmedUrl?.includes("https://www.facebook.com/share") || trimmedUrl?.includes("https://www.facebook.com/");
-    const isSnapchat = pathName === '/snapchat' && (trimmedUrl?.includes("https://t.snapchat.com/") || trimmedUrl?.includes("https://snapchat.com/"));
+    
+    // Smart Input Validation
+    const isValidPlatform = (link: string) => {
+      try {
+        const parsedUrl = new URL(link);
+        const host = parsedUrl.hostname.toLowerCase();
+        
+        const allowedDomains = [
+          'instagram.com', 'facebook.com', 'fb.watch',
+          'snapchat.com', 't.snapchat.com',
+          'youtube.com', 'youtu.be',
+          'pinterest.com', 'pin.it',
+          'tiktok.com', 'twitter.com', 'x.com'
+        ];
+        
+        return allowedDomains.some(domain => host === domain || host.endsWith('.' + domain));
+      } catch (e) {
+        return false;
+      }
+    };
 
-    if (pathName === '/' && !isInstagram) {
-      Toast('error', 'Please enter a valid Instagram URL');
-      setIsLoading(false);
-      return;
-    }
-
-    if (pathName === '/fb-video' && !isFacebook) {
-      Toast('error', 'Please enter a valid Facebook URL');
-      setIsLoading(false);
-      return;
-    }
-
-    if (pathName === '/snapchat' && !isSnapchat) {
-      Toast('error', 'Please enter a valid Snapchat URL');
+    if (!isValidPlatform(trimmedUrl)) {
+      Toast('error', 'Please enter a valid social media URL (e.g., Instagram, Facebook, Snapchat)');
       setIsLoading(false);
       return;
     }
@@ -88,83 +93,58 @@ export default function DownloadForm() {
   };
 
   return (
-    <main id="download-section" className="relative pt-16 px-4">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
-      </div>
-
+    <div id="download-section" className="relative w-full">
       <div className="relative mx-auto max-w-4xl">
-        {/* Header Section */}
-        <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-            <Sparkles className="h-5 w-5 text-purple-600" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Fast & Secure Downloads
-            </span>
-          </div>
-          <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-900 via-purple-900 to-violet-600 dark:from-white dark:via-purple-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Download Social Media
-            <span className="block text-purple-600 dark:text-purple-400">Videos Instantly</span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Download videos from Instagram, Facebook, and Snapchat in high quality. 
-            Plus, enjoy additional tools like background removal and audio extraction.
-          </p>
-        </div>
-
-        {/* Download Form */}
+        {/* Modern Download Form Pill */}
         <div className="relative">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl blur-lg opacity-30"></div>
-          <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="relative">
-                <InputField
-                  label={`Enter ${urlPath?.highlight} URL`}
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="Paste your video link here..."
-                  icon={<Link2 className="h-5 w-5 text-gray-400" />}
-                />
-              </div>
-              
-              <div className="flex flex-wrap gap-4 justify-center">
-                <Button
-                  isProcessing={isLoading}
-                  labal={isLoading ? "Processing..." : "Download Now"}
-                  icon={<Download className="h-5 w-5" />}
-                  className="flex-1 min-w-[200px]"
-                />
+          <form onSubmit={handleSubmit} className="relative z-10 flex flex-col md:flex-row items-center gap-3 bg-white dark:bg-gray-900 p-2 md:p-3 rounded-3xl md:rounded-full shadow-2xl border border-gray-200 dark:border-gray-800 transition-all focus-within:ring-4 focus-within:ring-indigo-500/20">
+            <div className="flex items-center flex-1 w-full pl-4 md:pl-6">
+              <Link2 className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
+              <input
+                type="text"
+                value={url}
+                onChange={(e) => setUrl(e.target.value)}
+                placeholder={`Paste your ${urlPath?.highlight || 'media'} link here...`}
+                className="w-full bg-transparent border-none text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-lg py-3"
+              />
+              {url && (
+                <button
+                  type="button"
+                  onClick={resetForm}
+                  className="pr-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                >
+                  Clear
+                </button>
+              )}
+            </div>
+            
+            <button
+              type="submit"
+              disabled={isLoading || !url}
+              className={`w-full md:w-auto font-bold py-4 px-10 rounded-2xl md:rounded-full flex items-center justify-center gap-2 transition-all duration-300 ${
+                isLoading || !url 
+                ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
+                : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30 hover:-translate-y-1'
+              }`}
+            >
+              {isLoading ? "Processing..." : "Download"}
+              {!isLoading && <Download className="h-5 w-5" />}
+            </button>
+          </form>
 
-                {url && (
-                  <ResetButton
-                    onClick={resetForm}
-                    labal='Clear'
-                    isProcessing={isSaving}
-                    variant="outline"
-                  />
-                )}
-              </div>
-            </form>
-
-            {/* Quick Tips */}
-            <div className="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
-              <div className="flex items-center justify-center gap-6 text-sm text-gray-500 dark:text-gray-400">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>No Watermark</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                  <span>High Quality</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-purple-500 rounded-full"></div>
-                  <span>Fast Download</span>
-                </div>
-              </div>
+          {/* Quick Tips */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm font-medium text-gray-500 dark:text-gray-400">
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+              <span>No Watermark</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-indigo-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
+              <span>High Quality</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-violet-500 rounded-full shadow-[0_0_8px_rgba(139,92,246,0.5)]"></div>
+              <span>Fast Download</span>
             </div>
           </div>
         </div>
@@ -175,6 +155,6 @@ export default function DownloadForm() {
           </div>
         )}
       </div>
-    </main>
+    </div>
   );
 }

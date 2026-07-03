@@ -5,6 +5,7 @@ export interface SocialLink {
     href: string;
     icon: IconType;
     ariaLabel: string;
+    description?: string;
 }
 
 export interface LegalLink {
@@ -65,9 +66,10 @@ export interface ButtonProps {
     onClick?: () => void;
     isProcessing?: boolean;
     labal: string;
-    icon?: boolean;
+    icon?: React.ReactNode | boolean;
     className?: string;
-     disabled?: boolean;
+    disabled?: boolean;
+    variant?: string;
 }
 
 interface MediaItem {
