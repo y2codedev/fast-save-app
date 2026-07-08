@@ -20,7 +20,7 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL("https://fast-save.vercel.app/bg-remover"),
+        metadataBase: new URL("https://fast-save.vercel.app"),
         other: {
             "google-adsense-account": "ca-pub-1504999187644497",
         },
