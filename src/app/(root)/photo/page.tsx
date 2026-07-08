@@ -5,9 +5,11 @@ import ImageToSVG from '@/components/sections/ImageToSVG'
 import React, { useState } from 'react'
 import { FiImage, FiUpload, FiCode, FiZap, FiDownload, FiCheck } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
-
+import Link from 'next/link'
+import { AdsenseAd } from '@/constants'
 const Page = () => {
     const [activeTab, setActiveTab] = useState('dropzone');
+    const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
 
     const tabs = [
         {
@@ -103,8 +105,7 @@ const Page = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.3 }}
                 >
-                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl blur-lg opacity-30"></div>
-                    <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 overflow-hidden">
+                    <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 overflow-hidden">
                         
                         {/* Tab Navigation */}
                         <div className="border-b border-gray-200 dark:border-gray-700">
@@ -169,6 +170,18 @@ const Page = () => {
                     </div>
                 </motion.div>
 
+                {/* Ad Section */}
+                <motion.div 
+                    className="mt-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                    <div className='mx-auto max-w-4xl'>
+                        <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50" />
+                    </div>
+                </motion.div>
+
                 {/* Explore Other Tools Section */}
                 <motion.div 
                     className="mt-12 text-center"
@@ -176,7 +189,7 @@ const Page = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.5 }}
                 >
-                    <div className="bg-gradient-to-br from-indigo-50/50 to-violet-50/50 dark:from-gray-800/50 dark:to-gray-800/50 backdrop-blur-sm rounded-3xl p-8 shadow-sm border border-indigo-100 dark:border-gray-700">
+                    <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-8">
                         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                             Explore More Tools
                         </h3>
@@ -184,15 +197,15 @@ const Page = () => {
                             Need more processing power? Check out our dedicated tools for background removal, media downloading, and image compression.
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
-                            <a href="/bg-remover" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                            <Link href="/bg-remover" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
                                 Background Remover
-                            </a>
-                            <a href="/image-compressor" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                            </Link>
+                            <Link href="/image-compressor" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
                                 Image Compressor
-                            </a>
-                            <a href="/" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                            </Link>
+                            <Link href="/" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
                                 Social Downloader
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </motion.div>

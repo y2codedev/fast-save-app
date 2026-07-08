@@ -1,7 +1,25 @@
 'use client';
 
-import { AdsenseAd, FEATURES, TopText, DownloadForm } from '@/constants';
-import { Zap, Shield, Globe, Smartphone, Sparkles } from 'lucide-react';
+import { AdsenseAd, TopText, DownloadForm } from '@/constants';
+import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage } from 'lucide-react';
+import { motion, Variants } from 'framer-motion';
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const itemVariants: Variants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 100 }
+  }
+};
 
 export default function HeroSection() {
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
@@ -20,9 +38,9 @@ export default function HeroSection() {
           <DownloadForm />
         </div>
         
-        {/* Ad Section */}
-        <div className='mx-auto max-w-7xl pt-16'>
-          <AdsenseAd height="h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
+        {/* Ad Section - Top */}
+        <div className='mx-auto max-w-5xl pt-12 md:pt-16'>
+          <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
         </div>
       </div>
 
@@ -37,58 +55,137 @@ export default function HeroSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {/* Card 1: AI Background Remover */}
-          <a href="/bg-remover" className="group flex flex-col items-center text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-1">
-            <div className="mb-5 text-indigo-500 group-hover:scale-110 transition-transform duration-300">
-              <Sparkles className="h-14 w-14" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Remove Background</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Instantly remove backgrounds from images with high-precision AI.</p>
-          </a>
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {[
+            {
+              href: "/fb-video",
+              icon: Facebook,
+              title: "FB Downloader",
+              description: "Save public Facebook videos directly to your device.",
+              color: "cyan"
+            },
+            // {
+            //   href: "/snapchat",
+            //   icon: Smartphone,
+            //   title: "Snapchat Downloader",
+            //   description: "Download Snapchat Spotlight and Stories easily.",
+            //   color: "amber"
+            // },
+            {
+              href: "/photo",
+              icon: Instagram,
+              title: "IG Downloader",
+              description: "Download HD Photos and Reels from Instagram.",
+              color: "pink"
+            },
+            {
+              href: "/bg-remover",
+              icon: Sparkles,
+              title: "Remove Background",
+              description: "Instantly remove backgrounds from images with high-precision AI.",
+              color: "indigo"
+            },
+            {
+              href: "/image-compressor",
+              icon: Zap,
+              title: "Compress Image",
+              description: "Reduce image file size while maintaining excellent quality.",
+              color: "emerald"
+            },
+            {
+              href: "/image-to-pdf",
+              icon: FileImage,
+              title: "Image to PDF",
+              description: "Convert multiple images into a single PDF document easily.",
+              color: "amber"
+            },
+            {
+              href: "/audio",
+              icon: Music,
+              title: "Video to MP3",
+              description: "Extract high-quality audio from any video instantly.",
+              color: "fuchsia"
+            },
+            {
+              href: "/video-to-gif",
+              icon: Film,
+              title: "Video to GIF",
+              description: "Convert any video into an animated looping GIF.",
+              color: "blue"
+            },
+            {
+              href: "/video-trimmer",
+              icon: Scissors,
+              title: "Video Trimmer",
+              description: "Cut and trim video clips instantly without losing quality.",
+              color: "rose"
+            },
+            
+          ].map((tool, index) => {
+            // Map colors to tailwind classes
+            const colorClasses: Record<string, any> = {
+              indigo: { gradient: "from-indigo-500/5 to-violet-500/5", bg: "bg-indigo-100 dark:bg-indigo-900/30", text: "text-indigo-600 dark:text-indigo-400" },
+              emerald: { gradient: "from-emerald-500/5 to-teal-500/5", bg: "bg-emerald-100 dark:bg-emerald-900/30", text: "text-emerald-600 dark:text-emerald-400" },
+              rose: { gradient: "from-rose-500/5 to-orange-500/5", bg: "bg-rose-100 dark:bg-rose-900/30", text: "text-rose-600 dark:text-rose-400" },
+              amber: { gradient: "from-amber-500/5 to-yellow-500/5", bg: "bg-amber-100 dark:bg-amber-900/30", text: "text-amber-600 dark:text-amber-400" },
+              blue: { gradient: "from-blue-500/5 to-cyan-500/5", bg: "bg-blue-100 dark:bg-blue-900/30", text: "text-blue-600 dark:text-blue-400" },
+              fuchsia: { gradient: "from-fuchsia-500/5 to-purple-500/5", bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30", text: "text-fuchsia-600 dark:text-fuchsia-400" },
+              pink: { gradient: "from-pink-500/5 to-rose-500/5", bg: "bg-pink-100 dark:bg-pink-900/30", text: "text-pink-600 dark:text-pink-400" },
+              cyan: { gradient: "from-cyan-500/5 to-teal-500/5", bg: "bg-cyan-100 dark:bg-cyan-900/30", text: "text-cyan-600 dark:text-cyan-400" },
+            };
+            const c = colorClasses[tool.color];
 
-          {/* Card 2: Image Compressor */}
-          <a href="/image-compressor" className="group flex flex-col items-center text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-1">
-            <div className="mb-5 text-emerald-500 group-hover:scale-110 transition-transform duration-300">
-              <Zap className="h-14 w-14" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Compress Image</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Reduce image file size while maintaining excellent quality.</p>
-          </a>
-
-          {/* Card 3: SVG Converter */}
-          <a href="/photo" className="group flex flex-col items-center text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-1">
-            <div className="mb-5 text-rose-500 group-hover:scale-110 transition-transform duration-300">
-              <Shield className="h-14 w-14" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Convert to SVG</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Transform your JPG or PNG images into scalable SVG vectors.</p>
-          </a>
-
-          {/* Card 4: Audio Extractor */}
-          <a href="/audio" className="group flex flex-col items-center text-center bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700 hover:-translate-y-1">
-            <div className="mb-5 text-amber-500 group-hover:scale-110 transition-transform duration-300">
-              <Globe className="h-14 w-14" strokeWidth={1.5} />
-            </div>
-            <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Video to MP3</h3>
-            <p className="text-sm text-gray-500 dark:text-gray-400">Extract high-quality audio from any video instantly.</p>
-          </a>
-        </div>
+            return (
+              <motion.a 
+                key={index}
+                variants={itemVariants} 
+                href={tool.href} 
+                className="relative group flex flex-col items-center text-center bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-white/40 dark:border-gray-700/50 overflow-hidden"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                <div className={`relative z-10 mb-5 ${c.text} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 ${c.bg} p-4 rounded-2xl`}>
+                  <tool.icon className="h-10 w-10" strokeWidth={1.5} />
+                </div>
+                <h3 className="relative z-10 text-lg font-bold text-gray-900 dark:text-white mb-2">{tool.title}</h3>
+                <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
+              </motion.a>
+            )
+          })}
+        </motion.div>
 
         {/* Stats Section */}
-        <div className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+        <motion.div 
+          className="mt-16 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
           {[
-            { icon: Zap, value: '10M+', label: 'Downloads' },
-            { icon: Shield, value: '100%', label: 'Secure' },
-            { icon: Globe, value: '150+', label: 'Countries' },
-            { icon: Smartphone, value: '24/7', label: 'Available' },
+            { icon: Zap, value: 'Lightning Fast', label: 'Processing' },
+            { icon: Shield, value: '100% Secure', label: 'Private & Safe' },
+            { icon: Globe, value: 'Browser Based', label: 'No Install' },
+            { icon: Smartphone, value: 'Forever Free', label: 'No Watermark' },
           ].map((stat, index) => (
-            <div key={index} className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl">
-              <stat.icon className="h-8 w-8 text-indigo-600 dark:text-indigo-400 mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white">{stat.value}</div>
-              <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
-            </div>
+            <motion.div key={index} variants={itemVariants} className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl border border-white/40 dark:border-gray-700/50 p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="bg-white/60 dark:bg-gray-700/60 w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-4">
+                <stat.icon className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
+              </div>
+              <div className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-1">{stat.value}</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">{stat.label}</div>
+            </motion.div>
           ))}
+        </motion.div>
+
+        {/* Ad Section - Bottom */}
+        <div className='mx-auto max-w-5xl pt-16'>
+          <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
         </div>
       </div>
     </div>

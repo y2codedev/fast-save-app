@@ -103,7 +103,9 @@ export default function RootLayout({
   <body>
         <ThemeProviderWrapper>
           <Navbar />
-          <AdsenseAd height="h-[100px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="" />
+          <div className="mx-auto max-w-7xl px-4 mt-4">
+            <AdsenseAd height="min-h-[50px] md:min-h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="rounded-xl" />
+          </div>
           < ExampleUsage />
           <Suspense fallback={<FallbackLoader />}>
             {children}

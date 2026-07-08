@@ -5,6 +5,7 @@ import { ReelResult, Toast, Button, InputField, ResetButton } from '@/constants'
 import { usePathname } from 'next/navigation';
 import { TopHeader_Item } from '@/constants/data';
 import { Sparkles, Link2, Download } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -97,7 +98,13 @@ export default function DownloadForm() {
       <div className="relative mx-auto max-w-4xl">
         {/* Modern Download Form Pill */}
         <div className="relative">
-          <form onSubmit={handleSubmit} className="relative z-10 flex flex-col md:flex-row items-center gap-3 bg-white dark:bg-gray-900 p-2 md:p-3 rounded-3xl md:rounded-full shadow-2xl border border-gray-200 dark:border-gray-800 transition-all focus-within:ring-4 focus-within:ring-indigo-500/20">
+          <motion.form 
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 100, damping: 15 }}
+            onSubmit={handleSubmit} 
+            className="relative z-10 flex flex-col md:flex-row items-center gap-3 bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl p-2 md:p-3 rounded-3xl md:rounded-full shadow-2xl border border-white/40 dark:border-gray-700/50 transition-all focus-within:ring-4 focus-within:ring-indigo-500/20"
+          >
             <div className="flex items-center flex-1 w-full pl-4 md:pl-6">
               <Link2 className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
               <input
@@ -130,10 +137,15 @@ export default function DownloadForm() {
               {isLoading ? "Processing..." : "Download"}
               {!isLoading && <Download className="h-5 w-5" />}
             </button>
-          </form>
+          </motion.form>
 
           {/* Quick Tips */}
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm font-medium text-gray-500 dark:text-gray-400">
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm font-medium text-gray-600 dark:text-gray-300"
+          >
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
               <span>No Watermark</span>
@@ -146,14 +158,22 @@ export default function DownloadForm() {
               <div className="w-2 h-2 bg-violet-500 rounded-full shadow-[0_0_8px_rgba(139,92,246,0.5)]"></div>
               <span>Fast Download</span>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {downloadData && (
-          <div className="mt-8 animate-fade-in">
-            <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />
-          </div>
-        )}
+        <AnimatePresence>
+          {downloadData && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0, y: -20 }}
+              animate={{ opacity: 1, height: 'auto', y: 0 }}
+              exit={{ opacity: 0, height: 0, y: -20 }}
+              transition={{ duration: 0.4 }}
+              className="mt-8"
+            >
+              <ReelResult data={downloadData} isSaving={isSaving} setIsSaving={setIsSaving} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );

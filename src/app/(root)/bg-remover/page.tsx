@@ -1,19 +1,26 @@
 'use client';
 
-import { Button, ErrorMessage, FileUploadArea, Loader, ResetButton } from "@/constants"
-import { removeBackground } from "@imgly/background-removal"
+import { Button, ErrorMessage, FileUploadArea, Loader, ResetButton, AdsenseAd } from "@/constants"
 import Image from "next/image"
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { FiUpload, FiDownload, FiImage, FiCheckCircle, FiTrash2, FiZap } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkle } from "lucide-react";
 
 export default function BackgroundRemovalPage() {
+  const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
   const [image, setImage] = useState<string | null>(null)
   const [resultImage, setResultImage] = useState<string | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const workerRef = useRef<Worker | null>(null)
+
+  useEffect(() => {
+    return () => {
+      workerRef.current?.terminate()
+    }
+  }, [])
 
   const handleFileUpload = (file: File) => {
     setError(null)
@@ -39,21 +46,27 @@ export default function BackgroundRemovalPage() {
   const handleRemoveBackground = async () => {
     if (!image) return
 
-    try {
-      setIsProcessing(true)
-      setError(null)
-      setResultImage(null)
+    setIsProcessing(true)
+    setError(null)
+    setResultImage(null)
 
-      const blob = await removeBackground(image)
-      const url = URL.createObjectURL(blob)
-      setResultImage(url)
-
-    } catch (err) {
-      console.error('Error removing background:', err)
-      setError('Failed to remove background. Please try another image.')
-    } finally {
-      setIsProcessing(false)
+    if (!workerRef.current) {
+      workerRef.current = new Worker(new URL('../../../workers/bg-remover.worker.ts', import.meta.url), { type: 'module' });
     }
+
+    workerRef.current.onmessage = (event) => {
+      const { success, blob, error } = event.data;
+      if (success) {
+        const url = URL.createObjectURL(blob);
+        setResultImage(url);
+      } else {
+        console.error('Error removing background:', error);
+        setError('Failed to remove background. Please try another image.');
+      }
+      setIsProcessing(false);
+    };
+
+    workerRef.current.postMessage({ image });
   }
 
   const resetAll = () => {
@@ -208,7 +221,7 @@ export default function BackgroundRemovalPage() {
                 <Button
                   onClick={handleRemoveBackground}
                   isProcessing={isProcessing}
-                  labal={isProcessing ? "Removing Background..." : "Remove Background"}
+                  label={isProcessing ? "Removing Background..." : "Remove Background"}
                   className="flex-1 w-full justify-center text-center"
                   disabled={!image || isProcessing}
                 />
@@ -216,7 +229,7 @@ export default function BackgroundRemovalPage() {
                 {image && !isProcessing && (
                   <ResetButton
                     onClick={resetAll}
-                    labal="Reset All"
+                    label="Reset All"
                     variant="outline"
                     className="flex-1 w-full justify-center text-center"
                   />
@@ -363,6 +376,18 @@ export default function BackgroundRemovalPage() {
             </div>
           </motion.div>
         </div>
+
+        {/* Ad Section */}
+        <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+        >
+            <div className='mx-auto max-w-4xl'>
+                <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50" />
+            </div>
+        </motion.div>
 
         {/* CTA Section */}
         <motion.div 

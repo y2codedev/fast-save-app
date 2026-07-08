@@ -1,14 +1,14 @@
 "use client";
 
-import { Button, FileUploader, AudioPlayer } from "@/constants";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
-import { fetchFile, toBlobURL } from "@ffmpeg/util";
+import { Button, FileUploader, AudioPlayer, AdsenseAd } from "@/constants";
 import { useRef, useState } from "react";
-import { FiUpload, FiMusic, FiDownload, FiVideo, FiCheck } from "react-icons/fi";
+import { FiUpload, FiMusic, FiDownload, FiVideo, FiCheck, FiMinimize, FiScissors, FiFilm } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 function VideoToAudioConverter() {
-  const ffmpegRef = useRef(new FFmpeg());
+  const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
+  const ffmpegRef = useRef<any>(null);
   const [loaded, setLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [audioURL, setAudioURL] = useState<string | null>(null);
@@ -21,10 +21,16 @@ function VideoToAudioConverter() {
   // Load FFmpeg
   const loadFFmpeg = async () => {
     setIsLoading(true);
+    const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+    const { toBlobURL } = await import("@ffmpeg/util");
+    
+    if (!ffmpegRef.current) {
+      ffmpegRef.current = new FFmpeg();
+    }
     const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
     const ffmpeg = ffmpegRef.current;
 
-    ffmpeg.on("log", ({ message }) => {
+    ffmpeg.on("log", ({ message }: { message: string }) => {
       if (messageRef.current) messageRef.current.innerHTML = message;
     });
 
@@ -70,6 +76,7 @@ function VideoToAudioConverter() {
     const ffmpeg = ffmpegRef.current;
     setIsLoading(true);
     try {
+      const { fetchFile } = await import("@ffmpeg/util");
       await ffmpeg.writeFile("input", await fetchFile(videoFile));
       await ffmpeg.exec(["-i", "input", "-q:a", "0", "-map", "a", "output.mp3"]);
 
@@ -178,8 +185,7 @@ function VideoToAudioConverter() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl blur-lg opacity-30"></div>
-            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
+            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-8 h-full">
               <div className="flex items-center gap-3 mb-6">
                 <div className="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl shadow-lg">
                   {conversionStep === 'complete' ? (
@@ -240,7 +246,7 @@ function VideoToAudioConverter() {
                     <Button
                       onClick={convertToAudio}
                       isProcessing={isLoading}
-                      labal={isLoading ? "Converting..." : "Convert to MP3"}
+                      label={isLoading ? "Converting..." : "Convert to MP3"}
                       className="w-full justify-center"
                     />
 
@@ -306,8 +312,7 @@ function VideoToAudioConverter() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-violet-600 rounded-3xl blur-lg opacity-30"></div>
-            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
+            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-8 h-full">
               <AudioPlayer
                 audioURL={audioURL}
                 albumArt={albumArt}
@@ -355,6 +360,51 @@ function VideoToAudioConverter() {
               </p>
             </div>
           ))}
+        </motion.div>
+
+        {/* Ad Section */}
+        <motion.div 
+          className="mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <div className='mx-auto max-w-4xl'>
+            <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50" />
+          </div>
+        </motion.div>
+
+        {/* Try Other Features */}
+        <motion.div 
+          className="text-center mt-12 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+        >
+          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Try Other Video Tools</h3>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Link 
+              href="/video-compressor" 
+              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
+            >
+              <FiMinimize className="w-4 h-4" />
+              Video Compressor
+            </Link>
+            <Link 
+              href="/video-to-gif" 
+              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
+            >
+              <FiFilm className="w-4 h-4" />
+              Video to GIF
+            </Link>
+            <Link 
+              href="/video-trimmer" 
+              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
+            >
+              <FiScissors className="w-4 h-4" />
+              Video Trimmer
+            </Link>
+          </div>
         </motion.div>
       </div>
     </div>

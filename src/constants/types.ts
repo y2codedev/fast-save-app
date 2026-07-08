@@ -65,7 +65,7 @@ export interface TopHeaderItem {
 export interface ButtonProps {
     onClick?: () => void;
     isProcessing?: boolean;
-    labal: string;
+    label: string;
     icon?: React.ReactNode | boolean;
     className?: string;
     disabled?: boolean;

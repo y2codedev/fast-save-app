@@ -3,20 +3,19 @@
 import { FiUploadCloud } from "react-icons/fi";
 import { LuFileSymlink } from "react-icons/lu";
 import { MdClose } from "react-icons/md";
-import ReactDropzone from "react-dropzone";
+import { useDropzone } from "react-dropzone";
+import { motion, AnimatePresence } from "framer-motion";
 import bytesToSize from "@/utils/bytes-to-size";
 import fileToIcon from "@/utils/file-to-icon";
 import { useState, useEffect, useRef } from "react";
 import compressFileName from "@/utils/compress-file-name";
 import { Skeleton } from "@/components/ui/skeleton";
-import convertFile from "@/utils/convert";
 import { MdDone } from "react-icons/md";
 import { Badge } from "@/components/ui/badge";
 import { BiError } from "react-icons/bi";
 import { Button } from "@/components/ui/button"
-import loadFfmpeg from "@/utils/load-ffmpeg";
 import type { Action } from "@/constants/types";
-import { FFmpeg } from "@ffmpeg/ffmpeg";
+import type { FFmpeg } from "@ffmpeg/ffmpeg";
 import { Loader, Toast } from "@/constants";
 
 const extensions = {
@@ -93,6 +92,23 @@ export default function Dropzone() {
     setIsReady(false);
     setIsConverting(false);
   };
+
+  const { getRootProps, getInputProps } = useDropzone({
+    onDrop: (acceptedFiles) => {
+      handleUpload(acceptedFiles);
+    },
+    onDragEnter: () => handleHover(),
+    onDragLeave: () => handleExitHover(),
+    accept: accepted_files,
+    onDropRejected: () => {
+      handleExitHover();
+      Toast("error", "Error uploading your file(s)");
+    },
+    onError: () => {
+      handleExitHover();
+      Toast("error", "Error uploading your file(s)");
+    }
+  });
   const download = (action: Action) => {
     const a = document.createElement("a");
     a.style.display = "none";
@@ -113,6 +129,9 @@ export default function Dropzone() {
     }));
     setActions(tmp_actions);
     setIsConverting(true);
+
+    const { default: convertFile } = await import("@/utils/convert");
+
     for (let action of tmp_actions) {
       try {
         const { url, output } = await convertFile(ffmpegRef.current, action);
@@ -204,6 +223,7 @@ export default function Dropzone() {
     load();
   }, []);
   const load = async () => {
+    const { default: loadFfmpeg } = await import("@/utils/load-ffmpeg");
     const ffmpeg_response: FFmpeg = await loadFfmpeg();
     ffmpegRef.current = ffmpeg_response;
     setIsLoaded(true);
@@ -212,15 +232,20 @@ export default function Dropzone() {
   // returns
   if (actions.length) {
     return (
-      <div>
-        {actions.map((action: Action, i: any) => (
-          <div
-            key={i}
-            className="w-full py-4 space-y-2 lg:py-0 relative cursor-pointer rounded-xl border h-fit lg:h-20 px-4 lg:px-10 flex flex-wrap lg:flex-nowrap items-center justify-between"
-          >
-            {!is_loaded && (
-              <Skeleton className="h-full w-full -ml-10 cursor-progress absolute rounded-xl" />
-            )}
+      <div className="space-y-4">
+        <AnimatePresence>
+          {actions.map((action: Action, i: any) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.3, delay: i * 0.1 }}
+              className="w-full py-4 space-y-2 lg:py-0 relative rounded-2xl border border-white/40 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md shadow-sm hover:shadow-md transition-all h-fit lg:h-24 px-4 lg:px-8 flex flex-wrap lg:flex-nowrap items-center justify-between overflow-hidden"
+            >
+              {!is_loaded && (
+                <Skeleton className="h-full w-full -ml-8 absolute rounded-2xl" />
+              )}
             <div className="flex gap-4 items-center">
               <span className="text-2xl text-orange-600">
                 {fileToIcon(action.file_type)}
@@ -317,9 +342,10 @@ export default function Dropzone() {
                 <MdClose />
               </span>
             )}
-          </div>
+          </motion.div>
         ))}
-        <div className="flex w-full justify-end mt-4">
+        </AnimatePresence>
+        <div className="flex w-full justify-end mt-6">
           {is_done ? (
             <div className="space-y-4 w-fit">
               <Button
@@ -351,54 +377,40 @@ export default function Dropzone() {
   }
 
   return (
-    <ReactDropzone
-      onDrop={handleUpload}
-      onDragEnter={handleHover}
-      onDragLeave={handleExitHover}
-      accept={accepted_files}
-      onDropRejected={() => {
-        handleExitHover();
-        Toast("error", "Error uploading your file(s)");
-      }}
-      onError={() => {
-        handleExitHover();
-        Toast("error", "Error uploading your file(s)");
-      }}
+    <div
+      {...getRootProps()}
+      className="relative group bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl h-72 lg:h-80 xl:h-96 border-2 border-dashed hover:border-indigo-500 dark:hover:border-indigo-400 border-gray-300 dark:border-gray-600 rounded-3xl cursor-pointer transition-all duration-300 hover:scale-[1.01] active:scale-[0.98] flex items-center justify-center overflow-hidden shadow-sm hover:shadow-xl"
+      style={{ maxHeight: '100vh' }}
     >
-      {({ getRootProps, getInputProps }) => (
-        <div
-          {...getRootProps()}
-          className="bg-background h-72 lg:h-80 xl:h-96 border-2 border-dashed dark:hover:border-indigo-600 hover:border-indigo-600 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-800 transition-colors flex items-center justify-center overflow-hidden"
-          style={{ maxHeight: '100vh' }}
-        >
-          <input
-            {...getInputProps()}
-            style={{ display: 'none' }}
-          />
-          <div className="space-y-4 text-foreground text-center">
-            {is_hover ? (
-              <>
-                <div className="flex justify-center text-6xl">
-                  <LuFileSymlink />
-                </div>
-                <h3 className="font-medium text-2xl">Yes, right there</h3>
-              </>
-            ) : (
-              <>
-                <div className="flex justify-center text-6xl text-gray-400">
-                  <FiUploadCloud />
-                </div>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-      )}
-    </ReactDropzone>
+      {/* Subtle animated gradient background on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-violet-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <input
+        {...getInputProps()}
+        style={{ display: 'none' }}
+      />
+      <div className="space-y-4 text-foreground text-center">
+        {is_hover ? (
+          <>
+            <div className="flex justify-center text-6xl">
+              <LuFileSymlink />
+            </div>
+            <h3 className="font-medium text-2xl">Yes, right there</h3>
+          </>
+        ) : (
+          <>
+            <div className="flex justify-center text-6xl text-gray-400">
+              <FiUploadCloud />
+            </div>
+            <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+              <span className="font-semibold">Click to upload</span> or drag and drop
+            </p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)
+            </p>
+          </>
+        )}
+      </div>
+    </div>
   );
 }

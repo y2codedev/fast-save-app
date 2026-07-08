@@ -88,7 +88,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                 <Button
                     onClick={handleDownload}
                     isProcessing={isSaving}
-                    labal='Download Now'
+                    label='Download Now'
                     icon={true}
                 />
             </div>

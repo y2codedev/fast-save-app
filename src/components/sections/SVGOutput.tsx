@@ -18,7 +18,7 @@ const SVGOutput: React.FC<SVGOutputProps> = ({
         <Button
           onClick={onDownload}
           icon={true}
-          labal='Download'
+          label='Download'
         />
 
         <button

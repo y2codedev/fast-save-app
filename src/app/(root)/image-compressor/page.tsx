@@ -1,8 +1,8 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import imageCompression from 'browser-image-compression'
-import { Button, ErrorMessage, FileUploadArea, ImagePreview, Loader, ResetButton, StatsDisplay } from '@/constants'
+// browser-image-compression is dynamically imported for performance
+import { Button, ErrorMessage, FileUploadArea, ImagePreview, Loader, ResetButton, StatsDisplay, AdsenseAd } from '@/constants'
 import { FiUpload, FiImage, FiDownload, FiZap, FiSave, FiBarChart2 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 
@@ -12,6 +12,7 @@ type ImageData = {
 } | undefined;
 
 export default function Home() {
+    const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
     const fileRef = useRef<HTMLInputElement>(null)
     const [original, setOriginal] = useState<ImageData>()
     const [compressed, setCompressed] = useState<ImageData>()
@@ -52,6 +53,8 @@ export default function Home() {
         }
 
         try {
+            const imageCompression = (await import('browser-image-compression')).default
+            
             const compressedFile = await imageCompression(file, {
                 maxSizeMB: 1,
                 maxWidthOrHeight: 1920,
@@ -332,14 +335,14 @@ export default function Home() {
                                                 <Button
                                                     onClick={handleDownload}
                                                     isProcessing={loading}
-                                                    labal={'Download Compressed Image'}
+                                                    label={'Download Compressed Image'}
                                                     className="flex-1 justify-center"
                                                     icon={<FiDownload className="h-5 w-5" />}
                                                 />
 
                                                 <ResetButton
                                                     onClick={resetAll}
-                                                    labal="Compress Another"
+                                                    label="Compress Another"
                                                     variant="outline"
                                                     className="flex-1 justify-center"
                                                 />
@@ -387,6 +390,18 @@ export default function Home() {
                         </div>
                     </motion.div>
                 </div>
+
+                {/* Ad Section */}
+                <motion.div 
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                    <div className='mx-auto max-w-4xl'>
+                        <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50" />
+                    </div>
+                </motion.div>
 
                 {/* Comparison Section */}
                 <AnimatePresence>

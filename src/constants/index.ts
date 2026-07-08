@@ -25,6 +25,9 @@ import Group from '@/components/sections/Group';
 import StatsDisplay from '@/components/sections/StatsDisplay';
 import ErrorMessage from '@/components/sections/ErrorMessage';
 import AdsenseAd from '@/components/AdsenseAd';
+import VideoToGifConverter from '@/components/sections/VideoToGifConverter';
+import VideoCompressor from '@/components/sections/VideoCompressor';
+import VideoTrimmer from '@/components/sections/VideoTrimmer';
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
@@ -57,4 +60,7 @@ export {
     Group,
     ErrorMessage,
     AdsenseAd,
+    VideoToGifConverter,
+    VideoCompressor,
+    VideoTrimmer,
 };
