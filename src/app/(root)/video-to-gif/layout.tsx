@@ -19,7 +19,7 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL("https://fast-save.vercel.app/video-to-gif"),
+        metadataBase: new URL("https://fast-save.vercel.app"),
         title,
         description,
         keywords,
