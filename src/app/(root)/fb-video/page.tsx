@@ -82,8 +82,7 @@ export const generateMetadata = (): Metadata => {
 export default function page() {
 
     return (
-        <main className=" bg-white dark:bg-gray-900">
-            <DownloadForm />
+        <main className="min-h-screen bg-slate-50 dark:bg-gray-900">
             <Group />
         </main>
     );

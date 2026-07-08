@@ -9,7 +9,7 @@ const Footer = ({
   legalLinks = DEFAULT_LEGAL_LINKS
 }: FooterProps) => {
   return (
-    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-auto">
+    <footer className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-t border-gray-200/50 dark:border-gray-700/50 mt-auto">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="py-8 md:flex md:items-center md:justify-between">
           <div className="flex flex-col items-center md:flex-row md:items-baseline space-y-2 md:space-y-0">

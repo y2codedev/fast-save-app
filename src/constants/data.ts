@@ -15,7 +15,7 @@ import {
     GlobeAltIcon,
     LifebuoyIcon,
     ArrowPathIcon,
-
+    DocumentTextIcon,
 } from '@heroicons/react/24/outline'
 
 import type { Feature, LegalLink, SocialLink, Step, TopHeaderItem } from './types';
@@ -168,37 +168,49 @@ export const NAVITEMS: SocialLink[] = [
         icon: FaFacebook,
         ariaLabel: 'Facebook',
     },
-    {
-        id: 2,
-        href: '/snapchat',
-        icon: FaSnapchat,
-        ariaLabel: 'Snapchat'
-    },
+    // {
+    //     id: 2,
+    //     href: '/snapchat',
+    //     icon: FaSnapchat,
+    //     ariaLabel: 'Snapchat'
+    // },
     {
         id: 3,
-        href: '/audio',
-        icon: MdAudiotrack,
-        ariaLabel: 'Audio',
-    },
-    {
-        id: 4,
         href: '/photo',
         icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
-
     {
-        id: 5,
+        id: 4,
         href: '/bg-remover',
         icon: ScissorsIcon,
         ariaLabel: 'Bg Remove',
     },
     {
-        id: 6,
+        id: 5,
         href: '/image-compressor',
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
+      {
+        id: 8,
+        href: '/image-to-pdf',
+        icon: DocumentTextIcon,
+        ariaLabel: 'Image to PDF'
+    },
+    {
+        id: 6,
+        href: '/audio',
+        icon: MdAudiotrack,
+        ariaLabel: 'Audio',
+    },
+    {
+        id: 7,
+        href: '/video-to-gif',
+        icon: FilmIcon,
+        ariaLabel: 'Video to GIF'
+    },
+
 ];
 
 
@@ -263,4 +275,22 @@ export const TopHeader_Item: TopHeaderItem[] = [
         description: 'Download Snapchat videos easily',
         highlight: 'Snapchat'
     },
+    {
+        path: '/video-to-gif',
+        title: 'Video to GIF Converter',
+        description: 'Convert any video into a looping GIF instantly',
+        highlight: 'Video to GIF'
+    },
+    {
+        path: '/video-compressor',
+        title: 'Video Compressor',
+        description: 'Reduce video file size without losing quality',
+        highlight: 'Video Compressor'
+    },
+    {
+        path: '/video-trimmer',
+        title: 'Video Trimmer',
+        description: 'Cut and trim video clips instantly',
+        highlight: 'Video Trimmer'
+    }
 ]

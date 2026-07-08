@@ -2,6 +2,7 @@
 
 import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useTheme } from 'next-themes';
 import { NAVITEMS } from '@/constants/data';
 import { useState, useEffect } from 'react';
@@ -11,6 +12,7 @@ import { ShareDialog } from '@/constants';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
+  const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -77,7 +79,7 @@ return (
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl">
+            <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-600 rounded-xl">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
             <div className="hidden md:block">
@@ -90,6 +92,7 @@ return (
           <ul className="hidden lg:flex items-center gap-1 text-sm font-medium">
             {NAVITEMS?.map((item,index) => {
               const IconComponent = item.icon;
+              const isActive = pathname === item.href;
               return (
                 <motion.li 
                   key={item.id} 
@@ -100,11 +103,15 @@ return (
                 >
                   <Link href={item.href} className="group">
                     <motion.div 
-                      className="flex items-center gap-2 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 dark:hover:from-purple-900/20 dark:hover:to-blue-900/20 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white px-4 py-2.5 rounded-xl transition-all duration-200 border border-transparent hover:border-purple-200 dark:hover:border-purple-800"
+                      className={`flex items-center gap-2 px-4 py-2.5 rounded-xl transition-all duration-200 border ${
+                        isActive 
+                          ? "bg-gradient-to-r from-indigo-50 to-violet-50 dark:from-indigo-900/40 dark:to-violet-900/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800 shadow-sm"
+                          : "text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50 border-transparent hover:border-gray-200 dark:hover:border-gray-700"
+                      }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <IconComponent className="h-4 w-4 text-purple-600 dark:text-purple-400" />
+                      <IconComponent className={`h-4 w-4 ${isActive ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-500 dark:text-gray-400 group-hover:text-indigo-500 dark:group-hover:text-indigo-400'}`} />
                       <span className="font-semibold">{item?.ariaLabel}</span>
                     </motion.div>
                   </Link>
@@ -154,12 +161,12 @@ return (
                   className="flex items-center space-x-3"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-purple-600 to-blue-600 rounded-xl">
+                  <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-600 rounded-xl">
                     <Sparkles className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <span className="text-xl font-bold text-gray-800 dark:text-white">
-                      Fast<span className="text-purple-600 dark:text-purple-400">Save</span>
+                      Fast<span className="text-indigo-600 dark:text-indigo-400">Save</span>
                     </span>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       Media Tools
@@ -179,6 +186,7 @@ return (
               <ul className="space-y-3 flex-1">
                 {NAVITEMS?.map((item, index) => {
                   const IconComponent = item.icon;
+                  const isActive = pathname === item.href;
                   return (
                     <motion.li
                       key={item.id}
@@ -188,10 +196,14 @@ return (
                     >
                       <Link
                         href={item.href}
-                        className="flex items-center gap-4 py-4 px-4 rounded-xl text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+                        className={`flex items-center gap-4 py-4 px-4 rounded-xl transition ${
+                          isActive
+                            ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300'
+                            : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'
+                        }`}
                         onClick={() => setMobileMenuOpen(false)}
                       >
-                        <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg">
+                        <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-indigo-500 to-violet-500 rounded-lg">
                           <IconComponent className="h-5 w-5 text-white" />
                         </div>
 

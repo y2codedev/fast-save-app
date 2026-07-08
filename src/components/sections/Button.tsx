@@ -5,7 +5,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import { ButtonProps } from "@/constants/types";
 import { Loader } from "@/constants";
 
-function Button({ onClick, isProcessing = false, labal, icon }: ButtonProps) {
+function Button({ onClick, isProcessing = false, label, icon }: ButtonProps) {
     return (
         <button
             type="submit"
@@ -21,7 +21,7 @@ function Button({ onClick, isProcessing = false, labal, icon }: ButtonProps) {
             ) : (
                 <div className="flex items-center gap-2">
                     {icon && <ArrowDownTrayIcon className="h-5 w-5" />}
-                    {labal}
+                    {label}
                 </div>
             )}
         </button>

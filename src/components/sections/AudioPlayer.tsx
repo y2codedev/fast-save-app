@@ -10,17 +10,19 @@ export function AudioPlayer({
     audioURL
 }: AudioPlayerProps) {
     return (
-        <div className="p-4 sm:p-6">
-            <div className="flex items-center justify-between pb-5">
-                <span className="flex items-center gap-2 text-sm sm:text-base">
-                    <FiMusic className="mr-2" />
-                    <span>Music Player</span>
-                </span>
+        <div className="h-full flex flex-col">
+            <div className="flex items-center gap-3 mb-6">
+                <div className="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl shadow-lg">
+                    <FiMusic className="h-6 w-6 text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                    Audio Preview
+                </h2>
             </div>
 
-            <div className="">
+            <div className="flex-1 flex flex-col justify-center gap-6">
                 {albumArt ? (
-                    <div className="relative aspect-square w-full h-96  mx-auto rounded-xl overflow-hidden">
+                    <div className="relative aspect-square w-full max-w-sm mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-700">
                         <Image
                             src={albumArt}
                             alt="Album art"
@@ -29,27 +31,29 @@ export function AudioPlayer({
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                            <span className="text-white font-medium text-sm">{videoFile?.name.replace(/\.[^/.]+$/, "")}</span>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
+                            <span className="text-white font-bold text-lg truncate drop-shadow-md">
+                                {videoFile?.name.replace(/\.[^/.]+$/, "")}
+                            </span>
                         </div>
                     </div>
                 ) : (
-                    <div className="aspect-square w-full h-64 sm:h-72 mx-auto border border-gray-300 dark:border-gray-600 rounded-xl bg-gray-50 dark:bg-gray-800 flex items-center justify-center">
-                        <FiMusic className="text-5xl sm:text-6xl text-gray-400 dark:text-gray-500" />
+                    <div className="aspect-square w-full max-w-sm mx-auto border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-2xl bg-gray-50/50 dark:bg-gray-800/50 flex flex-col items-center justify-center text-gray-400 dark:text-gray-500">
+                        <FiMusic className="text-6xl mb-4 opacity-50" />
+                        <p className="text-sm font-medium">No preview available</p>
+                    </div>
+                )}
+
+                {audioURL && (
+                    <div className="w-full max-w-sm mx-auto mt-2">
+                        <audio 
+                            controls 
+                            src={audioURL} 
+                            className="w-full h-12 rounded-full shadow-md bg-white dark:bg-gray-800"
+                        />
                     </div>
                 )}
             </div>
-            {audioURL && (
-                <div className="flex items-center mt-5 justify-end">
-                    <a
-                        href={audioURL}
-                        download="converted-audio.mp3"
-                        className="flex items-center px-3 py-2 sm:px-4 sm:py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 w-full sm:w-auto justify-center"
-                    >
-                        <FiDownload className="mr-1" /> Download
-                    </a>
-                </div>
-            )}
         </div>
     );
 }

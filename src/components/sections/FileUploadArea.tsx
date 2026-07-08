@@ -4,10 +4,11 @@ import { FiUploadCloud } from 'react-icons/fi';
 interface FileUploadAreaProps {
     onFileUpload: (file: File) => void;
     loading: boolean;
+    subtitle?: string;
 }
 
 const FileUploadArea = forwardRef<HTMLInputElement, FileUploadAreaProps>(
-    ({ onFileUpload, loading }, ref) => {
+    ({ onFileUpload, loading, subtitle = "PNG or JPG to SVG (MAX. 5MB)" }, ref) => {
         return (
             <div className="mb-6">
                 <label className="flex flex-col items-center justify-center w-full sm:h-96 h-72 border-2 border-dashed dark:hover:border-indigo-600 hover:border-indigo-600 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-800 transition-colors">
@@ -18,12 +19,12 @@ const FileUploadArea = forwardRef<HTMLInputElement, FileUploadAreaProps>(
                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
                             <span className="font-semibold">Click to upload</span> or drag and drop
                         </p>
-                        <p className="text-xs text-gray-500 dark:text-gray-400">PNG or JPG to SVG (MAX. 5MB)</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400">{subtitle}</p>
                     </div>
                     <input
                         ref={ref}
                         type="file"
-                        accept="image/png, image/jpeg"
+                        accept="image/png, image/jpeg, image/webp"
                         disabled={loading}
                         onChange={(e) => {
                             if (e.target.files && e.target.files[0]) {

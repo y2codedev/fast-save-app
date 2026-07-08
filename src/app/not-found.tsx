@@ -28,7 +28,7 @@ export default function NotFound() {
                 <div className="pt-4">
                     <Button
                         onClick={handleGoHome}
-                        labal='Return to Home'
+                        label='Return to Home'
                         icon={false}
                         isProcessing={false}
                     />
