@@ -9,6 +9,9 @@ import { motion, AnimatePresence } from 'framer-motion'
 type ImageData = {
     src: string;
     size: number;
+    file?: File;
+    width?: number;
+    height?: number;
 } | undefined;
 
 export default function Home() {
@@ -19,6 +22,8 @@ export default function Home() {
     const [loading, setLoading] = useState(false)
     const [compressionRatio, setCompressionRatio] = useState<number | null>(null)
     const [error, setError] = useState<string | null>(null)
+    const [targetWidth, setTargetWidth] = useState<string>('')
+    const [targetHeight, setTargetHeight] = useState<string>('')
 
     useEffect(() => {
         return () => {
@@ -31,7 +36,6 @@ export default function Home() {
         const file = fileRef.current?.files?.[0]
         if (!file) return
 
-        setLoading(true)
         if (original?.src) URL.revokeObjectURL(original.src)
         if (compressed?.src) URL.revokeObjectURL(compressed.src)
 
@@ -42,38 +46,87 @@ export default function Home() {
 
         if (!file.type.match('image.*')) {
             setError('Please select an image file (JPG, PNG, WEBP)')
-            setLoading(false)
             return
         }
 
         if (file.size > 100 * 1024 * 1024) {
             setError('File size exceeds 100MB limit')
-            setLoading(false)
             return
         }
 
+        setLoading(true) // Briefly show loader while parsing image
+
+        // Load image to get dimensions
+        const img = new Image();
+        const objectUrl = URL.createObjectURL(file);
+        
+        img.onload = () => {
+            setTargetWidth(img.width.toString());
+            setTargetHeight(img.height.toString());
+            setOriginal({
+                src: objectUrl,
+                size: file.size,
+                file: file,
+                width: img.width,
+                height: img.height
+            })
+            setLoading(false)
+        }
+        img.onerror = () => {
+            setError('Failed to load image. Please try another file.')
+            setLoading(false)
+        }
+        img.src = objectUrl;
+    }
+
+    const handleCompress = async () => {
+        if (!original?.file) return;
+        
+        setLoading(true)
+        setError(null)
+        setCompressed(undefined)
+        setCompressionRatio(null)
+
         try {
+            let processedFile = original.file;
+
+            if (targetWidth && targetHeight) {
+                const width = parseInt(targetWidth);
+                const height = parseInt(targetHeight);
+                if (!isNaN(width) && !isNaN(height)) {
+                    processedFile = (await new Promise((resolve) => {
+                        const img = new Image();
+                        img.onload = () => {
+                            const canvas = document.createElement('canvas');
+                            canvas.width = width;
+                            canvas.height = height;
+                            const ctx = canvas.getContext('2d');
+                            ctx?.drawImage(img, 0, 0, width, height);
+                            canvas.toBlob((blob) => {
+                                resolve(new File([blob as Blob], original.file!.name, { type: original.file!.type }));
+                            }, original.file!.type);
+                        };
+                        img.src = original.src;
+                    })) as File;
+                }
+            }
+
             const imageCompression = (await import('browser-image-compression')).default
             
-            const compressedFile = await imageCompression(file, {
+            const compressedFile = await imageCompression(processedFile, {
                 maxSizeMB: 1,
                 maxWidthOrHeight: 1920,
                 useWebWorker: true,
-                fileType: file.type.includes('png') ? 'image/png' : 'image/jpeg',
+                fileType: processedFile.type.includes('png') ? 'image/png' : 'image/jpeg',
             })
 
-            const originalSize = file.size
             const compressedSize = compressedFile.size
-            const ratio = Math.round((1 - compressedSize / originalSize) * 100)
-
-            setOriginal({
-                src: URL.createObjectURL(file),
-                size: originalSize,
-            })
+            const ratio = Math.round((1 - compressedSize / original.size) * 100)
 
             setCompressed({
                 src: URL.createObjectURL(compressedFile),
                 size: compressedSize,
+                file: compressedFile
             })
 
             setCompressionRatio(ratio)
@@ -104,6 +157,8 @@ export default function Home() {
         setCompressed(undefined)
         setCompressionRatio(null)
         setError(null)
+        setTargetWidth('')
+        setTargetHeight('')
         if (fileRef.current) {
             fileRef.current.value = ''
         }
@@ -239,28 +294,73 @@ export default function Home() {
                                 )}
                             </AnimatePresence>
 
-                            {/* Original Image Preview */}
+                            {/* Editor Mode Options */}
                             <AnimatePresence>
-                                {original && !compressed && (
+                                {original && !loading && (
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: 'auto' }}
                                         exit={{ opacity: 0, height: 0 }}
-                                        className="mt-6"
+                                        className="mt-6 p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 shadow-sm"
                                     >
-                                        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
-                                            <div className="flex items-center gap-3">
-                                                <FiImage className="h-5 w-5 text-blue-600 flex-shrink-0" />
-                                                <div className="flex-1">
-                                                    <p className="font-medium text-blue-800 dark:text-blue-200">
-                                                        Original Image Ready
-                                                    </p>
-                                                    <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
-                                                        Processing your image for compression...
-                                                    </p>
+                                        <div className="mb-6 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
+                                            {/* Image Preview */}
+                                            <div className="relative h-48 w-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+                                                <img 
+                                                    src={original.src} 
+                                                    alt="Original Preview" 
+                                                    className="object-contain h-full w-full"
+                                                />
+                                            </div>
+                                            
+                                            {/* File Info & Dimensions */}
+                                            <div className="p-4 bg-gray-800 text-white flex flex-col items-center">
+                                                <p className="text-sm font-semibold truncate w-full text-center mb-3">
+                                                    {original.file?.name || "image.jpg"}
+                                                </p>
+                                                <div className="flex items-center gap-3 text-sm font-medium">
+                                                    <span className="bg-gray-700 px-3 py-1 rounded-md text-gray-300">
+                                                        {original.width} x {original.height}
+                                                    </span>
+                                                    <span className="text-gray-400">→</span>
+                                                    <span className="bg-indigo-500 px-3 py-1 rounded-md text-white shadow-sm">
+                                                        {targetWidth || original.width} x {targetHeight || original.height}
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <h3 className="text-sm font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
+                                            <FiZap className="w-4 h-4 text-indigo-500" />
+                                            Adjust Dimensions
+                                        </h3>
+                                        <div className="grid grid-cols-2 gap-4 mb-5">
+                                            <div>
+                                                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Target Width (px)</label>
+                                                <input 
+                                                    type="number" 
+                                                    value={targetWidth}
+                                                    onChange={(e) => setTargetWidth(e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">Target Height (px)</label>
+                                                <input 
+                                                    type="number" 
+                                                    value={targetHeight}
+                                                    onChange={(e) => setTargetHeight(e.target.value)}
+                                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white text-sm font-medium focus:ring-2 focus:ring-indigo-500 outline-none transition-all shadow-sm"
+                                                />
+                                            </div>
+                                        </div>
+                                        <Button
+                                            onClick={handleCompress}
+                                            isProcessing={loading}
+                                            label={compressed ? 'Re-Compress Image' : 'Apply & Compress Image'}
+                                            className="w-full justify-center py-3 text-lg"
+                                            icon={<FiSave className="h-5 w-5" />}
+                                        />
                                     </motion.div>
                                 )}
                             </AnimatePresence>

@@ -45,7 +45,7 @@ export const generateMetadata = (): Metadata => {
             locale: "en_IN",
             images: [
                 {
-                    url: "/images/bg-remover.png", // Reusing an image or placeholder
+                    url: "/images/video-to-gif.png", 
                     width: 1200,
                     height: 630,
                     alt: "FastSave Video to GIF Converter",
@@ -56,7 +56,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/bg-remover.png"],
+            images: ["/images/video-to-gif.png"],
             creator: "@fastsaveapp",
             site: "@fastsaveapp",
         },
