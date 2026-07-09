@@ -23,7 +23,7 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL("https://fast-save.vercel.app"),
+        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
         other: {
             "google-adsense-account": "ca-pub-1504999187644497",
         },
@@ -31,7 +31,7 @@ export const generateMetadata = (): Metadata => {
         description,
         keywords,
 
-        authors: [{ name: "FastSave", url: "https://fast-save.vercel.app/snapchat" }],
+        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/snapchat` }],
         publisher: "FastSave",
         creator: "FastSave",
         robots: {
@@ -43,10 +43,10 @@ export const generateMetadata = (): Metadata => {
         },
 
         alternates: {
-            canonical: "https://fast-save.vercel.app/snapchat",
+            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/snapchat`,
             types: {
-                "application/rss+xml": "https://fast-save.vercel.app/feed.xml",
-                "application/atom+xml": "https://fast-save.vercel.app/feed.xml",
+                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
+                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
             },
         },
 
@@ -54,7 +54,7 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             type: "website",
-            url: "https://fast-save.vercel.app/snapchat",
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/snapchat`,
             siteName: "FastSave",
             locale: "en_IN",
             images: [

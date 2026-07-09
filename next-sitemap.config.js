@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: 'https://fast-save.vercel.app',
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://fast-save.vercel.app',
   generateRobotsTxt: true,
   changefreq: 'weekly',
   priority: 0.7,

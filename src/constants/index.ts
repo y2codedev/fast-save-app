@@ -31,6 +31,7 @@ import VideoTrimmer from '@/components/sections/VideoTrimmer';
 
 export type { SocialLink, LegalLink, FooterProps } from './types';
 export { DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS, FEATURES } from './data';
+export { SITE_URL } from './config';
 
 export {
     HeroSection,
