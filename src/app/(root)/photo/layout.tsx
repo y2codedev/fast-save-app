@@ -55,10 +55,10 @@ export const generateMetadata = (): Metadata => {
             locale: "en_IN",
             images: [
                 {
-                    url: "/images/photo.webp",
+                    url: "/images/photo-converter.png",
                     width: 1200,
                     height: 630,
-                    alt: "FastSave Image Format Converter",
+                    alt: "FastSave Photo Converter",
                 },
             ],
         },
@@ -66,7 +66,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/photo.webp"],
+            images: ["/images/photo-converter.png"],
             creator: "@fastsaveapp",
             site: "@fastsaveapp",
             creatorId: "fastsaveapp",

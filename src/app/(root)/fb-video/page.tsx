@@ -57,7 +57,7 @@ export const generateMetadata = (): Metadata => {
             locale: "en_IN",
             images: [
                 {
-                    url: "/images/facebook.webp",
+                    url: "/images/facebook.png",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Facebook Video Downloader",
@@ -68,7 +68,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/facebook.webp"],
+            images: ["/images/facebook.png"],
             creator: "@fastsaveapp",
             site: "@fastsaveapp",
             creatorId: "fastsaveapp",

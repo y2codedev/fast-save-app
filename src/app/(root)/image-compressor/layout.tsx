@@ -57,7 +57,7 @@ export const generateMetadata = (): Metadata => {
             locale: "en_IN",
             images: [
                 {
-                    url: "/images/image-compressor.webp",
+                    url: "/images/image-compressor.png",
                     width: 1200,
                     height: 630,
                     alt: "FastSave Image Compressor",
@@ -68,7 +68,7 @@ export const generateMetadata = (): Metadata => {
             card: "summary_large_image",
             title,
             description,
-            images: ["/images/image-compressor.webp"],
+            images: ["/images/image-compressor.png"],
             creator: "@fastsaveapp",
             site: "@fastsaveapp",
             creatorId: "fastsaveapp",
