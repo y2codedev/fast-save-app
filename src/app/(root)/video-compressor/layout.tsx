@@ -19,11 +19,11 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL("https://fast-save.vercel.app"),
+        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
         title,
         description,
         keywords,
-        authors: [{ name: "FastSave", url: "https://fast-save.vercel.app/video-compressor" }],
+        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/video-compressor` }],
         publisher: "FastSave",
         creator: "FastSave",
         robots: {
@@ -34,13 +34,13 @@ export const generateMetadata = (): Metadata => {
             "max-video-preview": "-1",
         },
         alternates: {
-            canonical: "https://fast-save.vercel.app/video-compressor",
+            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/video-compressor`,
         },
         openGraph: {
             title,
             description,
             type: "website",
-            url: "https://fast-save.vercel.app/video-compressor",
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/video-compressor`,
             siteName: "FastSave",
             locale: "en_IN",
             images: [

@@ -26,7 +26,7 @@ export const generateMetadata = (): Metadata => {
   ];
 
   return {
-    metadataBase: new URL("https://fast-save.vercel.app"),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`}`}`}`),
     other: {
       "google-adsense-account": "ca-pub-1504999187644497",
     },
@@ -48,8 +48,8 @@ export const generateMetadata = (): Metadata => {
     alternates: {
       canonical: "https://fast-save.vercel.app",
       types: {
-        "application/rss+xml": "https://fast-save.vercel.app/feed.xml",
-        "application/atom+xml": "https://fast-save.vercel.app/feed.xml",
+        "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
+        "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
       },
     },
 
