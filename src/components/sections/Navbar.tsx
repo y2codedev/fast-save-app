@@ -71,6 +71,8 @@ return (
         <div className="flex h-16 items-center justify-between">
           {/* Mobile Menu Button — show below 1024px */}
           <button
+            type="button"
+            aria-label="Open mobile menu"
             className="lg:hidden p-2 rounded-xl text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
             onClick={() => setMobileMenuOpen(true)}
           >
@@ -78,7 +80,7 @@ return (
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" aria-label="Home" className="flex items-center gap-3">
             <div className="w-10 h-10 flex items-center justify-center bg-gradient-to-br from-indigo-600 to-violet-600 rounded-xl">
               <Sparkles className="w-6 h-6 text-white" />
             </div>
@@ -123,6 +125,8 @@ return (
           {/* Actions */}
           <div className="flex items-center gap-2">
             <button
+              type="button"
+              aria-label="Toggle dark mode"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition"
             >
@@ -130,6 +134,8 @@ return (
             </button>
 
             <button
+              type="button"
+              aria-label="Share website"
               onClick={() => setIsOpen(true)}
               className="p-2 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition"
             >
@@ -175,6 +181,8 @@ return (
                 </Link>
 
                 <button
+                  type="button"
+                  aria-label="Close mobile menu"
                   className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
                   onClick={() => setMobileMenuOpen(false)}
                 >

@@ -28,7 +28,7 @@ export default function HeroSection() {
   return (
     <div className="relative px-4">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-100/50 via-transparent to-transparent dark:from-indigo-900/20"></div>
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-100/50 via-transparent to-transparent dark:from-indigo-900/20 -z-10 pointer-events-none"></div>
       
       <div className='relative py-12 md:py-20'>
         {/* Dynamic Title */}
