@@ -16,12 +16,15 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
 
   useEffect(() => {
     if (inView && clientId && !isDevelopment) {
-      try {
-        (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-        (window as any).adsbygoogle.push({});
-      } catch (e) {
-        console.error('Error loading AdSense:', e);
-      }
+      const timer = setTimeout(() => {
+        try {
+          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+          (window as any).adsbygoogle.push({});
+        } catch (e) {
+          console.error('Error loading AdSense:', e);
+        }
+      }, 2500); // 2.5s delay to prevent AdSense from ruining Mobile PageSpeed
+      return () => clearTimeout(timer);
     }
   }, [inView, clientId, isDevelopment])
 
