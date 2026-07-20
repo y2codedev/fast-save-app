@@ -1,4 +1,6 @@
-import React, { forwardRef } from 'react';
+"use client";
+
+import React, { forwardRef, useState, DragEvent } from 'react';
 import { FiUploadCloud } from 'react-icons/fi';
 
 interface FileUploadAreaProps {
@@ -9,9 +11,41 @@ interface FileUploadAreaProps {
 
 const FileUploadArea = forwardRef<HTMLInputElement, FileUploadAreaProps>(
     ({ onFileUpload, loading, subtitle = "PNG or JPG to SVG (MAX. 5MB)" }, ref) => {
+        const [isDragActive, setIsDragActive] = useState(false);
+
+        const handleDragOver = (e: DragEvent<HTMLLabelElement>) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!isDragActive) setIsDragActive(true);
+        };
+
+        const handleDragLeave = (e: DragEvent<HTMLLabelElement>) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsDragActive(false);
+        };
+
+        const handleDrop = (e: DragEvent<HTMLLabelElement>) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsDragActive(false);
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                onFileUpload(e.dataTransfer.files[0]);
+            }
+        };
+
         return (
             <div className="mb-6">
-                <label className="flex flex-col items-center justify-center w-full sm:h-96 h-72 border-2 border-dashed dark:hover:border-indigo-600 hover:border-indigo-600 border-gray-300 dark:border-gray-600 rounded-xl cursor-pointer bg-gray-50 dark:bg-gray-800 transition-colors">
+                <label 
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    onDrop={handleDrop}
+                    className={`flex flex-col items-center justify-center w-full sm:h-96 h-72 border-2 border-dashed rounded-xl cursor-pointer transition-colors ${
+                        isDragActive 
+                            ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10' 
+                            : 'border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 hover:border-indigo-600 dark:hover:border-indigo-600'
+                    }`}
+                >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                         <div className="flex justify-center text-6xl text-gray-400">
                             <FiUploadCloud />

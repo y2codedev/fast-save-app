@@ -59,6 +59,7 @@ export default function ImageToPdfConverter() {
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [conversionStep, setConversionStep] = useState<'upload' | 'convert' | 'complete'>('upload');
+  const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   // PDF Settings State
@@ -120,6 +121,32 @@ export default function ImageToPdfConverter() {
       
       setPdfImages(prev => [...prev, ...newPdfImages]);
       setConversionStep('convert');
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isDragActive) setIsDragActive(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragActive(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      // Create a mock event object to reuse handleFileChange
+      const mockEvent = {
+        target: { files: e.dataTransfer.files }
+      } as React.ChangeEvent<HTMLInputElement>;
+      handleFileChange(mockEvent);
     }
   };
 
@@ -285,8 +312,15 @@ export default function ImageToPdfConverter() {
                 
               {pdfImages.length === 0 ? (
                 <div 
-                  className="border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 border-gray-300 hover:border-indigo-500 bg-gray-50 hover:bg-indigo-50 dark:border-gray-600 dark:bg-gray-800/50 cursor-pointer flex-1 flex flex-col items-center justify-center min-h-[300px]"
+                  className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer flex-1 flex flex-col items-center justify-center min-h-[300px] ${
+                    isDragActive 
+                      ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10' 
+                      : 'border-gray-300 hover:border-indigo-500 bg-gray-50 hover:bg-indigo-50 dark:border-gray-600 dark:bg-gray-800/50'
+                  }`}
                   onClick={() => fileInputRef.current?.click()}
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
                 >
                   <div className="bg-white dark:bg-gray-700 p-4 rounded-full shadow-sm mb-4 inline-block">
                     <FiUpload className="h-8 w-8 text-indigo-500" />
