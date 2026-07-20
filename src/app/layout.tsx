@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import NextTopLoader from 'nextjs-toploader';
 import { Suspense } from 'react';
 import { Navbar, Footer, FallbackLoader, ThemeProviderWrapper, ToastProvider, AdsenseAd } from "@/constants";
 import { Inter } from "next/font/google";
@@ -102,6 +103,17 @@ export default function RootLayout({
   </head>
   <body>
         <ThemeProviderWrapper>
+          <NextTopLoader
+            color="#4f46e5"
+            initialPosition={0.08}
+            crawlSpeed={200}
+            height={3}
+            crawl={true}
+            showSpinner={false}
+            easing="ease"
+            speed={200}
+            shadow="0 0 10px #4f46e5,0 0 5px #4f46e5"
+          />
           <Navbar />
           <div className="mx-auto max-w-7xl px-4 mt-4">
             <AdsenseAd height="min-h-[50px] md:min-h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="rounded-xl" />

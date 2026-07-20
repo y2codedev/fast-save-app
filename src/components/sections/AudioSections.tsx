@@ -404,6 +404,13 @@ function VideoToAudioConverter() {
               <FiScissors className="w-4 h-4" />
               Video Trimmer
             </Link>
+            <Link 
+              href="/audio-trimmer" 
+              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
+            >
+              <FiScissors className="w-4 h-4" />
+              Audio Trimmer
+            </Link>
           </div>
         </motion.div>
       </div>

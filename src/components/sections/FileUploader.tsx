@@ -7,9 +7,18 @@ import { useCallback } from "react";
 interface FileUploaderProps {
   videoFile: File | null;
   handleFileChange: (file: File) => void;
+  accept?: Record<string, string[]>;
+  title?: string;
+  subtitle?: string;
 }
 
-export function FileUploader({ videoFile, handleFileChange }: FileUploaderProps) {
+export function FileUploader({ 
+  videoFile, 
+  handleFileChange,
+  accept = { 'video/*': [] },
+  title = "Select Video File",
+  subtitle = "MP4, WebM, AVI, MOV (Max 100MB)"
+}: FileUploaderProps) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       handleFileChange(acceptedFiles[0]); 
@@ -19,14 +28,14 @@ export function FileUploader({ videoFile, handleFileChange }: FileUploaderProps)
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
-    accept: { 'video/*': [] },
+    accept: accept,
     maxSize: 100 * 1024 * 1024, 
   });
 
   return (
     <div className="mb-6">
       <label className="block sm:text-sm text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">
-        Select Video File
+        {title}
       </label>
 
       <div
@@ -55,7 +64,7 @@ export function FileUploader({ videoFile, handleFileChange }: FileUploaderProps)
           </p>
 
           <p className="text-xs text-gray-400 dark:text-gray-500">
-            MP4, WebM, AVI, MOV (Max 100MB)
+            {subtitle}
           </p>
         </div>
       </div>

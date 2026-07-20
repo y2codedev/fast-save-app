@@ -61,12 +61,14 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                                 {data?.title || 'No title available'}
                             </p>
                         </div>
-                        <div>
-                            <h4 className="text-sm font-medium text-gray-500 dark:text-gray-200">Description</h4>
-                            <p className="text-sm text-gray-400 dark:text-gray-400 line-clamp-6">
-                                {data?.description || 'No description available'}
-                            </p>
-                        </div>
+                        {data?.description && (
+                            <div>
+                                <h4 className="text-sm font-medium text-gray-500 dark:text-gray-200">Description</h4>
+                                <p className="text-sm text-gray-400 dark:text-gray-400 line-clamp-6">
+                                    {data?.description || 'No description available'}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </div>
 

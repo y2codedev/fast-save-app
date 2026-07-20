@@ -3,6 +3,7 @@
 import { AdsenseAd, TopText, DownloadForm } from '@/constants';
 import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -63,13 +64,13 @@ export default function HeroSection() {
           viewport={{ once: true, margin: "-100px" }}
         >
           {[
-            {
-              href: "/fb-video",
-              icon: Facebook,
-              title: "FB Downloader",
-              description: "Save public Facebook videos directly to your device.",
-              color: "cyan"
-            },
+            // {
+            //   href: "/fb-video",
+            //   icon: Facebook,
+            //   title: "FB Downloader",
+            //   description: "Save public Facebook videos directly to your device.",
+            //   color: "cyan"
+            // },
             // {
             //   href: "/snapchat",
             //   icon: Smartphone,
@@ -108,9 +109,16 @@ export default function HeroSection() {
             {
               href: "/audio",
               icon: Music,
-              title: "Video to MP3",
+              title: "Video to Audio",
               description: "Extract high-quality audio from any video instantly.",
               color: "fuchsia"
+            },
+            {
+              href: "/audio-trimmer",
+              icon: Scissors,
+              title: "Audio Trimmer",
+              description: "Cut and trim audio files instantly.",
+              color: "cyan"
             },
             {
               href: "/video-to-gif",
@@ -127,6 +135,7 @@ export default function HeroSection() {
               color: "rose"
             },
             
+            
           ].map((tool, index) => {
             // Map colors to tailwind classes
             const colorClasses: Record<string, any> = {
@@ -142,19 +151,23 @@ export default function HeroSection() {
             const c = colorClasses[tool.color];
 
             return (
-              <motion.a 
+              <motion.div 
                 key={index}
-                variants={itemVariants} 
-                href={tool.href} 
-                className="relative group flex flex-col items-center text-center bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-white/40 dark:border-gray-700/50 overflow-hidden"
+                variants={itemVariants}
+                className="flex"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                <div className={`relative z-10 mb-5 ${c.text} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 ${c.bg} p-4 rounded-2xl`}>
-                  <tool.icon className="h-10 w-10" strokeWidth={1.5} />
-                </div>
-                <h3 className="relative z-10 text-lg font-bold text-gray-900 dark:text-white mb-2">{tool.title}</h3>
-                <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
-              </motion.a>
+                <Link
+                  href={tool.href} 
+                  className="relative group flex flex-col w-full items-center text-center bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl p-8 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-white/40 dark:border-gray-700/50 overflow-hidden"
+                >
+                  <div className={`absolute inset-0 bg-gradient-to-br ${c.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+                  <div className={`relative z-10 mb-5 ${c.text} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 ${c.bg} p-4 rounded-2xl`}>
+                    <tool.icon className="h-10 w-10" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="relative z-10 text-lg font-bold text-gray-900 dark:text-white mb-2">{tool.title}</h3>
+                  <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
+                </Link>
+              </motion.div>
             )
           })}
         </motion.div>
