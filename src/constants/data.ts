@@ -40,12 +40,12 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
         icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
-    {
-        id: 4,
-        href: '/fb-video',
-        icon: FaFacebook,
-        ariaLabel: 'FB Video',
-    },
+    // {
+    //     id: 4,
+    //     href: '/fb-video',
+    //     icon: FaFacebook,
+    //     ariaLabel: 'FB Video',
+    // },
     {
         id: 5,
         href: '/bg-remover',
@@ -58,12 +58,12 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
-    {
-        id: 7,
-        href: '/snapchat',
-        icon: FaSnapchat,
-        ariaLabel: 'Snapchat'
-    },
+    // {
+    //     id: 7,
+    //     href: '/snapchat',
+    //     icon: FaSnapchat,
+    //     ariaLabel: 'Snapchat'
+    // },
 
 ];
 
@@ -162,12 +162,12 @@ export const STEP: Step[] = [
 ]
 
 export const NAVITEMS: SocialLink[] = [
-    {
-        id: 1,
-        href: '/fb-video',
-        icon: FaFacebook,
-        ariaLabel: 'Facebook',
-    },
+    // {
+    //     id: 1,
+    //     href: '/fb-video',
+    //     icon: FaFacebook,
+    //     ariaLabel: 'Facebook',
+    // },
     // {
     //     id: 2,
     //     href: '/snapchat',
@@ -210,7 +210,6 @@ export const NAVITEMS: SocialLink[] = [
         icon: FilmIcon,
         ariaLabel: 'Video to GIF'
     },
-
 ];
 
 
@@ -292,5 +291,11 @@ export const TopHeader_Item: TopHeaderItem[] = [
         title: 'Video Trimmer',
         description: 'Cut and trim video clips instantly',
         highlight: 'Video Trimmer'
+    },
+    {
+        path: '/audio-trimmer',
+        title: 'Audio Trimmer',
+        description: 'Cut and trim MP3 audio files instantly',
+        highlight: 'Audio Trimmer'
     }
 ]
