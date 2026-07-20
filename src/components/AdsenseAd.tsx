@@ -48,7 +48,7 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
       ref={ref}
       className={`relative w-full ${height} ${className} flex flex-col justify-center items-center bg-gray-50/50 dark:bg-gray-900/50 overflow-hidden`}
     >
-      <span className="absolute top-0 left-0 bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 text-[10px] px-2 py-0.5 rounded-br-lg z-10 opacity-70">
+      <span className="absolute top-0 left-0 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 text-[10px] px-2 py-0.5 rounded-br-lg z-10 opacity-80">
         Advertisement
       </span>
       
