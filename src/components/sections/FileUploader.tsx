@@ -19,9 +19,12 @@ export function FileUploader({
   title = "Select Video File",
   subtitle = "MP4, WebM, AVI, MOV (Max 100MB)"
 }: FileUploaderProps) {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
+  const onDrop = useCallback((acceptedFiles: File[], fileRejections: any[]) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       handleFileChange(acceptedFiles[0]); 
+    } else if (fileRejections && fileRejections.length > 0) {
+      // Sometimes OS drag and drop fails MIME type checks in react-dropzone
+      handleFileChange(fileRejections[0].file);
     }
   }, [handleFileChange]);
 

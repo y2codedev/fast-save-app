@@ -97,7 +97,7 @@ export default function RootLayout({
   <head>
     <Script
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       crossOrigin="anonymous"
     />
   </head>

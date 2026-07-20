@@ -32,8 +32,16 @@ export default function Home() {
         }
     }, [original, compressed])
 
-    const handleFileChange = async () => {
-        const file = fileRef.current?.files?.[0]
+    const handleFileChange = async (droppedFile?: File | React.ChangeEvent<HTMLInputElement>) => {
+        // Handle both File objects (from drag & drop) and ChangeEvents (just in case)
+        let file: File | undefined = undefined;
+        
+        if (droppedFile instanceof File) {
+            file = droppedFile;
+        } else {
+            file = fileRef.current?.files?.[0];
+        }
+
         if (!file) return
 
         if (original?.src) URL.revokeObjectURL(original.src)
