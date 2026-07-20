@@ -34,6 +34,9 @@ function SortableImageItem({ img, index, removeImage }: { img: PdfImage, index: 
       {...listeners}
     >
       <button 
+        type="button"
+        aria-label="Remove image"
+        title="Remove image"
         onPointerDown={(e) => e.stopPropagation()}
         onClick={(e) => { e.stopPropagation(); removeImage(img.id); }}
         className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-gray-800/90 text-gray-500 hover:text-red-500 p-1.5 rounded-full shadow-sm hover:shadow-md transition-all opacity-0 group-hover:opacity-100"
