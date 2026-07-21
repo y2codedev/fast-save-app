@@ -2,32 +2,37 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NextTopLoader from 'nextjs-toploader';
 import { Suspense } from 'react';
-import { Navbar, Footer, FallbackLoader, ThemeProviderWrapper, ToastProvider, AdsenseAd } from "@/constants";
+import Navbar from "@/components/sections/Navbar";
+import Footer from "@/components/sections/Footer";
+import FallbackLoader from "@/components/ui/FallbackLoader";
+import ThemeProviderWrapper from "@/components/sections/ThemeProviderWrapper";
+import ToastProvider from "@/components/sections/ToastProvider";
+import AdsenseAd from "@/components/AdsenseAd";
 import { Inter } from "next/font/google";
 import GA from "@/components/image-converter/GA";
 import { ExampleUsage } from "@/components/sections/SchemaMarkup";
 import Script from "next/script";
 import Head from "next/head";
 export const generateMetadata = (): Metadata => {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app";
+  const title = "FastSave - Free Online Media & PDF Tools";
 
-  const title = "FastSave Instagram Reels Downloader – Save Reels in HD";
-
-  const description = "Download Instagram Reels in HD with FastSave. No watermark, no login, 100% free. Save public Reels as MP4 videos in seconds.";
+  const description = "Edit, convert, compress, and merge PDFs, Videos, Images, and Audio instantly in your browser. 100% free, secure, and privacy-focused media suite.";
   const keywords = [
-    "Instagram Reels Downloader",
-    "Download Instagram Reels",
-    "IG Reels to MP4",
-    "Save Instagram Reels",
-    "No Watermark Reels Download",
-    "Fast Instagram Downloader",
-    "Reels Video Saver",
-    "Online Reels Downloader",
-    "IG Reels Grabber",
-    "Free IG Reels Tool"
+    "Online Media Tools",
+    "PDF Converter",
+    "Merge PDF Online",
+    "Video Compressor",
+    "Video to Audio",
+    "Background Remover",
+    "Image Converter",
+    "Free PDF Tools",
+    "Online Video Editor",
+    "FastSave Suite"
   ];
 
   return {
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`}`}`}`),
+    metadataBase: new URL(siteUrl),
     other: {
       "google-adsense-account": "ca-pub-1504999187644497",
     },
@@ -35,7 +40,7 @@ export const generateMetadata = (): Metadata => {
     description: description,
     keywords: keywords,
 
-    authors: [{ name: "FastSave", url: "https://fast-save.vercel.app" }],
+    authors: [{ name: "FastSave", url: siteUrl }],
     publisher: "FastSave",
     creator: "FastSave",
     robots: {
@@ -47,10 +52,10 @@ export const generateMetadata = (): Metadata => {
     },
 
     alternates: {
-      canonical: "https://fast-save.vercel.app",
+      canonical: siteUrl,
       types: {
-        "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-        "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
+        "application/rss+xml": `${siteUrl}/feed.xml`,
+        "application/atom+xml": `${siteUrl}/feed.xml`,
       },
     },
 
@@ -58,15 +63,15 @@ export const generateMetadata = (): Metadata => {
       title: title,
       description: description,
       type: "website",
-      url: "https://fast-save.vercel.app",
+      url: siteUrl,
       siteName: "FastSave",
       locale: "en_IN",
       images: [
         {
-          url: "/images/insta.png",
+          url: "/images/home-og.png",
           width: 1200,
           height: 630,
-          alt: "FastSave - Social Media Downloader",
+          alt: "FastSave - All-in-One Media & PDF Suite",
         },
       ],
     },
@@ -74,14 +79,14 @@ export const generateMetadata = (): Metadata => {
       card: "summary_large_image",
       title: title,
       description: description,
-      images: ["/images/insta.png"],
+      images: ["/images/home-og.png"],
       creator: "@fastsaveapp",
       site: "@fastsaveapp",
       creatorId: "fastsaveapp",
       siteId: "fastsaveapp",
     },
     category: "Technology",
-    applicationName: "FastSave - Instagram Reels Downloader",
+    applicationName: "FastSave - Media & PDF Suite",
 
   };
 };
@@ -129,7 +134,7 @@ export default function RootLayout({
           />
           <Navbar />
           <div className="mx-auto max-w-7xl px-4 mt-4">
-            <AdsenseAd height="min-h-[50px] md:min-h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="rounded-xl" />
+            <AdsenseAd height="h-[50px] md:h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="rounded-xl" />
           </div>
           < ExampleUsage />
           <Suspense fallback={<FallbackLoader />}>

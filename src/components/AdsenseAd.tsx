@@ -31,9 +31,9 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
   // Always show a clean placeholder in local development to avoid ugly iframe errors
   if (isDevelopment) {
     return (
-      <div className={`w-full ${height} ${className} flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800/50 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl`}>
-        <span className="text-gray-500 dark:text-gray-400 font-medium">Advertisement Placeholder</span>
-        <span className="text-xs text-gray-400 dark:text-gray-500 mt-1">(Real ads will show in production)</span>
+      <div className={`w-full ${height} ${className} flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-800/50 border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-xl p-2`}>
+        <span className="text-gray-500 dark:text-gray-400 font-medium text-center">Advertisement Placeholder</span>
+        <span className="text-xs text-gray-400 dark:text-gray-500 mt-2 text-center leading-tight">(Real ads will show in production)</span>
       </div>
     )
   }

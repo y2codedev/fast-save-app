@@ -13,8 +13,10 @@ function VideoCompressor() {
   const [progress, setProgress] = useState(0);
   const [compressedVideoURL, setCompressedVideoURL] = useState<string | null>(null);
   const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [duration, setDuration] = useState<number | null>(null);
   const [compressedSize, setCompressedSize] = useState<number | null>(null);
   const [conversionStep, setConversionStep] = useState<'upload' | 'convert' | 'complete'>('upload');
+  const [compressionLevel, setCompressionLevel] = useState<'light' | 'balanced' | 'strong'>('balanced');
   const messageRef = useRef<HTMLParagraphElement | null>(null);
 
   const loadFFmpeg = async () => {
@@ -51,6 +53,15 @@ function VideoCompressor() {
     setProgress(0);
     setCompressedSize(null);
     setConversionStep('convert');
+
+    // Extract duration to calculate original bitrate
+    const videoElement = document.createElement('video');
+    videoElement.preload = 'metadata';
+    videoElement.onloadedmetadata = () => {
+      setDuration(videoElement.duration);
+      URL.revokeObjectURL(videoElement.src);
+    };
+    videoElement.src = URL.createObjectURL(file);
   };
 
   const compressVideo = async () => {
@@ -64,14 +75,42 @@ function VideoCompressor() {
       const { fetchFile } = await import("@ffmpeg/util");
       await ffmpeg.writeFile("input.mp4", await fetchFile(videoFile));
       
-      // Compress command: using ultrafast preset for browser speed, and CRF 28 for good compression
-      await ffmpeg.exec([
-        "-i", "input.mp4", 
-        "-vcodec", "libx264", 
-        "-preset", "ultrafast", 
-        "-crf", "28", 
-        "output.mp4"
-      ]);
+      let ffmpegArgs = ["-i", "input.mp4"];
+
+      if (duration && duration > 0) {
+        const originalBitrate = (videoFile.size * 8) / duration; // bps
+        let targetRatio = 0.5;
+        if (compressionLevel === 'light') targetRatio = 0.7;
+        if (compressionLevel === 'strong') targetRatio = 0.3;
+
+        const targetTotalBitrate = originalBitrate * targetRatio;
+        const audioBitrate = Math.min(128000, targetTotalBitrate * 0.2); // max 128k audio
+        const videoBitrate = targetTotalBitrate - audioBitrate;
+
+        ffmpegArgs.push(
+          "-vcodec", "libx264", 
+          "-preset", "ultrafast", 
+          "-b:v", `${Math.round(videoBitrate)}`, 
+          "-maxrate", `${Math.round(videoBitrate * 1.5)}`, // Allows minor spikes
+          "-bufsize", `${Math.round(videoBitrate * 2)}`,
+          "-acodec", "aac",
+          "-b:a", `${Math.round(audioBitrate)}`,
+          "output.mp4"
+        );
+      } else {
+        // Fallback if duration extraction fails
+        ffmpegArgs.push(
+          "-vcodec", "libx264", 
+          "-preset", "ultrafast", 
+          "-crf", "32", 
+          "-vf", "scale='min(1280,iw)':-2",
+          "-acodec", "aac",
+          "-b:a", "128k",
+          "output.mp4"
+        );
+      }
+
+      await ffmpeg.exec(ffmpegArgs);
 
       const data: any = await ffmpeg.readFile("output.mp4");
       const videoBlob = new Blob([data], { type: "video/mp4" });
@@ -252,6 +291,26 @@ function VideoCompressor() {
                       </div>
                     </div>
 
+                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm">
+                      <p className="font-semibold text-gray-900 dark:text-white mb-3">Target Compression</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {[
+                          { id: 'light', label: 'Light', desc: '~30% Smaller' },
+                          { id: 'balanced', label: 'Balanced', desc: '~50% Smaller' },
+                          { id: 'strong', label: 'Strong', desc: '~70% Smaller' },
+                        ].map(level => (
+                          <button
+                            key={level.id}
+                            onClick={() => setCompressionLevel(level.id as any)}
+                            className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all duration-300 ${compressionLevel === level.id ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 shadow-sm' : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+                          >
+                            <span className="font-bold text-sm">{level.label}</span>
+                            <span className="text-xs mt-1 opacity-80">{level.desc}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
                     {isLoading && progress > 0 && (
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -269,20 +328,31 @@ function VideoCompressor() {
                     
                     <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono line-clamp-2"></p>
 
-                    <Button
-                      onClick={compressVideo}
-                      isProcessing={isLoading}
-                      label={isLoading ? "Compressing Video..." : "Compress Video Now"}
-                      className="w-full justify-center"
-                    />
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        onClick={compressVideo}
+                        disabled={isLoading}
+                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
+                      >
+                        {isLoading ? (
+                            <>
+                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                Compressing...
+                            </>
+                        ) : (
+                            "Compress Video Now"
+                        )}
+                      </button>
 
-                    <button
-                      onClick={resetConverter}
-                      disabled={isLoading}
-                      className="w-full text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200 disabled:opacity-50"
-                    >
-                      Choose different file
-                    </button>
+                      <button
+                        onClick={resetConverter}
+                        disabled={isLoading}
+                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <FiUpload className="w-4 h-4" />
+                        Choose Different File
+                      </button>
+                    </div>
                   </motion.div>
                 )}
 
@@ -312,8 +382,11 @@ function VideoCompressor() {
                             </div>
                           </div>
                           {compressedSize && (
-                            <p className="text-sm text-green-700 dark:text-green-300 mt-3 font-medium">
-                              Saved {Math.round((1 - compressedSize / videoFile!.size) * 100)}% of file size!
+                            <p className={`text-sm mt-3 font-medium ${compressedSize > videoFile!.size ? 'text-orange-600 dark:text-orange-400' : 'text-green-700 dark:text-green-300'}`}>
+                              {compressedSize > videoFile!.size 
+                                ? `File size increased by ${Math.round((compressedSize / videoFile!.size - 1) * 100)}% (Original was already highly optimized)`
+                                : `Saved ${Math.round((1 - compressedSize / videoFile!.size) * 100)}% of file size!`
+                              }
                             </p>
                           )}
                         </div>

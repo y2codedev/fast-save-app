@@ -16,6 +16,7 @@ function VideoTrimmer() {
   const [duration, setDuration] = useState<number>(0);
   const [startTime, setStartTime] = useState<number>(0);
   const [endTime, setEndTime] = useState<number>(100);
+  const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   
   const [conversionStep, setConversionStep] = useState<'upload' | 'trim' | 'complete'>('upload');
@@ -65,9 +66,12 @@ function VideoTrimmer() {
   };
 
   const handleTimeUpdate = () => {
-    if (videoRef.current && isPlaying) {
-      if (videoRef.current.currentTime >= endTime) {
-        videoRef.current.currentTime = startTime;
+    if (videoRef.current) {
+      setCurrentTime(videoRef.current.currentTime);
+      if (isPlaying) {
+        if (videoRef.current.currentTime >= endTime) {
+          videoRef.current.currentTime = startTime;
+        }
       }
     }
   };
@@ -79,6 +83,7 @@ function VideoTrimmer() {
       setStartTime(val);
       if (videoRef.current) {
         videoRef.current.currentTime = val;
+        setCurrentTime(val);
       }
     }
   };
@@ -87,9 +92,6 @@ function VideoTrimmer() {
     const val = Number(e.target.value);
     if (val > startTime + 0.5) {
       setEndTime(val);
-      if (videoRef.current) {
-        videoRef.current.currentTime = val;
-      }
     }
   };
 
@@ -233,44 +235,57 @@ function VideoTrimmer() {
                    <div 
                      className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500"
                      style={{ 
-                       left: `${(startTime / duration) * 100}%`,
-                       right: `${100 - (endTime / duration) * 100}%`
+                       left: `${duration > 0 ? (startTime / duration) * 100 : 0}%`,
+                       right: `${duration > 0 ? 100 - (endTime / duration) * 100 : 100}%`
                      }}
                    ></div>
                 </div>
+
+                {/* Moving Playhead Vertical Line */}
+                {duration > 0 && (
+                  <div 
+                    className="absolute h-8 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] z-30 pointer-events-none transform -translate-x-1/2 flex items-center justify-center transition-all duration-75"
+                    style={{ left: `${(currentTime / duration) * 100}%` }}
+                  >
+                    {/* Playhead Dot */}
+                    <div className="absolute -top-1 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_4px_rgba(0,0,0,0.5)]"></div>
+                    <div className="absolute -bottom-1 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_4px_rgba(0,0,0,0.5)]"></div>
+                  </div>
+                )}
 
                 {/* Invisible Inputs for native slider logic */}
                 <input 
                   type="range"
                   min={0}
-                  max={duration}
+                  max={duration || 1}
                   step={0.1}
                   value={startTime}
                   onChange={handleStartChange}
                   className="absolute w-full h-4 appearance-none pointer-events-none opacity-0 z-20"
-                  style={{ /* Standard CSS hack to make thumbs clickable */ }}
+                  style={{ WebkitAppearance: 'none' }}
                 />
                 <input 
                   type="range"
                   min={0}
-                  max={duration}
+                  max={duration || 1}
                   step={0.1}
                   value={endTime}
                   onChange={handleEndChange}
                   className="absolute w-full h-4 appearance-none pointer-events-none opacity-0 z-20"
+                  style={{ WebkitAppearance: 'none' }}
                 />
 
                 {/* Custom Thumbs */}
                 <div 
                   className="absolute h-8 w-4 bg-indigo-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border border-indigo-400"
-                  style={{ left: `${(startTime / duration) * 100}%` }}
+                  style={{ left: `${duration > 0 ? (startTime / duration) * 100 : 0}%` }}
                 >
                   <div className="w-0.5 h-4 bg-white/50 rounded-full"></div>
                 </div>
                 
                 <div 
                   className="absolute h-8 w-4 bg-violet-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border border-violet-400"
-                  style={{ left: `${(endTime / duration) * 100}%` }}
+                  style={{ left: `${duration > 0 ? (endTime / duration) * 100 : 100}%` }}
                 >
                   <div className="w-0.5 h-4 bg-white/50 rounded-full"></div>
                 </div>

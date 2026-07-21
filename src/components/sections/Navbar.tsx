@@ -8,7 +8,7 @@ import { NAVITEMS } from '@/constants/data';
 import { useState, useEffect } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronRightIcon, Sparkles, Download, Image, Music, Zap } from 'lucide-react';
-import { ShareDialog } from '@/constants';
+import ShareDialog from '@/components/ui/ShareDialog';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {

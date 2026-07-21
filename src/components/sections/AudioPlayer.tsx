@@ -31,8 +31,8 @@ export function AudioPlayer({
                             sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                             loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6">
-                            <span className="text-white font-bold text-lg truncate drop-shadow-md">
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 overflow-hidden">
+                            <span className="text-white font-bold text-lg truncate block w-full drop-shadow-md" title={videoFile?.name}>
                                 {videoFile?.name.replace(/\.[^/.]+$/, "")}
                             </span>
                         </div>

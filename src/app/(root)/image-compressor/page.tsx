@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from 'react'
 import { Button, ErrorMessage, FileUploadArea, ImagePreview, Loader, ResetButton, StatsDisplay, AdsenseAd } from '@/constants'
 import { FiUpload, FiImage, FiDownload, FiZap, FiSave, FiBarChart2 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds'
 
 type ImageData = {
     src: string;
@@ -28,9 +29,14 @@ export default function Home() {
     useEffect(() => {
         return () => {
             if (original?.src) URL.revokeObjectURL(original.src)
+        }
+    }, [original?.src])
+
+    useEffect(() => {
+        return () => {
             if (compressed?.src) URL.revokeObjectURL(compressed.src)
         }
-    }, [original, compressed])
+    }, [compressed?.src])
 
     const handleFileChange = async (droppedFile?: File | React.ChangeEvent<HTMLInputElement>) => {
         // Handle both File objects (from drag & drop) and ChangeEvents (just in case)
@@ -191,7 +197,8 @@ export default function Home() {
     ]
 
     return (
-        <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <ToolLayoutWithAds>
+            <div className="py-8 px-4 sm:px-6 lg:px-8">
 
             <div className="relative max-w-7xl mx-auto">
                 {/* Header Section */}
@@ -253,7 +260,11 @@ export default function Home() {
                             exit={{ opacity: 0, y: -20 }}
                             className="mb-8"
                         >
-                            <StatsDisplay compressionRatio={compressionRatio} />
+                            <StatsDisplay 
+                                compressionRatio={compressionRatio} 
+                                originalSize={original?.size}
+                                compressedSize={compressed?.size}
+                            />
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -304,7 +315,7 @@ export default function Home() {
 
                             {/* Editor Mode Options */}
                             <AnimatePresence>
-                                {original && !loading && (
+                                {original && (
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: 'auto' }}
@@ -575,6 +586,7 @@ export default function Home() {
                     </div>
                 </motion.div>
             </div>
-        </main>
+          </div>
+        </ToolLayoutWithAds>
     )
 }

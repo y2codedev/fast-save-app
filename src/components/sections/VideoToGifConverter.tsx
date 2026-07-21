@@ -201,35 +201,48 @@ function VideoToGifConverter() {
                     exit={{ opacity: 0, y: -20 }}
                     className="space-y-6"
                   >
-                    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4">
-                      <div className="flex items-center gap-3">
-                        <FiVideo className="h-5 w-5 text-green-600" />
-                        <div>
+                    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 w-full">
+                      <div className="flex items-start sm:items-center gap-3">
+                        <FiVideo className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
+                        <div className="min-w-0 flex-1">
                           <p className="font-medium text-green-800 dark:text-green-200">
                             File Ready for GIF Conversion
                           </p>
-                          <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                            {videoFile.name} ({(videoFile.size / (1024 * 1024)).toFixed(2)} MB)
-                          </p>
+                          <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
+                            <span className="truncate block" title={videoFile.name}>{videoFile.name}</span>
+                            <span className="flex-shrink-0 whitespace-nowrap opacity-80">({(videoFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                          </div>
                         </div>
                       </div>
                     </div>
                     
                     <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono"></p>
 
-                    <Button
-                      onClick={convertToGif}
-                      isProcessing={isLoading}
-                      label={isLoading ? "Generating GIF..." : "Convert to GIF"}
-                      className="w-full justify-center"
-                    />
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        onClick={convertToGif}
+                        disabled={isLoading}
+                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
+                      >
+                        {isLoading ? (
+                            <>
+                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                Generating GIF...
+                            </>
+                        ) : (
+                            "Convert to GIF"
+                        )}
+                      </button>
 
-                    <button
-                      onClick={resetConverter}
-                      className="w-full text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200"
-                    >
-                      Choose different file
-                    </button>
+                      <button
+                        onClick={resetConverter}
+                        disabled={isLoading}
+                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        <FiUpload className="w-4 h-4" />
+                        Choose Different File
+                      </button>
+                    </div>
                   </motion.div>
                 )}
 

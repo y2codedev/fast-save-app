@@ -29,7 +29,6 @@ const extensions = {
     "ico",
     "tif",
     "tiff",
-    "svg",
     "raw",
     "tga",
   ],
@@ -173,7 +172,7 @@ export default function Dropzone() {
         file_name: file.name,
         file_size: file.size,
         from: file.name.slice(((file.name.lastIndexOf(".") - 1) >>> 0) + 2),
-        to: null,
+        to: file.type.includes("image") ? extensions.image[0] : file.type.includes("video") ? extensions.video[0] : extensions.audio[0],
         file_type: file.type,
         file,
         is_converted: false,
@@ -241,14 +240,78 @@ export default function Dropzone() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.3, delay: i * 0.1 }}
-              className="w-full py-4 space-y-2 lg:py-0 relative rounded-2xl border border-white/40 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md shadow-sm hover:shadow-md transition-all h-fit lg:h-24 px-4 lg:px-8 flex flex-wrap lg:flex-nowrap items-center justify-between overflow-hidden"
+              className={`w-full relative rounded-2xl border border-white/40 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md shadow-sm transition-all overflow-hidden ${
+                action.is_converted 
+                  ? "flex flex-col p-6 gap-6 hover:shadow-xl" 
+                  : "py-4 space-y-2 lg:py-0 h-fit lg:h-24 px-4 lg:px-8 flex flex-wrap lg:flex-nowrap items-center justify-between hover:shadow-md"
+              }`}
             >
-              {!is_loaded && (
-                <Skeleton className="h-full w-full -ml-8 absolute rounded-2xl" />
-              )}
+              {action.is_converted ? (
+                <div className="flex flex-col md:flex-row gap-6 w-full">
+                  {/* Left Side: Large Preview */}
+                  <div className="w-full md:w-1/2 bg-gray-100/50 dark:bg-gray-900/50 rounded-xl overflow-hidden relative aspect-video flex items-center justify-center border border-gray-200 dark:border-gray-700">
+                    {action.url && action.to && extensions.image.includes(action.to.toString()) ? (
+                      <img 
+                        src={action.url} 
+                        alt="Converted preview" 
+                        className="object-contain w-full h-full p-2"
+                      />
+                    ) : (
+                      <div className="text-6xl text-gray-400">
+                        {fileToIcon(action.to ? action.to.toString() : action.file_type)}
+                      </div>
+                    )}
+                    <div className="absolute top-3 right-3">
+                      <Badge variant="default" className="bg-emerald-500 hover:bg-emerald-600 shadow-md flex gap-1.5 items-center px-3 py-1 text-sm font-medium border-0">
+                        <MdDone className="w-4 h-4" /> Ready
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {/* Right Side: Details & Actions */}
+                  <div className="w-full md:w-1/2 flex flex-col justify-center space-y-6">
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white truncate">
+                        {compressFileName(action.output || action.file_name)}
+                      </h3>
+                      <p className="text-sm text-gray-500 dark:text-gray-400 mt-1.5 flex items-center gap-2">
+                        <span className="bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded text-xs font-semibold">{action.from?.toUpperCase()}</span>
+                        <span>→</span>
+                        <span className="bg-indigo-100 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300 px-2 py-0.5 rounded text-xs font-semibold">{action.to?.toUpperCase()}</span>
+                      </p>
+                    </div>
+                    
+                    <div className="flex flex-col sm:flex-row gap-3 mt-auto">
+                      <Button 
+                        size="lg"
+                        onClick={() => download(action)}
+                        className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white rounded-xl shadow-md transition-all hover:-translate-y-0.5 hover:shadow-lg h-12"
+                      >
+                        Download File
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="lg"
+                        onClick={() => deleteAction(action)}
+                        className="rounded-xl border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-900/20 dark:hover:text-red-400 flex-1 sm:flex-none h-12 transition-colors"
+                      >
+                        Remove
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  {!is_loaded && (
+                    <Skeleton className="h-full w-full -ml-8 absolute rounded-2xl" />
+                  )}
             <div className="flex gap-4 items-center">
-              <span className="text-2xl text-orange-600">
-                {fileToIcon(action.file_type)}
+              <span className="text-2xl text-orange-600 flex items-center justify-center">
+                {action.file_type.includes("image") ? (
+                  <img src={URL.createObjectURL(action.file)} alt="preview" className="h-10 w-10 object-cover rounded-md" />
+                ) : (
+                  fileToIcon(action.file_type)
+                )}
               </span>
               <div className="flex items-center gap-1 w-96">
                 <span className="text-md font-medium overflow-x-hidden">
@@ -264,11 +327,6 @@ export default function Dropzone() {
               <Badge variant="destructive" className="flex gap-2">
                 <span>Error Converting File</span>
                 <BiError />
-              </Badge>
-            ) : action.is_converted ? (
-              <Badge variant="default" className="flex gap-2 bg-green-500">
-                <span>Done</span>
-                <MdDone />
               </Badge>
             ) : action.is_converting ? (
               <Badge variant="default" className="flex gap-2">
@@ -289,7 +347,7 @@ export default function Dropzone() {
                     setSelected(value);
                     updateAction(action.file_name, value);
                   }}
-                  value={selcted}
+                  value={action.to ? action.to.toString() : ""}
                   className="w-32 px-3 py-1 rounded-md border bg-white text-gray-900 border-gray-300 bg-background text-muted-foreground text-sm font-medium focus:outline-none "
                 >
                   {/* <option value="" disabled className="rounded-md">
@@ -329,18 +387,13 @@ export default function Dropzone() {
 
               </div>
             )}
-
-            {action.is_converted ? (
-              <Button variant="outline" onClick={() => download(action)}>
-                Download
-              </Button>
-            ) : (
               <span
                 onClick={() => deleteAction(action)}
-                className="cursor-pointer hover:bg-muted rounded-full h-10 w-10 flex items-center justify-center text-2xl text-foreground"
+                className="cursor-pointer hover:bg-red-50 dark:hover:bg-red-900/20 text-gray-400 hover:text-red-500 rounded-full h-10 w-10 flex items-center justify-center text-2xl transition-colors"
               >
                 <MdClose />
               </span>
+            </>
             )}
           </motion.div>
         ))}

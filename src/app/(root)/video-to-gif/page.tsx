@@ -1,12 +1,13 @@
 import NoSSRWrapper from "@/components/sections/NoSSRWrapper";
 import VideoToGifConverter from "@/components/sections/VideoToGifConverter";
+import ToolLayoutWithAds from "@/components/sections/ToolLayoutWithAds";
 
 export default function Page() {
     return (
-        <main className="min-h-screen py-8">
+        <ToolLayoutWithAds>
             <NoSSRWrapper>
                 <VideoToGifConverter />
             </NoSSRWrapper>
-        </main>
+        </ToolLayoutWithAds>
     );
 }

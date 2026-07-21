@@ -1,7 +1,9 @@
 'use client';
 
-import { AdsenseAd, TopText, DownloadForm } from '@/constants';
-import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage } from 'lucide-react';
+import AdsenseAd from '@/components/AdsenseAd';
+import TopText from '@/components/sections/TopText';
+import DownloadForm from '@/components/sections/DownloadForm';
+import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage, FileText, Layers, ImagePlus } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
@@ -22,8 +24,12 @@ const itemVariants: Variants = {
   }
 };
 
-export default function HeroSection() {
+import { usePathname } from 'next/navigation';
+
+export default function HeroSection({ children }: { children?: React.ReactNode }) {
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
+  const pathName = usePathname();
+  const isHome = pathName === '/';
   
   return (
     <div className="relative px-4">
@@ -32,29 +38,34 @@ export default function HeroSection() {
       
       <div className='relative py-12 md:py-20'>
         {/* Dynamic Title */}
-        <TopText />
-        
-        {/* Form Container */}
-        <div className="mx-auto max-w-4xl mt-10">
-          <DownloadForm />
+        <div className="mt-8 mb-4">
+          <TopText />
         </div>
+        
+        {children && (
+          <div className="mx-auto max-w-4xl mt-10 relative z-20">
+            {children}
+          </div>
+        )}
         
         {/* Ad Section - Top */}
         <div className='mx-auto max-w-5xl pt-12 md:pt-16'>
-          <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
+          <AdsenseAd height="h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
         </div>
       </div>
 
-      {/* Premium Tool Grid (iLoveIMG Style) */}
+      {/* Premium Tool Grid */}
       <div className="relative mx-auto max-w-7xl pb-16 pt-4">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
-            Every tool you need for media editing
-          </h2>
-          <p className="text-base text-gray-500 dark:text-gray-400">
-            100% free online tools to edit, convert, and download media. No installation needed.
-          </p>
-        </div>
+        {!isHome && (
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
+              Explore more free tools
+            </h2>
+            <p className="text-base text-gray-500 dark:text-gray-400">
+              100% free online tools to edit, convert, and download media. No installation needed.
+            </p>
+          </div>
+        )}
 
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6"
@@ -79,7 +90,7 @@ export default function HeroSection() {
             //   color: "amber"
             // },
             {
-              href: "/photo",
+              href: "/ig-downloader",
               icon: Instagram,
               title: "IG Downloader",
               description: "Download HD Photos and Reels from Instagram.",
@@ -105,6 +116,27 @@ export default function HeroSection() {
               title: "Image to PDF",
               description: "Convert multiple images into a single PDF document easily.",
               color: "amber"
+            },
+             {
+              href: "/md-converter",
+              icon: FileText,
+              title: "MD to PDF & Word",
+              description: "Convert Markdown files to PDF or DOCX format securely.",
+              color: "indigo"
+            },
+            {
+              href: "/pdf-to-jpg",
+              icon: ImagePlus,
+              title: "PDF to JPG",
+              description: "Extract high-quality JPG images from any PDF document.",
+              color: "cyan"
+            },
+            {
+              href: "/merge-pdf",
+              icon: Layers,
+              title: "Merge PDF",
+              description: "Combine multiple PDF files into one single document.",
+              color: "rose"
             },
             {
               href: "/audio",
@@ -134,7 +166,7 @@ export default function HeroSection() {
               description: "Cut and trim video clips instantly without losing quality.",
               color: "rose"
             },
-            
+           
             
           ].map((tool, index) => {
             // Map colors to tailwind classes
@@ -196,10 +228,6 @@ export default function HeroSection() {
           ))}
         </motion.div>
 
-        {/* Ad Section - Bottom */}
-        <div className='mx-auto max-w-5xl pt-16'>
-          <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
-        </div>
       </div>
     </div>
   );
