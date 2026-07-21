@@ -209,7 +209,7 @@ export const NAVITEMS: SocialLink[] = [
         href: '/video-to-gif',
         icon: FilmIcon,
         ariaLabel: 'Video to GIF'
-    },
+    }
 ];
 
 
@@ -258,6 +258,12 @@ export const TopHeader_Item: TopHeaderItem[] = [
     },
     {
         path: '',
+        title: 'All Media & PDF Tools',
+        description: 'A collection of free, easy-to-use, and secure online tools to edit, convert, and manage your media and documents.',
+        highlight: 'Media & PDF Tools'
+    },
+    {
+        path: '/ig-downloader',
         title: 'Download Instagram Reels',
         description: 'Paste your Instagram Reel URL below to download the video without watermark',
         highlight: 'Instagram Reels'
@@ -297,5 +303,11 @@ export const TopHeader_Item: TopHeaderItem[] = [
         title: 'Audio Trimmer',
         description: 'Cut and trim MP3 audio files instantly',
         highlight: 'Audio Trimmer'
+    },
+    {
+        path: '/md-converter',
+        title: 'Markdown Converter',
+        description: 'Convert Markdown files to PDF or Word documents securely',
+        highlight: 'Markdown Converter'
     }
 ]

@@ -1,12 +1,14 @@
 import NoSSRWrapper from "@/components/sections/NoSSRWrapper";
 import ImageToPdfConverter from "@/components/sections/ImageToPdfConverter";
+import ToolLayoutWithAds from "@/components/sections/ToolLayoutWithAds";
+
 
 export default function Page() {
     return (
-        <main className="min-h-screen py-8">
+        <ToolLayoutWithAds>
             <NoSSRWrapper>
                 <ImageToPdfConverter />
             </NoSSRWrapper>
-        </main>
+        </ToolLayoutWithAds>
     );
 }

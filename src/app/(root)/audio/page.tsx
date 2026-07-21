@@ -1,5 +1,6 @@
 import NoSSRWrapper from "@/components/sections/NoSSRWrapper";
 import AudioSections from "@/components/sections/AudioSections";
+import ToolLayoutWithAds from "@/components/sections/ToolLayoutWithAds";
 import type { Metadata } from "next";
 
 export const generateMetadata = (): Metadata => {
@@ -80,10 +81,10 @@ export const generateMetadata = (): Metadata => {
 
 export default function Page() {
     return (
-        <main className="min-h-screen py-8">
+        <ToolLayoutWithAds>
             <NoSSRWrapper>
                 <AudioSections />
             </NoSSRWrapper>
-        </main>
+        </ToolLayoutWithAds>
     );
 }

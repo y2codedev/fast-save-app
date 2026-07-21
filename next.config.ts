@@ -12,6 +12,13 @@ const nextConfig: NextConfig = {
    typescript: {
     ignoreBuildErrors: true,  
   },
+  experimental: {
+    optimizePackageImports: ['@/constants', 'lucide-react', 'react-icons', '@heroicons/react'],
+  },
+  webpack: (config) => {
+    config.resolve.alias.canvas = false;
+    return config;
+  },
 };
 
 export default nextConfig;

@@ -84,6 +84,10 @@ export default function ImageToPdfConverter() {
         const newIndex = items.findIndex((item) => item.id === over.id);
         return arrayMove(items, oldIndex, newIndex);
       });
+      if (pdfUrl) {
+        setPdfUrl(null);
+        setConversionStep('convert');
+      }
     }
   };
 
@@ -123,6 +127,7 @@ export default function ImageToPdfConverter() {
       }
       
       setPdfImages(prev => [...prev, ...newPdfImages]);
+      setPdfUrl(null);
       setConversionStep('convert');
     }
   };
@@ -156,8 +161,11 @@ export default function ImageToPdfConverter() {
   const removeImage = (idToRemove: string) => {
     const updated = pdfImages.filter(img => img.id !== idToRemove);
     setPdfImages(updated);
+    setPdfUrl(null);
     if (updated.length === 0) {
       setConversionStep('upload');
+    } else {
+      setConversionStep('convert');
     }
   };
 
@@ -489,6 +497,18 @@ export default function ImageToPdfConverter() {
                       <FiDownload className="h-5 w-5" />
                       Download PDF
                     </a>
+                    
+                    <button
+                      onClick={() => {
+                        setPdfUrl(null);
+                        setConversionStep('convert');
+                      }}
+                      className="w-full inline-flex items-center justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"
+                    >
+                      <FiLayers className="h-5 w-5" />
+                      Edit Settings & Regenerate
+                    </button>
+
                     <button
                       onClick={resetConverter}
                       className="w-full inline-flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"

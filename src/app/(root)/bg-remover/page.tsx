@@ -6,6 +6,7 @@ import { useState, useRef, useEffect } from 'react'
 import { FiUpload, FiDownload, FiImage, FiCheckCircle, FiTrash2, FiZap } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkle } from "lucide-react";
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds'
 
 export default function BackgroundRemovalPage() {
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
@@ -97,7 +98,8 @@ export default function BackgroundRemovalPage() {
   ]
 
   return (
-    <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <ToolLayoutWithAds>
+      <div className="py-8 px-4 sm:px-6 lg:px-8">
 
       <div className="relative max-w-7xl mx-auto">
         {/* Header Section */}
@@ -413,6 +415,7 @@ export default function BackgroundRemovalPage() {
           </div>
         </motion.div>
       </div>
-    </main>
+     </div>
+    </ToolLayoutWithAds>
   )
 }

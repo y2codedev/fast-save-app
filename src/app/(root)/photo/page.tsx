@@ -7,6 +7,7 @@ import { FiImage, FiUpload, FiCode, FiZap, FiDownload, FiCheck } from 'react-ico
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import { AdsenseAd } from '@/constants'
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds'
 const Page = () => {
     const [activeTab, setActiveTab] = useState('dropzone');
     const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
@@ -45,7 +46,8 @@ const Page = () => {
     ];
 
     return (
-        <main className="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+        <ToolLayoutWithAds>
+            <div className="py-8 px-4 sm:px-6 lg:px-8">
 
             <div className="relative max-w-6xl mx-auto">
                 {/* Header Section */}
@@ -182,35 +184,9 @@ const Page = () => {
                     </div>
                 </motion.div>
 
-                {/* Explore Other Tools Section */}
-                <motion.div 
-                    className="mt-12 text-center"
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                    <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-8">
-                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                            Explore More Tools
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-                            Need more processing power? Check out our dedicated tools for background removal, media downloading, and image compression.
-                        </p>
-                        <div className="flex flex-wrap justify-center gap-4">
-                            <Link href="/bg-remover" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
-                                Background Remover
-                            </Link>
-                            <Link href="/image-compressor" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
-                                Image Compressor
-                            </Link>
-                            <Link href="/" className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-6 py-3 rounded-full font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
-                                Social Downloader
-                            </Link>
-                        </div>
-                    </div>
-                </motion.div>
             </div>
-        </main>
+          </div>
+        </ToolLayoutWithAds>
     )
 }
 
