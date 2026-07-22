@@ -1,89 +1,50 @@
-import type { Metadata } from "next";
+import { Metadata } from 'next';
+import React from 'react';
+import SchemaMarkup from '@/components/sections/SchemaMarkup';
 
-export const generateMetadata = (): Metadata => {
-    const title = "FastSave Image Compressor – Compress Images Without Quality Loss";
+const title = 'Compress Images Online Without Losing Quality - FastSave';
+const description = 'Reduce image file size instantly with our free image compressor. Compress JPG, PNG, WEBP without losing visible quality.';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
 
-    const description =
-        "Compress JPEG, PNG, WebP images online with FastSave Image Compressor. Fast, free, watermark-free, secure. Perfect for web, email & social sharing. No signup needed.";
-
-    const keywords = [
-        "Image Compressor",
-        "Compress Images Online",
-        "JPEG Compressor",
-        "PNG Compressor",
-        "WebP Compression",
-        "Reduce Image Size",
-        "Online Image Optimizer",
-        "Free Image Compressor",
-        "Lossless Compression Tool",
-        "Photo Compressor",
-    ];
-
-    return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
-        other: {
-            "google-adsense-account": "ca-pub-1504999187644497",
-        },
-        title,
-        description,
-        keywords,
-
-        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/image-compressor` }],
-        publisher: "FastSave",
-        creator: "FastSave",
-        robots: {
-            index: true,
-            follow: true,
-            nocache: false,
-            "max-image-preview": "large",
-            "max-video-preview": "-1",
-        },
-
-        alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/image-compressor`,
-            types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-            },
-        },
-
-
-        openGraph: {
-            title,
-            description,
-            type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/image-compressor`,
-            siteName: "FastSave",
-            locale: "en_IN",
-            images: [
-                {
-                    url: "/images/image-compressor.png",
-                    width: 1200,
-                    height: 630,
-                    alt: "FastSave Image Compressor",
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title,
-            description,
-            images: ["/images/image-compressor.png"],
-            creator: "@fastsaveapp",
-            site: "@fastsaveapp",
-            creatorId: "fastsaveapp",
-            siteId: "fastsaveapp",
-        },
-        category: "Technology",
-        applicationName: "FastSave - Image Compressor",
-    };
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: `${siteUrl}/image-compressor`,
+    siteName: 'FastSave',
+    locale: 'en_US',
+    type: 'website',
+    images: [{ url: '/images/image-compressor.png', width: 1200, height: 630 }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/images/image-compressor.png'],
+    site: '@fastsaveapp',
+    creator: '@fastsaveapp',
+  },
+  alternates: {
+    canonical: `${siteUrl}/image-compressor`,
+  }
 };
 
-export default function NestedLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <>
-            {children}
-        </>
-    );
-}
+const schemaData = {
+    '@context': 'https://schema.org' as const,
+    '@type': 'WebApplication' as const,
+    'name': 'Image Compressor Tool',
+    'description': description,
+    'applicationCategory': 'Multimedia' as const,
+    'operatingSystem': 'Web' as const,
+};
 
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <SchemaMarkup data={schemaData} />
+      {children}
+    </>
+  );
+}

@@ -1,86 +1,50 @@
-import type { Metadata } from "next";
+import { Metadata } from 'next';
+import React from 'react';
+import SchemaMarkup from '@/components/sections/SchemaMarkup';
 
-export const generateMetadata = (): Metadata => {
-    const title = "Image Converter – Convert PNG, JPG, WebP & More Instantly";
+const title = 'Image Converter & Photo Tools - FastSave';
+const description = 'Convert images between formats (JPG, PNG, WEBP, SVG) easily with our free online image converter.';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
 
-    const description =
-        "Convert PNG, JPG, WebP, SVG, and more quickly with FastSave Image Converter. Free, fast, secure, no watermarks. Supports batch conversion and all major formats.";
-
-    const keywords = [
-        "Image Converter",
-        "PNG to JPG",
-        "JPG to PNG",
-        "Convert WebP to PNG",
-        "JPEG to PNG",
-        "Image to WebP",
-        "Convert SVG to PNG",
-        "Free Photo Converter",
-        "High-Quality Image Conversion",
-    ];
-
-    return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
-        other: {
-            "google-adsense-account": "ca-pub-1504999187644497",
-        },
-        title,
-        description,
-        keywords,
-
-        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/photo` }],
-        publisher: "FastSave",
-        creator: "FastSave",
-        robots: {
-            index: true,
-            follow: true,
-            nocache: false,
-            "max-image-preview": "large",
-            "max-video-preview": "-1",
-        },
-
-        alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/photo`,
-            types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-            },
-        },
-
-        openGraph: {
-            title,
-            description,
-            type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/photo`,
-            siteName: "FastSave",
-            locale: "en_IN",
-            images: [
-                {
-                    url: "/images/photo-converter.png",
-                    width: 1200,
-                    height: 630,
-                    alt: "FastSave Photo Converter",
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title,
-            description,
-            images: ["/images/photo-converter.png"],
-            creator: "@fastsaveapp",
-            site: "@fastsaveapp",
-            creatorId: "fastsaveapp",
-            siteId: "fastsaveapp",
-        },
-        category: "Technology",
-        applicationName: "FastSave - Image Converter",
-    };
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: `${siteUrl}/photo`,
+    siteName: 'FastSave',
+    locale: 'en_US',
+    type: 'website',
+    images: [{ url: '/images/photo-converter.png', width: 1200, height: 630 }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/images/photo-converter.png'],
+    site: '@fastsaveapp',
+    creator: '@fastsaveapp',
+  },
+  alternates: {
+    canonical: `${siteUrl}/photo`,
+  }
 };
 
-export default function NestedLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <>
-            {children}
-        </>
-    );
+const schemaData = {
+    '@context': 'https://schema.org' as const,
+    '@type': 'WebApplication' as const,
+    'name': 'Image Converter Tool',
+    'description': description,
+    'applicationCategory': 'Multimedia' as const,
+    'operatingSystem': 'Web' as const,
+};
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <SchemaMarkup data={schemaData} />
+      {children}
+    </>
+  );
 }
