@@ -1,88 +1,50 @@
-import type { Metadata } from "next";
+import { Metadata } from 'next';
+import React from 'react';
+import SchemaMarkup from '@/components/sections/SchemaMarkup';
 
-export const generateMetadata = (): Metadata => {
-    const title = "Background Remover – Erase Image Background Online";
+const title = 'Remove Background from Image Free Online - FastSave';
+const description = 'Instantly remove backgrounds from images with AI. 100% free, fast, and high quality background eraser online.';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
 
-    const description =
-        "Remove backgrounds instantly with FastSave Background Remover. AI-powered, free, no watermark, high-res transparent PNGs for photos, products, and more.";
-
-    const keywords = [
-        "Background Remover",
-        "Remove Background Online",
-        "AI Background Removal",
-        "Transparent PNG Generator",
-        "Remove Background Free",
-        "No Watermark Background Remover",
-        "Product Image Background Remover",
-        "Online Background Remover",
-        "Auto Remove Image Background",
-        "One-click Background Removal",
-    ];
-
-    return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
-        other: {
-            "google-adsense-account": "ca-pub-1504999187644497",
-        },
-        title,
-        description,
-        keywords,
-
-        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/bg-remover` }],
-        publisher: "FastSave",
-        creator: "FastSave",
-        robots: {
-            index: true,
-            follow: true,
-            nocache: false,
-            "max-image-preview": "large",
-            "max-video-preview": "-1",
-        },
-
-        alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/bg-remover`,
-            types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-            },
-        },
-
-        openGraph: {
-            title,
-            description,
-            type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/bg-remover`,
-            siteName: "FastSave",
-            locale: "en_IN",
-            images: [
-                {
-                    url: "/images/bg-remover.png",
-                    width: 1200,
-                    height: 630,
-                    alt: "FastSave Background Remover",
-                },
-            ],
-        },
-        twitter: {
-            card: "summary_large_image",
-            title,
-            description,
-            images: ["/images/bg-remover.png"],
-            creator: "@fastsaveapp",
-            site: "@fastsaveapp",
-            creatorId: "fastsaveapp",
-            siteId: "fastsaveapp",
-        },
-        category: "Technology",
-        applicationName: "FastSave - Background Remover",
-    };
+export const metadata: Metadata = {
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    url: `${siteUrl}/bg-remover`,
+    siteName: 'FastSave',
+    locale: 'en_US',
+    type: 'website',
+    images: [{ url: '/images/bg-remover.png', width: 1200, height: 630 }]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title,
+    description,
+    images: ['/images/bg-remover.png'],
+    site: '@fastsaveapp',
+    creator: '@fastsaveapp',
+  },
+  alternates: {
+    canonical: `${siteUrl}/bg-remover`,
+  }
 };
 
-export default function NestedLayout({ children }: { children: React.ReactNode }) {
-    return (
-        <>
-            {children}
-        </>
-    );
-}
+const schemaData = {
+    '@context': 'https://schema.org' as const,
+    '@type': 'WebApplication' as const,
+    'name': 'Background Remover Tool',
+    'description': description,
+    'applicationCategory': 'Multimedia' as const,
+    'operatingSystem': 'Web' as const,
+};
 
+export default function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <>
+      <SchemaMarkup data={schemaData} />
+      {children}
+    </>
+  );
+}
