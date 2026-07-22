@@ -209,6 +209,39 @@ export default function MergePdf() {
           )}
         </div>
       )}
+
+      {/* How to Use Section */}
+      <motion.div 
+        className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to merge PDF files?</h3>
+        <div className="space-y-4">
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Upload PDFs</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop multiple PDF files. You can select multiple documents at once for merging.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Arrange Order</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Drag and drop the uploaded PDF files in the list to arrange them in the exact sequence you want them merged.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Merge & Download</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Merge PDFs' and wait a few seconds. A combined high-quality PDF will be instantly available for download.</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }

@@ -202,6 +202,39 @@ export default function PdfToJpg() {
           </div>
         </div>
       )}
+
+      {/* How to Use Section */}
+      <motion.div 
+        className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to extract JPGs from PDF?</h3>
+        <div className="space-y-4">
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Upload PDF</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your PDF file. The processing is done securely in your browser so your data never leaves your device.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Processing</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Our tool instantly scans all the pages of your PDF document and converts them into high-quality JPG image formats.</p>
+            </div>
+          </div>
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+            <div>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Download Images</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Preview the extracted images and click the download button on any individual page to save it as a JPG image to your device.</p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
     </div>
   );
 }

@@ -10,7 +10,7 @@ const ALL_TOOLS = [
     { name: 'Video Trimmer', path: '/video-trimmer' },
     { name: 'Image Compressor', path: '/image-compressor' },
     { name: 'Image Converter', path: '/photo' },
-    { name: 'SVG Converter', path: '/image-to-svg' },
+    { name: 'SVG Converter', path: '/photo' },
     { name: 'Markdown to PDF', path: '/md-converter' },
     { name: 'Video to GIF', path: '/video-to-gif' },
     { name: 'Audio Converter', path: '/audio' },
@@ -19,6 +19,8 @@ const ALL_TOOLS = [
     { name: 'Video Compressor', path: '/video-compressor' },
     { name: 'PDF to JPG', path: '/pdf-to-jpg' },
     { name: 'Merge PDF', path: '/merge-pdf' },
+    { name: 'Unlock PDF', path: '/unlock-pdf' },
+    { name: 'Pro Image Editor', path: '/image-editor' },
     { name: 'IG Downloader', path: '/ig-downloader' },
 ];
 
@@ -37,7 +39,7 @@ export default function ExploreOtherTools() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
               {toolsToShow.map(tool => (
-                  <Link key={tool.path} href={tool.path} className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
+                  <Link key={tool.name} href={tool.path} className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
                       {tool.name}
                   </Link>
               ))}

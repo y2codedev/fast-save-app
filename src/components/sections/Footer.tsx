@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { FooterProps, DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS } from '@/constants';
+import AppLogo from '@/components/AppLogo';
 
 const Footer = ({
   year = new Date().getFullYear(),
@@ -12,11 +13,13 @@ const Footer = ({
     <footer className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-t border-gray-200/50 dark:border-gray-700/50 mt-auto">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="py-8 md:flex md:items-center md:justify-between">
-          <div className="flex flex-col items-center md:flex-row md:items-baseline space-y-2 md:space-y-0">
-            <Link href="/" className="flex flex-col md:flex-row items-center md:items-baseline">
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                Fast<span className="text-indigo-600 dark:text-indigo-600">Save</span>
-              </span>
+          <div className="flex flex-col items-center md:flex-row md:items-center space-y-2 md:space-y-0">
+            <Link href="/" className="flex flex-col md:flex-row items-center md:items-center gap-2 mb-2 md:mb-0">
+              <AppLogo showText={false} iconClassName="w-7 h-7" className="flex-shrink-0" />
+              <div className="font-black tracking-tight text-xl leading-none">
+                <span className="text-gray-900 dark:text-white">Fast</span>
+                <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">Save</span>
+              </div>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 md:ml-4">
               &copy; {year} FastSave All rights reserved.

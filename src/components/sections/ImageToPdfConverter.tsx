@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { FiUpload, FiDownload, FiFileText, FiImage, FiCheck, FiTrash2, FiLayers, FiX, FiPlus } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { AdsenseAd } from "@/constants";
+
 import { jsPDF } from "jspdf";
 import { DndContext, closestCenter, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, rectSortingStrategy, useSortable } from '@dnd-kit/sortable';
@@ -302,15 +302,15 @@ export default function ImageToPdfConverter() {
         </motion.div>
 
         {/* Main Interface Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch">
           {/* Left Panel: Upload & Manage Images */}
           <motion.div 
-            className="relative h-full lg:col-span-8"
+            className="relative lg:col-span-8 flex flex-col"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 min-h-[400px] h-full flex flex-col">
+            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 min-h-[400px] flex-1 flex flex-col">
               
               <input
                 type="file"
@@ -378,15 +378,15 @@ export default function ImageToPdfConverter() {
 
           {/* Right Panel: Generate & Preview */}
           <motion.div 
-            className="relative lg:col-span-4"
+            className="relative lg:col-span-4 flex flex-col"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 flex flex-col">
+            <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 flex-1 flex flex-col">
               
               {!pdfUrl ? (
-                 <div className="flex flex-col">
+                 <div className="flex flex-col flex-1">
                   {/* PDF Settings Header */}
                   <div className="flex items-center gap-3 mb-6 text-gray-900 dark:text-white font-bold text-lg border-b border-gray-100 dark:border-gray-700/50 pb-4">
                     <div className="bg-indigo-100 dark:bg-indigo-900/40 p-2 rounded-lg">
@@ -457,7 +457,7 @@ export default function ImageToPdfConverter() {
                   <button
                     onClick={generatePDF}
                     disabled={pdfImages.length === 0 || isGenerating}
-                    className={`w-full inline-flex items-center justify-center gap-2 font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg ${
+                    className={`w-full inline-flex mt-auto items-center justify-center gap-2 font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg ${
                       pdfImages.length > 0 
                         ? 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white hover:-translate-y-1'
                         : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 shadow-none'
@@ -562,41 +562,38 @@ export default function ImageToPdfConverter() {
           ))}
         </motion.div>
 
-        {/* Ad Section */}
-        <motion.div 
-          className="mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <div className='mx-auto max-w-4xl'>
-            <AdsenseAd height="min-h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50" />
-          </div>
-        </motion.div>
 
-        {/* Try Other Features */}
+
+        {/* How to Use Section */}
         <motion.div 
-          className="text-center mt-12 mb-8"
+          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Try Other Tools</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link 
-              href="/image-compressor" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiImage className="w-4 h-4" />
-              Image Compressor
-            </Link>
-            <Link 
-              href="/bg-remover" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiImage className="w-4 h-4" />
-              Background Remover
-            </Link>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to convert Images to PDF?</h3>
+          <div className="space-y-4">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Images</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your images (JPG, PNG, WEBP). You can select multiple files at once.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Arrange Order</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Drag and drop the uploaded images to reorder them exactly how you want them to appear in the PDF pages.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Convert & Download</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Click on 'Generate PDF'. Your images will be instantly combined into a single, high-quality PDF document ready for download.</p>
+              </div>
+            </div>
           </div>
         </motion.div>
 
