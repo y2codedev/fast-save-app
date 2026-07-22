@@ -438,36 +438,36 @@ function VideoCompressor() {
           </motion.div>
         </div>
 
-        {/* Try Other Features */}
+        {/* How to Use Section */}
         <motion.div 
-          className="text-center mt-12 mb-8"
+          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Try Other Video Tools</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link 
-              href="/video-to-gif" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiFilm className="w-4 h-4" />
-              Video to GIF Maker
-            </Link>
-            <Link 
-              href="/audio" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiDownload className="w-4 h-4" />
-              Extract Audio (MP3)
-            </Link>
-            <Link 
-              href="/video-trimmer" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiScissors className="w-4 h-4" />
-              Video Trimmer
-            </Link>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to compress Videos?</h3>
+          <div className="space-y-4">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Video</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your video file. The processing is done entirely on your device, ensuring complete privacy.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Choose Compression Level</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Select the desired quality (High, Medium, Low, or Custom) to balance between file size reduction and video clarity.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Compress & Save</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Start Compression' and watch the magic happen. Compare the before & after sizes, then download your optimized video!</p>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

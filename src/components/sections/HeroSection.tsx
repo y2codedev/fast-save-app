@@ -3,7 +3,7 @@
 import AdsenseAd from '@/components/AdsenseAd';
 import TopText from '@/components/sections/TopText';
 import DownloadForm from '@/components/sections/DownloadForm';
-import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage, FileText, Layers, ImagePlus } from 'lucide-react';
+import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage, FileText, Layers, ImagePlus, Unlock, Lock, Image as ImageIcon } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
@@ -49,9 +49,9 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
         )}
         
         {/* Ad Section - Top */}
-        <div className='mx-auto max-w-5xl pt-12 md:pt-16'>
+        {/* <div className='mx-auto max-w-5xl pt-12 md:pt-16'>
           <AdsenseAd height="h-[100px] md:h-[280px]" slot={adsenseSlotId} className="rounded-2xl shadow-lg" />
-        </div>
+        </div> */}
       </div>
 
       {/* Premium Tool Grid */}
@@ -139,6 +139,20 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               color: "rose"
             },
             {
+              href: "/unlock-pdf",
+              icon: Unlock,
+              title: "Unlock PDF",
+              description: "Remove passwords from your PDF files securely.",
+              color: "violet"
+            },
+            {
+              href: "/protect-pdf",
+              icon: Lock,
+              title: "Protect PDF",
+              description: "Add password protection to your PDF files.",
+              color: "indigo"
+            },
+            {
               href: "/audio",
               icon: Music,
               title: "Video to Audio",
@@ -166,8 +180,27 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               description: "Cut and trim video clips instantly without losing quality.",
               color: "rose"
             },
-           
-            
+            {
+              href: "/video-compressor",
+              icon: Shrink,
+              title: "Video Compressor",
+              description: "Reduce video file size while maintaining quality.",
+              color: "emerald"
+            },
+            {
+              href: "/image-editor",
+              icon: Sparkles,
+              title: "Pro Image Editor",
+              description: "Resize, crop, rotate, and edit images with ease.",
+              color: "pink"
+            },
+            {
+              href: "/photo",
+              icon: ImageIcon,
+              title: "Image Converter",
+              description: "Convert images between PNG, JPG, WebP and more.",
+              color: "amber"
+            },
           ].map((tool, index) => {
             // Map colors to tailwind classes
             const colorClasses: Record<string, any> = {
@@ -179,6 +212,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               fuchsia: { gradient: "from-fuchsia-500/5 to-purple-500/5", bg: "bg-fuchsia-100 dark:bg-fuchsia-900/30", text: "text-fuchsia-600 dark:text-fuchsia-400" },
               pink: { gradient: "from-pink-500/5 to-rose-500/5", bg: "bg-pink-100 dark:bg-pink-900/30", text: "text-pink-600 dark:text-pink-400" },
               cyan: { gradient: "from-cyan-500/5 to-teal-500/5", bg: "bg-cyan-100 dark:bg-cyan-900/30", text: "text-cyan-600 dark:text-cyan-400" },
+              violet: { gradient: "from-violet-500/5 to-purple-500/5", bg: "bg-violet-100 dark:bg-violet-900/30", text: "text-violet-600 dark:text-violet-400" },
             };
             const c = colorClasses[tool.color];
 

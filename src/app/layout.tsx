@@ -39,6 +39,9 @@ export const generateMetadata = (): Metadata => {
     title: title,
     description: description,
     keywords: keywords,
+    icons: {
+      icon: '/favicon.svg',
+    },
 
     authors: [{ name: "FastSave", url: siteUrl }],
     publisher: "FastSave",

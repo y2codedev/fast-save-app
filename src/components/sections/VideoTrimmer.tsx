@@ -2,7 +2,7 @@
 
 import { Button, FileUploader } from "@/constants";
 import { useRef, useState, useEffect, useCallback } from "react";
-import { FiUpload, FiDownload, FiCheck, FiScissors, FiFilm, FiVideo } from "react-icons/fi";
+import { FiUpload, FiDownload, FiCheck, FiScissors, FiFilm, FiVideo, FiPlay, FiPause } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from 'next/link';
 
@@ -18,11 +18,13 @@ function VideoTrimmer() {
   const [endTime, setEndTime] = useState<number>(100);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isDraggingSeek, setIsDraggingSeek] = useState(false);
   
   const [conversionStep, setConversionStep] = useState<'upload' | 'trim' | 'complete'>('upload');
   const messageRef = useRef<HTMLParagraphElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
+  const trimmerRef = useRef<HTMLDivElement | null>(null);
 
   const loadFFmpeg = async () => {
     setIsLoading(true);
@@ -54,7 +56,12 @@ function VideoTrimmer() {
     setVideoURL(url);
     setTrimmedVideoURL(null);
     setStartTime(0);
+    setCurrentTime(0);
     setConversionStep('trim');
+    // Smooth-scroll to the trimmer area after React renders it
+    setTimeout(() => {
+      trimmerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
   };
 
   const onVideoLoaded = (e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
@@ -62,28 +69,70 @@ function VideoTrimmer() {
     if (videoDuration > 0) {
       setDuration(videoDuration);
       setEndTime(videoDuration);
+      setStartTime(0);
+      setCurrentTime(0);
     }
   };
 
+  // Video onTimeUpdate — only syncs state when NOT playing (paused / seeking).
+  // During playback, the rAF loop below handles smooth 60fps updates instead.
   const handleTimeUpdate = () => {
-    if (videoRef.current) {
+    if (!videoRef.current || isDraggingSeek) return;
+    if (!isPlaying) {
+      // When paused, keep UI in sync with wherever the video is
       setCurrentTime(videoRef.current.currentTime);
-      if (isPlaying) {
-        if (videoRef.current.currentTime >= endTime) {
-          videoRef.current.currentTime = startTime;
-        }
-      }
     }
   };
 
-  // Dual Slider Handlers
+  // 60fps rAF loop — drives both the seek bar and the trim-slider stepper
+  // smoothly during playback. Only this loop sets currentTime while playing.
+  useEffect(() => {
+    let animId: number;
+    let active = true;       // guard against stale closures
+
+    const tick = () => {
+      if (!active || !videoRef.current) return;
+
+      const cur = videoRef.current.currentTime;
+
+      // Stop at trim end
+      if (cur >= endTime) {
+        videoRef.current.pause();
+        videoRef.current.currentTime = endTime;
+        setCurrentTime(endTime);
+        setIsPlaying(false);
+        return;
+      }
+
+      // Snap forward if somehow before trim start
+      if (cur < startTime) {
+        videoRef.current.currentTime = startTime;
+      }
+
+      setCurrentTime(videoRef.current.currentTime);
+      animId = requestAnimationFrame(tick);
+    };
+
+    if (isPlaying && !isDraggingSeek) {
+      animId = requestAnimationFrame(tick);
+    }
+
+    return () => {
+      active = false;
+      if (animId) cancelAnimationFrame(animId);
+    };
+  }, [isPlaying, endTime, startTime, isDraggingSeek]);
+
+  // Dual Slider Handlers for Trim Cut Range Selection
   const handleStartChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = Number(e.target.value);
-    if (val < endTime - 0.5) { // Ensure at least 0.5s gap
+    if (val < endTime - 0.5) {
       setStartTime(val);
-      if (videoRef.current) {
-        videoRef.current.currentTime = val;
+      if (currentTime < val) {
         setCurrentTime(val);
+        if (videoRef.current) {
+          videoRef.current.currentTime = val;
+        }
       }
     }
   };
@@ -92,6 +141,49 @@ function VideoTrimmer() {
     const val = Number(e.target.value);
     if (val > startTime + 0.5) {
       setEndTime(val);
+      if (currentTime > val) {
+        setCurrentTime(val);
+        if (videoRef.current) {
+          videoRef.current.currentTime = val;
+        }
+      }
+    }
+  };
+
+  // Playback Toggle: Play from current playhead position, or reset to startTime if at/past end
+  const togglePlay = () => {
+    if (!videoRef.current) return;
+    if (isPlaying) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      if (currentTime >= endTime - 0.05 || currentTime < startTime) {
+        videoRef.current.currentTime = startTime;
+        setCurrentTime(startTime);
+      }
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch((err) => {
+        console.error("Playback error:", err);
+      });
+    }
+  };
+
+  // Music Player Seek Bar Handler (Relative time from 0 to trimmedLength)
+  const handleSeekInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const relativeVal = Number(e.target.value);
+    const targetTime = startTime + relativeVal;
+    const clampedVal = Math.min(Math.max(targetTime, startTime), endTime);
+    setCurrentTime(clampedVal);
+    if (videoRef.current) {
+      videoRef.current.currentTime = clampedVal;
+    }
+  };
+
+  const handleSeekRelease = () => {
+    setIsDraggingSeek(false);
+    if (videoRef.current) {
+      videoRef.current.currentTime = currentTime;
     }
   };
 
@@ -105,7 +197,7 @@ function VideoTrimmer() {
 
     const ffmpeg = ffmpegRef.current;
     setIsLoading(true);
-    if(videoRef.current) videoRef.current.pause();
+    if (videoRef.current) videoRef.current.pause();
     setIsPlaying(false);
     
     try {
@@ -143,11 +235,21 @@ function VideoTrimmer() {
     setConversionStep('upload');
   };
 
+  // High precision time formatting for handles (m:ss.s)
   const formatTime = (seconds: number) => {
+    if (isNaN(seconds) || seconds < 0) return "0:00.0";
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
     const ms = Math.floor((seconds % 1) * 10);
     return `${m}:${s < 10 ? '0' : ''}${s}.${ms}`;
+  };
+
+  // Music player style time formatting (m:ss e.g. 0:18)
+  const formatPlaybackTime = (seconds: number) => {
+    if (isNaN(seconds) || seconds < 0) return "0:00";
+    const m = Math.floor(seconds / 60);
+    const s = Math.floor(seconds % 60);
+    return `${m}:${s < 10 ? '0' : ''}${s}`;
   };
 
   useEffect(() => {
@@ -156,6 +258,11 @@ function VideoTrimmer() {
       if (videoURL) URL.revokeObjectURL(videoURL);
     };
   }, [trimmedVideoURL, videoURL]);
+
+  // Trimmed length duration and current relative time within trim range (0 to trimmedLength)
+  const trimmedLength = Math.max(0.1, endTime - startTime);
+  const relativeCurrentTime = Math.min(Math.max(currentTime - startTime, 0), trimmedLength);
+  const playbackProgressPercent = (relativeCurrentTime / trimmedLength) * 100;
 
   return (
     <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
@@ -184,12 +291,13 @@ function VideoTrimmer() {
         {/* Trimmer UI - Only shows when file is loaded */}
         {conversionStep === 'trim' && videoURL ? (
           <motion.div 
+            ref={trimmerRef}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-12 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 border border-white/20 dark:border-gray-700/50"
+            className="mb-12 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 border border-white/20 dark:border-gray-700/50 shadow-2xl scroll-mt-4"
           >
-            {/* Live Video Player */}
-            <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden mb-8 shadow-inner">
+            {/* Live Video Player Container */}
+            <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden mb-6 shadow-inner cursor-pointer" onClick={togglePlay}>
               <video 
                 ref={videoRef}
                 src={videoURL}
@@ -198,42 +306,125 @@ function VideoTrimmer() {
                 className="w-full h-full object-contain"
                 onPlay={() => setIsPlaying(true)}
                 onPause={() => setIsPlaying(false)}
-                onClick={() => {
+                onEnded={() => {
+                  setIsPlaying(false);
                   if (videoRef.current) {
-                    if (isPlaying) videoRef.current.pause();
-                    else videoRef.current.play();
+                    videoRef.current.currentTime = startTime;
+                    setCurrentTime(startTime);
                   }
                 }}
               />
               {!isPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/20 pointer-events-none">
-                  <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/40">
-                    <div className="w-0 h-0 border-t-[10px] border-t-transparent border-l-[16px] border-l-white border-b-[10px] border-b-transparent ml-1"></div>
+                <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
+                  <div className="w-16 h-16 bg-white/25 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 shadow-xl hover:scale-110 transition-transform">
+                    <FiPlay className="w-8 h-8 text-white fill-current ml-1" />
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Premium Dual Range Slider */}
-            <div className="px-4 mb-10">
-              <div className="flex justify-between items-center mb-4">
-                <span className="font-mono text-lg font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
-                  {formatTime(startTime)}
+            {/* Music Player Style Seek Bar Component (Spotify / YouTube style) */}
+            <div className="mb-8 bg-gray-900/90 dark:bg-gray-950/90 backdrop-blur-xl rounded-2xl p-5 border border-gray-800 text-white shadow-xl">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-4">
+                <div className="flex items-center gap-4 w-full sm:w-auto">
+                  <button
+                    onClick={togglePlay}
+                    type="button"
+                    aria-label={isPlaying ? "Pause Video" : "Play Video"}
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 flex-shrink-0"
+                  >
+                    {isPlaying ? (
+                      <FiPause className="w-6 h-6 fill-current" />
+                    ) : (
+                      <FiPlay className="w-6 h-6 fill-current ml-0.5" />
+                    )}
+                  </button>
+                  <div>
+                    <span className="text-xs uppercase tracking-wider text-indigo-400 font-semibold block flex items-center gap-2">
+                      <FiVideo className="w-3.5 h-3.5" />
+                      Trim Preview
+                    </span>
+                    <span className="text-sm text-gray-300 font-mono mt-0.5 block">
+                      {formatPlaybackTime(relativeCurrentTime)} / {formatPlaybackTime(trimmedLength)}
+                    </span>
+                  </div>
+                </div>
+                <div className="text-right hidden sm:block">
+                  <span className="text-xs text-gray-400 block">Trimmed Length</span>
+                  <span className="text-sm font-mono font-medium text-indigo-300">
+                    {formatPlaybackTime(trimmedLength)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Music Player Range Slider (From 0:00 to trimmedLength) */}
+              <div className="relative pt-2 pb-1 px-1">
+                {/* Seek Bar Track */}
+                <div className="relative h-2 w-full bg-gray-700/80 rounded-full flex items-center cursor-pointer group">
+                  {/* Progress Fill — no CSS transition so it tracks every rAF frame */}
+                  <div 
+                    className="absolute h-full bg-white rounded-full group-hover:bg-indigo-400"
+                    style={{ width: `${playbackProgressPercent}%` }}
+                  />
+                  {/* Circular Playhead Knob — w-4 h-4 (valid Tailwind), no transition */}
+                  <div 
+                    className="absolute w-4 h-4 bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.6)] -translate-x-1/2 -translate-y-1/2 top-1/2 group-hover:scale-125 pointer-events-none"
+                    style={{ left: `${playbackProgressPercent}%` }}
+                  />
+                  {/* Native Range Input from 0 to trimmedLength for seamless relative scrubbing */}
+                  <input 
+                    type="range"
+                    min={0}
+                    max={trimmedLength}
+                    step={0.01}
+                    value={relativeCurrentTime}
+                    onInput={handleSeekInput}
+                    onChange={handleSeekInput}
+                    onMouseDown={() => setIsDraggingSeek(true)}
+                    onMouseUp={handleSeekRelease}
+                    onTouchStart={() => setIsDraggingSeek(true)}
+                    onTouchEnd={handleSeekRelease}
+                    className="absolute w-full h-full opacity-0 cursor-pointer z-10"
+                  />
+                </div>
+
+                {/* Left & Right Labels (0:00 relative start & trimmedLength end time) */}
+                <div className="flex justify-between items-center text-xs font-mono text-gray-300 mt-2 font-medium">
+                  <span>{formatPlaybackTime(relativeCurrentTime)}</span>
+                  <span>{formatPlaybackTime(trimmedLength)}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Dual Range Cut Selection Controls */}
+            <div className="px-4 mb-8">
+              <div className="flex justify-between items-center mb-3">
+                <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  Trim Selection Handles
                 </span>
-                <span className="text-sm font-medium text-gray-500">
+                <span className="text-xs text-gray-400">
+                  Full Video: {formatTime(duration)}
+                </span>
+              </div>
+              
+              <div className="flex justify-between items-center mb-4">
+                <span className="font-mono text-base font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
+                  Start: {formatTime(startTime)}
+                </span>
+                <span className="text-xs font-medium text-gray-500">
                   Duration: {formatTime(endTime - startTime)}
                 </span>
-                <span className="font-mono text-lg font-semibold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30 px-3 py-1 rounded-lg">
-                  {formatTime(endTime)}
+                <span className="font-mono text-base font-semibold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30 px-3 py-1 rounded-lg">
+                  End: {formatTime(endTime)}
                 </span>
               </div>
               
               <div className="relative h-12 flex items-center" ref={trackRef}>
-                {/* Background Track */}
+                {/* Full Video Track */}
                 <div className="absolute w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                   {/* Active Selection Highlight */}
+                   {/* Selected Range Highlight */}
                    <div 
-                     className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500"
+                     className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-[left,right] duration-100 ease-out"
                      style={{ 
                        left: `${duration > 0 ? (startTime / duration) * 100 : 0}%`,
                        right: `${duration > 0 ? 100 - (endTime / duration) * 100 : 100}%`
@@ -241,19 +432,18 @@ function VideoTrimmer() {
                    ></div>
                 </div>
 
-                {/* Moving Playhead Vertical Line */}
+                {/* Moving Stepper Playhead Marker across full timeline */}
                 {duration > 0 && (
                   <div 
-                    className="absolute h-8 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] z-30 pointer-events-none transform -translate-x-1/2 flex items-center justify-center transition-all duration-75"
+                    className="absolute h-8 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] z-30 pointer-events-none -translate-x-1/2 flex items-center justify-center"
                     style={{ left: `${(currentTime / duration) * 100}%` }}
                   >
-                    {/* Playhead Dot */}
-                    <div className="absolute -top-1 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_4px_rgba(0,0,0,0.5)]"></div>
-                    <div className="absolute -bottom-1 w-2.5 h-2.5 bg-white rounded-full shadow-[0_0_4px_rgba(0,0,0,0.5)]"></div>
+                    <div className="absolute -top-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow"></div>
+                    <div className="absolute -bottom-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow"></div>
                   </div>
                 )}
 
-                {/* Invisible Inputs for native slider logic */}
+                {/* Dual handle inputs */}
                 <input 
                   type="range"
                   min={0}
@@ -275,23 +465,22 @@ function VideoTrimmer() {
                   style={{ WebkitAppearance: 'none' }}
                 />
 
-                {/* Custom Thumbs */}
+                {/* Handle thumbs */}
                 <div 
-                  className="absolute h-8 w-4 bg-indigo-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border border-indigo-400"
+                  className="absolute h-8 w-4 bg-indigo-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 -translate-x-1/2 flex items-center justify-center border border-indigo-400 transition-[left] duration-100 ease-out"
                   style={{ left: `${duration > 0 ? (startTime / duration) * 100 : 0}%` }}
                 >
                   <div className="w-0.5 h-4 bg-white/50 rounded-full"></div>
                 </div>
                 
                 <div 
-                  className="absolute h-8 w-4 bg-violet-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border border-violet-400"
+                  className="absolute h-8 w-4 bg-violet-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 -translate-x-1/2 flex items-center justify-center border border-violet-400 transition-[left] duration-100 ease-out"
                   style={{ left: `${duration > 0 ? (endTime / duration) * 100 : 100}%` }}
                 >
                   <div className="w-0.5 h-4 bg-white/50 rounded-full"></div>
                 </div>
               </div>
 
-              {/* Instructions */}
               <style jsx>{`
                 input[type=range]::-webkit-slider-thumb {
                   pointer-events: auto;
@@ -390,29 +579,36 @@ function VideoTrimmer() {
           </div>
         )}
 
-        {/* Try Other Features */}
+        {/* How to Use Section */}
         <motion.div 
-          className="text-center mt-12 mb-8"
+          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-6">Explore Other Tools</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link 
-              href="/video-to-gif" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiFilm className="w-4 h-4" />
-              Video to GIF Maker
-            </Link>
-            <Link 
-              href="/video-compressor" 
-              className="px-6 py-3 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:border-indigo-300 hover:text-indigo-600 transition-all font-medium flex items-center gap-2 shadow-sm"
-            >
-              <FiVideo className="w-4 h-4" />
-              Video Compressor
-            </Link>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to trim Videos?</h3>
+          <div className="space-y-4">
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Video</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Select or drag & drop the video you want to cut. We support MP4, MOV, WEBM and more formats natively.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Select Range</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Use the timeline sliders to choose your start and end points. You can also manually enter the exact timestamps.</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
+              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+              <div>
+                <h4 className="font-semibold text-gray-900 dark:text-white">Trim & Download</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Trim Video'. The clip will be processed instantly without any quality loss, ready for you to download!</p>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
@@ -421,3 +617,4 @@ function VideoTrimmer() {
 }
 
 export default VideoTrimmer;
+

@@ -138,7 +138,7 @@ export const STEP: Step[] = [
     {
         id: 1,
         name: 'Find',
-        description: 'Open  find the you want to download',
+        description: 'Open the app and find the content you want to download',
         icon: DevicePhoneMobileIcon,
     },
     {
@@ -160,6 +160,47 @@ export const STEP: Step[] = [
         icon: ArrowDownTrayIcon,
     },
 ]
+
+import { Sparkles, Image as ImageIcon, Zap, FileText, Film, Scissors, ImagePlus, Layers, Unlock, Lock } from 'lucide-react';
+
+export const MEGA_MENU_ITEMS = [
+  {
+    category: "Video & Audio",
+    items: [
+      { name: "Video Trimmer", path: "/video-trimmer", icon: Scissors, desc: "Cut and trim videos" },
+      { name: "Video Compressor", path: "/video-compressor", icon: Zap, desc: "Reduce video size" },
+      { name: "Video to GIF", path: "/video-to-gif", icon: FilmIcon, desc: "Convert to GIF" },
+      { name: "Video to Audio", path: "/audio", icon: MdAudiotrack, desc: "Extract audio" },
+      { name: "Audio Trimmer", path: "/audio-trimmer", icon: Scissors, desc: "Cut audio files" },
+    ]
+  },
+  {
+    category: "Image Tools",
+    items: [
+      { name: "Pro Image Editor", path: "/image-editor", icon: Sparkles, desc: "Resize, crop, and edit" },
+      { name: "Remove Background", path: "/bg-remover", icon: Sparkles, desc: "AI background removal" },
+      { name: "Compress Image", path: "/image-compressor", icon: ArrowPathIcon, desc: "Reduce image size" },
+      { name: "Image Converter", path: "/photo", icon: MdInsertPhoto, desc: "Convert image formats" },
+    ]
+  },
+  {
+    category: "PDF Tools",
+    items: [
+      { name: "Merge PDF", path: "/merge-pdf", icon: Layers, desc: "Combine PDFs" },
+      { name: "Image to PDF", path: "/image-to-pdf", icon: DocumentTextIcon, desc: "Convert images to PDF" },
+      { name: "PDF to JPG", path: "/pdf-to-jpg", icon: ImagePlus, desc: "Extract images" },
+      { name: "MD to PDF", path: "/md-converter", icon: FileText, desc: "Markdown to PDF" },
+      { name: "Unlock PDF", path: "/unlock-pdf", icon: Unlock, desc: "Remove passwords" },
+      { name: "Protect PDF", path: "/protect-pdf", icon: Lock, desc: "Add passwords" },
+    ]
+  },
+  {
+    category: "Social",
+    items: [
+      { name: "IG Downloader", path: "/ig-downloader", icon: FiInstagram, desc: "Download Instagram content" },
+    ]
+  }
+];
 
 export const NAVITEMS: SocialLink[] = [
     // {
@@ -309,5 +350,17 @@ export const TopHeader_Item: TopHeaderItem[] = [
         title: 'Markdown Converter',
         description: 'Convert Markdown files to PDF or Word documents securely',
         highlight: 'Markdown Converter'
+    },
+    {
+        path: '/protect-pdf',
+        title: 'Protect PDF with Password',
+        description: 'Add password protection to PDF files instantly',
+        highlight: 'Protect PDF'
+    },
+    {
+        path: '/unlock-pdf',
+        title: 'Unlock PDF - Remove Password',
+        description: 'Remove password protection from your PDF files securely',
+        highlight: 'Unlock PDF'
     }
 ]

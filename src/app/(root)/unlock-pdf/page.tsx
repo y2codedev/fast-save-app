@@ -1,52 +1,51 @@
+import UnlockPdf from '@/components/sections/UnlockPdf';
 import SchemaMarkup from '@/components/sections/SchemaMarkup';
 import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
-import TopText from '@/components/sections/TopText';
-import DownloadForm from '@/components/sections/DownloadForm';
-import DownloadSteps from '@/components/sections/DownloadSteps';
 import { Metadata } from 'next';
 import React from 'react';
 
-const title = 'Instagram Reels Downloader - FastSave';
-const description = 'Download Instagram Reels in HD with FastSave. No watermark, no login, 100% free. Save public Reels as MP4 videos in seconds.';
+const title = 'Unlock PDF Online - Remove PDF Password - FastSave';
+const description = 'Remove password protection from your PDF files instantly and securely in your browser. 100% free, fast, and privacy-focused.';
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
 
 export const metadata: Metadata = {
   title,
   description,
-  keywords: ['instagram reels downloader', 'download instagram reels', 'ig reels to mp4', 'save instagram reels', 'no watermark reels download'],
+  keywords: ['unlock pdf', 'remove pdf password', 'decrypt pdf', 'pdf password remover', 'free pdf unlocker'],
   openGraph: {
     title,
     description,
-    url: `${siteUrl}/ig-downloader`,
+    url: `${siteUrl}/unlock-pdf`,
     siteName: 'FastSave',
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: "/images/insta.png",
+        url: "/images/unlock-pdf.png",
         width: 1200,
         height: 630,
-      }
-    ]
+        alt: "Unlock PDF Online - FastSave",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/insta.png"],
-    site: "@fastsaveapp",
+    images: ["/images/unlock-pdf.png"],
     creator: "@fastsaveapp",
+    site: "@fastsaveapp",
   },
   alternates: {
-    canonical: `${siteUrl}/ig-downloader`,
+    canonical: `${siteUrl}/unlock-pdf`,
   }
 };
 
 const schemaData = {
     "@context": "https://schema.org" as const,
     "@type": "WebApplication" as const,
-    "name": "Instagram Reels Downloader",
-    "description": "Download Instagram Reels and Videos instantly without watermark.",
+    "name": "Unlock PDF Tool",
+    "description": "Remove password protection from PDF documents securely inside your browser.",
     "applicationCategory": "Multimedia" as const,
     "operatingSystem": "Web" as const,
 };
@@ -57,13 +56,7 @@ const Page = () => {
       <SchemaMarkup data={schemaData} />
       <ToolLayoutWithAds>
         <div className="flex flex-col space-y-12 pb-12">
-          <div className="pt-8">
-            <TopText />
-          </div>
-          <div className="mx-auto max-w-4xl w-full">
-            <DownloadForm />
-          </div>
-          <DownloadSteps />
+          <UnlockPdf />
         </div>
       </ToolLayoutWithAds>
     </>

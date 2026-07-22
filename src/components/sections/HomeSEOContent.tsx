@@ -58,7 +58,7 @@ export default function HomeSEOContent() {
             Why Choose FastSave?
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            We built FastSave to be the only media suite you'll ever need. Here is why millions of users trust our platform for their daily tasks.
+            We built FastSave to be the only media suite you'll ever need. Here is why users around the world trust our platform for their daily tasks.
           </p>
         </div>
 
