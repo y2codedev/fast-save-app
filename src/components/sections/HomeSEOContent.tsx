@@ -14,8 +14,8 @@ const faqs = [
     answer: "Absolutely not. Your privacy and security are our top priorities. Most of our tools process your files directly inside your browser. For tools that require server processing, files are automatically and permanently deleted immediately after processing."
   },
   {
-    question: "Can I use these tools on my mobile phone?",
-    answer: "Yes, FastSave is fully optimized for all devices. Whether you are using a smartphone (iOS or Android), tablet, or desktop computer, our tools work seamlessly right in your mobile browser without installing any apps."
+    question: "What platforms and devices are supported?",
+    answer: "FastSave is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software."
   },
   {
     question: "Are there any file size limits?",
@@ -51,6 +51,21 @@ export default function HomeSEOContent() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 space-y-24">
       
+      {/* What is FastSave Section */}
+      <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
+            What is FastSave?
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
+            FastSave is a comprehensive, 100% free online media utility suite. We provide over 20+ professional tools designed to help you edit images, convert PDFs, trim audio files, and process videos directly in your web browser. 
+          </p>
+          <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+            Unlike traditional software that requires heavy downloads, installations, and expensive subscriptions, FastSave leverages modern web technologies (like WebAssembly) to bring desktop-class editing capabilities right to your browser. It is incredibly fast, universally accessible, and completely safe since your files never need to be uploaded to external servers.
+          </p>
+        </div>
+      </div>
+
       {/* Why Choose Us Section */}
       <div>
         <div className="text-center mb-12">
