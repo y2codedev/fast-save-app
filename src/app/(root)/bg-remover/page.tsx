@@ -176,48 +176,45 @@ export default function BackgroundRemovalPage() {
                 </div>
               </div>
 
-              <FileUploadArea
-                onFileUpload={handleFileUpload}
-                loading={isProcessing}
-                subtitle="PNG, JPG, or WEBP (Max. 5MB)"
-              />
-
-              <AnimatePresence>
-                {image && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mt-6"
-                  >
-                    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4">
-                      <div className="flex items-center gap-3">
-                        <FiCheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
-                        <div className="flex-1">
-                          <p className="font-medium text-green-800 dark:text-green-200">
-                            Image Ready for Processing
-                          </p>
-                          <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                            Click the button below to remove the background
-                          </p>
-                        </div>
+              {!image ? (
+                <FileUploadArea
+                  onFileUpload={handleFileUpload}
+                  loading={isProcessing}
+                  subtitle="PNG, JPG, or WEBP (Max. 5MB)"
+                />
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="w-full"
+                >
+                  <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 mb-4">
+                    <div className="flex items-center gap-3">
+                      <FiCheckCircle className="h-5 w-5 text-green-600 flex-shrink-0" />
+                      <div className="flex-1">
+                        <p className="font-medium text-green-800 dark:text-green-200">
+                          Image Ready for Processing
+                        </p>
+                        <p className="text-sm text-green-700 dark:text-green-300 mt-1">
+                          Click the button below to remove the background
+                        </p>
                       </div>
                     </div>
+                  </div>
 
-                    <div className="mt-4 relative group">
-                      <div className="relative bg-gray-100 dark:bg-gray-700 w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-green-500">
-                        <Image
-                          src={image}
-                          alt="Uploaded preview"
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                      </div>
+                  <div className="relative group">
+                    <div className="relative bg-gray-100 dark:bg-gray-700 w-full aspect-[4/3] rounded-xl overflow-hidden border-2 border-green-500">
+                      <Image
+                        src={image}
+                        alt="Uploaded preview"
+                        fill
+                        className="object-contain"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
                     </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                  </div>
+                </motion.div>
+              )}
 
               <div className="mt-6 flex flex-col sm:flex-row gap-4">
                 <Button
