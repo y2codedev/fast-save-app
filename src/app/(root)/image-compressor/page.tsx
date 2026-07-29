@@ -293,12 +293,14 @@ export default function Home() {
                                 </div>
                             </div>
 
-                            <FileUploadArea
-                                ref={fileRef}
-                                onFileUpload={handleFileChange}
-                                loading={loading}
-                                subtitle="PNG, JPG, or WEBP (Max. 100MB)"
-                            />
+                            {!original && (
+                                <FileUploadArea
+                                    ref={fileRef}
+                                    onFileUpload={handleFileChange}
+                                    loading={loading}
+                                    subtitle="PNG, JPG, or WEBP (Max. 100MB)"
+                                />
+                            )}
 
                             <AnimatePresence>
                                 {error && (
