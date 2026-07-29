@@ -5,8 +5,10 @@ import { useRef, useState, useEffect } from "react";
 import { FiDownload, FiCheck, FiScissors, FiMusic, FiMic } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 function AudioTrimmer() {
+  const t = useTranslations('AudioTrimmer');
   const ffmpegRef = useRef<any>(null);
   const [loaded, setLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -172,15 +174,15 @@ function AudioTrimmer() {
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiScissors className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Pro Audio Trimmer
+              {t('titleBadge')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Cut & Trim Audio
-            <span className="block text-indigo-600 dark:text-indigo-400">Make Ringtones Instantly</span>
+            {t('titleMain')}
+            <span className="block text-indigo-600 dark:text-indigo-400">{t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Drag the handles to select the perfect moment of your song. No upload wait times, everything happens in your browser.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -291,7 +293,7 @@ function AudioTrimmer() {
                 onClick={resetConverter}
                 className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 font-medium transition-colors"
               >
-                Cancel
+                {t('cancel')}
               </button>
               
               <p ref={messageRef} className="text-sm text-indigo-500 font-mono line-clamp-1 flex-1 text-center px-4"></p>
@@ -299,7 +301,7 @@ function AudioTrimmer() {
               <Button
                 onClick={trimAudio}
                 isProcessing={isLoading}
-                label={isLoading ? "Processing..." : "Cut Audio Now"}
+                label={isLoading ? t('processing') : t('cutAudioBtn')}
                 className="w-full sm:w-auto px-8"
               />
             </div>
@@ -319,8 +321,8 @@ function AudioTrimmer() {
                       videoFile={audioFile} 
                       handleFileChange={handleFileChange} 
                       accept={{ 'audio/*': ['.mp3', '.wav', '.ogg', '.m4a'] }}
-                      title="Select Audio File"
-                      subtitle="MP3, WAV, OGG, M4A (Max 100MB)"
+                      title={t('step1')}
+                      subtitle={t('supportedFormats')}
                     />
                   </div>
                 </motion.div>
@@ -339,7 +341,7 @@ function AudioTrimmer() {
                         <FiCheck className="h-8 w-8 text-green-600 dark:text-green-400" />
                       </div>
                       <h3 className="text-2xl font-bold text-green-800 dark:text-green-200 mb-4">
-                        Trim Successful!
+                        {t('successTitle')}
                       </h3>
                       <audio controls src={trimmedAudioURL} className="w-full mx-auto max-w-md" />
                     </div>
@@ -374,27 +376,27 @@ function AudioTrimmer() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to trim audio online?</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Audio File</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your MP3, WAV, or other audio files. No server uploads—everything is processed locally for privacy.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo1Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Select the Timestamps</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Use the interactive slider handles to choose the exact start and end points of the section you want to keep.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo2Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Cut & Download</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Cut Audio Now'. Once processing is complete, download your newly trimmed audio file instantly.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo3Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo3Desc')}</p>
               </div>
             </div>
           </div>

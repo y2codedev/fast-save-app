@@ -5,8 +5,10 @@ import { useRef, useState } from "react";
 import { FiUpload, FiMusic, FiDownload, FiVideo, FiCheck, FiMinimize, FiScissors, FiFilm } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 function VideoToAudioConverter() {
+  const t = useTranslations('VideoToAudio');
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
   const ffmpegRef = useRef<any>(null);
   const [loaded, setLoaded] = useState(false);
@@ -114,15 +116,15 @@ function VideoToAudioConverter() {
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiMusic className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Video to MP3 Converter
+              {t('titleBadge')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Extract Audio from
-            <span className="block text-indigo-600 dark:text-indigo-400">Any Video</span>
+            {t('titleMain')}
+            <span className="block text-indigo-600 dark:text-indigo-400">{t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Convert videos to high-quality MP3 files instantly. Supports all major video formats with crystal clear audio extraction.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -136,9 +138,9 @@ function VideoToAudioConverter() {
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
-                { step: 'upload', label: 'Upload Video', icon: FiUpload },
-                { step: 'convert', label: 'Convert', icon: FiMusic },
-                { step: 'complete', label: 'Download', icon: FiDownload },
+                { step: 'upload', label: t('step1'), icon: FiUpload },
+                { step: 'convert', label: t('step2'), icon: FiMusic },
+                { step: 'complete', label: t('step3'), icon: FiDownload },
               ].map(({ step, label, icon: Icon }, index) => (
                 <div key={step} className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
@@ -198,10 +200,10 @@ function VideoToAudioConverter() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {conversionStep === 'complete' 
-                    ? 'Audio Ready' 
+                    ? t('statusComplete') 
                     : conversionStep === 'convert' 
-                    ? 'Ready to Convert' 
-                    : 'Upload & Convert'}
+                    ? t('statusReady') 
+                    : t('statusUpload')}
                 </h2>
               </div>
 
@@ -216,7 +218,7 @@ function VideoToAudioConverter() {
                   >
                     <FileUploader videoFile={videoFile} handleFileChange={handleFileChange} />
                     <div className="text-center text-gray-500 dark:text-gray-400">
-                      <p>Supported formats: MP4, AVI, MOV, WEBM, and more</p>
+                      <p>{t('supportedFormats')}</p>
                     </div>
                   </motion.div>
                 )}
@@ -234,7 +236,7 @@ function VideoToAudioConverter() {
                         <FiVideo className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
                         <div className="min-w-0 flex-1">
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            File Ready for Conversion
+                            {t('fileReady')}
                           </p>
                           <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
                             <span className="truncate block" title={videoFile.name}>{videoFile.name}</span>
@@ -253,10 +255,10 @@ function VideoToAudioConverter() {
                         {isLoading ? (
                             <>
                                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                Converting...
+                                {t('converting')}
                             </>
                         ) : (
-                            "Convert to MP3"
+                            t('convertBtn')
                         )}
                       </button>
 
@@ -266,7 +268,7 @@ function VideoToAudioConverter() {
                         className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiUpload className="w-4 h-4" />
-                        Choose Different File
+                        {t('chooseDiffBtn')}
                       </button>
                     </div>
                   </motion.div>
@@ -285,10 +287,10 @@ function VideoToAudioConverter() {
                         <FiCheck className="h-5 w-5 text-green-600" />
                         <div>
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            Conversion Complete!
+                            {t('successTitle')}
                           </p>
                           <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                            Your audio is ready for download
+                            {t('successDesc')}
                           </p>
                         </div>
                       </div>
@@ -345,18 +347,18 @@ function VideoToAudioConverter() {
           {[
             {
               icon: FiDownload,
-              title: "High Quality",
-              description: "Extract audio in 320kbps MP3 quality with no loss in sound clarity"
+              title: t('feature1Title'),
+              description: t('feature1Desc')
             },
             {
               icon: FiMusic,
-              title: "All Formats",
-              description: "Supports MP4, AVI, MOV, WEBM, and 20+ other video formats"
+              title: t('feature2Title'),
+              description: t('feature2Desc')
             },
             {
               icon: FiCheck,
-              title: "Instant Processing",
-              description: "Fast conversion with our optimized audio extraction engine"
+              title: t('feature3Title'),
+              description: t('feature3Desc')
             }
           ].map((feature, index) => (
             <div key={index} className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl text-center">
@@ -384,27 +386,27 @@ function VideoToAudioConverter() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to extract Audio from Video?</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Video</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your video file (MP4, WEBM, MOV, etc). All processing happens securely in your browser.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo1Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Select Format</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Choose your desired output audio format (MP3, WAV, AAC, etc). The tool will prepare the extraction settings instantly.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo2Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Convert & Save</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Extract Audio' and wait a few seconds. Once done, you can play the audio directly or download it to your device.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo3Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo3Desc')}</p>
               </div>
             </div>
           </div>

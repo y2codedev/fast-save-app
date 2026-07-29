@@ -1,15 +1,21 @@
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import createMiddleware from 'next-intl/middleware';
+import {routing} from './i18n/routing';
 
-export function middleware(request: NextRequest) {
-  const response = NextResponse.next()
+const intlMiddleware = createMiddleware(routing);
 
-  response.headers.set('Cross-Origin-Opener-Policy', 'same-origin')
-  response.headers.set('Cross-Origin-Embedder-Policy', 'require-corp')
+export default function middleware(request: any) {
+  const response = intlMiddleware(request);
 
-  return response
+  response.headers.set('Cross-Origin-Opener-Policy', 'same-origin');
+  response.headers.set('Cross-Origin-Embedder-Policy', 'require-corp');
+
+  return response;
 }
 
 export const config = {
-  matcher: ['/:path*', '/((?!api|_next/static|_next/image|favicon.ico).*)'],
-}
+  matcher: [
+    '/',
+    '/(en|es|fr|ar|zh|pt|id|ru|de|tr)/:path*',
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)'
+  ],
+};

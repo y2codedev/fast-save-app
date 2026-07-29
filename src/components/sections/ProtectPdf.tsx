@@ -4,8 +4,10 @@ import React, { useState, useRef } from 'react';
 import { FiLock, FiUpload, FiDownload, FiCheck, FiFileText, FiEye, FiEyeOff } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { encryptPDF } from '@pdfsmaller/pdf-encrypt';
+import { useTranslations } from 'next-intl';
 
 export default function ProtectPdf() {
+  const t = useTranslations('ProtectPdf');
   const [file, setFile] = useState<File | null>(null);
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -107,7 +109,7 @@ export default function ProtectPdf() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          Protect PDF
+          {t('titleMain')}
         </motion.h1>
         <motion.p 
           className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
@@ -115,7 +117,7 @@ export default function ProtectPdf() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          Add password protection to your PDF files securely in your browser.
+          {t('subtitle')}
         </motion.p>
       </div>
 
@@ -153,8 +155,8 @@ export default function ProtectPdf() {
                 <div className="bg-white dark:bg-gray-700 p-4 rounded-full shadow-sm mb-4 inline-block">
                   <FiUpload className="h-8 w-8 text-indigo-500" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Select PDF File</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-sm">Upload a PDF file to encrypt.</p>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('uploadTitle')}</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-sm">{t('uploadDesc')}</p>
               </div>
             ) : (
               <div className="flex flex-col h-full flex-1 items-center justify-center text-center">
@@ -171,7 +173,7 @@ export default function ProtectPdf() {
                   onClick={resetState}
                   className="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 font-medium transition-colors"
                 >
-                  Remove File
+                  {t('removeFileBtn')}
                 </button>
               </div>
             )}
@@ -194,18 +196,17 @@ export default function ProtectPdf() {
                   <div className="bg-indigo-100 dark:bg-indigo-900/40 p-2 rounded-lg">
                     <FiLock className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                   </div>
-                  Protect Settings
+                  {t('protectSettingsTitle')}
                 </div>
 
-                {/* Password Input */}
                 <div className="mb-6">
                   <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                    <FiLock className="h-4 w-4 text-gray-400" /> Password
+                    <FiLock className="h-4 w-4 text-gray-400" /> {t('passwordLabel')}
                   </label>
                   <div className="relative">
                     <input 
                       type={showPassword ? "text" : "password"} 
-                      placeholder="Enter new PDF password..."
+                      placeholder={t('passwordPlaceholder')}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 pr-12 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white"
@@ -220,7 +221,7 @@ export default function ProtectPdf() {
                     </button>
                   </div>
                   <p className="text-xs text-gray-500 mt-2">
-                    Keep this password safe. You'll need it to open the PDF later.
+                    {t('passwordTip')}
                   </p>
                 </div>
 
@@ -242,12 +243,12 @@ export default function ProtectPdf() {
                   {isProcessing ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                      Protecting...
+                      {t('protectingBtn')}
                     </>
                   ) : (
                     <>
                       <FiLock className="h-5 w-5" />
-                      Protect PDF
+                      {t('protectBtn')}
                     </>
                   )}
                 </button>
@@ -256,12 +257,12 @@ export default function ProtectPdf() {
               <div className="flex flex-col h-full flex-1">
                 <div className="flex items-center justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
                   <FiCheck className="w-5 h-5" />
-                  <span className="font-medium">Success! PDF Protected.</span>
+                  <span className="font-medium">{t('successMsg')}</span>
                 </div>
                 
                 <div className="flex-1 flex items-center justify-center text-center p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 mb-6">
                    <p className="text-gray-500 dark:text-gray-400">
-                      Your PDF is now encrypted with the password you provided.
+                      {t('successDesc')}
                    </p>
                 </div>
 
@@ -272,14 +273,14 @@ export default function ProtectPdf() {
                     className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                   >
                     <FiDownload className="h-5 w-5" />
-                    Download PDF
+                    {t('downloadBtn')}
                   </a>
                   
                   <button 
                     onClick={resetState}
                     className="w-full py-3.5 px-6 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-xl transition-colors border border-gray-200 dark:border-gray-600"
                   >
-                    Protect Another PDF
+                    {t('protectAnotherBtn')}
                   </button>
                 </div>
               </div>
@@ -295,27 +296,27 @@ export default function ProtectPdf() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
       >
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to add a password to PDF?</h3>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white">Upload PDF Document</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop the PDF file you want to protect. All processing happens safely in your browser.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white">Set Password</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Enter a strong password. This password will be required every time someone tries to open the document.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white">Protect & Download</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Protect PDF'. The file will be encrypted using standard AES encryption and will be ready to download.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>
             </div>
           </div>
         </div>

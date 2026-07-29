@@ -265,112 +265,22 @@ export const NAVITEMS: SocialLink[] = [
 
 
 export const TopHeader_Item: TopHeaderItem[] = [
-    {
-        path: '/pinterest',
-        title: 'Download Pinterest Videos & Images',
-        description: 'Save Pinterest content directly to your device',
-        highlight: 'Pinterest'
-    },
-    {
-        path: '/youtube-video',
-        title: 'Download YouTube Videos',
-        description: 'Save YouTube videos in high quality',
-        highlight: 'YouTube Videos'
-    },
-    {
-        path: '/audio',
-        title: 'Extract Audio from Videos',
-        description: 'Convert videos to MP3 audio files',
-        highlight: 'Audio'
-    },
-    {
-        path: '/photo',
-        title: 'Download Photos & Videos',
-        description: 'Save high resolution images to your device',
-        highlight: 'Photos'
-    },
-    {
-        path: '/stories',
-        title: 'Download Instagram Stories',
-        description: 'Save stories before they disappear',
-        highlight: 'Stories'
-    },
-    {
-        path: '/fb-video',
-        title: 'Download Facebook Videos',
-        description: 'Save videos from Facebook to your device',
-        highlight: 'Facebook'
-    },
-    {
-        path: '/bg-remover',
-        title: 'Remove Backgrounds from Images',
-        description: 'Instantly remove backgrounds with AI technology',
-        highlight: 'Backgrounds'
-    },
-    {
-        path: '',
-        title: 'All Media & PDF Tools',
-        description: 'A collection of free, easy-to-use, and secure online tools to edit, convert, and manage your media and documents.',
-        highlight: 'Media & PDF Tools'
-    },
-    {
-        path: '/ig-downloader',
-        title: 'Download Instagram Reels',
-        description: 'Paste your Instagram Reel URL below to download the video without watermark',
-        highlight: 'Instagram Reels'
-    },
-    {
-        path: '/image-compressor',
-        title: 'Image Compressor',
-        description: 'Instantly Image Compressor without losing quality Reduce image file size without sacrificing quality',
-        highlight: 'Image Compressor'
-    },
-    {
-        path: '/snapchat',
-        title: 'Snapchat Video Downloader',
-        description: 'Download Snapchat videos easily',
-        highlight: 'Snapchat'
-    },
-    {
-        path: '/video-to-gif',
-        title: 'Video to GIF Converter',
-        description: 'Convert any video into a looping GIF instantly',
-        highlight: 'Video to GIF'
-    },
-    {
-        path: '/video-compressor',
-        title: 'Video Compressor',
-        description: 'Reduce video file size without losing quality',
-        highlight: 'Video Compressor'
-    },
-    {
-        path: '/video-trimmer',
-        title: 'Video Trimmer',
-        description: 'Cut and trim video clips instantly',
-        highlight: 'Video Trimmer'
-    },
-    {
-        path: '/audio-trimmer',
-        title: 'Audio Trimmer',
-        description: 'Cut and trim MP3 audio files instantly',
-        highlight: 'Audio Trimmer'
-    },
-    {
-        path: '/md-converter',
-        title: 'Markdown Converter',
-        description: 'Convert Markdown files to PDF or Word documents securely',
-        highlight: 'Markdown Converter'
-    },
-    {
-        path: '/protect-pdf',
-        title: 'Protect PDF with Password',
-        description: 'Add password protection to PDF files instantly',
-        highlight: 'Protect PDF'
-    },
-    {
-        path: '/unlock-pdf',
-        title: 'Unlock PDF - Remove Password',
-        description: 'Remove password protection from your PDF files securely',
-        highlight: 'Unlock PDF'
-    }
+    { path: '/pinterest', titleKey: 'pinterest.title', descriptionKey: 'pinterest.description' },
+    { path: '/youtube-video', titleKey: 'youtube.title', descriptionKey: 'youtube.description' },
+    { path: '/audio', titleKey: 'audio.title', descriptionKey: 'audio.description' },
+    { path: '/photo', titleKey: 'photo.title', descriptionKey: 'photo.description' },
+    { path: '/stories', titleKey: 'stories.title', descriptionKey: 'stories.description' },
+    { path: '/fb-video', titleKey: 'fb_video.title', descriptionKey: 'fb_video.description' },
+    { path: '/bg-remover', titleKey: 'bg_remover.title', descriptionKey: 'bg_remover.description' },
+    { path: '', titleKey: 'default.title', descriptionKey: 'default.description' },
+    { path: '/ig-downloader', titleKey: 'ig_downloader.title', descriptionKey: 'ig_downloader.description' },
+    { path: '/image-compressor', titleKey: 'image_compressor.title', descriptionKey: 'image_compressor.description' },
+    { path: '/snapchat', titleKey: 'snapchat.title', descriptionKey: 'snapchat.description' },
+    { path: '/video-to-gif', titleKey: 'video_to_gif.title', descriptionKey: 'video_to_gif.description' },
+    { path: '/video-compressor', titleKey: 'video_compressor.title', descriptionKey: 'video_compressor.description' },
+    { path: '/video-trimmer', titleKey: 'video_trimmer.title', descriptionKey: 'video_trimmer.description' },
+    { path: '/audio-trimmer', titleKey: 'audio_trimmer.title', descriptionKey: 'audio_trimmer.description' },
+    { path: '/md-converter', titleKey: 'md_converter.title', descriptionKey: 'md_converter.description' },
+    { path: '/protect-pdf', titleKey: 'protect_pdf.title', descriptionKey: 'protect_pdf.description' },
+    { path: '/unlock-pdf', titleKey: 'unlock_pdf.title', descriptionKey: 'unlock_pdf.description' }
 ]

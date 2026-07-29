@@ -57,8 +57,8 @@ export interface ReelResultProps {
 
 export interface TopHeaderItem {
     path: string
-    title: string
-    description: string
+    titleKey: string
+    descriptionKey: string
     highlight?: string
 }
 

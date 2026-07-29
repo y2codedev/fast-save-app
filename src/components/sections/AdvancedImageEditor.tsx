@@ -9,6 +9,7 @@ import {
   RotateCw, RotateCcw, Download, ArrowLeft, Sliders, Palette, Zap, Undo, 
   Settings2, ImagePlus, Upload
 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 type Tool = 'resize' | 'crop' | 'mirror' | 'rotate' | 'compress' | 'convert' | 'filter';
 
@@ -21,6 +22,8 @@ function centerAspectCrop(mediaWidth: number, mediaHeight: number, aspect: numbe
 }
 
 export default function AdvancedImageEditor() {
+  const t = useTranslations('ImageEditor');
+  
   const [file, setFile] = useState<File | null>(null);
   const [imageSrc, setImageSrc] = useState<string>('');
   const [undoStack, setUndoStack] = useState<string[]>([]);
@@ -225,22 +228,22 @@ export default function AdvancedImageEditor() {
 
   const renderHowToUse = () => (
     <div className="text-center mb-12 mt-16 max-w-4xl mx-auto px-4">
-      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">How to use the Pro Image Editor</h2>
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">{t('howToTitle')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Upload Image</h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">Select any image from your device to open it in our secure, browser-based editor.</p>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('step1Title')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">{t('step1Desc')}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Edit & Adjust</h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">Use the sidebar tools to resize, crop, rotate, flip, compress, or apply filters.</p>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('step2Title')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">{t('step2Desc')}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
           <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">Save & Download</h3>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">Choose your output format (JPG/PNG/WEBP) and instantly download the final image.</p>
+          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('step3Title')}</h3>
+          <p className="text-gray-600 dark:text-gray-400 text-sm">{t('step3Desc')}</p>
         </div>
       </div>
     </div>
@@ -251,8 +254,8 @@ export default function AdvancedImageEditor() {
       {!file || !imageSrc ? (
         <div className="max-w-3xl mx-auto py-12 px-4">
           <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">Pro Image Editor</h1>
-            <p className="text-lg text-gray-600 dark:text-gray-400">A complete browser-based image editing suite. Resize, crop, filter, and compress your images easily and privately.</p>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">{t('titleMain')}</h1>
+            <p className="text-lg text-gray-600 dark:text-gray-400">{t('subtitle')}</p>
           </div>
           <div className="border-2 border-dashed border-gray-300 dark:border-gray-700 rounded-3xl p-12 text-center hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors cursor-pointer relative mb-16">
             <input 
@@ -264,8 +267,8 @@ export default function AdvancedImageEditor() {
             <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Upload className="w-10 h-10 text-indigo-500" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Upload an Image</h3>
-            <p className="text-gray-500 dark:text-gray-400">Click or drag and drop to start editing</p>
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('uploadTitle')}</h3>
+            <p className="text-gray-500 dark:text-gray-400">{t('uploadDesc')}</p>
           </div>
           {renderHowToUse()}
         </div>
@@ -276,13 +279,23 @@ export default function AdvancedImageEditor() {
             {/* Left Sidebar - Tools */}
             <div className="w-full md:w-24 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex md:flex-col overflow-x-auto md:overflow-y-auto shrink-0">
               <div className="p-4 flex md:flex-col gap-2">
-                {tools.map((t) => {
-                  const Icon = t.icon;
-                  const isActive = activeTool === t.id;
+                {tools.map((tItem) => {
+                  const Icon = tItem.icon;
+                  const isActive = activeTool === tItem.id;
+                  
+                  let label: string = tItem.label;
+                  if (tItem.id === 'resize') label = t('toolResize');
+                  if (tItem.id === 'crop') label = t('toolCrop');
+                  if (tItem.id === 'mirror') label = t('toolMirror');
+                  if (tItem.id === 'rotate') label = t('toolRotate');
+                  if (tItem.id === 'filter') label = t('toolFilters');
+                  if (tItem.id === 'compress') label = t('toolCompress');
+                  if (tItem.id === 'convert') label = t('toolConvert');
+
                   return (
                     <button
-                      key={t.id}
-                      onClick={() => setActiveTool(t.id as Tool)}
+                      key={tItem.id}
+                      onClick={() => setActiveTool(tItem.id as Tool)}
                       className={`flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl transition-all min-w-[70px] ${
                         isActive 
                           ? 'bg-indigo-600 text-white shadow-md' 
@@ -290,7 +303,7 @@ export default function AdvancedImageEditor() {
                       }`}
                     >
                       <Icon className="w-5 h-5" />
-                      <span className="text-[10px] font-bold uppercase tracking-wider">{t.label}</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider">{label}</span>
                     </button>
                   )
                 })}
@@ -301,7 +314,7 @@ export default function AdvancedImageEditor() {
             <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 p-6 flex flex-col shrink-0 overflow-y-auto">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
                 <Settings2 className="w-5 h-5 text-indigo-500" />
-                {tools.find(t => t.id === activeTool)?.label} Settings
+                {t('settingsTitle')}
               </h2>
 
               <div className="flex-1">
@@ -309,28 +322,28 @@ export default function AdvancedImageEditor() {
                   {activeTool === 'resize' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">Width (px)</label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">{t('widthLabel')}</label>
                         <input type="number" value={resizeW} onChange={e => handleResizeWChange(Number(e.target.value))} className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white" />
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">Height (px)</label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">{t('heightLabel')}</label>
                         <input type="number" value={resizeH} onChange={e => handleResizeHChange(Number(e.target.value))} className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white" />
                       </div>
                       <label className="flex items-center gap-2 cursor-pointer">
                         <input type="checkbox" checked={keepAspect} onChange={e => setKeepAspect(e.target.checked)} className="rounded text-indigo-600 focus:ring-indigo-500 w-4 h-4" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">Keep Aspect Ratio</span>
+                        <span className="text-sm text-gray-700 dark:text-gray-300">{t('keepAspect')}</span>
                       </label>
                       <button onClick={applyResize} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-xl transition shadow-md hover:shadow-lg">
-                        Apply Resize
+                        {t('applyResize')}
                       </button>
                     </motion.div>
                   )}
 
                   {activeTool === 'crop' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
-                      <p className="text-sm text-gray-600 dark:text-gray-400">Drag on the image to select the area you want to keep.</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{t('cropDesc')}</p>
                       <button onClick={applyCrop} disabled={!completedCrop} className="w-full mt-4 bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 text-white font-bold py-3 px-4 rounded-xl transition shadow-md hover:shadow-lg">
-                        Apply Crop
+                        {t('applyCrop')}
                       </button>
                     </motion.div>
                   )}
@@ -338,10 +351,10 @@ export default function AdvancedImageEditor() {
                   {activeTool === 'mirror' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
                       <button onClick={() => applyFlip(true, false)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
-                        <FlipHorizontal className="w-5 h-5" /> Flip Horizontal
+                        <FlipHorizontal className="w-5 h-5" /> {t('flipHoriz')}
                       </button>
                       <button onClick={() => applyFlip(false, true)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
-                        <FlipVertical className="w-5 h-5" /> Flip Vertical
+                        <FlipVertical className="w-5 h-5" /> {t('flipVert')}
                       </button>
                     </motion.div>
                   )}
@@ -349,10 +362,10 @@ export default function AdvancedImageEditor() {
                   {activeTool === 'rotate' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
                       <button onClick={() => applyRotate(90)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
-                        <RotateCw className="w-5 h-5" /> Rotate 90° CW
+                        <RotateCw className="w-5 h-5" /> {t('rotateCw')}
                       </button>
                       <button onClick={() => applyRotate(270)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
-                        <RotateCcw className="w-5 h-5" /> Rotate 90° CCW
+                        <RotateCcw className="w-5 h-5" /> {t('rotateCcw')}
                       </button>
                     </motion.div>
                   )}
@@ -360,10 +373,10 @@ export default function AdvancedImageEditor() {
                   {activeTool === 'filter' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
                       <button onClick={() => applyFilter('grayscale')} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
-                        Grayscale (B&W)
+                        {t('grayscale')}
                       </button>
                       <button onClick={() => applyFilter('pixelate')} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
-                        Pixelate
+                        {t('pixelate')}
                       </button>
                     </motion.div>
                   )}
@@ -371,7 +384,7 @@ export default function AdvancedImageEditor() {
                   {(activeTool === 'compress' || activeTool === 'convert') && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">Output Format</label>
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5 block">{t('outFormat')}</label>
                         <select value={outFormat} onChange={e => setOutFormat(e.target.value)} className="w-full bg-gray-50 dark:bg-gray-900 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5 outline-none focus:ring-2 focus:ring-indigo-500 dark:text-white cursor-pointer">
                           <option value="image/jpeg">JPG</option>
                           <option value="image/png">PNG</option>
@@ -382,7 +395,7 @@ export default function AdvancedImageEditor() {
                       {outFormat !== 'image/png' && (
                         <div>
                           <div className="flex items-center justify-between mb-1.5">
-                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 block">Quality</label>
+                            <label className="text-sm font-medium text-gray-700 dark:text-gray-300 block">{t('quality')}</label>
                             <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">{quality}%</span>
                           </div>
                           <input 
@@ -390,7 +403,7 @@ export default function AdvancedImageEditor() {
                             onChange={e => setQuality(Number(e.target.value))} 
                             className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-indigo-600"
                           />
-                          <p className="text-xs text-gray-500 mt-2">Adjust quality to reduce file size. Applied upon downloading.</p>
+                          <p className="text-xs text-gray-500 mt-2">{t('qualityDesc')}</p>
                         </div>
                       )}
                     </motion.div>
@@ -404,19 +417,19 @@ export default function AdvancedImageEditor() {
                   disabled={undoStack.length === 0}
                   className="w-full flex items-center justify-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Undo className="w-5 h-5" /> Undo Change
+                  <Undo className="w-5 h-5" /> {t('undo')}
                 </button>
                 <button 
                   onClick={handleDownload}
                   className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-4 px-4 rounded-xl transition shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                 >
-                  <Download className="w-5 h-5" /> Download Image
+                  <Download className="w-5 h-5" /> {t('download')}
                 </button>
                 <button 
                   onClick={() => { setFile(null); setImageSrc(''); }}
                   className="w-full flex items-center justify-center gap-2 text-gray-500 hover:text-gray-800 dark:hover:text-white font-semibold py-2 transition"
                 >
-                  <ArrowLeft className="w-4 h-4" /> Back to Upload
+                  <ArrowLeft className="w-4 h-4" /> {t('back')}
                 </button>
               </div>
             </div>

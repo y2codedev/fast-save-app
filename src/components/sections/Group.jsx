@@ -5,7 +5,7 @@ import DownloadSteps from "@/components/sections/DownloadSteps";
 import DownloadForm from "@/components/sections/DownloadForm";
 import HomeSEOContent from "@/components/sections/HomeSEOContent";
 import AdsenseAd from "@/components/AdsenseAd";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 
 const Group = () => {
     const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID;

@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 const ALL_TOOLS = [
     { name: 'Social Downloader', path: '/' },
@@ -27,20 +28,21 @@ const ALL_TOOLS = [
 export default function ExploreOtherTools() {
   const pathname = usePathname();
   const toolsToShow = ALL_TOOLS.filter(t => t.path !== pathname);
+  const t = useTranslations('Explore');
 
   return (
     <div className="text-center mt-12 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
       <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Explore More Tools
+              {t('Explore More Tools')}
           </h3>
           <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-              Done with your media? Check out our other dedicated tools for downloading, converting, and compressing files.
+              {t('Explore subtitle')}
           </p>
           <div className="flex flex-wrap justify-center gap-3">
               {toolsToShow.map(tool => (
                   <Link key={tool.name} href={tool.path} className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 hover:bg-indigo-50 dark:hover:bg-gray-600 text-gray-800 dark:text-white px-5 py-2.5 rounded-full text-sm font-medium transition-all shadow-sm border border-gray-200 dark:border-gray-600 hover:border-indigo-300 hover:-translate-y-1">
-                      {tool.name}
+                      {t(tool.name)}
                   </Link>
               ))}
           </div>

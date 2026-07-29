@@ -5,8 +5,10 @@ import { useRef, useState } from "react";
 import { FiUpload, FiFileText, FiDownload, FiCheck, FiFile } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { marked } from "marked";
+import { useTranslations } from 'next-intl';
 
 function MdConverter() {
+  const t = useTranslations('MdConverter');
   const [isLoading, setIsLoading] = useState(false);
   const [mdFile, setMdFile] = useState<File | null>(null);
   const [htmlContent, setHtmlContent] = useState<string>("");
@@ -103,15 +105,15 @@ function MdConverter() {
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiFileText className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Markdown to PDF & Word
+              {t('titleBadge')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Convert Markdown Files
-            <span className="block text-indigo-600 dark:text-indigo-400">Instantly & Securely</span>
+            {t('titleMain')}
+            <span className="block text-indigo-600 dark:text-indigo-400"> {t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Transform your raw .md files into beautifully formatted PDF or DOCX documents right in your browser. No data leaves your device.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -124,8 +126,8 @@ function MdConverter() {
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
-                { step: 'upload', label: 'Upload .md File', icon: FiUpload },
-                { step: 'preview', label: 'Preview & Export', icon: FiFileText }
+                { step: 'upload', label: t('step1'), icon: FiUpload },
+                { step: 'preview', label: t('step2'), icon: FiFileText }
               ].map(({ step, label, icon: Icon }, index) => (
                 <div key={step} className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
@@ -179,7 +181,7 @@ function MdConverter() {
                   )}
                 </div>
                 <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                  {conversionStep === 'preview' ? 'Export Document' : 'Upload Markdown'}
+                  {conversionStep === 'preview' ? t('exportDocTitle') : t('uploadTitle')}
                 </h2>
               </div>
 
@@ -195,8 +197,8 @@ function MdConverter() {
                     <FileUploader 
                       videoFile={mdFile} 
                       handleFileChange={handleFileChange} 
-                      title="Select Document File"
-                      subtitle=".md or .txt files (Max 5MB)"
+                      title={t('selectDocTitle')}
+                      subtitle={t('selectDocSubtitle')}
                       accept={{ 'text/markdown': ['.md'], 'text/plain': ['.txt'] }}
                     />
                   </motion.div>
@@ -215,7 +217,7 @@ function MdConverter() {
                         <FiFileText className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
                         <div className="min-w-0 flex-1">
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            File Parsed Successfully
+                            {t('fileParsedMsg')}
                           </p>
                           <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
                             <span className="truncate block" title={mdFile.name}>{mdFile.name}</span>
@@ -233,8 +235,8 @@ function MdConverter() {
                         disabled={isLoading}
                         className="w-full inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-red-600 hover:bg-red-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
                       >
-                        {isLoading ? "Processing..." : (
-                           <><FiDownload className="w-5 h-5" /> Export as PDF</>
+                        {isLoading ? t('processingBtn') : (
+                           <><FiDownload className="w-5 h-5" /> {t('exportPdfBtn')}</>
                         )}
                       </button>
 
@@ -243,8 +245,8 @@ function MdConverter() {
                         disabled={isLoading}
                         className="w-full inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
                       >
-                        {isLoading ? "Processing..." : (
-                           <><FiDownload className="w-5 h-5" /> Export as Word (DOCX)</>
+                        {isLoading ? t('processingBtn') : (
+                           <><FiDownload className="w-5 h-5" /> {t('exportWordBtn')}</>
                         )}
                       </button>
 
@@ -253,7 +255,7 @@ function MdConverter() {
                         disabled={isLoading}
                         className="w-full inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-3 px-4 rounded-xl text-sm transition-all duration-300 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        Choose Different File
+                        {t('chooseDiffBtn')}
                       </button>
                     </div>
                   </motion.div>
@@ -271,7 +273,7 @@ function MdConverter() {
           >
             <div className="relative bg-white dark:bg-gray-50 backdrop-blur-xl rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50 h-[600px] flex flex-col overflow-hidden">
               <div className="bg-gray-100 dark:bg-gray-200 border-b border-gray-300 px-4 py-2 flex items-center justify-center text-sm font-medium text-gray-600">
-                Document Preview
+                {t('docPreviewTitle')}
               </div>
               <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
                 {htmlContent ? (
@@ -283,8 +285,8 @@ function MdConverter() {
                 ) : (
                   <div className="h-full flex flex-col items-center justify-center text-gray-400">
                     <FiFileText className="h-20 w-20 mx-auto mb-4 opacity-30" />
-                    <p className="text-lg font-medium">Your Document Preview</p>
-                    <p className="text-sm">will appear here after upload</p>
+                    <p className="text-lg font-medium">{t('previewEmptyTitle')}</p>
+                    <p className="text-sm">{t('previewEmptySubtitle')}</p>
                   </div>
                 )}
               </div>

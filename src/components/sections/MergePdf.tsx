@@ -5,8 +5,10 @@ import { useDropzone } from 'react-dropzone';
 import { PDFDocument } from 'pdf-lib';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, UploadCloud, X, ArrowUp, ArrowDown, Download, AlertCircle, FilePlus } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function MergePdf() {
+  const t = useTranslations('MergePdf');
   const [files, setFiles] = useState<File[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,10 +89,10 @@ export default function MergePdf() {
             <Layers className="w-8 h-8 text-rose-600 dark:text-rose-400" />
         </div>
         <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
-            Merge PDF Files
+            {t('titleMain')}
         </h2>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Combine multiple PDF files into a single document. Drag and drop to reorder the files before merging. Completely secure and processed directly in your browser.
+            {t('subtitle')}
         </p>
       </div>
 
@@ -106,7 +108,7 @@ export default function MergePdf() {
           </div>
           <div>
             <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
-              {isDragActive ? "Drop PDF files here" : "Click to upload or drag & drop PDFs"}
+              {isDragActive ? t('uploadDesc') : t('uploadTitle')}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
               Only .pdf files are supported.
@@ -126,7 +128,7 @@ export default function MergePdf() {
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 space-y-6">
           <div className="flex items-center justify-between">
             <h3 className="text-lg font-bold text-gray-900 dark:text-white">Selected Files ({files.length})</h3>
-            <span className="text-sm text-gray-500 dark:text-gray-400 hidden sm:block">Order them exactly as you want them merged</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400 hidden sm:block">{t('tip1')}</span>
           </div>
           
           <div className="space-y-3">
@@ -180,12 +182,12 @@ export default function MergePdf() {
               {loading ? (
                 <div className="flex items-center gap-3">
                   <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Merging PDFs...</span>
+                  <span>{t('mergingBtn')}</span>
                 </div>
               ) : (
                 <>
                   <FilePlus className="w-5 h-5" />
-                  <span>Merge {files.length} PDFs</span>
+                  <span>{t('mergeBtn')}</span>
                 </>
               )}
             </button>
@@ -197,13 +199,13 @@ export default function MergePdf() {
                 className="w-full sm:flex-1 flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5"
               >
                 <Download className="w-5 h-5" />
-                <span>Download Merged PDF</span>
+                <span>{t('downloadBtn')}</span>
               </a>
               <button 
                 onClick={() => { setFiles([]); setMergedPdfUrl(null); }}
                 className="w-full sm:flex-1 py-4 px-6 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold rounded-xl shadow-sm transition-colors border border-gray-200 dark:border-gray-700"
               >
-                Start Over
+                {t('mergeAnother')}
               </button>
             </div>
           )}
@@ -217,27 +219,27 @@ export default function MergePdf() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}
       >
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to merge PDF files?</h3>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white">Upload PDFs</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop multiple PDF files. You can select multiple documents at once for merging.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white">Arrange Order</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Drag and drop the uploaded PDF files in the list to arrange them in the exact sequence you want them merged.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
             <div>
-              <h4 className="font-semibold text-gray-900 dark:text-white">Merge & Download</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Merge PDFs' and wait a few seconds. A combined high-quality PDF will be instantly available for download.</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>
             </div>
           </div>
         </div>

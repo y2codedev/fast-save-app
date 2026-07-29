@@ -3,12 +3,14 @@
 import Link from 'next/link';
 import { FooterProps, DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS } from '@/constants';
 import AppLogo from '@/components/AppLogo';
+import { useTranslations } from 'next-intl';
 
 const Footer = ({
   year = new Date().getFullYear(),
   socialLinks = DEFAULT_SOCIAL_LINKS,
   legalLinks = DEFAULT_LEGAL_LINKS
 }: FooterProps) => {
+  const t = useTranslations('Footer');
   return (
     <footer className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-t border-gray-200/50 dark:border-gray-700/50 mt-auto">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -22,7 +24,7 @@ const Footer = ({
               </div>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 md:ml-4">
-              &copy; {year} FastSave All rights reserved.
+              &copy; {year} FastSave {t('All rights reserved.')}
             </p>
           </div>
 
@@ -49,7 +51,7 @@ const Footer = ({
                 href={link?.href}
                 className="text-sm text-gray-500 underline transition-colors duration-200"
               >
-                {link?.label}
+                {t(link?.label)}
               </Link>
             ))}
           </nav>

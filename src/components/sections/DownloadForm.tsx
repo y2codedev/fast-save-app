@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { ReelResult, Toast, Button, InputField, ResetButton } from '@/constants';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 import { TopHeader_Item } from '@/constants/data';
 import { Sparkles, Link2, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 export default function DownloadForm() {
   const [url, setUrl] = useState('');
@@ -14,13 +15,14 @@ export default function DownloadForm() {
   const [isSaving, setIsSaving] = useState(false);
   const pathName = usePathname();
   const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item?.path === '')!;
+  const t = useTranslations('Form');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
     if (!url) {
-      Toast('error', 'Please enter a URL.');
+      Toast('error', t('Please enter a URL.'));
       setIsLoading(false);
       return;
     }
@@ -48,7 +50,7 @@ export default function DownloadForm() {
     };
 
     if (!isValidPlatform(trimmedUrl)) {
-      Toast('error', 'Please enter a valid social media URL (e.g., Instagram, Facebook, Snapchat)');
+      Toast('error', t('Please enter a valid social media URL'));
       setIsLoading(false);
       return;
     }
@@ -78,7 +80,7 @@ export default function DownloadForm() {
         'error',
         err instanceof Error
           ? err.message
-          : 'Network error. Please check your connection and try again.'
+          : t('Network error')
       );
     } finally {
       setIsLoading(false);
@@ -111,7 +113,7 @@ export default function DownloadForm() {
                 type="text"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
-                placeholder={`Paste your ${urlPath?.highlight || 'media'} link here...`}
+                placeholder={`${t('Paste your')} ${urlPath?.highlight || t('media')} ${t('link here')}...`}
                 className="w-full bg-transparent border-none text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none text-lg py-3"
               />
               {url && (
@@ -120,7 +122,7 @@ export default function DownloadForm() {
                   onClick={resetForm}
                   className="pr-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
-                  Clear
+                  {t('Clear')}
                 </button>
               )}
             </div>
@@ -134,7 +136,7 @@ export default function DownloadForm() {
                 : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30 hover:-translate-y-1'
               }`}
             >
-              {isLoading ? "Processing..." : "Download"}
+              {isLoading ? t('Processing...') : t('Download')}
               {!isLoading && <Download className="h-5 w-5" />}
             </button>
           </motion.form>
@@ -148,15 +150,15 @@ export default function DownloadForm() {
           >
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
-              <span>No Watermark</span>
+              <span>{t('No Watermark')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-indigo-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
-              <span>High Quality</span>
+              <span>{t('High Quality')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-violet-500 rounded-full shadow-[0_0_8px_rgba(139,92,246,0.5)]"></div>
-              <span>Fast Download</span>
+              <span>{t('Fast Download')}</span>
             </div>
           </motion.div>
         </div>

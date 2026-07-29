@@ -5,8 +5,10 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import { FiUpload, FiDownload, FiCheck, FiScissors, FiFilm, FiVideo, FiPlay, FiPause } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 function VideoTrimmer() {
+  const t = useTranslations('VideoTrimmer');
   const ffmpegRef = useRef<any>(null);
   const [loaded, setLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -276,15 +278,15 @@ function VideoTrimmer() {
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiScissors className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Pro Video Trimmer
+              {t('titleBadge')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Cut & Trim Videos
-            <span className="block text-indigo-600 dark:text-indigo-400">Visually & Instantly</span>
+            {t('titleMain')}
+            <span className="block text-indigo-600 dark:text-indigo-400">{t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Drag the handles to select the perfect moment. No upload wait times, everything happens in your browser.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -342,7 +344,7 @@ function VideoTrimmer() {
                   <div>
                     <span className="text-xs uppercase tracking-wider text-indigo-400 font-semibold block flex items-center gap-2">
                       <FiVideo className="w-3.5 h-3.5" />
-                      Trim Preview
+                      {t('trimPreview')}
                     </span>
                     <span className="text-sm text-gray-300 font-mono mt-0.5 block">
                       {formatPlaybackTime(relativeCurrentTime)} / {formatPlaybackTime(trimmedLength)}
@@ -350,7 +352,7 @@ function VideoTrimmer() {
                   </div>
                 </div>
                 <div className="text-right hidden sm:block">
-                  <span className="text-xs text-gray-400 block">Trimmed Length</span>
+                  <span className="text-xs text-gray-400 block">{t('trimmedLength')}</span>
                   <span className="text-sm font-mono font-medium text-indigo-300">
                     {formatPlaybackTime(trimmedLength)}
                   </span>
@@ -400,22 +402,22 @@ function VideoTrimmer() {
             <div className="px-4 mb-8">
               <div className="flex justify-between items-center mb-3">
                 <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                  Trim Selection Handles
+                  {t('trimSelectionHandles')}
                 </span>
                 <span className="text-xs text-gray-400">
-                  Full Video: {formatTime(duration)}
+                  {t('fullVideo')} {formatTime(duration)}
                 </span>
               </div>
               
               <div className="flex justify-between items-center mb-4">
                 <span className="font-mono text-base font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
-                  Start: {formatTime(startTime)}
+                  {t('startLabel')} {formatTime(startTime)}
                 </span>
                 <span className="text-xs font-medium text-gray-500">
-                  Duration: {formatTime(endTime - startTime)}
+                  {t('durationLabel')} {formatTime(endTime - startTime)}
                 </span>
                 <span className="font-mono text-base font-semibold text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/30 px-3 py-1 rounded-lg">
-                  End: {formatTime(endTime)}
+                  {t('endLabel')} {formatTime(endTime)}
                 </span>
               </div>
               
@@ -507,7 +509,7 @@ function VideoTrimmer() {
                 onClick={resetConverter}
                 className="text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 font-medium transition-colors"
               >
-                Cancel
+                {t('cancel')}
               </button>
               
               <p ref={messageRef} className="text-sm text-indigo-500 font-mono line-clamp-1 flex-1 text-center px-4"></p>
@@ -515,7 +517,7 @@ function VideoTrimmer() {
               <Button
                 onClick={trimVideo}
                 isProcessing={isLoading}
-                label={isLoading ? "Processing..." : "Cut Video Now"}
+                label={isLoading ? t('processing') : t('cutVideoNow')}
                 className="w-full sm:w-auto px-8"
               />
             </div>
@@ -549,10 +551,10 @@ function VideoTrimmer() {
                         <FiCheck className="h-8 w-8 text-green-600 dark:text-green-400" />
                       </div>
                       <h3 className="text-2xl font-bold text-green-800 dark:text-green-200 mb-2">
-                        Trim Successful!
+                        {t('successTitle')}
                       </h3>
                       <p className="text-green-700 dark:text-green-300">
-                        Your cut video is ready. We saved exactly what you selected.
+                        {t('successDesc')}
                       </p>
                     </div>
 
@@ -563,13 +565,13 @@ function VideoTrimmer() {
                         className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-lg"
                       >
                         <FiDownload className="h-6 w-6" />
-                        Download Video
+                        {t('downloadBtn')}
                       </a>
                       <button
                         onClick={resetConverter}
                         className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg"
                       >
-                        Trim Another
+                        {t('trimAnotherBtn')}
                       </button>
                     </div>
                   </div>
@@ -586,27 +588,27 @@ function VideoTrimmer() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to trim Videos?</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Video</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Select or drag & drop the video you want to cut. We support MP4, MOV, WEBM and more formats natively.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Select Range</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Use the timeline sliders to choose your start and end points. You can also manually enter the exact timestamps.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Trim & Download</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Trim Video'. The clip will be processed instantly without any quality loss, ready for you to download!</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>
               </div>
             </div>
           </div>

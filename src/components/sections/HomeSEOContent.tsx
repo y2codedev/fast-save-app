@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ShieldCheck, Zap, Sparkles, Lock, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 const faqs = [
   {
@@ -47,6 +48,7 @@ const features = [
 
 export default function HomeSEOContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const t = useTranslations('HomeSEO');
 
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 space-y-24">
@@ -55,13 +57,13 @@ export default function HomeSEOContent() {
       <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
-            What is FastSave?
+            {t('What is FastSave?')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-            FastSave is a comprehensive, 100% free online media utility suite. We provide over 20+ professional tools designed to help you edit images, convert PDFs, trim audio files, and process videos directly in your web browser. 
+            {t('What is desc 1')}
           </p>
           <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-            Unlike traditional software that requires heavy downloads, installations, and expensive subscriptions, FastSave leverages modern web technologies (like WebAssembly) to bring desktop-class editing capabilities right to your browser. It is incredibly fast, universally accessible, and completely safe since your files never need to be uploaded to external servers.
+            {t('What is desc 2')}
           </p>
         </div>
       </div>
@@ -70,10 +72,10 @@ export default function HomeSEOContent() {
       <div>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
-            Why Choose FastSave?
+            {t('Why Choose FastSave?')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            We built FastSave to be the only media suite you'll ever need. Here is why users around the world trust our platform for their daily tasks.
+            {t('Why Choose desc')}
           </p>
         </div>
 
@@ -84,10 +86,10 @@ export default function HomeSEOContent() {
                 <feature.icon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                {feature.title}
+                {t(feature.title)}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                {feature.description}
+                {t(feature.description)}
               </p>
             </div>
           ))}
@@ -102,12 +104,10 @@ export default function HomeSEOContent() {
         <div className="relative z-10 max-w-3xl">
           <div className="flex items-center gap-3 mb-4">
             <ShieldCheck className="w-8 h-8 text-indigo-200" />
-            <h2 className="text-2xl md:text-3xl font-bold">Your Privacy is 100% Guaranteed</h2>
+            <h2 className="text-2xl md:text-3xl font-bold">{t('Your Privacy is Guaranteed')}</h2>
           </div>
           <p className="text-indigo-100 text-lg leading-relaxed mb-6">
-            Unlike other platforms that keep copies of your documents, FastSave is built on a privacy-first architecture. 
-            When you use tools like our PDF to JPG converter or Video Compressor, the processing happens directly inside your own web browser. 
-            No files are uploaded to our servers, ensuring your sensitive data never leaves your device.
+            {t('Privacy desc')}
           </p>
         </div>
       </div>
@@ -116,10 +116,10 @@ export default function HomeSEOContent() {
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
-            Frequently Asked Questions
+            {t('Frequently Asked Questions')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400">
-            Got questions? We have answers. Here is everything you need to know about using FastSave.
+            {t('FAQ desc')}
           </p>
         </div>
 
@@ -134,7 +134,7 @@ export default function HomeSEOContent() {
                 className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
               >
                 <span className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
-                  {faq.question}
+                  {t(faq.question)}
                 </span>
                 <ChevronDown 
                   className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-indigo-600' : ''}`} 
@@ -150,7 +150,7 @@ export default function HomeSEOContent() {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
-                      {faq.answer}
+                      {t(faq.answer)}
                     </div>
                   </motion.div>
                 )}

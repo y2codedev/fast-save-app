@@ -1,13 +1,15 @@
 'use client';
 
 import { STEP, TopHeader_Item } from "@/constants/data";
-import { usePathname } from "next/navigation";
+import { usePathname } from "@/i18n/routing";
 import { motion } from 'framer-motion';
 import { ArrowRight } from "lucide-react";
+import { useTranslations } from 'next-intl';
 
 export default function DownloadSteps() {
     const pathName = usePathname();
     const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item.path === '')!;
+    const t = useTranslations('Steps');
 
     const containerVariants = {
         hidden: { opacity: 0 },
@@ -38,17 +40,17 @@ export default function DownloadSteps() {
                 >
                     <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/30 rounded-full px-4 py-2 mb-6 border border-indigo-100 dark:border-indigo-800">
                         <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
-                            Simple Process
+                            {t('Simple Process')}
                         </span>
                     </div>
                     <h2 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6">
-                        How to Download
+                        {t('How to Download')}
                         <span className="block text-indigo-600 mt-2">
-                            {urlPath?.highlight} Videos
+                            {urlPath?.highlight} {t('Videos')}
                         </span>
                     </h2>
                     <p className="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
-                        Our streamlined process makes it incredibly easy to download your favorite media in just a few clicks.
+                        {t('Our streamlined process')}
                     </p>
                 </motion.div>
 
@@ -76,10 +78,10 @@ export default function DownloadSteps() {
                                         <step.icon className="h-7 w-7" aria-hidden="true" />
                                     </div>
                                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                                        {step?.name}
+                                        {t(step?.name)}
                                     </h3>
                                     <p className="text-gray-500 dark:text-gray-400 leading-relaxed text-sm flex-grow">
-                                        {step?.description}
+                                        {t(step?.description)}
                                     </p>
                                 </div>
                             </div>
@@ -104,16 +106,16 @@ export default function DownloadSteps() {
                 >
                     <div className="bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-gray-800 dark:to-gray-800 rounded-3xl p-10 md:p-12 border border-indigo-100 dark:border-gray-700">
                         <h3 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                            Ready to save your media?
+                            {t('Ready to save your media?')}
                         </h3>
                         <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto">
-                            Join millions of users who trust our platform for fast, secure, and high-quality downloads.
+                            {t('Join millions of users')}
                         </p>
                         <a 
                             href="#download-section" 
                             className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:-translate-y-1"
                         >
-                            Start Downloading
+                            {t('Start Downloading')}
                             <ArrowRight className="w-5 h-5" />
                         </a>
                     </div>

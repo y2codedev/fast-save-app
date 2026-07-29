@@ -5,8 +5,10 @@ import { useRef, useState, useEffect } from "react";
 import { FiUpload, FiVideo, FiDownload, FiCheck, FiMinimize, FiFilm, FiScissors } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 function VideoCompressor() {
+  const t = useTranslations('VideoCompressor');
   const ffmpegRef = useRef<any>(null);
   const [loaded, setLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -165,15 +167,15 @@ function VideoCompressor() {
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiMinimize className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Smart Video Compressor
+              {t('titleBadge')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Compress Videos
-            <span className="block text-indigo-600 dark:text-indigo-400">Reduce File Size Free</span>
+            {t('titleMain')}
+            <span className="block text-indigo-600 dark:text-indigo-400">{t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Shrink your video files directly in your browser. Maintain quality while saving storage space.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -186,9 +188,9 @@ function VideoCompressor() {
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 border border-white/20 dark:border-gray-700/50">
            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
-                { step: 'upload', label: 'Upload Video', icon: FiUpload },
-                { step: 'convert', label: 'Compress', icon: FiMinimize },
-                { step: 'complete', label: 'Download', icon: FiDownload },
+                { step: 'upload', label: t('step1'), icon: FiUpload },
+                { step: 'convert', label: t('step2'), icon: FiMinimize },
+                { step: 'complete', label: t('step3'), icon: FiDownload },
               ].map(({ step, label, icon: Icon }, index) => (
                 <div key={step} className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
@@ -246,10 +248,10 @@ function VideoCompressor() {
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                   {conversionStep === 'complete' 
-                    ? 'Compression Complete' 
+                    ? t('statusComplete') 
                     : conversionStep === 'convert' 
-                    ? 'Ready to Compress' 
-                    : 'Upload Video'}
+                    ? t('statusReady') 
+                    : t('statusUpload')}
                 </h2>
               </div>
 
@@ -264,7 +266,7 @@ function VideoCompressor() {
                   >
                     <FileUploader videoFile={videoFile} handleFileChange={handleFileChange} />
                     <div className="text-center text-gray-500 dark:text-gray-400">
-                      <p>Supported formats: MP4, AVI, MOV, WEBM (Max size depends on your RAM)</p>
+                      <p>{t('supportedFormats')}</p>
                     </div>
                   </motion.div>
                 )}
@@ -282,7 +284,7 @@ function VideoCompressor() {
                         <FiVideo className="h-5 w-5 text-indigo-600" />
                         <div>
                           <p className="font-medium text-indigo-800 dark:text-indigo-200">
-                            Original File
+                            {t('originalFile')}
                           </p>
                           <p className="text-sm text-indigo-700 dark:text-indigo-300 mt-1">
                             {videoFile.name} ({formatSize(videoFile.size)})
@@ -292,12 +294,12 @@ function VideoCompressor() {
                     </div>
 
                     <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm">
-                      <p className="font-semibold text-gray-900 dark:text-white mb-3">Target Compression</p>
+                      <p className="font-semibold text-gray-900 dark:text-white mb-3">{t('targetCompression')}</p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         {[
-                          { id: 'light', label: 'Light', desc: '~30% Smaller' },
-                          { id: 'balanced', label: 'Balanced', desc: '~50% Smaller' },
-                          { id: 'strong', label: 'Strong', desc: '~70% Smaller' },
+                          { id: 'light', label: t('lightLabel'), desc: t('lightDesc') },
+                          { id: 'balanced', label: t('balancedLabel'), desc: t('balancedDesc') },
+                          { id: 'strong', label: t('strongLabel'), desc: t('strongDesc') },
                         ].map(level => (
                           <button
                             key={level.id}
@@ -314,7 +316,7 @@ function VideoCompressor() {
                     {isLoading && progress > 0 && (
                       <div className="space-y-2">
                         <div className="flex justify-between text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <span>Compressing...</span>
+                          <span>{t('compressingStatus')}</span>
                           <span>{progress}%</span>
                         </div>
                         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
@@ -340,7 +342,7 @@ function VideoCompressor() {
                                 Compressing...
                             </>
                         ) : (
-                            "Compress Video Now"
+                            t('compressBtn')
                         )}
                       </button>
 
@@ -350,7 +352,7 @@ function VideoCompressor() {
                         className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiUpload className="w-4 h-4" />
-                        Choose Different File
+                        {t('chooseDiffBtn')}
                       </button>
                     </div>
                   </motion.div>
@@ -369,23 +371,23 @@ function VideoCompressor() {
                         <FiCheck className="h-5 w-5 text-green-600 flex-shrink-0" />
                         <div className="w-full">
                           <p className="font-medium text-green-800 dark:text-green-200 mb-2">
-                            Compression Successful!
+                            {t('successTitle')}
                           </p>
                           <div className="grid grid-cols-2 gap-4 mt-2 bg-white/50 dark:bg-black/20 p-3 rounded-lg border border-green-100 dark:border-green-900/50">
                             <div>
-                              <p className="text-xs text-green-600 dark:text-green-400">Original Size</p>
+                              <p className="text-xs text-green-600 dark:text-green-400">{t('originalSize')}</p>
                               <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{formatSize(videoFile!.size)}</p>
                             </div>
                             <div>
-                              <p className="text-xs text-green-600 dark:text-green-400">New Size</p>
-                              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{compressedSize ? formatSize(compressedSize) : 'Unknown'}</p>
+                              <p className="text-xs text-green-600 dark:text-green-400">{t('newSize')}</p>
+                              <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">{compressedSize ? formatSize(compressedSize) : t('unknown')}</p>
                             </div>
                           </div>
                           {compressedSize && (
                             <p className={`text-sm mt-3 font-medium ${compressedSize > videoFile!.size ? 'text-orange-600 dark:text-orange-400' : 'text-green-700 dark:text-green-300'}`}>
                               {compressedSize > videoFile!.size 
-                                ? `File size increased by ${Math.round((compressedSize / videoFile!.size - 1) * 100)}% (Original was already highly optimized)`
-                                : `Saved ${Math.round((1 - compressedSize / videoFile!.size) * 100)}% of file size!`
+                                ? `${t('sizeIncreased')} ${Math.round((compressedSize / videoFile!.size - 1) * 100)}%`
+                                : `${t('sizeSaved')} ${Math.round((1 - compressedSize / videoFile!.size) * 100)}%`
                               }
                             </p>
                           )}
@@ -400,13 +402,13 @@ function VideoCompressor() {
                         className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                       >
                         <FiDownload className="h-5 w-5" />
-                        Save Video
+                        {t('saveBtn')}
                       </a>
                       <button
                         onClick={resetConverter}
                         className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3 px-6 rounded-xl transition-all duration-300"
                       >
-                        Compress New
+                        {t('compressNewBtn')}
                       </button>
                     </div>
                   </motion.div>
@@ -431,7 +433,7 @@ function VideoCompressor() {
               ) : (
                 <div className="text-center text-gray-400">
                   <FiVideo className="h-20 w-20 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">Your Compressed Video Preview<br/>will appear here</p>
+                  <p className="text-lg">{t('previewPlaceholder1')}<br/>{t('previewPlaceholder2')}</p>
                 </div>
               )}
             </div>
@@ -445,27 +447,27 @@ function VideoCompressor() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to compress Videos?</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Video</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your video file. The processing is done entirely on your device, ensuring complete privacy.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo1Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Choose Compression Level</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Select the desired quality (High, Medium, Low, or Custom) to balance between file size reduction and video clarity.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo2Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Compress & Save</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click 'Start Compression' and watch the magic happen. Compare the before & after sizes, then download your optimized video!</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo3Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo3Desc')}</p>
               </div>
             </div>
           </div>

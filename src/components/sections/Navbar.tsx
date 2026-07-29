@@ -2,7 +2,7 @@
 
 import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { MEGA_MENU_ITEMS } from '@/constants/data';
 import { useState, useEffect } from 'react';
@@ -11,8 +11,11 @@ import { ChevronDownIcon, Sparkles } from 'lucide-react';
 import ShareDialog from '@/components/ui/ShareDialog';
 import AppLogo from '@/components/AppLogo';
 import { motion, AnimatePresence } from 'framer-motion';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useTranslations } from 'next-intl';
 
 const MobileMenuCategory = ({ category, pathname, setMobileMenuOpen }: any) => {
+  const t = useTranslations('Navigation');
   const [isOpen, setIsOpen] = useState(false);
   const isActiveCat = category.items.some((t: any) => t.path === pathname);
   
@@ -27,7 +30,7 @@ const MobileMenuCategory = ({ category, pathname, setMobileMenuOpen }: any) => {
         onClick={() => setIsOpen(!isOpen)}
         className={`w-full flex items-center justify-between py-3 px-4 rounded-xl font-bold transition-colors ${isActiveCat ? 'bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400' : 'text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800/50'}`}
       >
-        {category.category}
+        {t(category.category)}
         <ChevronDownIcon className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`} />
       </button>
       
@@ -50,7 +53,7 @@ const MobileMenuCategory = ({ category, pathname, setMobileMenuOpen }: any) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <Icon className="w-5 h-5" />
-                    <span>{tool.name}</span>
+                    <span>{t(tool.name)}</span>
                   </Link>
                 </li>
               )
@@ -63,6 +66,7 @@ const MobileMenuCategory = ({ category, pathname, setMobileMenuOpen }: any) => {
 }
 
 const Navbar = () => {
+  const t = useTranslations('Navigation');
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -112,7 +116,7 @@ const Navbar = () => {
                   <span className="text-gray-900 dark:text-white">Fast</span>
                   <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">Save</span>
                 </div>
-                <p className="hidden sm:block text-[10px] text-gray-500 dark:text-gray-400 leading-tight uppercase font-bold tracking-widest mt-0.5">All-in-One Tools</p>
+                <p className="hidden sm:block text-[10px] text-gray-500 dark:text-gray-400 leading-tight uppercase font-bold tracking-widest mt-0.5">{t('All-in-One Tools')}</p>
               </div>
             </Link>
 
@@ -123,7 +127,7 @@ const Navbar = () => {
                 return (
                   <li key={index} className="relative group">
                     <button className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-colors font-bold text-sm ${isActiveCat ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
-                      {category.category}
+                      {t(category.category)}
                       <ChevronDownIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 opacity-70" />
                     </button>
                     
@@ -143,10 +147,10 @@ const Navbar = () => {
                               </div>
                               <div className="pt-0.5">
                                 <div className={`font-bold mb-0.5 text-sm ${isActive ? 'text-indigo-900 dark:text-indigo-200' : 'text-gray-900 dark:text-white group-hover/item:text-indigo-700 dark:group-hover/item:text-indigo-300'}`}>
-                                  {tool.name}
+                                  {t(tool.name)}
                                 </div>
                                 <div className="text-[11px] text-gray-500 dark:text-gray-400 leading-tight">
-                                  {tool.desc}
+                                  {t(tool.desc)}
                                 </div>
                               </div>
                             </Link>
@@ -161,6 +165,7 @@ const Navbar = () => {
 
             {/* Actions & Mobile Menu */}
             <div className="flex items-center gap-1.5 sm:gap-2">
+              <LanguageSwitcher />
               <button
                 type="button"
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -209,7 +214,7 @@ const Navbar = () => {
                         <span className="text-gray-900 dark:text-white">Fast</span>
                         <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">Save</span>
                       </div>
-                      <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-0.5">All-in-One Tools</p>
+                      <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-0.5">{t('All-in-One Tools')}</p>
                     </div>
                   </Link>
 

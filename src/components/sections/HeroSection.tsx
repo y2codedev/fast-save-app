@@ -24,12 +24,14 @@ const itemVariants: Variants = {
   }
 };
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 export default function HeroSection({ children }: { children?: React.ReactNode }) {
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
   const pathName = usePathname();
   const isHome = pathName === '/';
+  const t = useTranslations('Hero');
   
   return (
     <div className="relative px-4">
@@ -59,10 +61,10 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
         {!isHome && (
           <div className="text-center mb-10">
             <h2 className="text-2xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-3">
-              Explore more free tools
+              {t('Explore more free tools')}
             </h2>
             <p className="text-base text-gray-500 dark:text-gray-400">
-              100% free online tools to edit, convert, and download media. No installation needed.
+              {t('Explore subtitle')}
             </p>
           </div>
         )}
@@ -93,112 +95,112 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               href: "/ig-downloader",
               icon: Instagram,
               title: "IG Downloader",
-              description: "Download HD Photos and Reels from Instagram.",
+              description: "Download HD Photos and Reels from Instagram",
               color: "pink"
             },
             {
               href: "/bg-remover",
               icon: Sparkles,
               title: "Remove Background",
-              description: "Instantly remove backgrounds from images with high-precision AI.",
+              description: "Instantly remove backgrounds from images with high-precision AI",
               color: "indigo"
             },
             {
               href: "/image-compressor",
               icon: Zap,
               title: "Compress Image",
-              description: "Reduce image file size while maintaining excellent quality.",
+              description: "Reduce image file size while maintaining excellent quality",
               color: "emerald"
             },
             {
               href: "/image-to-pdf",
               icon: FileImage,
               title: "Image to PDF",
-              description: "Convert multiple images into a single PDF document easily.",
+              description: "Convert multiple images into a single PDF document easily",
               color: "amber"
             },
              {
               href: "/md-converter",
               icon: FileText,
               title: "MD to PDF & Word",
-              description: "Convert Markdown files to PDF or DOCX format securely.",
+              description: "Convert Markdown files to PDF or DOCX format securely",
               color: "indigo"
             },
             {
               href: "/pdf-to-jpg",
               icon: ImagePlus,
               title: "PDF to JPG",
-              description: "Extract high-quality JPG images from any PDF document.",
+              description: "Extract high-quality JPG images from any PDF document",
               color: "cyan"
             },
             {
               href: "/merge-pdf",
               icon: Layers,
               title: "Merge PDF",
-              description: "Combine multiple PDF files into one single document.",
+              description: "Combine multiple PDF files into one single document",
               color: "rose"
             },
             {
               href: "/unlock-pdf",
               icon: Unlock,
               title: "Unlock PDF",
-              description: "Remove passwords from your PDF files securely.",
+              description: "Remove passwords from your PDF files securely",
               color: "violet"
             },
             {
               href: "/protect-pdf",
               icon: Lock,
               title: "Protect PDF",
-              description: "Add password protection to your PDF files.",
+              description: "Add password protection to your PDF files",
               color: "indigo"
             },
             {
               href: "/audio",
               icon: Music,
               title: "Video to Audio",
-              description: "Extract high-quality audio from any video instantly.",
+              description: "Extract high-quality audio from any video instantly",
               color: "fuchsia"
             },
             {
               href: "/audio-trimmer",
               icon: Scissors,
               title: "Audio Trimmer",
-              description: "Cut and trim audio files instantly.",
+              description: "Cut and trim audio files instantly",
               color: "cyan"
             },
             {
               href: "/video-to-gif",
               icon: Film,
               title: "Video to GIF",
-              description: "Convert any video into an animated looping GIF.",
+              description: "Convert any video into an animated looping GIF",
               color: "blue"
             },
             {
               href: "/video-trimmer",
               icon: Scissors,
               title: "Video Trimmer",
-              description: "Cut and trim video clips instantly without losing quality.",
+              description: "Cut and trim video clips instantly without losing quality",
               color: "rose"
             },
             {
               href: "/video-compressor",
               icon: Shrink,
               title: "Video Compressor",
-              description: "Reduce video file size while maintaining quality.",
+              description: "Reduce video file size while maintaining quality",
               color: "emerald"
             },
             {
               href: "/image-editor",
               icon: Sparkles,
               title: "Pro Image Editor",
-              description: "Resize, crop, rotate, and edit images with ease.",
+              description: "Resize, crop, rotate, and edit images with ease",
               color: "pink"
             },
             {
               href: "/photo",
               icon: ImageIcon,
               title: "Image Converter",
-              description: "Convert images between PNG, JPG, WebP and more.",
+              description: "Convert images between PNG, JPG, WebP and more",
               color: "amber"
             },
           ].map((tool, index) => {
@@ -230,8 +232,8 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
                   <div className={`relative z-10 mb-5 ${c.text} group-hover:scale-110 group-hover:-translate-y-1 transition-transform duration-300 ${c.bg} p-4 rounded-2xl`}>
                     <tool.icon className="h-10 w-10" strokeWidth={1.5} />
                   </div>
-                  <h3 className="relative z-10 text-lg font-bold text-gray-900 dark:text-white mb-2">{tool.title}</h3>
-                  <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">{tool.description}</p>
+                  <h3 className="relative z-10 text-lg font-bold text-gray-900 dark:text-white mb-2">{t(tool.title)}</h3>
+                  <p className="relative z-10 text-sm text-gray-600 dark:text-gray-400">{t(tool.description)}</p>
                 </Link>
               </motion.div>
             )
@@ -256,8 +258,8 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               <div className="bg-white/60 dark:bg-gray-700/60 w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-4">
                 <stat.icon className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
               </div>
-              <div className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-1">{stat.value}</div>
-              <div className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">{stat.label}</div>
+              <div className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-1">{t(stat.value)}</div>
+              <div className="text-sm font-medium text-gray-600 dark:text-gray-400 uppercase tracking-wide">{t(stat.label)}</div>
             </motion.div>
           ))}
         </motion.div>

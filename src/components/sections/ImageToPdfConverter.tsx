@@ -9,6 +9,7 @@ import { jsPDF } from "jspdf";
 import { DndContext, closestCenter, KeyboardSensor, MouseSensor, TouchSensor, useSensor, useSensors, DragEndEvent } from '@dnd-kit/core';
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, rectSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import { useTranslations } from 'next-intl';
 
 type PdfImage = {
   id: string;
@@ -57,6 +58,7 @@ function SortableImageItem({ img, index, removeImage }: { img: PdfImage, index: 
 }
 
 export default function ImageToPdfConverter() {
+  const t = useTranslations('ImageToPdf');
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
   const [pdfImages, setPdfImages] = useState<PdfImage[]>([]);
   const [pdfUrl, setPdfUrl] = useState<string | null>(null);
@@ -247,15 +249,15 @@ export default function ImageToPdfConverter() {
           <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiFileText className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Image to PDF Converter
+              {t('titleBadge')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
-            Convert Images into
-            <span className="block text-indigo-600 dark:text-indigo-400">PDF Documents</span>
+            {t('titleMain')}
+            <span className="block text-indigo-600 dark:text-indigo-400"> {t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Merge multiple JPG, PNG, or WEBP images into a single PDF file instantly. Drag and drop to rearrange pages.
+            {t('subtitle')}
           </p>
         </motion.div>
 
@@ -336,8 +338,8 @@ export default function ImageToPdfConverter() {
                   <div className="bg-white dark:bg-gray-700 p-4 rounded-full shadow-sm mb-4 inline-block">
                     <FiUpload className="h-8 w-8 text-indigo-500" />
                   </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Select Images</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">JPG, PNG, or WEBP. You can select multiple files.</p>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{t('uploadTitle')}</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">{t('uploadDesc')}</p>
                 </div>
               ) : (
                 <div className="flex flex-col h-full">
@@ -365,7 +367,7 @@ export default function ImageToPdfConverter() {
                             onClick={() => fileInputRef.current?.click()}
                           >
                             <FiPlus className="w-8 h-8 text-gray-400 mb-2" />
-                            <span className="text-sm font-medium text-gray-500">Add more</span>
+                            <span className="text-sm font-medium text-gray-500">{t('addMoreBtn')}</span>
                           </div>
                         </div>
                       </SortableContext>
@@ -466,12 +468,12 @@ export default function ImageToPdfConverter() {
                     {isGenerating ? (
                       <>
                         <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                        Generating...
+                        {t('convertingBtn')}
                       </>
                     ) : (
                       <>
                         <FiLayers className="h-5 w-5" />
-                        Convert to PDF
+                        {t('convertBtn')}
                       </>
                     )}
                   </button>
@@ -480,7 +482,7 @@ export default function ImageToPdfConverter() {
                 <div className="flex flex-col h-full">
                   <div className="flex items-center justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
                     <FiCheck className="w-5 h-5" />
-                    <span className="font-medium">Success! Your PDF is ready.</span>
+                    <span className="font-medium">{t('resultTitle')} - {t('resultDesc')}</span>
                   </div>
                   
                   <div className="w-full aspect-[4/5] bg-gray-100 dark:bg-gray-900 rounded-xl mb-6 overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center justify-center relative">
@@ -495,7 +497,7 @@ export default function ImageToPdfConverter() {
                       className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                     >
                       <FiDownload className="h-5 w-5" />
-                      Download PDF
+                      {t('downloadBtn')}
                     </a>
                     
                     <button
@@ -513,7 +515,7 @@ export default function ImageToPdfConverter() {
                       onClick={resetConverter}
                       className="w-full inline-flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"
                     >
-                      Create Another
+                      {t('convertAnother')}
                     </button>
                   </div>
                 </div>
@@ -532,18 +534,18 @@ export default function ImageToPdfConverter() {
           {[
             {
               icon: FiLayers,
-              title: "Merge Multiple Images",
-              description: "Select unlimited images and combine them into a single PDF document instantly."
+              title: t('feature1Title'),
+              description: t('feature1Desc')
             },
             {
               icon: FiCheck,
-              title: "100% Client-Side",
-              description: "Everything happens in your browser. Your images are never uploaded to any server."
+              title: t('feature2Title'),
+              description: t('feature2Desc')
             },
             {
               icon: FiImage,
-              title: "Perfect Quality",
-              description: "Images are scaled perfectly to fit A4 size pages without losing their original clarity."
+              title: t('feature3Title'),
+              description: t('feature3Desc')
             }
           ].map((feature, index) => (
             <div key={index} className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl text-center">
@@ -571,27 +573,27 @@ export default function ImageToPdfConverter() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">How to convert Images to PDF?</h3>
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Upload Images</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click the upload area or drag & drop your images (JPG, PNG, WEBP). You can select multiple files at once.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Arrange Order</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Drag and drop the uploaded images to reorder them exactly how you want them to appear in the PDF pages.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
-                <h4 className="font-semibold text-gray-900 dark:text-white">Convert & Download</h4>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Click on 'Generate PDF'. Your images will be instantly combined into a single, high-quality PDF document ready for download.</p>
+                <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>
               </div>
             </div>
           </div>
