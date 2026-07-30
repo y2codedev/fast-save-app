@@ -1,0 +1,18 @@
+export const ALL_TOOLS = [
+  { name: 'Social Downloader', path: '/' },
+  { name: 'Background Remover', path: '/bg-remover' },
+  { name: 'Video Trimmer', path: '/video-trimmer' },
+  { name: 'Image Compressor', path: '/image-compressor' },
+  { name: 'Image Converter', path: '/photo' },
+  { name: 'Markdown to PDF', path: '/md-converter' },
+  { name: 'Video to GIF', path: '/video-to-gif' },
+  { name: 'Audio Converter', path: '/audio' },
+  { name: 'Audio Trimmer', path: '/audio-trimmer' },
+  { name: 'Image to PDF', path: '/image-to-pdf' },
+  { name: 'Video Compressor', path: '/video-compressor' },
+  { name: 'PDF to JPG', path: '/pdf-to-jpg' },
+  { name: 'Merge PDF', path: '/merge-pdf' },
+  { name: 'Unlock PDF', path: '/unlock-pdf' },
+  { name: 'Pro Image Editor', path: '/image-editor' },
+  { name: 'IG Downloader', path: '/ig-downloader' },
+];

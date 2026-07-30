@@ -1,14 +1,33 @@
 import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, getSiteUrl } from '@/lib/seo';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }) {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Privacy' });
+  const title = `${t('title')} - ConvertAllNow`;
+  const description = `Privacy Policy for ConvertAllNow download tools`;
+
   return {
-    title: `${t('title')} - ConvertAllNow`,
-    description: `Privacy Policy for ConvertAllNow download tools`,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: getCanonicalUrl(locale, '/privacy'),
+      siteName: 'ConvertAllNow',
+      locale: getOgLocale(locale),
+      type: 'website',
+    },
+    alternates: {
+      canonical: getCanonicalUrl(locale, '/privacy'),
+      languages: getAlternateLanguages('/privacy'),
+    },
   };
 }
 
-export default async function PrivacyPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function PrivacyPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Privacy' });
   
   return (

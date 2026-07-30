@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { ShieldCheck, Zap, Sparkles, Lock, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
+import FAQSchema from '@/components/seo/FAQSchema';
 
 const faqs = [
   {
@@ -50,9 +51,14 @@ export default function HomeSEOContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const t = useTranslations('HomeSEO');
 
+  const translatedFaqs = faqs.map(faq => ({
+    question: t(faq.question),
+    answer: t(faq.answer)
+  }));
+
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 space-y-24">
-      
+      <FAQSchema faqs={translatedFaqs} />
       {/* What is ConvertAllNow Section */}
       <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
         <div className="max-w-3xl mx-auto text-center">

@@ -1,11 +1,36 @@
-'use client';
-
 import React from 'react';
 import { Mail, Clock, MapPin, ExternalLink } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
+import { Metadata } from 'next';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale } from '@/lib/seo';
 
-export default function ContactPage() {
-  const t = useTranslations('Contact');
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Contact' });
+  const title = `${t('title')} ${t('titleHighlight')} - ConvertAllNow`;
+  const description = t('subtitle');
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: getCanonicalUrl(locale, '/contact'),
+      siteName: 'ConvertAllNow',
+      locale: getOgLocale(locale),
+      type: 'website',
+    },
+    alternates: {
+      canonical: getCanonicalUrl(locale, '/contact'),
+      languages: getAlternateLanguages('/contact'),
+    },
+  };
+}
+
+export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Contact' });
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">

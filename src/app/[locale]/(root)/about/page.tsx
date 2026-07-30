@@ -2,10 +2,10 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Target, Users, Zap, Shield, Heart } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale } from '@/lib/seo';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://convertallnow.com';
-
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'About' });
   const title = `${t('titleMain')} ${t('titleHighlight')} - ConvertAllNow`;
   const description = t('subtitle');
@@ -16,18 +16,20 @@ export async function generateMetadata({ params: { locale } }: { params: { local
     openGraph: {
       title,
       description,
-      url: `${siteUrl}/${locale}/about`,
+      url: getCanonicalUrl(locale, '/about'),
       siteName: 'ConvertAllNow',
-      locale,
+      locale: getOgLocale(locale),
       type: 'website',
     },
     alternates: {
-      canonical: `${siteUrl}/${locale}/about`,
+      canonical: getCanonicalUrl(locale, '/about'),
+      languages: getAlternateLanguages('/about'),
     }
   };
 }
 
-export default async function AboutPage({ params: { locale } }: { params: { locale: string } }) {
+export default async function AboutPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'About' });
   
   return (

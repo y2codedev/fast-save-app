@@ -15,7 +15,7 @@ export default function UnlockPdf() {
   const [error, setError] = useState<string | null>(null);
   const [unlockedUrl, setUnlockedUrl] = useState<string | null>(null);
   const [isDragActive, setIsDragActive] = useState(false);
-  
+
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -55,17 +55,17 @@ export default function UnlockPdf() {
 
   const handleUnlock = async () => {
     if (!file) return;
-    
+
     setIsProcessing(true);
     setError(null);
 
     try {
       const arrayBuffer = await file.arrayBuffer();
       const pdfBytes = new Uint8Array(arrayBuffer);
-      
+
       // Attempt to decrypt the PDF
       const unlockedBytes = await decryptPDF(pdfBytes, password);
-      
+
       const blob = new Blob([unlockedBytes as any], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       setUnlockedUrl(url);
@@ -95,7 +95,7 @@ export default function UnlockPdf() {
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
       <div className="text-center mb-10">
-        <motion.div 
+        <motion.div
           className="inline-flex items-center justify-center p-3 bg-indigo-100 dark:bg-indigo-900/40 rounded-2xl mb-4"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -103,7 +103,7 @@ export default function UnlockPdf() {
         >
           <FiUnlock className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
         </motion.div>
-        <motion.h1 
+        <motion.h1
           className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -111,7 +111,7 @@ export default function UnlockPdf() {
         >
           {t('titleMain')}
         </motion.h1>
-        <motion.p 
+        <motion.p
           className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -124,14 +124,14 @@ export default function UnlockPdf() {
       {/* Main Interface */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch max-w-5xl mx-auto">
         {/* Left Panel: Upload */}
-        <motion.div 
+        <motion.div
           className="relative lg:col-span-8 flex flex-col"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 min-h-[400px] flex-1 flex flex-col">
-            
+
             <input
               type="file"
               accept=".pdf"
@@ -139,14 +139,13 @@ export default function UnlockPdf() {
               ref={fileInputRef}
               onChange={handleFileChange}
             />
-              
+
             {!file ? (
-              <div 
-                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer flex-1 flex flex-col items-center justify-center min-h-[300px] ${
-                  isDragActive 
-                    ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10' 
+              <div
+                className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer flex-1 flex flex-col items-center justify-center min-h-[300px] ${isDragActive
+                    ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/10'
                     : 'border-gray-300 hover:border-indigo-500 bg-gray-50 hover:bg-indigo-50 dark:border-gray-600 dark:bg-gray-800/50'
-                }`}
+                  }`}
                 onClick={() => fileInputRef.current?.click()}
                 onDragOver={handleDragOver}
                 onDragLeave={handleDragLeave}
@@ -169,7 +168,7 @@ export default function UnlockPdf() {
                     {(file.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
-                <button 
+                <button
                   onClick={resetState}
                   className="text-sm text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 font-medium transition-colors"
                 >
@@ -181,16 +180,16 @@ export default function UnlockPdf() {
         </motion.div>
 
         {/* Right Panel: Settings & Unlock */}
-        <motion.div 
+        <motion.div
           className="relative lg:col-span-4 flex flex-col"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 flex-1 flex flex-col">
-            
+
             {!unlockedUrl ? (
-               <div className="flex flex-col flex-1">
+              <div className="flex flex-col flex-1">
                 {/* PDF Settings Header */}
                 <div className="flex items-center gap-3 mb-6 text-gray-900 dark:text-white font-bold text-lg border-b border-gray-100 dark:border-gray-700/50 pb-4">
                   <div className="bg-indigo-100 dark:bg-indigo-900/40 p-2 rounded-lg">
@@ -205,8 +204,8 @@ export default function UnlockPdf() {
                     <FiLock className="h-4 w-4 text-gray-400" /> {t('passwordLabel')}
                   </label>
                   <div className="relative">
-                    <input 
-                      type={showPassword ? "text" : "password"} 
+                    <input
+                      type={showPassword ? "text" : "password"}
                       placeholder={t('passwordPlaceholder')}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
@@ -228,15 +227,14 @@ export default function UnlockPdf() {
                     {error}
                   </div>
                 )}
-                
+
                 <button
                   onClick={handleUnlock}
                   disabled={!file || isProcessing}
-                  className={`w-full inline-flex mt-auto items-center justify-center gap-2 font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg ${
-                    file 
+                  className={`w-full inline-flex mt-auto items-center justify-center gap-2 font-bold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed text-lg ${file
                       ? 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white hover:-translate-y-1'
                       : 'bg-gray-200 dark:bg-gray-700 text-gray-400 dark:text-gray-500 shadow-none'
-                  }`}
+                    }`}
                 >
                   {isProcessing ? (
                     <>
@@ -250,18 +248,18 @@ export default function UnlockPdf() {
                     </>
                   )}
                 </button>
-               </div>
+              </div>
             ) : (
               <div className="flex flex-col h-full flex-1">
                 <div className="flex items-center justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
                   <FiCheck className="w-5 h-5" />
                   <span className="font-medium">{t('successMsg')}</span>
                 </div>
-                
+
                 <div className="flex-1 flex items-center justify-center text-center p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 mb-6">
-                   <p className="text-gray-500 dark:text-gray-400">
-                      {t('successDesc')}
-                   </p>
+                  <p className="text-gray-500 dark:text-gray-400">
+                    {t('successDesc')}
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-3 mt-auto">
@@ -273,8 +271,8 @@ export default function UnlockPdf() {
                     <FiDownload className="h-5 w-5" />
                     {t('downloadBtn')}
                   </a>
-                  
-                  <button 
+
+                  <button
                     onClick={resetState}
                     className="w-full py-3.5 px-6 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-xl transition-colors border border-gray-200 dark:border-gray-600"
                   >
@@ -288,7 +286,7 @@ export default function UnlockPdf() {
       </div>
 
       {/* How to Use Section */}
-      <motion.div 
+      <motion.div
         className="mt-16 mb-8 text-start max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

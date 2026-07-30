@@ -1,11 +1,11 @@
 import MergePdf from '@/components/sections/MergePdf';
-import SchemaMarkup from '@/components/sections/SchemaMarkup';
+import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
 import { Metadata } from 'next';
 import React from 'react';
 import { getTranslations } from 'next-intl/server';
-
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://convertallnow.com';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, getSiteUrl, TOOL_KEYWORDS } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -16,13 +16,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    keywords: ['merge pdf', 'combine pdf', 'join pdf files', 'pdf merger online', 'free pdf tools', 'privacy pdf merger'],
+    keywords: TOOL_KEYWORDS['merge-pdf'],
     openGraph: {
       title,
       description,
-      url: `${siteUrl}/merge-pdf`,
+      url: getCanonicalUrl(locale, '/merge-pdf'),
       siteName: 'ConvertAllNow',
-      locale,
+      locale: getOgLocale(locale),
       type: 'website',
       images: [
         {
@@ -42,8 +42,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       site: "@convertallnow",
     },
     alternates: {
-      canonical: `${siteUrl}/merge-pdf`,
-    }
+      canonical: getCanonicalUrl(locale, '/merge-pdf'),
+      languages: getAlternateLanguages('/merge-pdf'),
+    },
   };
 }
 
@@ -51,18 +52,23 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'MergePdfSEO' });
 
-  const schemaData = {
-    "@context": "https://schema.org" as const,
-    "@type": "WebApplication" as const,
-    "name": t('title'),
-    "description": t('description'),
-    "applicationCategory": "Multimedia" as const,
-    "operatingSystem": "Web" as const,
-  };
+  const schemaData = createToolSchema({
+    name: t('title'),
+    description: t('description'),
+    path: '/merge-pdf',
+    locale,
+    featureList: ['Merge multiple PDFs', 'Drag and drop reorder', 'Browser-based processing', 'No file upload to server'],
+    screenshot: '/images/merge-pdf.png',
+  });
 
   return (
     <>
       <SchemaMarkup data={schemaData} />
+      <BreadcrumbSchema locale={locale} items={[
+        { name: 'Home', href: '/' },
+        { name: 'PDF Tools', href: '/merge-pdf' },
+        { name: t('title') },
+      ]} />
       <ToolLayoutWithAds>
         <div className="flex flex-col space-y-12 pb-12">
           <MergePdf />

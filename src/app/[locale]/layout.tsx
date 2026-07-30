@@ -9,45 +9,51 @@ import ThemeProviderWrapper from "@/components/sections/ThemeProviderWrapper";
 import ToastProvider from "@/components/sections/ToastProvider";
 import AdsenseAd from "@/components/AdsenseAd";
 import { Inter } from "next/font/google";
-import GA from "@/components/image-converter/GA";
-import { ExampleUsage } from "@/components/sections/SchemaMarkup";
 import Script from "next/script";
-import Head from "next/head";
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages, getTranslations} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, getSiteUrl } from '@/lib/seo';
+import OrganizationSchema from '@/components/seo/OrganizationSchema';
+
 export async function generateMetadata({ params }: { params: Promise<{locale: string}> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({locale, namespace: 'Index'});
   const navT = await getTranslations({locale, namespace: 'Navigation'});
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com";
-  const title = `${t('title')} - ${navT('All-in-One Tools')}`;
-
+  const siteUrl = getSiteUrl();
+  const pageTitle = `${t('title')} - ${navT('All-in-One Tools')}`;
   const description = t('description');
-  const keywords = [
-    "Online Media Tools",
-    "PDF Converter",
-    "Merge PDF Online",
-    "Video Compressor",
-    "Video to Audio",
-    "Background Remover",
-    "Image Converter",
-    "Free PDF Tools",
-    "Online Video Editor",
-    "ConvertAllNow Suite"
-  ];
 
   return {
     metadataBase: new URL(siteUrl),
     other: {
       "google-adsense-account": "ca-pub-1504999187644497",
     },
-    title: title,
+    title: {
+      default: pageTitle,
+      template: '%s | ConvertAllNow',
+    },
     description: description,
-    keywords: keywords,
+    keywords: [
+      "Online Media Tools",
+      "PDF Converter",
+      "Merge PDF Online",
+      "Video Compressor",
+      "Video to Audio",
+      "Background Remover",
+      "Image Converter",
+      "Free PDF Tools",
+      "Online Video Editor",
+      "ConvertAllNow",
+      "free online file converter",
+      "media utilities",
+      "browser based tools",
+    ],
     icons: {
-      icon: '/images/icon.png',
+      icon: '/images/logo.png',
+      shortcut: '/images/logo.png',
+      apple: '/images/logo.png',
     },
 
     authors: [{ name: "ConvertAllNow", url: siteUrl }],
@@ -62,42 +68,36 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
     },
 
     alternates: {
-      canonical: siteUrl,
-      types: {
-        "application/rss+xml": `${siteUrl}/feed.xml`,
-        "application/atom+xml": `${siteUrl}/feed.xml`,
-      },
+      canonical: getCanonicalUrl(locale),
+      languages: getAlternateLanguages(),
     },
 
     openGraph: {
-      title: title,
+      title: pageTitle,
       description: description,
       type: "website",
-      url: siteUrl,
+      url: getCanonicalUrl(locale),
       siteName: "ConvertAllNow",
-      locale: "en_IN",
+      locale: getOgLocale(locale),
       images: [
         {
           url: "/images/home-og.png",
           width: 1200,
           height: 630,
-          alt: "ConvertAllNow - All-in-One Media & PDF Suite",
+          alt: "ConvertAllNow - Free Online File Converter & Media Tools",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: title,
+      title: pageTitle,
       description: description,
       images: ["/images/home-og.png"],
       creator: "@convertallnow",
       site: "@convertallnow",
-      creatorId: "convertallnow",
-      siteId: "convertallnow",
     },
     category: "Technology",
-    applicationName: "ConvertAllNow - Media & PDF Suite",
-
+    applicationName: "ConvertAllNow",
   };
 };
 
@@ -120,6 +120,7 @@ export default async function RootLayout({
   return (
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
+    <meta name="google-adsense-account" content="ca-pub-1504999187644497" />
     <Script
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
       strategy="lazyOnload"
@@ -153,6 +154,7 @@ export default async function RootLayout({
             }
           `}
         </Script>
+        <OrganizationSchema />
         <ThemeProviderWrapper>
           <NextIntlClientProvider messages={messages}>
             <NextTopLoader
@@ -170,7 +172,6 @@ export default async function RootLayout({
             <div className="mx-auto max-w-7xl px-4 mt-4">
               <AdsenseAd height="h-[50px] md:h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="rounded-xl" />
             </div>
-            < ExampleUsage />
             <Suspense fallback={<FallbackLoader />}>
               {children}
             </Suspense>
