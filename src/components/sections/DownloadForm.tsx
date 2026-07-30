@@ -107,8 +107,8 @@ export default function DownloadForm() {
             onSubmit={handleSubmit} 
             className="relative z-10 flex flex-col md:flex-row items-center gap-3 bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl p-2 md:p-3 rounded-3xl md:rounded-full shadow-2xl border border-white/40 dark:border-gray-700/50 transition-all focus-within:ring-4 focus-within:ring-indigo-500/20"
           >
-            <div className="flex items-center flex-1 w-full pl-4 md:pl-6">
-              <Link2 className="h-6 w-6 text-indigo-500 mr-3 flex-shrink-0" />
+            <div className="flex items-center flex-1 w-full ps-4 md:ps-6">
+              <Link2 className="h-6 w-6 text-indigo-500 me-3 flex-shrink-0" />
               <input
                 type="text"
                 value={url}
@@ -120,7 +120,7 @@ export default function DownloadForm() {
                 <button
                   type="button"
                   onClick={resetForm}
-                  className="pr-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+                  className="pe-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                 >
                   {t('Clear')}
                 </button>

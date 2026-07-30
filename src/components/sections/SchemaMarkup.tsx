@@ -12,7 +12,7 @@ interface WebApplicationSchema {
 const schemaData: WebApplicationSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "FastSave - Instagram Reels Downloader",
+    "name": "ConvertAllNow - Instagram Reels Downloader",
     "description": "Download Instagram Reels in HD with no watermark. Free, fast, and no login required.",
     "applicationCategory": "Multimedia",
     "operatingSystem": "Web",

@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 
 const faqs = [
   {
-    question: "Is FastSave completely free to use?",
+    question: "Is ConvertAllNow completely free to use?",
     answer: "Yes! All our tools including PDF editors, Video downloaders, and Image converters are 100% free to use. There are no hidden fees, subscriptions, or premium tiers."
   },
   {
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     question: "What platforms and devices are supported?",
-    answer: "FastSave is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software."
+    answer: "ConvertAllNow is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software."
   },
   {
     question: "Are there any file size limits?",
@@ -37,7 +37,7 @@ const features = [
   {
     icon: Lock,
     title: "Bank-Grade Security",
-    description: "Your files are yours alone. We employ advanced encryption and strict no-logging policies. What happens on FastSave, stays on your device."
+    description: "Your files are yours alone. We employ advanced encryption and strict no-logging policies. What happens on ConvertAllNow, stays on your device."
   },
   {
     icon: Sparkles,
@@ -53,11 +53,11 @@ export default function HomeSEOContent() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16 space-y-24">
       
-      {/* What is FastSave Section */}
+      {/* What is ConvertAllNow Section */}
       <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-6">
-            {t('What is FastSave?')}
+            {t('What is ConvertAllNow?')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
             {t('What is desc 1')}
@@ -72,7 +72,7 @@ export default function HomeSEOContent() {
       <div>
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
-            {t('Why Choose FastSave?')}
+            {t('Why Choose ConvertAllNow?')}
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {t('Why Choose desc')}
@@ -98,7 +98,7 @@ export default function HomeSEOContent() {
 
       {/* Security & Privacy Banner */}
       <div className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-3xl p-8 md:p-12 text-white shadow-xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mt-10 -mr-10 opacity-10 pointer-events-none">
+        <div className="absolute top-0 end-0 -mt-10 -mr-10 opacity-10 pointer-events-none">
           <ShieldCheck className="w-64 h-64" />
         </div>
         <div className="relative z-10 max-w-3xl">
@@ -131,9 +131,9 @@ export default function HomeSEOContent() {
             >
               <button
                 onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                className="w-full flex items-center justify-between p-6 text-start focus:outline-none"
               >
-                <span className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
+                <span className="text-lg font-semibold text-gray-900 dark:text-white pe-4">
                   {t(faq.question)}
                 </span>
                 <ChevronDown 

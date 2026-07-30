@@ -2,8 +2,11 @@
 
 import React from 'react';
 import { Mail, Clock, MapPin, ExternalLink } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 export default function ContactPage() {
+  const t = useTranslations('Contact');
+
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
       <div className="max-w-3xl w-full">
@@ -11,10 +14,10 @@ export default function ContactPage() {
         {/* Header */}
         <div className="text-center space-y-4 mb-12">
           <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
-            Contact <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">Us</span>
+            {t('title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">{t('titleHighlight')}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Have a question, feedback, or need help with a tool? We're here for you. Reach out directly to the FastSave team.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -28,16 +31,16 @@ export default function ContactPage() {
                   <Mail className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">Email Support</h4>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">{t('emailSupport')}</h4>
                   <a 
-                    href="mailto:support@fastsave.com" 
+                    href="mailto:support@convertallnow.com" 
                     className="text-lg font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition-colors inline-flex items-center gap-2"
                   >
-                    support@fastsave.com
+                    support@convertallnow.com
                     <ExternalLink className="w-4 h-4" />
                   </a>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                    Send us an email anytime. This is the fastest way to get support.
+                    {t('emailDesc')}
                   </p>
                 </div>
               </div>
@@ -47,9 +50,9 @@ export default function ContactPage() {
                   <Clock className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">Response Time</h4>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">{t('responseTime')}</h4>
                   <p className="text-gray-600 dark:text-gray-400">
-                    We aim to respond to all inquiries within 24-48 hours during business days.
+                    {t('responseDesc')}
                   </p>
                 </div>
               </div>
@@ -59,10 +62,10 @@ export default function ContactPage() {
                   <MapPin className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">Company</h4>
+                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">{t('company')}</h4>
                   <p className="text-gray-600 dark:text-gray-400">
-                    Fast Save Apps<br/>
-                    Digital Media Tools
+                    {t('companyName')}<br/>
+                    {t('companyDesc')}
                   </p>
                 </div>
               </div>
@@ -72,13 +75,13 @@ export default function ContactPage() {
             <div className="flex-1 w-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-gray-700/30 dark:to-gray-800/50 rounded-2xl border border-indigo-100 dark:border-gray-700">
                <Mail className="w-16 h-16 text-indigo-300 dark:text-indigo-900/50 mb-4" />
                <p className="text-center text-gray-600 dark:text-gray-300 font-medium mb-6">
-                 Click below to open your default email client.
+                 {t('ctaTitle')}
                </p>
                <a 
-                 href="mailto:support@fastsave.com"
+                 href="mailto:support@convertallnow.com"
                  className="w-full text-center px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg"
                >
-                 Email Us Now
+                 {t('ctaBtn')}
                </a>
             </div>
 

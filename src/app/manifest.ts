@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next'
  
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'FastSave Media Tools',
-    short_name: 'FastSave',
+    name: 'ConvertAllNow Media Tools',
+    short_name: 'ConvertAllNow',
     description: 'All-in-one media tools for background removal, image compression, and video conversion.',
     start_url: '/',
     display: 'standalone',
@@ -11,13 +11,13 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#4f46e5',
     icons: [
       {
-        src: '/images/insta.png',
+        src: '/images/logo.png',
         sizes: '192x192',
         type: 'image/png',
         purpose: 'any',
       },
       {
-        src: '/images/insta.png',
+        src: '/images/logo.png',
         sizes: '512x512',
         type: 'image/png',
         purpose: 'maskable',

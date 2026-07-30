@@ -1,6 +1,6 @@
 'use client';
 
-import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
+import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes, FaGlobe, FaChevronRight } from 'react-icons/fa';
 import Link from 'next/link';
 import { usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
@@ -40,7 +40,7 @@ const MobileMenuCategory = ({ category, pathname, setMobileMenuOpen }: any) => {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden space-y-1 pl-4 mt-1"
+            className="overflow-hidden space-y-1 ps-4 mt-1"
           >
             {category.items.map((tool: any, i: number) => {
               const Icon = tool.icon;
@@ -85,7 +85,7 @@ const Navbar = () => {
     return (
       <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 transition-all duration-300">
         <nav className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-20 sm:h-24 items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="w-24 h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
             </div>
@@ -105,18 +105,18 @@ const Navbar = () => {
         }`}
       >
         <nav className="mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
-          <div className="flex h-16 items-center justify-between">
+          <div className="flex h-20 sm:h-24 items-center justify-between">
 
 
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2 sm:gap-3">
-              <AppLogo showText={false} iconClassName="w-8 h-8 sm:w-10 sm:h-10" className="flex-shrink-0" />
+            <Link href="/" className="flex items-center gap-2 sm:gap-4">
+              <AppLogo showText={false} iconClassName="w-14 h-14 sm:w-20 sm:h-20" className="flex-shrink-0" />
               <div className="flex flex-col">
-                <div className="font-black tracking-tight text-xl sm:text-2xl leading-none">
-                  <span className="text-gray-900 dark:text-white">Fast</span>
-                  <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">Save</span>
+                <div className="font-black tracking-tight text-base sm:text-lg leading-none">
+                  <span className="text-gray-900 dark:text-white">Convert</span>
+                  <span className="bg-gradient-to-r from-[#4F46E5] to-[#3B82F6] bg-clip-text text-transparent">AllNow</span>
                 </div>
-                <p className="hidden sm:block text-[10px] text-gray-500 dark:text-gray-400 leading-tight uppercase font-bold tracking-widest mt-0.5">{t('All-in-One Tools')}</p>
+                <p className="hidden sm:block text-[8px] text-gray-500 dark:text-gray-400 leading-tight uppercase font-bold tracking-widest mt-0.5">{t('All-in-One Tools')}</p>
               </div>
             </Link>
 
@@ -135,7 +135,7 @@ const Navbar = () => {
                     <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                       <div className="w-[520px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-4 grid grid-cols-2 gap-2 relative">
                         {/* Decorative Top Arrow */}
-                        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-gray-900 border-t border-l border-gray-200/60 dark:border-gray-700/60 rotate-45" />
+                        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
                         
                         {category.items.map((tool, i) => {
                           const Icon = tool.icon;
@@ -165,22 +165,24 @@ const Navbar = () => {
 
             {/* Actions & Mobile Menu */}
             <div className="flex items-center gap-1.5 sm:gap-2">
-              <LanguageSwitcher />
-              <button
-                type="button"
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-colors text-gray-600 dark:text-gray-300"
-              >
-                {theme === "dark" ? <FaSun className="w-4 h-4" /> : <FaMoon className="w-4 h-4" />}
-              </button>
+              <div className="hidden lg:flex items-center gap-1.5 sm:gap-2">
+                <LanguageSwitcher />
+                <button
+                  type="button"
+                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  className="p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-colors text-gray-600 dark:text-gray-300"
+                >
+                  {theme === "dark" ? <FaSun className="w-4 h-4" /> : <FaMoon className="w-4 h-4" />}
+                </button>
 
-              <button
-                type="button"
-                onClick={() => setIsOpen(true)}
-                className="p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-colors text-gray-600 dark:text-gray-300"
-              >
-                <FaShareAlt className="w-4 h-4" />
-              </button>
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(true)}
+                  className="p-2 sm:p-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700 transition-colors text-gray-600 dark:text-gray-300"
+                >
+                  <FaShareAlt className="w-4 h-4" />
+                </button>
+              </div>
 
               {/* Mobile Menu Button */}
               <button
@@ -197,7 +199,7 @@ const Navbar = () => {
           <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden fixed inset-0 z-50">
             <DialogBackdrop className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity" />
 
-            <DialogPanel className="fixed inset-y-0 left-0 w-4/5 max-w-sm bg-white dark:bg-gray-900 shadow-2xl">
+            <DialogPanel className="fixed inset-y-0 start-0 w-4/5 max-w-sm bg-white dark:bg-gray-900 shadow-2xl">
               <motion.div
                 initial={{ x: '-100%' }}
                 animate={{ x: 0 }}
@@ -206,15 +208,15 @@ const Navbar = () => {
                 className="flex h-full flex-col overflow-y-auto px-4 py-6"
               >
                 {/* Header */}
-                <div className="flex items-center justify-between mb-8 pl-2">
+                <div className="flex items-center justify-between mb-8 ps-2">
                   <Link href="/" className="flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
-                    <AppLogo showText={false} iconClassName="w-10 h-10" className="flex-shrink-0" />
+                    <AppLogo showText={false} iconClassName="w-14 h-14" className="flex-shrink-0" />
                     <div>
-                      <div className="font-black tracking-tight text-xl leading-none">
-                        <span className="text-gray-900 dark:text-white">Fast</span>
-                        <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">Save</span>
+                      <div className="font-black tracking-tight text-base leading-none">
+                        <span className="text-gray-900 dark:text-white">Convert</span>
+                        <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">AllNow</span>
                       </div>
-                      <p className="text-[10px] text-gray-500 uppercase font-bold tracking-widest mt-0.5">{t('All-in-One Tools')}</p>
+                      <p className="text-[8px] text-gray-500 uppercase font-bold tracking-widest mt-0.5">{t('All-in-One Tools')}</p>
                     </div>
                   </Link>
 
@@ -228,7 +230,7 @@ const Navbar = () => {
                 </div>
 
                 {/* Accordion Categories */}
-                <div className="flex-1">
+                <div className="flex-1 mb-6">
                   {MEGA_MENU_ITEMS.map((category, index) => (
                     <MobileMenuCategory 
                       key={index} 
@@ -237,6 +239,41 @@ const Navbar = () => {
                       setMobileMenuOpen={setMobileMenuOpen} 
                     />
                   ))}
+                </div>
+
+                {/* Mobile Drawer Settings */}
+                <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800 space-y-2">
+                  <div className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                    <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      <FaGlobe className="w-4 h-4" />
+                      {t('Language')}
+                    </div>
+                    <LanguageSwitcher />
+                  </div>
+                  
+                  <div className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                    <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      {theme === 'dark' ? <FaMoon className="w-4 h-4" /> : <FaSun className="w-4 h-4" />}
+                      {t('Dark Mode')}
+                    </div>
+                    <button 
+                      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                      className={`w-11 h-6 rounded-full transition-colors relative ${theme === 'dark' ? 'bg-indigo-500' : 'bg-gray-300'}`}
+                    >
+                      <span className={`absolute top-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${theme === 'dark' ? 'left-[22px]' : 'left-[4px]'}`} />
+                    </button>
+                  </div>
+
+                  <button 
+                    onClick={() => { setMobileMenuOpen(false); setIsOpen(true); }}
+                    className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  >
+                    <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
+                      <FaShareAlt className="w-4 h-4" />
+                      {t('Share ConvertAllNow')}
+                    </div>
+                    <FaChevronRight className="w-3.5 h-3.5 text-gray-400" />
+                  </button>
                 </div>
 
                 {/* Footer */}

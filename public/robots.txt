@@ -4,4 +4,4 @@ Allow: /
 
 
 # Sitemaps
-Sitemap: https://fast-save.vercel.app/sitemap.xml
+Sitemap: https://convertallnow.com/sitemap.xml

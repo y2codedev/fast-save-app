@@ -292,7 +292,9 @@ export default function ImageCompressor() {
                                 ref={fileRef}
                                 onFileUpload={handleFileChange}
                                 loading={loading}
-                                subtitle="PNG, JPG, or WEBP (Max. 100MB)"
+                                subtitle={t('uploadSubtitle')}
+                                titleText={t('uploadTitleText')}
+                                dragText={t('uploadDragText')}
                             />
                         )}
 

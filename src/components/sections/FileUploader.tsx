@@ -3,6 +3,7 @@
 import { useDropzone } from "react-dropzone";
 import { FiUpload } from "react-icons/fi";
 import { useCallback } from "react";
+import { useTranslations } from "next-intl";
 
 interface FileUploaderProps {
   videoFile: File | null;
@@ -10,6 +11,8 @@ interface FileUploaderProps {
   accept?: Record<string, string[]>;
   title?: string;
   subtitle?: string;
+  dropText?: string;
+  browseText?: string;
 }
 
 export function FileUploader({ 
@@ -17,8 +20,13 @@ export function FileUploader({
   handleFileChange,
   accept = { 'video/*': [] },
   title = "Select Video File",
-  subtitle = "MP4, WebM, AVI, MOV (Max 100MB)"
+  subtitle = "MP4, WebM, AVI, MOV (Max 100MB)",
+  dropText,
+  browseText
 }: FileUploaderProps) {
+  const t = useTranslations('FileUploader');
+  const finalDropText = dropText || t('dropText');
+  const finalBrowseText = browseText || t('browseText');
   const onDrop = useCallback((acceptedFiles: File[], fileRejections: any[]) => {
     if (acceptedFiles && acceptedFiles.length > 0) {
       handleFileChange(acceptedFiles[0]); 
@@ -60,8 +68,8 @@ export function FileUploader({
               </span>
             ) : (
               <>
-                <span className="font-medium text-gray-700 dark:text-gray-300">Drag & drop files or</span>{' '}
-                <span className="text-indigo-600 dark:text-indigo-400 underline">browse</span>
+                <span className="font-medium text-gray-700 dark:text-gray-300">{finalDropText}</span>{' '}
+                <span className="text-indigo-600 dark:text-indigo-400 underline">{finalBrowseText}</span>
               </>
             )}
           </p>

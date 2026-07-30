@@ -216,7 +216,14 @@ function VideoToAudioConverter() {
                     exit={{ opacity: 0, y: -20 }}
                     className="space-y-6"
                   >
-                    <FileUploader videoFile={videoFile} handleFileChange={handleFileChange} />
+                    <FileUploader 
+                      videoFile={videoFile} 
+                      handleFileChange={handleFileChange} 
+                      title={t('uploadTitle')}
+                      subtitle={t('uploadSubtitle')}
+                      dropText={t('uploadDropText')}
+                      browseText={t('uploadBrowseText')}
+                    />
                     <div className="text-center text-gray-500 dark:text-gray-400">
                       <p>{t('supportedFormats')}</p>
                     </div>
@@ -381,7 +388,7 @@ function VideoToAudioConverter() {
 
         {/* How to Use Section */}
         <motion.div 
-          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+          className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}

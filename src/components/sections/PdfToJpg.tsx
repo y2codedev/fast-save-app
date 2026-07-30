@@ -185,7 +185,7 @@ export default function PdfToJpg() {
                 >
                   <div className="relative aspect-[3/4] w-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
                     <img src={img.url} alt={`Page ${img.index}`} className="max-w-full max-h-full object-contain drop-shadow-md" />
-                    <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-md">
+                    <div className="absolute top-2 start-2 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-md">
                       Page {img.index}
                     </div>
                   </div>
@@ -207,7 +207,7 @@ export default function PdfToJpg() {
 
       {/* How to Use Section */}
       <motion.div 
-        className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+        className="mt-16 mb-8 text-start max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}

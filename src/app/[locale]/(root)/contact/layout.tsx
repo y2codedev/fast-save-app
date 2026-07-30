@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 import React from 'react';
 
-const title = 'Contact Us - FastSave Support';
-const description = 'Get in touch with the FastSave team. We are here to help you with any questions or feedback regarding our media tools.';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
+const title = 'Contact Us - ConvertAllNow Support';
+const description = 'Get in touch with the ConvertAllNow team. We are here to help you with any questions or feedback regarding our media tools.';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://convertallnow.com';
 
 export const metadata: Metadata = {
   title,
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: `${siteUrl}/contact`,
-    siteName: 'FastSave',
+    siteName: 'ConvertAllNow',
     locale: 'en_US',
     type: 'website',
   },

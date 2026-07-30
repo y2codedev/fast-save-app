@@ -7,9 +7,10 @@ import VideoTrimmer from '@/components/sections/VideoTrimmer';
 import { getTranslations } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://convertallnow.com';
 
-export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'VideoTrimmerSEO' });
   const title = t('title');
   const description = t('description');
@@ -21,7 +22,7 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       title,
       description,
       url: `${siteUrl}/video-trimmer`,
-      siteName: 'FastSave',
+      siteName: 'ConvertAllNow',
       locale,
       type: 'website',
       images: [
@@ -37,8 +38,8 @@ export async function generateMetadata({ params: { locale } }: { params: { local
       title,
       description,
       images: ['/images/video-trimmer.png'],
-      site: '@fastsaveapp',
-      creator: '@fastsaveapp',
+      site: '@convertallnow',
+      creator: '@convertallnow',
     },
     alternates: {
       canonical: `${siteUrl}/video-trimmer`,

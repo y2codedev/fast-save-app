@@ -40,7 +40,7 @@ function SortableImageItem({ img, index, removeImage }: { img: PdfImage, index: 
         title="Remove image"
         onPointerDown={(e) => e.stopPropagation()}
         onClick={(e) => { e.stopPropagation(); removeImage(img.id); }}
-        className="absolute top-2 right-2 z-20 bg-white/90 dark:bg-gray-800/90 text-gray-500 hover:text-red-500 p-1.5 rounded-full shadow-sm hover:shadow-md transition-all opacity-0 group-hover:opacity-100"
+        className="absolute top-2 end-2 z-20 bg-white/90 dark:bg-gray-800/90 text-gray-500 hover:text-red-500 p-1.5 rounded-full shadow-sm hover:shadow-md transition-all opacity-0 group-hover:opacity-100"
       >
         <FiX className="w-4 h-4" />
       </button>
@@ -50,7 +50,7 @@ function SortableImageItem({ img, index, removeImage }: { img: PdfImage, index: 
         <img src={img.preview} alt={`Page ${index + 1}`} className="max-w-full max-h-full object-contain drop-shadow-sm" />
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-2 pointer-events-none">
+      <div className="absolute bottom-0 start-0 end-0 h-12 bg-gradient-to-t from-black/60 to-transparent flex items-end justify-center pb-2 pointer-events-none">
         <span className="text-white text-xs font-semibold drop-shadow-md">Page {index + 1}</span>
       </div>
     </div>
@@ -295,7 +295,7 @@ export default function ImageToPdfConverter() {
                     {label}
                   </span>
                   {index < 2 && (
-                    <div className="hidden sm:block w-12 h-[2px] bg-gray-200 dark:bg-gray-700 ml-4" />
+                    <div className="hidden sm:block w-12 h-[2px] bg-gray-200 dark:bg-gray-700 ms-4" />
                   )}
                 </div>
               ))}
@@ -353,7 +353,7 @@ export default function ImageToPdfConverter() {
                   </div>
 
                   {/* Draggable Grid */}
-                  <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar -mr-2">
+                  <div className="flex-1 overflow-y-auto pe-2 custom-scrollbar -mr-2">
                     <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                       <SortableContext items={pdfImages.map(img => img.id)} strategy={rectSortingStrategy}>
                         <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
@@ -394,42 +394,42 @@ export default function ImageToPdfConverter() {
                     <div className="bg-indigo-100 dark:bg-indigo-900/40 p-2 rounded-lg">
                       <FiFileText className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
                     </div>
-                    PDF Settings
+                    {t('settingsTitle')}
                   </div>
 
                   {/* Page Size */}
                   <div className="mb-5">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                      <FiLayers className="h-4 w-4 text-gray-400" /> Page Size
+                      <FiLayers className="h-4 w-4 text-gray-400" /> {t('pageSize')}
                     </label>
                     <select 
                       value={pageSize}
                       onChange={(e) => setPageSize(e.target.value as any)}
                       className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white cursor-pointer"
                     >
-                      <option value="a4">A4 (210 × 297mm)</option>
-                      <option value="letter">Letter (216 × 279mm)</option>
-                      <option value="legal">Legal (216 × 356mm)</option>
+                      <option value="a4">{t('pageA4')}</option>
+                      <option value="letter">{t('pageLetter')}</option>
+                      <option value="legal">{t('pageLegal')}</option>
                     </select>
                   </div>
 
                   {/* Orientation */}
                   <div className="mb-5">
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 flex items-center gap-2">
-                      <FiImage className="h-4 w-4 text-gray-400" /> Orientation
+                      <FiImage className="h-4 w-4 text-gray-400" /> {t('orientation')}
                     </label>
                     <div className="flex bg-gray-100 dark:bg-gray-800 p-1 rounded-xl border border-gray-200 dark:border-gray-700">
                       <button
                         onClick={() => setOrientation('portrait')}
                         className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${orientation === 'portrait' ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-sm border border-gray-200 dark:border-gray-600' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}`}
                       >
-                        Portrait
+                        {t('portrait')}
                       </button>
                       <button
                         onClick={() => setOrientation('landscape')}
                         className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all ${orientation === 'landscape' ? 'bg-white dark:bg-gray-700 text-indigo-600 dark:text-indigo-400 shadow-sm border border-gray-200 dark:border-gray-600' : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'}`}
                       >
-                        Landscape
+                        {t('landscape')}
                       </button>
                     </div>
                   </div>
@@ -438,7 +438,7 @@ export default function ImageToPdfConverter() {
                   <div className="mb-8">
                     <div className="flex justify-between items-center mb-2">
                       <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center gap-2">
-                        <span className="text-gray-400">⤢</span> Margin
+                        <span className="text-gray-400">⤢</span> {t('margin')}
                       </label>
                       <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-2 py-1 rounded-md">{margin}mm</span>
                     </div>
@@ -451,7 +451,7 @@ export default function ImageToPdfConverter() {
                       className="w-full h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700 accent-indigo-600"
                     />
                     <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
-                      <span>No margin</span>
+                      <span>{t('noMargin')}</span>
                       <span>50mm</span>
                     </div>
                   </div>
@@ -487,7 +487,7 @@ export default function ImageToPdfConverter() {
                   
                   <div className="w-full aspect-[4/5] bg-gray-100 dark:bg-gray-900 rounded-xl mb-6 overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center justify-center relative">
                     <iframe src={`${pdfUrl}#toolbar=0`} className="w-full h-full" title="PDF Preview" />
-                    <div className="absolute bottom-4 right-4 text-xs font-medium bg-black/60 text-white px-3 py-1 rounded-full backdrop-blur-md">Preview</div>
+                    <div className="absolute bottom-4 end-4 text-xs font-medium bg-black/60 text-white px-3 py-1 rounded-full backdrop-blur-md">{t('preview')}</div>
                   </div>
 
                   <div className="flex flex-col gap-3 mt-auto">
@@ -568,7 +568,7 @@ export default function ImageToPdfConverter() {
 
         {/* How to Use Section */}
         <motion.div 
-          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+          className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}

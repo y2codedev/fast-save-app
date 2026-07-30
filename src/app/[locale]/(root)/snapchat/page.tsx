@@ -7,7 +7,7 @@ export const generateMetadata = (): Metadata => {
     const title = "Snapchat Story Saver – Download Snaps Online";
 
     const description =
-        "Download Snapchat videos in HD with FastSave. Save snaps, stories, and videos quickly. No watermark, no login, no app needed. Free and works on all devices.";
+        "Download Snapchat videos in HD with ConvertAllNow. Save snaps, stories, and videos quickly. No watermark, no login, no app needed. Free and works on all devices.";
 
     const keywords = [
         "Snapchat Video Downloader",
@@ -23,7 +23,7 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
+        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}`),
         other: {
             "google-adsense-account": "ca-pub-1504999187644497",
         },
@@ -31,9 +31,9 @@ export const generateMetadata = (): Metadata => {
         description,
         keywords,
 
-        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/snapchat` }],
-        publisher: "FastSave",
-        creator: "FastSave",
+        authors: [{ name: "ConvertAllNow", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/snapchat` }],
+        publisher: "ConvertAllNow",
+        creator: "ConvertAllNow",
         robots: {
             index: true,
             follow: true,
@@ -43,10 +43,10 @@ export const generateMetadata = (): Metadata => {
         },
 
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/snapchat`,
+            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/snapchat`,
             types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
+                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
+                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
             },
         },
 
@@ -54,15 +54,15 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/snapchat`,
-            siteName: "FastSave",
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/snapchat`,
+            siteName: "ConvertAllNow",
             locale: "en_IN",
             images: [
                 {
                     url: "/images/snap.webp",
                     width: 1200,
                     height: 630,
-                    alt: "FastSave Snapchat Video Downloader",
+                    alt: "ConvertAllNow Snapchat Video Downloader",
                 },
             ],
         },
@@ -71,13 +71,13 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             images: ["/images/snap.webp"],
-            creator: "@fastsaveapp",
-            site: "@fastsaveapp",
-            creatorId: "fastsaveapp",
-            siteId: "fastsaveapp",
+            creator: "@convertallnow",
+            site: "@convertallnow",
+            creatorId: "convertallnow",
+            siteId: "convertallnow",
         },
         category: "Technology",
-        applicationName: "FastSave - Snapchat Video Downloader",
+        applicationName: "ConvertAllNow - Snapchat Video Downloader",
     };
 };
 

@@ -160,7 +160,7 @@ export default function MergePdf() {
                   </div>
                   
                   <div className="flex items-center gap-2 shrink-0">
-                    <div className="sm:hidden flex flex-col gap-1 mr-2">
+                    <div className="sm:hidden flex flex-col gap-1 me-2">
                       <button onClick={() => moveUp(index)} disabled={index === 0} className="p-1 disabled:opacity-30"><ArrowUp className="w-4 h-4" /></button>
                       <button onClick={() => moveDown(index)} disabled={index === files.length - 1} className="p-1 disabled:opacity-30"><ArrowDown className="w-4 h-4" /></button>
                     </div>
@@ -214,7 +214,7 @@ export default function MergePdf() {
 
       {/* How to Use Section */}
       <motion.div 
-        className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+        className="mt-16 mb-8 text-start max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}

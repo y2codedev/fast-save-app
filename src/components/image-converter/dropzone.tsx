@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import bytesToSize from "@/utils/bytes-to-size";
 import fileToIcon from "@/utils/file-to-icon";
 import { useState, useEffect, useRef } from "react";
+import { useTranslations } from 'next-intl';
 import compressFileName from "@/utils/compress-file-name";
 import { Skeleton } from "@/components/ui/skeleton";
 import { MdDone } from "react-icons/md";
@@ -54,6 +55,7 @@ const extensions = {
 };
 
 export default function Dropzone() {
+  const t = useTranslations('ImageConverter');
   // variables & hooks
   const [is_hover, setIsHover] = useState<boolean>(false);
   const [actions, setActions] = useState<Action[]>([]);
@@ -261,7 +263,7 @@ export default function Dropzone() {
                         {fileToIcon(action.to ? action.to.toString() : action.file_type)}
                       </div>
                     )}
-                    <div className="absolute top-3 right-3">
+                    <div className="absolute top-3 end-3">
                       <Badge variant="default" className="bg-emerald-500 hover:bg-emerald-600 shadow-md flex gap-1.5 items-center px-3 py-1 text-sm font-medium border-0">
                         <MdDone className="w-4 h-4" /> Ready
                       </Badge>
@@ -456,10 +458,10 @@ export default function Dropzone() {
               <FiUploadCloud />
             </div>
             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-              <span className="font-semibold">Click to upload</span> or drag and drop
+              <span className="font-semibold">{t('uploadTitleText')}</span> {t('uploadDragText')}
             </p>
             <p className="text-xs text-gray-500 dark:text-gray-400">
-              Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)
+              {t('uploadSubtitle')}
             </p>
           </>
         )}

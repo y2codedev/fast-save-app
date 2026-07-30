@@ -16,15 +16,15 @@ const Footer = ({
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="py-8 md:flex md:items-center md:justify-between">
           <div className="flex flex-col items-center md:flex-row md:items-center space-y-2 md:space-y-0">
-            <Link href="/" className="flex flex-col md:flex-row items-center md:items-center gap-2 mb-2 md:mb-0">
-              <AppLogo showText={false} iconClassName="w-7 h-7" className="flex-shrink-0" />
-              <div className="font-black tracking-tight text-xl leading-none">
-                <span className="text-gray-900 dark:text-white">Fast</span>
-                <span className="bg-gradient-to-r from-[#6C5CE7] to-[#4A90E2] bg-clip-text text-transparent">Save</span>
+            <Link href="/" className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3 mb-2 md:mb-0">
+              <AppLogo showText={false} iconClassName="w-12 h-12 md:w-16 md:h-16" className="flex-shrink-0" />
+              <div className="font-black tracking-tight text-base md:text-lg leading-none">
+                <span className="text-gray-900 dark:text-white">Convert</span>
+                <span className="bg-gradient-to-r from-[#4F46E5] to-[#3B82F6] bg-clip-text text-transparent">AllNow</span>
               </div>
             </Link>
-            <p className="text-sm text-gray-500 dark:text-gray-400 md:ml-4">
-              &copy; {year} FastSave {t('All rights reserved.')}
+            <p className="text-sm text-gray-500 dark:text-gray-400 md:ms-4">
+              &copy; {year} ConvertAllNow {t('All rights reserved.')}
             </p>
           </div>
 

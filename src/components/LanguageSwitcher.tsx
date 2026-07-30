@@ -9,7 +9,7 @@ const languages = [
   { code: 'en', name: 'EN', flagCode: 'us' },
   { code: 'es', name: 'ES', flagCode: 'es' },
   { code: 'fr', name: 'FR', flagCode: 'fr' },
-  // { code: 'ar', name: 'AR', flagCode: 'sa' },
+  { code: 'ar', name: 'AR', flagCode: 'sa' },
   { code: 'zh', name: 'ZH', flagCode: 'cn' },
   { code: 'pt', name: 'PT', flagCode: 'pt' },
   { code: 'id', name: 'ID', flagCode: 'id' },
@@ -33,7 +33,7 @@ export default function LanguageSwitcher() {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className="relative inline-block text-start">
       <Menu>
         <MenuButton 
           disabled={isPending}
@@ -45,7 +45,7 @@ export default function LanguageSwitcher() {
 
         <MenuItems 
           transition
-          className="absolute right-0 z-50 mt-2 w-32 origin-top-right rounded-xl bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black/5 dark:ring-white/10 focus:outline-none transition duration-100 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+          className="absolute end-0 z-50 mt-2 w-32 origin-top-right rounded-xl bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black/5 dark:ring-white/10 focus:outline-none transition duration-100 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
         >
           <div className="p-1 h-60 overflow-y-auto custom-scrollbar">
             {languages.map((lang) => (
@@ -54,7 +54,7 @@ export default function LanguageSwitcher() {
                   onClick={() => onSelectChange(lang.code)}
                   className="data-[focus]:bg-indigo-50 dark:data-[focus]:bg-indigo-900/30 data-[focus]:text-indigo-700 dark:data-[focus]:text-indigo-300 text-gray-700 dark:text-gray-200 flex w-full items-center rounded-lg px-3 py-2 text-sm transition-colors font-semibold"
                 >
-                  <img src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/flags/4x3/${lang.flagCode}.svg`} width="20" alt={lang.name} className="mr-2.5 rounded-[2px] shadow-sm" />
+                  <img src={`https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.5/flags/4x3/${lang.flagCode}.svg`} width="20" alt={lang.name} className="me-2.5 rounded-[2px] shadow-sm" />
                   {lang.name}
                 </button>
               </MenuItem>

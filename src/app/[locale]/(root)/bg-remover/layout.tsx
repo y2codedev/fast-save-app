@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import React from 'react';
 import SchemaMarkup from '@/components/sections/SchemaMarkup';
 
-const title = 'Remove Background from Image Free Online - FastSave';
+const title = 'Remove Background from Image Free Online - ConvertAllNow';
 const description = 'Instantly remove backgrounds from images with AI. 100% free, fast, and high quality background eraser online.';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://convertallnow.com';
 
 export const metadata: Metadata = {
   title,
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: `${siteUrl}/bg-remover`,
-    siteName: 'FastSave',
+    siteName: 'ConvertAllNow',
     locale: 'en_US',
     type: 'website',
     images: [{ url: '/images/bg-remover.png', width: 1200, height: 630 }]
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     title,
     description,
     images: ['/images/bg-remover.png'],
-    site: '@fastsaveapp',
-    creator: '@fastsaveapp',
+    site: '@convertallnow',
+    creator: '@convertallnow',
   },
   alternates: {
     canonical: `${siteUrl}/bg-remover`,

@@ -209,12 +209,12 @@ export default function ProtectPdf() {
                       placeholder={t('passwordPlaceholder')}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 pr-12 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white"
+                      className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-xl px-4 py-3 pe-12 text-sm focus:ring-2 focus:ring-indigo-500 outline-none transition-all dark:text-white"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+                      className="absolute end-3 top-1/2 -translate-y-1/2 p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
                       title={showPassword ? "Hide password" : "Show password"}
                     >
                       {showPassword ? <FiEyeOff className="w-5 h-5" /> : <FiEye className="w-5 h-5" />}
@@ -291,7 +291,7 @@ export default function ProtectPdf() {
 
       {/* How to Use Section */}
       <motion.div 
-        className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+        className="mt-16 mb-8 text-start max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.5 }}

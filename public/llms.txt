@@ -1,0 +1,82 @@
+# ConvertAllNow
+
+> Free browser-based tools for converting, editing, compressing, and managing images, videos, audio, and PDF files.
+
+ConvertAllNow provides simple online media and document tools that work directly from a web browser. No software installation is required.
+
+Website: https://convertallnow.com/
+
+## Main Features
+
+- Free online media and document tools
+- Browser-based interface
+- No software installation required
+- Image, video, audio, and PDF utilities
+- Available in multiple languages
+- Designed for fast and simple file processing
+
+## Tools
+
+### Video & Audio
+
+- [Video Trimmer](https://convertallnow.com/en/video-trimmer) — Trim and cut video files.
+- [Video Compressor](https://convertallnow.com/en/video-compressor) — Reduce video file size.
+- [Video to GIF](https://convertallnow.com/en/video-to-gif) — Convert video clips to animated GIF files.
+- [Video to Audio](https://convertallnow.com/en/audio) — Extract audio from video files.
+- [Audio Trimmer](https://convertallnow.com/en/audio-trimmer) — Trim audio files online.
+
+### Images
+
+- [Image Editor](https://convertallnow.com/en/image-editor) — Resize, crop, and edit images.
+- [Background Remover](https://convertallnow.com/en/bg-remover) — Automatically remove image backgrounds.
+- [Image Compressor](https://convertallnow.com/en/image-compressor) — Compress images and reduce file size.
+- [Image Converter](https://convertallnow.com/en/photo) — Convert images between supported formats including JPG, PNG, and WebP.
+
+### PDF
+
+- [Merge PDF](https://convertallnow.com/en/merge-pdf) — Combine multiple PDF documents.
+- [Image to PDF](https://convertallnow.com/en/image-to-pdf) — Convert images into PDF documents.
+- [PDF to JPG](https://convertallnow.com/en/pdf-to-jpg) — Convert PDF pages to JPG images.
+- [Markdown to PDF](https://convertallnow.com/en/md-converter) — Convert Markdown content to PDF.
+- [Unlock PDF](https://convertallnow.com/en/unlock-pdf) — Remove supported password protection or restrictions from PDF files when authorized.
+- [Protect PDF](https://convertallnow.com/en/protect-pdf) — Password-protect PDF documents.
+
+### Social Media
+
+- [Instagram Downloader](https://convertallnow.com/en/ig-downloader) — Download supported Instagram photos and reels.
+
+## Languages
+
+ConvertAllNow is available in:
+
+- English (en)
+- Spanish (es)
+- French (fr)
+- Arabic (ar)
+- Chinese (zh)
+- Portuguese (pt)
+- Indonesian (id)
+- Russian (ru)
+- German (de)
+- Turkish (tr)
+
+Localized tool pages use the language prefix in the URL.
+
+Examples:
+
+- https://convertallnow.com/en/image-compressor
+- https://convertallnow.com/es/image-compressor
+- https://convertallnow.com/fr/image-compressor
+- https://convertallnow.com/de/image-compressor
+
+## Privacy and Security
+
+ConvertAllNow is designed to provide secure file-processing tools through the browser.
+
+For tools that process files locally, files remain on the user's device during processing. For tools that require server-side processing, refer to the site's privacy policy for information about file handling.
+
+## Important Pages
+
+- Home: https://convertallnow.com/
+- Sitemap: https://convertallnow.com/sitemap.xml
+- Robots: https://convertallnow.com/robots.txt

@@ -178,7 +178,9 @@ export default function BgRemover() {
                 <FileUploadArea
                   onFileUpload={handleFileUpload}
                   loading={isProcessing}
-                  subtitle="PNG, JPG, or WEBP (Max. 5MB)"
+                  subtitle={t('uploadSubtitle')}
+                  titleText={t('uploadTitleText')}
+                  dragText={t('uploadDragText')}
                 />
               ) : (
                 <motion.div

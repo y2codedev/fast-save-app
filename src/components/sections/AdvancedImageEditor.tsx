@@ -277,7 +277,7 @@ export default function AdvancedImageEditor() {
           <div className="max-w-[1400px] mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col md:flex-row h-[85vh]">
             
             {/* Left Sidebar - Tools */}
-            <div className="w-full md:w-24 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex md:flex-col overflow-x-auto md:overflow-y-auto shrink-0">
+            <div className="w-full md:w-24 border-b md:border-b-0 md:border-e border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 flex md:flex-col overflow-x-auto md:overflow-y-auto shrink-0">
               <div className="p-4 flex md:flex-col gap-2">
                 {tools.map((tItem) => {
                   const Icon = tItem.icon;
@@ -311,7 +311,7 @@ export default function AdvancedImageEditor() {
             </div>
 
             {/* Middle Panel - Settings */}
-            <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-gray-200 dark:border-gray-700 p-6 flex flex-col shrink-0 overflow-y-auto">
+            <div className="w-full md:w-64 border-b md:border-b-0 md:border-e border-gray-200 dark:border-gray-700 p-6 flex flex-col shrink-0 overflow-y-auto">
               <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider flex items-center gap-2">
                 <Settings2 className="w-5 h-5 text-indigo-500" />
                 {t('settingsTitle')}
@@ -429,7 +429,7 @@ export default function AdvancedImageEditor() {
                   onClick={() => { setFile(null); setImageSrc(''); }}
                   className="w-full flex items-center justify-center gap-2 text-gray-500 hover:text-gray-800 dark:hover:text-white font-semibold py-2 transition"
                 >
-                  <ArrowLeft className="w-4 h-4" /> {t('back')}
+                  <ArrowLeft className="w-4 h-4 rtl:-scale-x-100" /> {t('back')}
                 </button>
               </div>
             </div>

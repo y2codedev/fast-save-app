@@ -323,6 +323,8 @@ function AudioTrimmer() {
                       accept={{ 'audio/*': ['.mp3', '.wav', '.ogg', '.m4a'] }}
                       title={t('step1')}
                       subtitle={t('supportedFormats')}
+                      dropText={t('uploadDropText')}
+                      browseText={t('uploadBrowseText')}
                     />
                   </div>
                 </motion.div>
@@ -371,7 +373,7 @@ function AudioTrimmer() {
 
         {/* How to Use Section */}
         <motion.div 
-          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+          className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}

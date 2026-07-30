@@ -5,7 +5,7 @@ export const generateMetadata = (): Metadata => {
     const title = "Facebook Video Downloader – Save Videos Online Free";
 
     const description =
-        "Download Facebook videos in HD quickly and free with FastSave. No watermark, no login needed. Save reels, feeds, pages & private videos on all devices.";
+        "Download Facebook videos in HD quickly and free with ConvertAllNow. No watermark, no login needed. Save reels, feeds, pages & private videos on all devices.";
 
     const keywords = [
         "Facebook Video Downloader",
@@ -21,7 +21,7 @@ export const generateMetadata = (): Metadata => {
     ];
 
     return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}`),
+        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}`),
         other: {
             "google-adsense-account": "ca-pub-1504999187644497",
         },
@@ -29,9 +29,9 @@ export const generateMetadata = (): Metadata => {
         description,
         keywords,
 
-        authors: [{ name: "FastSave", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/fb-video` }],
-        publisher: "FastSave",
-        creator: "FastSave",
+        authors: [{ name: "ConvertAllNow", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/fb-video` }],
+        publisher: "ConvertAllNow",
+        creator: "ConvertAllNow",
         robots: {
             index: true,
             follow: true,
@@ -41,10 +41,10 @@ export const generateMetadata = (): Metadata => {
         },
 
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/fb-video`,
+            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/fb-video`,
             types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/feed.xml`,
+                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
+                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
             },
         },
 
@@ -52,15 +52,15 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app"}/fb-video`,
-            siteName: "FastSave",
+            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/fb-video`,
+            siteName: "ConvertAllNow",
             locale: "en_IN",
             images: [
                 {
                     url: "/images/facebook.png",
                     width: 1200,
                     height: 630,
-                    alt: "FastSave Facebook Video Downloader",
+                    alt: "ConvertAllNow Facebook Video Downloader",
                 },
             ],
         },
@@ -69,13 +69,13 @@ export const generateMetadata = (): Metadata => {
             title,
             description,
             images: ["/images/facebook.png"],
-            creator: "@fastsaveapp",
-            site: "@fastsaveapp",
-            creatorId: "fastsaveapp",
-            siteId: "fastsaveapp",
+            creator: "@convertallnow",
+            site: "@convertallnow",
+            creatorId: "convertallnow",
+            siteId: "convertallnow",
         },
         category: "Technology",
-        applicationName: "FastSave - Facebook Video Downloader",
+        applicationName: "ConvertAllNow - Facebook Video Downloader",
     };
 };
 

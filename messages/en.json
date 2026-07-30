@@ -1,6 +1,6 @@
 {
   "Index": {
-    "title": "FastSave",
+    "title": "ConvertAllNow",
     "description": "Free online file converter and media utilities."
   },
   "TopHeader": {
@@ -118,7 +118,10 @@
     "Switch to light mode": "Switch to light mode",
     "Switch to dark mode": "Switch to dark mode",
     "Share": "Share",
-    "Toggle menu": "Toggle menu"
+    "Toggle menu": "Toggle menu",
+    "Language": "Language",
+    "Dark Mode": "Dark Mode",
+    "Share ConvertAllNow": "Share ConvertAllNow"
   },
   "Hero": {
     "Explore more free tools": "Explore more free tools",
@@ -229,34 +232,34 @@
     "Contact Us": "Contact Us"
   },
   "HomeSEO": {
-    "What is FastSave?": "What is FastSave?",
-    "What is desc 1": "FastSave is a comprehensive, 100% free online media utility suite. We provide over 20+ professional tools designed to help you edit images, convert PDFs, trim audio files, and process videos directly in your web browser.",
-    "What is desc 2": "Unlike traditional software that requires heavy downloads, installations, and expensive subscriptions, FastSave leverages modern web technologies (like WebAssembly) to bring desktop-class editing capabilities right to your browser. It is incredibly fast, universally accessible, and completely safe since your files never need to be uploaded to external servers.",
-    "Why Choose FastSave?": "Why Choose FastSave?",
-    "Why Choose desc": "We built FastSave to be the only media suite you'll ever need. Here is why users around the world trust our platform for their daily tasks.",
+    "What is ConvertAllNow?": "What is ConvertAllNow?",
+    "What is desc 1": "ConvertAllNow is a comprehensive, 100% free online media utility suite. We provide over 20+ professional tools designed to help you edit images, convert PDFs, trim audio files, and process videos directly in your web browser.",
+    "What is desc 2": "Unlike traditional software that requires heavy downloads, installations, and expensive subscriptions, ConvertAllNow leverages modern web technologies (like WebAssembly) to bring desktop-class editing capabilities right to your browser. It is incredibly fast, universally accessible, and completely safe since your files never need to be uploaded to external servers.",
+    "Why Choose ConvertAllNow?": "Why Choose ConvertAllNow?",
+    "Why Choose desc": "We built ConvertAllNow to be the only media suite you'll ever need. Here is why users around the world trust our platform for their daily tasks.",
     "Lightning Fast Processing": "Lightning Fast Processing",
     "Time is valuable. Our tools are optimized for maximum speed, leveraging your device's native browser capabilities to convert, compress, and edit files in seconds.": "Time is valuable. Our tools are optimized for maximum speed, leveraging your device's native browser capabilities to convert, compress, and edit files in seconds.",
     "Bank-Grade Security": "Bank-Grade Security",
-    "Your files are yours alone. We employ advanced encryption and strict no-logging policies. What happens on FastSave, stays on your device.": "Your files are yours alone. We employ advanced encryption and strict no-logging policies. What happens on FastSave, stays on your device.",
+    "Your files are yours alone. We employ advanced encryption and strict no-logging policies. What happens on ConvertAllNow, stays on your device.": "Your files are yours alone. We employ advanced encryption and strict no-logging policies. What happens on ConvertAllNow, stays on your device.",
     "Premium Quality Output": "Premium Quality Output",
     "Free doesn't mean low quality. Our advanced algorithms ensure that your compressed images, converted PDFs, and trimmed videos retain the highest possible resolution.": "Free doesn't mean low quality. Our advanced algorithms ensure that your compressed images, converted PDFs, and trimmed videos retain the highest possible resolution.",
     "Your Privacy is Guaranteed": "Your Privacy is 100% Guaranteed",
-    "Privacy desc": "Unlike other platforms that keep copies of your documents, FastSave is built on a privacy-first architecture. When you use tools like our PDF to JPG converter or Video Compressor, the processing happens directly inside your own web browser. No files are uploaded to our servers, ensuring your sensitive data never leaves your device.",
+    "Privacy desc": "Unlike other platforms that keep copies of your documents, ConvertAllNow is built on a privacy-first architecture. When you use tools like our PDF to JPG converter or Video Compressor, the processing happens directly inside your own web browser. No files are uploaded to our servers, ensuring your sensitive data never leaves your device.",
     "Frequently Asked Questions": "Frequently Asked Questions",
-    "FAQ desc": "Got questions? We have answers. Here is everything you need to know about using FastSave.",
-    "Is FastSave completely free to use?": "Is FastSave completely free to use?",
+    "FAQ desc": "Got questions? We have answers. Here is everything you need to know about using ConvertAllNow.",
+    "Is ConvertAllNow completely free to use?": "Is ConvertAllNow completely free to use?",
     "Yes! All our tools including PDF editors, Video downloaders, and Image converters are 100% free to use. There are no hidden fees, subscriptions, or premium tiers.": "Yes! All our tools including PDF editors, Video downloaders, and Image converters are 100% free to use. There are no hidden fees, subscriptions, or premium tiers.",
     "Do you store my files on your servers?": "Do you store my files on your servers?",
     "Absolutely not. Your privacy and security are our top priorities. Most of our tools process your files directly inside your browser. For tools that require server processing, files are automatically and permanently deleted immediately after processing.": "Absolutely not. Your privacy and security are our top priorities. Most of our tools process your files directly inside your browser. For tools that require server processing, files are automatically and permanently deleted immediately after processing.",
     "What platforms and devices are supported?": "What platforms and devices are supported?",
-    "FastSave is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software.": "FastSave is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software.",
+    "ConvertAllNow is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software.": "ConvertAllNow is a browser-based suite that works across all platforms. Whether you use Windows, macOS, Linux, or a mobile device (iOS, iPadOS, Android), our tools work perfectly in Google Chrome, Safari, Firefox, and Edge without installing any apps or software.",
     "Are there any file size limits?": "Are there any file size limits?",
     "To ensure fast and stable performance for all users, some video and PDF tools have reasonable file size limits (usually up to 100MB). However, this is sufficient for 99% of everyday media tasks.": "To ensure fast and stable performance for all users, some video and PDF tools have reasonable file size limits (usually up to 100MB). However, this is sufficient for 99% of everyday media tasks.",
     "Do downloaded videos have watermarks?": "Do downloaded videos have watermarks?",
     "No. Our social media downloaders (like Instagram Reels Downloader) extract the highest quality video available completely watermark-free.": "No. Our social media downloaders (like Instagram Reels Downloader) extract the highest quality video available completely watermark-free."
   },
   "VideoTrimmerSEO": {
-    "title": "Video Trimmer Online - Cut & Trim Videos Free - FastSave",
+    "title": "Video Trimmer Online - Cut & Trim Videos Free - ConvertAllNow",
     "description": "Cut and trim your video files easily online. Fast, secure, and no watermark. Works in your browser with no uploads."
   },
   "VideoTrimmer": {
@@ -284,10 +287,14 @@
     "step2Title": "Select Range",
     "step2Desc": "Use the timeline sliders to choose your start and end points. You can also manually enter the exact timestamps.",
     "step3Title": "Trim & Download",
-    "step3Desc": "Click 'Trim Video'. The clip will be processed instantly without any quality loss, ready for you to download!"
+    "step3Desc": "Click 'Trim Video'. The clip will be processed instantly without any quality loss, ready for you to download!",
+    "uploadTitle": "Select Video File",
+    "uploadSubtitle": "MP4, WebM, AVI, MOV (Max 100MB)",
+    "uploadDropText": "Drag & drop files or",
+    "uploadBrowseText": "browse"
   },
   "VideoCompressorSEO": {
-    "title": "Video Compressor Online - Reduce Video Size Free - FastSave",
+    "title": "Video Compressor Online - Reduce Video Size Free - ConvertAllNow",
     "description": "Compress video files online for free. Reduce video file size without losing quality. No watermark, fast and secure in your browser."
   },
   "VideoCompressor": {
@@ -329,10 +336,14 @@
     "howTo2Title": "Choose Compression Level",
     "howTo2Desc": "Select the desired quality (High, Medium, Low, or Custom) to balance between file size reduction and video clarity.",
     "howTo3Title": "Compress & Save",
-    "howTo3Desc": "Click 'Start Compression' and watch the magic happen. Compare the before & after sizes, then download your optimized video!"
+    "howTo3Desc": "Click 'Start Compression' and watch the magic happen. Compare the before & after sizes, then download your optimized video!",
+    "uploadTitle": "Select Video File",
+    "uploadSubtitle": "MP4, WebM, AVI, MOV (Max 100MB)",
+    "uploadDropText": "Drag & drop files or",
+    "uploadBrowseText": "browse"
   },
   "VideoToGifSEO": {
-    "title": "Video to GIF Converter - Create Animated GIFs Free - FastSave",
+    "title": "Video to GIF Converter - Create Animated GIFs Free - ConvertAllNow",
     "description": "Convert video to high-quality GIF animations online for free. Support for MP4, WEBM, and MOV formats. Fast and secure directly in your browser."
   },
   "VideoToGif": {
@@ -362,10 +373,14 @@
     "howTo2Title": "Adjust Settings",
     "howTo2Desc": "Configure your GIF output preferences if needed. You can change the frame rate, dimension, and quality before conversion.",
     "howTo3Title": "Convert & Download",
-    "howTo3Desc": "Hit 'Convert to GIF' and let our AI engine create a high-quality animation for you. Download and share instantly!"
+    "howTo3Desc": "Hit 'Convert to GIF' and let our AI engine create a high-quality animation for you. Download and share instantly!",
+    "uploadTitle": "Select File",
+    "uploadSubtitle": "Max 100MB",
+    "uploadDropText": "Drag & drop files or",
+    "uploadBrowseText": "browse"
   },
   "VideoToAudioSEO": {
-    "title": "Video to MP3 Converter - Extract Audio from Video - FastSave",
+    "title": "Video to MP3 Converter - Extract Audio from Video - ConvertAllNow",
     "description": "Convert video to MP3 online for free. Extract high-quality audio from MP4, WEBM, and MOV files securely in your browser."
   },
   "VideoToAudio": {
@@ -400,10 +415,14 @@
     "howTo2Title": "Select Format",
     "howTo2Desc": "Choose your desired output audio format (MP3, WAV, AAC, etc). The tool will prepare the extraction settings instantly.",
     "howTo3Title": "Convert & Save",
-    "howTo3Desc": "Click 'Extract Audio' and wait a few seconds. Once done, you can play the audio directly or download it to your device."
+    "howTo3Desc": "Click 'Extract Audio' and wait a few seconds. Once done, you can play the audio directly or download it to your device.",
+    "uploadTitle": "Select File",
+    "uploadSubtitle": "Max 100MB",
+    "uploadDropText": "Drag & drop files or",
+    "uploadBrowseText": "browse"
   },
   "AudioTrimmerSEO": {
-    "title": "Audio Trimmer - Cut MP3 Online Free - FastSave",
+    "title": "Audio Trimmer - Cut MP3 Online Free - ConvertAllNow",
     "description": "Cut and trim audio files online for free. Create ringtones and short clips from MP3, WAV, and OGG files securely in your browser."
   },
   "AudioTrimmer": {
@@ -425,14 +444,18 @@
     "howTo2Title": "Select the Timestamps",
     "howTo2Desc": "Use the interactive slider handles to choose the exact start and end points of the section you want to keep.",
     "howTo3Title": "Cut & Download",
-    "howTo3Desc": "Click 'Cut Audio Now'. Once processing is complete, download your newly trimmed audio file instantly."
+    "howTo3Desc": "Click 'Cut Audio Now'. Once processing is complete, download your newly trimmed audio file instantly.",
+    "uploadTitle": "Select File",
+    "uploadSubtitle": "Max 100MB",
+    "uploadDropText": "Drag & drop files or",
+    "uploadBrowseText": "browse"
   },
   "IgDownloaderSEO": {
-    "title": "Instagram Reels Downloader - FastSave",
-    "description": "Download Instagram Reels in HD with FastSave. No watermark, no login, 100% free. Save public Reels as MP4 videos in seconds."
+    "title": "Instagram Reels Downloader - ConvertAllNow",
+    "description": "Download Instagram Reels in HD with ConvertAllNow. No watermark, no login, 100% free. Save public Reels as MP4 videos in seconds."
   },
   "ImageEditorSEO": {
-    "title": "Pro Image Editor Online - Edit Photos Free - FastSave",
+    "title": "Pro Image Editor Online - Edit Photos Free - ConvertAllNow",
     "description": "Edit, crop, resize, and apply filters to your images online. Free professional photo editing tools."
   },
   "ImageEditor": {
@@ -475,7 +498,7 @@
     "toolConvert": "Convert"
   },
   "BgRemoverSEO": {
-    "title": "Remove Background from Image Free - AI Background Remover - FastSave",
+    "title": "Remove Background from Image Free - AI Background Remover - ConvertAllNow",
     "description": "Instantly remove backgrounds from your images using AI. 100% free, fast, and high quality background removal tool."
   },
   "BgRemover": {
@@ -515,10 +538,13 @@
     "tagNoWatermark": "No Watermark",
     "tagHighQuality": "High Quality",
     "tagInstant": "Instant Processing",
-    "tagFree": "Free to Use"
+    "tagFree": "Free to Use",
+    "uploadSubtitle": "PNG, JPG, or WEBP (Max. 5MB)",
+    "uploadTitleText": "Click to upload",
+    "uploadDragText": "or drag and drop"
   },
   "ImageCompressorSEO": {
-    "title": "Image Compressor Online - Reduce Image Size Free - FastSave",
+    "title": "Image Compressor Online - Reduce Image Size Free - ConvertAllNow",
     "description": "Compress images online for free without losing quality. Reduce file size for JPG, PNG, and WEBP images."
   },
   "ImageCompressor": {
@@ -556,13 +582,16 @@
     "feature2Desc": "Reduce file size without noticeable quality loss",
     "feature3Title": "Smart Compression",
     "feature3Desc": "AI-powered compression maintains image clarity",
+    "uploadTitleText": "Click to upload",
+    "uploadDragText": "or drag and drop",
+    "uploadSubtitle": "PNG, JPG, or WEBP (Max. 100MB)",
     "tagNoLoss": "No Quality Loss",
     "tagFast": "Fast Processing",
     "tagFree": "Free to Use",
     "tagAllFormats": "All Formats"
   },
   "ImageConverterSEO": {
-    "title": "Image Converter & SVG Maker - FastSave",
+    "title": "Image Converter & SVG Maker - ConvertAllNow",
     "description": "Convert images to SVG or between formats like JPG, PNG, WEBP. Fast, free online image format converter."
   },
   "ImageConverter": {
@@ -581,10 +610,13 @@
     "feature2Title": "Multiple Formats",
     "feature2Desc": "Support for JPG, PNG, WEBP, and more to SVG conversion",
     "feature3Title": "High Quality",
-    "feature3Desc": "Maintain image quality with vector-based SVG output"
+    "feature3Desc": "Maintain image quality with vector-based SVG output",
+    "uploadTitleText": "Click to upload",
+    "uploadDragText": "or drag and drop",
+    "uploadSubtitle": "Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)"
   },
   "MergePdfSEO": {
-    "title": "Merge PDF Files Online Free - FastSave",
+    "title": "Merge PDF Files Online Free - ConvertAllNow",
     "description": "Combine multiple PDF files into one single document. Free, fast, and secure online PDF merger tool."
   },
   "MergePdf": {
@@ -628,7 +660,7 @@
     "step3Desc": "Click 'Merge PDFs' and wait a few seconds. A combined high-quality PDF will be instantly available for download."
   },
   "ImageToPdfSEO": {
-    "title": "Convert Images to PDF Online Free - FastSave",
+    "title": "Convert Images to PDF Online Free - ConvertAllNow",
     "description": "Convert JPG, PNG, WEBP and other images to PDF format. Free online image to PDF converter."
   },
   "ImageToPdf": {
@@ -669,10 +701,21 @@
     "step2Title": "Arrange Order",
     "step2Desc": "Drag and drop the uploaded images to reorder them exactly how you want them to appear in the PDF pages.",
     "step3Title": "Convert & Download",
-    "step3Desc": "Click on 'Generate PDF'. Your images will be instantly combined into a single, high-quality PDF document ready for download."
+    "step3Desc": "Click on 'Generate PDF'. Your images will be instantly combined into a single, high-quality PDF document ready for download.",
+    "settingsTitle": "PDF Settings",
+    "pageSize": "Page Size",
+    "pageA4": "A4 (210 × 297mm)",
+    "pageLetter": "Letter (216 × 279mm)",
+    "pageLegal": "Legal (216 × 356mm)",
+    "orientation": "Orientation",
+    "portrait": "Portrait",
+    "landscape": "Landscape",
+    "margin": "Margin",
+    "noMargin": "No margin",
+    "preview": "Preview"
   },
   "PdfToJpgSEO": {
-    "title": "Convert PDF to JPG Online Free - FastSave",
+    "title": "Convert PDF to JPG Online Free - ConvertAllNow",
     "description": "Extract images from PDF or convert PDF pages to high-quality JPG images for free."
   },
   "PdfToJpg": {
@@ -715,7 +758,7 @@
     "step3Desc": "Preview the extracted images and click the download button on any individual page to save it as a JPG image to your device."
   },
   "MdConverterSEO": {
-    "title": "Markdown to PDF/Word Converter - FastSave",
+    "title": "Markdown to PDF/Word Converter - ConvertAllNow",
     "description": "Convert Markdown (.md) files to beautifully formatted PDF or Word (DOCX) documents online."
   },
   "MdConverter": {
@@ -746,10 +789,23 @@
     "ctaDesc": "Turn your developer notes and readmes into shareable, professional documents.",
     "tagSecure": "100% Secure",
     "tagFast": "Fast Processing",
-    "tagFree": "Free to Use"
+    "tagFree": "Free to Use",
+    "step1": "Upload",
+    "step2": "Preview & Export",
+    "exportDocTitle": "Export Document",
+    "selectDocTitle": "Select Markdown File",
+    "selectDocSubtitle": "Drag and drop or click to browse",
+    "fileParsedMsg": "File parsed successfully",
+    "processingBtn": "Processing...",
+    "exportPdfBtn": "Export as PDF",
+    "exportWordBtn": "Export as Word",
+    "chooseDiffBtn": "Choose Different File",
+    "docPreviewTitle": "Document Preview",
+    "previewEmptyTitle": "Preview Empty",
+    "previewEmptySubtitle": "Your document preview will appear here"
   },
   "UnlockPdfSEO": {
-    "title": "Unlock PDF Online - Remove Password Free - FastSave",
+    "title": "Unlock PDF Online - Remove Password Free - ConvertAllNow",
     "description": "Remove password protection and unlock PDF files securely online for free."
   },
   "UnlockPdf": {
@@ -792,10 +848,14 @@
     "step2Desc": "Type the correct password for the PDF file into the settings box on the right. This is required to decrypt the document.",
     "step3Title": "Unlock & Download",
     "step3Desc": "Click 'Unlock PDF'. We will remove the password protection entirely, allowing you to download an unlocked version of your PDF.",
-    "unlockSettingsTitle": "Unlock Settings"
+    "unlockSettingsTitle": "Unlock Settings",
+    "removeFileBtn": "Remove file",
+    "successMsg": "Successfully unlocked!",
+    "successDesc": "Your PDF is now unlocked and ready to download.",
+    "unlockAnotherBtn": "Unlock Another PDF"
   },
   "ProtectPdfSEO": {
-    "title": "Protect PDF Online - Add Password Free - FastSave",
+    "title": "Protect PDF Online - Add Password Free - ConvertAllNow",
     "description": "Add password protection to your PDF files securely online for free. Prevent unauthorized access to your documents."
   },
   "ProtectPdf": {
@@ -841,6 +901,98 @@
     "step3Title": "Protect & Download",
     "step3Desc": "Click 'Protect PDF'. The file will be encrypted using standard AES encryption and will be ready to download.",
     "protectSettingsTitle": "Protect Settings",
-    "passwordTip": "Keep this password safe. You'll need it to open the PDF later."
+    "passwordTip": "Keep this password safe. You'll need it to open the PDF later.",
+    "removeFileBtn": "Remove file",
+    "successMsg": "Successfully protected!",
+    "successDesc": "Your PDF is now password protected.",
+    "protectAnotherBtn": "Protect Another PDF"
+  },
+  "Contact": {
+    "title": "Contact",
+    "titleHighlight": "Us",
+    "subtitle": "Have a question, feedback, or need help with a tool? We're here for you. Reach out directly to the ConvertAllNow team.",
+    "emailSupport": "Email Support",
+    "emailDesc": "Send us an email anytime. This is the fastest way to get support.",
+    "responseTime": "Response Time",
+    "responseDesc": "We aim to respond to all inquiries within 24-48 hours during business days.",
+    "company": "Company",
+    "companyName": "Fast Save Apps",
+    "companyDesc": "Digital Media Tools",
+    "ctaTitle": "Click below to open your default email client.",
+    "ctaBtn": "Email Us Now"
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated",
+    "s1Title": "1. Information We Collect",
+    "s1Desc": "When you use ConvertAllNow, we may collect the following information:",
+    "s1L1": "URLs of content you want to download or process",
+    "s1L2": "Basic usage data (features used, duration of use)",
+    "s1L3": "Device information (browser type, operating system)",
+    "s1L4": "IP address for security and analytics purposes",
+    "s2Title": "2. How We Use Your Information",
+    "s2Desc": "We use the collected information for the following purposes:",
+    "s2L1": "To provide and maintain our Service",
+    "s2L2": "To improve user experience and develop new features",
+    "s2L3": "To monitor usage and analyze trends",
+    "s2L4": "To detect, prevent, and address technical issues",
+    "s2L5": "To ensure compliance with our Terms of Service",
+    "s3Title": "3. Data Sharing and Disclosure",
+    "s3Desc": "We do not sell your personal information. We may share information with:",
+    "s3L1": "Service providers who assist in our operations",
+    "s3L2": "Law enforcement when required by law",
+    "s3L3": "Third parties in connection with a business transaction",
+    "s4Title": "4. Data Security",
+    "s4Desc": "We implement security measures to protect your information, but no method of transmission over the Internet is 100% secure. We cannot guarantee absolute security.",
+    "s5Title": "5. Third-Party Services",
+    "s5Desc": "Our Service may contain links to third-party websites or services that are not operated by us. We have no control over and assume no responsibility for their content or privacy policies.",
+    "s6Title": "6. Changes to This Policy",
+    "s6Desc": "We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page."
+  },
+  "Terms": {
+    "title": "Terms & Conditions",
+    "lastUpdated": "Last updated",
+    "s1Title": "1. Acceptance of Terms",
+    "s1Desc": "By accessing or using ConvertAllNow (\"the Service\"), you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the Service.",
+    "s2Title": "2. Service Description",
+    "s2Desc": "ConvertAllNow provides tools for downloading and processing online content, including:",
+    "s2L1": "Pinterest content downloader",
+    "s2L2": "Video downloader from various platforms",
+    "s2L3": "Audio extraction from videos",
+    "s2L4": "Photo downloading tools",
+    "s2L5": "Facebook video downloader",
+    "s2L6": "Background removal from images",
+    "s3Title": "3. User Responsibilities",
+    "s3Desc": "You agree to use the Service only for lawful purposes and in accordance with these Terms.",
+    "s3L1": "You must not use the Service to violate any laws or regulations",
+    "s3L2": "You must respect copyright and intellectual property rights",
+    "s3L3": "You must not upload or process harmful or malicious content",
+    "s3L4": "You are responsible for any content you download or process",
+    "s4Title": "4. Limitations of Liability",
+    "s4Desc": "ConvertAllNow is provided \"as is\" without any warranties. We do not guarantee that:",
+    "s4L1": "The Service will be uninterrupted or error-free",
+    "s4L2": "The results obtained from using the Service will be accurate or reliable",
+    "s4L3": "The quality of any downloaded content will meet your expectations",
+    "s5Title": "5. Changes to Terms",
+    "s5Desc": "We reserve the right to modify or replace these Terms at any time. Your continued use of the Service after any changes constitutes acceptance of the new Terms."
+  },
+  "About": {
+    "titleMain": "About",
+    "titleHighlight": "ConvertAllNow",
+    "subtitle": "We are on a mission to democratize media editing. We believe everyone deserves access to fast, secure, and professional-grade tools without paying for expensive software.",
+    "storyTitle": "Why We Built ConvertAllNow",
+    "storyP1": "The internet is filled with media tools, but we noticed a persistent problem: they are either too expensive, overly complicated, or they compromise user privacy by forcing you to upload sensitive files to remote servers.",
+    "storyP2": "We built ConvertAllNow to solve this. By leveraging modern web technologies like WebAssembly (Wasm) and client-side processing, we created a suite of tools that run directly in your web browser. This means your files stay on your device, processing is incredibly fast, and you don't need to install any heavy software.",
+    "whatTitle": "What You Can Do",
+    "whatDesc": "ConvertAllNow offers over 20+ specialized tools. You can compress heavy videos, trim audio files, remove backgrounds from images with AI, merge PDF documents, and even download your favorite social media content—all from one unified dashboard.",
+    "promiseTitle": "Our Promise",
+    "promiseDesc": "We promise to keep our core tools 100% free forever. We also promise to never compromise your privacy. If a tool requires server-side processing, we guarantee that your files are automatically deleted the moment processing is complete.",
+    "missionTitle": "Our Mission",
+    "missionDesc": "To empower creators, students, and professionals around the world with a reliable, safe, and lightning-fast digital toolkit. We are a dedicated team of independent developers (Fast Save Apps) passionate about making the web a more productive place.",
+    "badgeText": "Built by creators, for creators."
+  },
+  "FileUploader": {
+    "dropText": "Drag & drop files or",
+    "browseText": "browse"
   }
 }

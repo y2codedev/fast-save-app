@@ -7,10 +7,12 @@ interface FileUploadAreaProps {
     onFileUpload: (file: File) => void;
     loading: boolean;
     subtitle?: string;
+    titleText?: string;
+    dragText?: string;
 }
 
 const FileUploadArea = forwardRef<HTMLInputElement, FileUploadAreaProps>(
-    ({ onFileUpload, loading, subtitle = "PNG or JPG to SVG (MAX. 5MB)" }, ref) => {
+    ({ onFileUpload, loading, subtitle = "PNG or JPG to SVG (MAX. 5MB)", titleText = "Click to upload", dragText = "or drag and drop" }, ref) => {
         const [isDragActive, setIsDragActive] = useState(false);
 
         const handleDragOver = (e: DragEvent<HTMLLabelElement>) => {
@@ -51,7 +53,7 @@ const FileUploadArea = forwardRef<HTMLInputElement, FileUploadAreaProps>(
                             <FiUploadCloud />
                         </div>
                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-semibold">Click to upload</span> or drag and drop
+                            <span className="font-semibold">{titleText}</span> {dragText}
                         </p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">{subtitle}</p>
                     </div>

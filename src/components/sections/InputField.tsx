@@ -36,7 +36,7 @@ const InputField = forwardRef(
 
                 <div className={`flex`}>
                     <span
-                        className={`inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 ${iconClassName}`}
+                        className={`inline-flex items-center px-3 rounded-s-lg border border-e-0 border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 text-gray-500 dark:text-gray-400 ${iconClassName}`}
                     >
                         {icon}
                     </span>
@@ -44,7 +44,7 @@ const InputField = forwardRef(
                         id='input field'
                         type='text'
                         ref={ref}
-                        className={`flex-1 min-w-0 block w-full bg-gray-100 text-gray-900 px-3 py-2 rounded-none rounded-r-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 focus:outline-none  ${className}`}
+                        className={`flex-1 min-w-0 block w-full bg-gray-100 text-gray-900 px-3 py-2 rounded-none rounded-e-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 focus:outline-none  ${className}`}
                         {...props}
                     />
                 </div>

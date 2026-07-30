@@ -89,7 +89,7 @@ export default function DownloadSteps() {
                             {/* Arrow Indicator (only visible on desktop between cards) */}
                             {index < STEP.length - 1 && (
                                 <div className="hidden lg:flex absolute -right-6 top-1/2 -translate-y-1/2 z-20 items-center justify-center w-8 h-8 rounded-full bg-white dark:bg-gray-800 shadow-md border border-gray-100 dark:border-gray-700 text-gray-400">
-                                    <ArrowRight className="w-4 h-4" />
+                                    <ArrowRight className="w-4 h-4 rtl:-scale-x-100" />
                                 </div>
                             )}
                         </motion.div>
@@ -116,7 +116,8 @@ export default function DownloadSteps() {
                             className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:-translate-y-1"
                         >
                             {t('Start Downloading')}
-                            <ArrowRight className="w-5 h-5" />
+                            <ArrowRight className="w-5 h-5 rtl:-scale-x-100" />
+
                         </a>
                     </div>
                 </motion.div>

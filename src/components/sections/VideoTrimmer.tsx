@@ -319,7 +319,7 @@ function VideoTrimmer() {
               {!isPlaying && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
                   <div className="w-16 h-16 bg-white/25 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 shadow-xl hover:scale-110 transition-transform">
-                    <FiPlay className="w-8 h-8 text-white fill-current ml-1" />
+                    <FiPlay className="w-8 h-8 text-white fill-current ms-1" />
                   </div>
                 </div>
               )}
@@ -338,7 +338,7 @@ function VideoTrimmer() {
                     {isPlaying ? (
                       <FiPause className="w-6 h-6 fill-current" />
                     ) : (
-                      <FiPlay className="w-6 h-6 fill-current ml-0.5" />
+                      <FiPlay className="w-6 h-6 fill-current ms-0.5" />
                     )}
                   </button>
                   <div>
@@ -351,7 +351,7 @@ function VideoTrimmer() {
                     </span>
                   </div>
                 </div>
-                <div className="text-right hidden sm:block">
+                <div className="text-end hidden sm:block">
                   <span className="text-xs text-gray-400 block">{t('trimmedLength')}</span>
                   <span className="text-sm font-mono font-medium text-indigo-300">
                     {formatPlaybackTime(trimmedLength)}
@@ -533,7 +533,14 @@ function VideoTrimmer() {
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
                   <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
-                    <FileUploader videoFile={videoFile} handleFileChange={handleFileChange} />
+                    <FileUploader 
+                      videoFile={videoFile} 
+                      handleFileChange={handleFileChange} 
+                      title={t('uploadTitle')}
+                      subtitle={t('uploadSubtitle')}
+                      dropText={t('uploadDropText')}
+                      browseText={t('uploadBrowseText')}
+                    />
                   </div>
                 </motion.div>
               )}
@@ -583,7 +590,7 @@ function VideoTrimmer() {
 
         {/* How to Use Section */}
         <motion.div 
-          className="mt-16 mb-8 text-left max-w-3xl mx-auto"
+          className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}

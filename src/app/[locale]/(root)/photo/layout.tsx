@@ -2,9 +2,9 @@ import { Metadata } from 'next';
 import React from 'react';
 import SchemaMarkup from '@/components/sections/SchemaMarkup';
 
-const title = 'Image Converter & Photo Tools - FastSave';
+const title = 'Image Converter & Photo Tools - ConvertAllNow';
 const description = 'Convert images between formats (JPG, PNG, WEBP, SVG) easily with our free online image converter.';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fastsave.com';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://convertallnow.com';
 
 export const metadata: Metadata = {
   title,
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     title,
     description,
     url: `${siteUrl}/photo`,
-    siteName: 'FastSave',
+    siteName: 'ConvertAllNow',
     locale: 'en_US',
     type: 'website',
     images: [{ url: '/images/photo-converter.png', width: 1200, height: 630 }]
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
     title,
     description,
     images: ['/images/photo-converter.png'],
-    site: '@fastsaveapp',
-    creator: '@fastsaveapp',
+    site: '@convertallnow',
+    creator: '@convertallnow',
   },
   alternates: {
     canonical: `${siteUrl}/photo`,

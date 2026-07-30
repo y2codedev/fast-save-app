@@ -33,9 +33,9 @@ interface SharePopupProps {
 }
 
 const ShareDialog = ({ onClose, isOpen }: SharePopupProps) => {
-  const urlToShare = "https://fast-save.vercel.app/";
-  const title = "Fast Save";
-  const hashtags = ["fastsave"];
+  const urlToShare = "https://convertallnow.com/";
+  const title = "ConvertAllNow";
+  const hashtags = ["convertallnow", "mediatools"];
 
   const socialIcons = [
     { Icon: EmailIcon, name: "Email", onClick: () => window.open(`mailto:?body=${encodeURIComponent(urlToShare)}&subject=${encodeURIComponent(title)}`) },

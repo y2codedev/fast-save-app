@@ -20,8 +20,9 @@ import {routing} from '@/i18n/routing';
 export async function generateMetadata({ params }: { params: Promise<{locale: string}> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({locale, namespace: 'Index'});
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://fast-save.vercel.app";
-  const title = t('title');
+  const navT = await getTranslations({locale, namespace: 'Navigation'});
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com";
+  const title = `${t('title')} - ${navT('All-in-One Tools')}`;
 
   const description = t('description');
   const keywords = [
@@ -34,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
     "Image Converter",
     "Free PDF Tools",
     "Online Video Editor",
-    "FastSave Suite"
+    "ConvertAllNow Suite"
   ];
 
   return {
@@ -46,12 +47,12 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
     description: description,
     keywords: keywords,
     icons: {
-      icon: '/favicon.svg',
+      icon: '/images/icon.png',
     },
 
-    authors: [{ name: "FastSave", url: siteUrl }],
-    publisher: "FastSave",
-    creator: "FastSave",
+    authors: [{ name: "ConvertAllNow", url: siteUrl }],
+    publisher: "ConvertAllNow",
+    creator: "ConvertAllNow",
     robots: {
       index: true,
       follow: true,
@@ -73,14 +74,14 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
       description: description,
       type: "website",
       url: siteUrl,
-      siteName: "FastSave",
+      siteName: "ConvertAllNow",
       locale: "en_IN",
       images: [
         {
           url: "/images/home-og.png",
           width: 1200,
           height: 630,
-          alt: "FastSave - All-in-One Media & PDF Suite",
+          alt: "ConvertAllNow - All-in-One Media & PDF Suite",
         },
       ],
     },
@@ -89,13 +90,13 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
       title: title,
       description: description,
       images: ["/images/home-og.png"],
-      creator: "@fastsaveapp",
-      site: "@fastsaveapp",
-      creatorId: "fastsaveapp",
-      siteId: "fastsaveapp",
+      creator: "@convertallnow",
+      site: "@convertallnow",
+      creatorId: "convertallnow",
+      siteId: "convertallnow",
     },
     category: "Technology",
-    applicationName: "FastSave - Media & PDF Suite",
+    applicationName: "ConvertAllNow - Media & PDF Suite",
 
   };
 };
@@ -117,13 +118,26 @@ export default async function RootLayout({
   const messages = await getMessages();
 
   return (
-  <html lang={locale} className={inter.className} suppressHydrationWarning>
+  <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
     <Script
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
       strategy="lazyOnload"
       crossOrigin="anonymous"
     />
+    {/* Google Analytics */}
+    <Script
+      src="https://www.googletagmanager.com/gtag/js?id=G-D77QJC0T0J"
+      strategy="afterInteractive"
+    />
+    <Script id="google-analytics" strategy="afterInteractive">
+      {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-D77QJC0T0J');
+      `}
+    </Script>
   </head>
   <body>
         <Script id="register-sw" strategy="afterInteractive">

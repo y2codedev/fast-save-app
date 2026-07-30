@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
    typescript: {
     ignoreBuildErrors: true,  
   },
+  output: 'standalone',
   experimental: {
     optimizePackageImports: ['@/constants', 'lucide-react', 'react-icons', '@heroicons/react'],
   },
