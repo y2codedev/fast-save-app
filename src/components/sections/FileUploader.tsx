@@ -57,8 +57,8 @@ export function FileUploader({
         <input {...getInputProps()} />
 
         <div className="flex flex-col items-center justify-center space-y-3">
-          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
-            <FiUpload className="text-xl sm:text-2xl text-indigo-600 dark:text-indigo-400" />
+          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg flex items-center justify-center">
+            <FiUpload className="text-xl sm:text-2xl text-white" />
           </div>
 
           <p className="text-sm text-gray-500 dark:text-gray-400">

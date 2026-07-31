@@ -121,11 +121,11 @@ export default async function RootLayout({
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
     <meta name="google-adsense-account" content="ca-pub-1504999187644497" />
-    <Script
+    <script
+      async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
-      strategy="lazyOnload"
       crossOrigin="anonymous"
-    />
+    ></script>
     {/* Google Analytics */}
     <Script
       src="https://www.googletagmanager.com/gtag/js?id=G-D77QJC0T0J"
@@ -140,7 +140,7 @@ export default async function RootLayout({
       `}
     </Script>
   </head>
-  <body>
+  <body suppressHydrationWarning>
         <Script id="register-sw" strategy="afterInteractive">
           {`
             if ('serviceWorker' in navigator) {

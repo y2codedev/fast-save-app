@@ -209,9 +209,26 @@ export default function AdvancedImageEditor() {
   };
 
   const handleDownload = () => {
+    if (!imageRef.current) return;
+    
+    const canvas = document.createElement('canvas');
+    canvas.width = imageRef.current.naturalWidth;
+    canvas.height = imageRef.current.naturalHeight;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    // Fill white background for JPEGs in case original had transparency
+    if (outFormat === 'image/jpeg') {
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    }
+    
+    ctx.drawImage(imageRef.current, 0, 0);
+    const finalDataUrl = canvas.toDataURL(outFormat, quality / 100);
+
     const link = document.createElement('a');
     link.download = `edited_image.${outFormat.split('/')[1]}`;
-    link.href = imageSrc;
+    link.href = finalDataUrl;
     link.click();
   };
 

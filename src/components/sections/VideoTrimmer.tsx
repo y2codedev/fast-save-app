@@ -21,7 +21,7 @@ function VideoTrimmer() {
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDraggingSeek, setIsDraggingSeek] = useState(false);
-  
+
   const [conversionStep, setConversionStep] = useState<'upload' | 'trim' | 'complete'>('upload');
   const messageRef = useRef<HTMLParagraphElement | null>(null);
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -29,27 +29,42 @@ function VideoTrimmer() {
   const trimmerRef = useRef<HTMLDivElement | null>(null);
 
   const loadFFmpeg = async () => {
-    setIsLoading(true);
-    const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-    const { toBlobURL } = await import("@ffmpeg/util");
-    
-    if (!ffmpegRef.current) {
-      ffmpegRef.current = new FFmpeg();
+    try {
+      const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+      const { toBlobURL } = await import("@ffmpeg/util");
+
+      if (!ffmpegRef.current) {
+        ffmpegRef.current = new FFmpeg();
+      }
+
+      // Revert to unpkg as it is officially supported for @ffmpeg/core
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
+      const ffmpeg = ffmpegRef.current;
+
+      ffmpeg.on("log", ({ message }: { message: string }) => {
+        if (messageRef.current) messageRef.current.innerHTML = message;
+      });
+
+      if (messageRef.current) {
+        messageRef.current.innerHTML = "Downloading video processor (one-time ~30MB download, please wait)...";
+      }
+
+      await ffmpeg.load({
+        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+      });
+
+      if (messageRef.current) {
+        messageRef.current.innerHTML = "Processor loaded successfully.";
+      }
+      setLoaded(true);
+    } catch (error) {
+      console.error("FFmpeg load error:", error);
+      if (messageRef.current) {
+        messageRef.current.innerHTML = `Failed to load video processor: ${error instanceof Error ? error.message : String(error)}. Check your connection.`;
+      }
+      throw error; // Rethrow to be caught by caller
     }
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
-    const ffmpeg = ffmpegRef.current;
-
-    ffmpeg.on("log", ({ message }: { message: string }) => {
-      if (messageRef.current) messageRef.current.innerHTML = message;
-    });
-
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
-    });
-
-    setLoaded(true);
-    setIsLoading(false);
   };
 
   const handleFileChange = (file: File) => {
@@ -192,31 +207,38 @@ function VideoTrimmer() {
   const trimVideo = async () => {
     if (!videoFile) return;
     if (startTime >= endTime) {
-       alert("Start time must be before end time");
-       return;
+      alert("Start time must be before end time");
+      return;
     }
-    if (!loaded) await loadFFmpeg();
 
-    const ffmpeg = ffmpegRef.current;
     setIsLoading(true);
     if (videoRef.current) videoRef.current.pause();
     setIsPlaying(false);
-    
+
     try {
+      if (!loaded) await loadFFmpeg();
+      const ffmpeg = ffmpegRef.current;
+
       const { fetchFile } = await import("@ffmpeg/util");
-      await ffmpeg.writeFile("input.mp4", await fetchFile(videoFile));
-      
+
+      // Preserve original extension to avoid codec mismatch with `-c copy`
+      const ext = videoFile.name.split('.').pop()?.toLowerCase() || 'mp4';
+      const inputName = `input.${ext}`;
+      const outputName = `output.${ext}`;
+
+      await ffmpeg.writeFile(inputName, await fetchFile(videoFile));
+
       // Fast trim without re-encoding using -c copy
       await ffmpeg.exec([
-        "-i", "input.mp4", 
-        "-ss", startTime.toString(), 
-        "-to", endTime.toString(), 
-        "-c", "copy", 
-        "output.mp4"
+        "-i", inputName,
+        "-ss", startTime.toString(),
+        "-to", endTime.toString(),
+        "-c", "copy",
+        outputName
       ]);
 
-      const data: any = await ffmpeg.readFile("output.mp4");
-      const videoBlob = new Blob([data], { type: "video/mp4" });
+      const data: any = await ffmpeg.readFile(outputName);
+      const videoBlob = new Blob([data], { type: `video/${ext === 'mov' ? 'mp4' : ext}` });
       const url = URL.createObjectURL(videoBlob);
       setTrimmedVideoURL(url);
       setConversionStep('complete');
@@ -269,7 +291,7 @@ function VideoTrimmer() {
   return (
     <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="relative max-w-5xl mx-auto w-full">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -292,7 +314,7 @@ function VideoTrimmer() {
 
         {/* Trimmer UI - Only shows when file is loaded */}
         {conversionStep === 'trim' && videoURL ? (
-          <motion.div 
+          <motion.div
             ref={trimmerRef}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -300,7 +322,7 @@ function VideoTrimmer() {
           >
             {/* Live Video Player Container */}
             <div className="relative w-full aspect-video bg-black rounded-2xl overflow-hidden mb-6 shadow-inner cursor-pointer" onClick={togglePlay}>
-              <video 
+              <video
                 ref={videoRef}
                 src={videoURL}
                 onLoadedMetadata={onVideoLoaded}
@@ -364,17 +386,17 @@ function VideoTrimmer() {
                 {/* Seek Bar Track */}
                 <div className="relative h-2 w-full bg-gray-700/80 rounded-full flex items-center cursor-pointer group">
                   {/* Progress Fill — no CSS transition so it tracks every rAF frame */}
-                  <div 
+                  <div
                     className="absolute h-full bg-white rounded-full group-hover:bg-indigo-400"
                     style={{ width: `${playbackProgressPercent}%` }}
                   />
                   {/* Circular Playhead Knob — w-4 h-4 (valid Tailwind), no transition */}
-                  <div 
+                  <div
                     className="absolute w-4 h-4 bg-white rounded-full shadow-[0_0_8px_rgba(0,0,0,0.6)] -translate-x-1/2 -translate-y-1/2 top-1/2 group-hover:scale-125 pointer-events-none"
                     style={{ left: `${playbackProgressPercent}%` }}
                   />
                   {/* Native Range Input from 0 to trimmedLength for seamless relative scrubbing */}
-                  <input 
+                  <input
                     type="range"
                     min={0}
                     max={trimmedLength}
@@ -408,7 +430,7 @@ function VideoTrimmer() {
                   {t('fullVideo')} {formatTime(duration)}
                 </span>
               </div>
-              
+
               <div className="flex justify-between items-center mb-4">
                 <span className="font-mono text-base font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/30 px-3 py-1 rounded-lg">
                   {t('startLabel')} {formatTime(startTime)}
@@ -420,87 +442,149 @@ function VideoTrimmer() {
                   {t('endLabel')} {formatTime(endTime)}
                 </span>
               </div>
-              
-              <div className="relative h-12 flex items-center" ref={trackRef}>
-                {/* Full Video Track */}
-                <div className="absolute w-full h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
-                   {/* Selected Range Highlight */}
-                   <div 
-                     className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500 transition-[left,right] duration-100 ease-out"
-                     style={{ 
-                       left: `${duration > 0 ? (startTime / duration) * 100 : 0}%`,
-                       right: `${duration > 0 ? 100 - (endTime / duration) * 100 : 100}%`
-                     }}
-                   ></div>
+
+              <div className="relative h-14 flex items-center select-none touch-none" ref={trackRef}>
+                {/* Full Video Track — clickable background to jump */}
+                <div
+                  className="absolute w-full h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden cursor-pointer"
+                  onPointerDown={(e) => {
+                    if (!trackRef.current || duration <= 0) return;
+                    const rect = trackRef.current.getBoundingClientRect();
+                    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                    const clickedTime = pct * duration;
+                    // Decide which handle is closer and move it
+                    const distToStart = Math.abs(clickedTime - startTime);
+                    const distToEnd = Math.abs(clickedTime - endTime);
+                    if (distToStart < distToEnd) {
+                      if (clickedTime < endTime - 0.5) {
+                        setStartTime(clickedTime);
+                        if (currentTime < clickedTime && videoRef.current) {
+                          setCurrentTime(clickedTime);
+                          videoRef.current.currentTime = clickedTime;
+                        }
+                      }
+                    } else {
+                      if (clickedTime > startTime + 0.5) {
+                        setEndTime(clickedTime);
+                        if (currentTime > clickedTime && videoRef.current) {
+                          setCurrentTime(clickedTime);
+                          videoRef.current.currentTime = clickedTime;
+                        }
+                      }
+                    }
+                  }}
+                >
+                  {/* Selected Range Highlight */}
+                  <div
+                    className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500"
+                    style={{
+                      left: `${duration > 0 ? (startTime / duration) * 100 : 0}%`,
+                      right: `${duration > 0 ? 100 - (endTime / duration) * 100 : 100}%`
+                    }}
+                  ></div>
                 </div>
 
                 {/* Moving Stepper Playhead Marker across full timeline */}
                 {duration > 0 && (
-                  <div 
-                    className="absolute h-8 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] z-30 pointer-events-none -translate-x-1/2 flex items-center justify-center"
+                  <div
+                    className="absolute h-12 w-6 z-40 -translate-x-1/2 flex items-center justify-center cursor-grab active:cursor-grabbing touch-none"
                     style={{ left: `${(currentTime / duration) * 100}%` }}
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      (e.target as HTMLElement).setPointerCapture(e.pointerId);
+                      const wasPlaying = isPlaying;
+                      if (wasPlaying && videoRef.current) videoRef.current.pause();
+                      setIsPlaying(false);
+                      setIsDraggingSeek(true);
+
+                      const onMove = (ev: PointerEvent) => {
+                        if (!trackRef.current || duration <= 0) return;
+                        const rect = trackRef.current.getBoundingClientRect();
+                        const pct = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+                        const newVal = pct * duration;
+                        setCurrentTime(newVal);
+                        if (videoRef.current) videoRef.current.currentTime = newVal;
+                      };
+                      const onUp = () => {
+                        document.removeEventListener('pointermove', onMove);
+                        document.removeEventListener('pointerup', onUp);
+                        setIsDraggingSeek(false);
+                        // Optional: resume if it was playing, or just let them hit play again
+                      };
+                      document.addEventListener('pointermove', onMove);
+                      document.addEventListener('pointerup', onUp);
+                    }}
                   >
-                    <div className="absolute -top-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow"></div>
-                    <div className="absolute -bottom-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow"></div>
+                    {/* The visual thin line */}
+                    <div className="absolute h-10 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] flex items-center justify-center pointer-events-none">
+                      <div className="absolute -top-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow pointer-events-none"></div>
+                      <div className="absolute -bottom-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow pointer-events-none"></div>
+                    </div>
                   </div>
                 )}
 
-                {/* Dual handle inputs */}
-                <input 
-                  type="range"
-                  min={0}
-                  max={duration || 1}
-                  step={0.1}
-                  value={startTime}
-                  onChange={handleStartChange}
-                  className="absolute w-full h-4 appearance-none pointer-events-none opacity-0 z-20"
-                  style={{ WebkitAppearance: 'none' }}
-                />
-                <input 
-                  type="range"
-                  min={0}
-                  max={duration || 1}
-                  step={0.1}
-                  value={endTime}
-                  onChange={handleEndChange}
-                  className="absolute w-full h-4 appearance-none pointer-events-none opacity-0 z-20"
-                  style={{ WebkitAppearance: 'none' }}
-                />
-
-                {/* Handle thumbs */}
-                <div 
-                  className="absolute h-8 w-4 bg-indigo-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 -translate-x-1/2 flex items-center justify-center border border-indigo-400 transition-[left] duration-100 ease-out"
+                {/* Start Handle — directly draggable */}
+                <div
+                  className="absolute h-10 w-6 bg-indigo-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-30 -translate-x-1/2 flex items-center justify-center border-2 border-indigo-400 hover:scale-110 hover:bg-indigo-500 transition-transform"
                   style={{ left: `${duration > 0 ? (startTime / duration) * 100 : 0}%` }}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+                    const onMove = (ev: PointerEvent) => {
+                      if (!trackRef.current || duration <= 0) return;
+                      const rect = trackRef.current.getBoundingClientRect();
+                      const pct = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+                      const newVal = pct * duration;
+                      if (newVal < endTime - 0.5) {
+                        setStartTime(newVal);
+                        if (currentTime < newVal && videoRef.current) {
+                          setCurrentTime(newVal);
+                          videoRef.current.currentTime = newVal;
+                        }
+                      }
+                    };
+                    const onUp = () => {
+                      document.removeEventListener('pointermove', onMove);
+                      document.removeEventListener('pointerup', onUp);
+                    };
+                    document.addEventListener('pointermove', onMove);
+                    document.addEventListener('pointerup', onUp);
+                  }}
                 >
-                  <div className="w-0.5 h-4 bg-white/50 rounded-full"></div>
+                  <div className="w-0.5 h-5 bg-white/60 rounded-full"></div>
                 </div>
-                
-                <div 
-                  className="absolute h-8 w-4 bg-violet-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 -translate-x-1/2 flex items-center justify-center border border-violet-400 transition-[left] duration-100 ease-out"
+
+                {/* End Handle — directly draggable */}
+                <div
+                  className="absolute h-10 w-6 bg-violet-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-30 -translate-x-1/2 flex items-center justify-center border-2 border-violet-400 hover:scale-110 hover:bg-violet-500 transition-transform"
                   style={{ left: `${duration > 0 ? (endTime / duration) * 100 : 100}%` }}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+                    const onMove = (ev: PointerEvent) => {
+                      if (!trackRef.current || duration <= 0) return;
+                      const rect = trackRef.current.getBoundingClientRect();
+                      const pct = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+                      const newVal = pct * duration;
+                      if (newVal > startTime + 0.5) {
+                        setEndTime(newVal);
+                        if (currentTime > newVal && videoRef.current) {
+                          setCurrentTime(newVal);
+                          videoRef.current.currentTime = newVal;
+                        }
+                      }
+                    };
+                    const onUp = () => {
+                      document.removeEventListener('pointermove', onMove);
+                      document.removeEventListener('pointerup', onUp);
+                    };
+                    document.addEventListener('pointermove', onMove);
+                    document.addEventListener('pointerup', onUp);
+                  }}
                 >
-                  <div className="w-0.5 h-4 bg-white/50 rounded-full"></div>
+                  <div className="w-0.5 h-5 bg-white/60 rounded-full"></div>
                 </div>
               </div>
-
-              <style jsx>{`
-                input[type=range]::-webkit-slider-thumb {
-                  pointer-events: auto;
-                  width: 20px;
-                  height: 40px;
-                  border-radius: 0;
-                  -webkit-appearance: none;
-                  background: transparent;
-                }
-                input[type=range]::-moz-range-thumb {
-                  pointer-events: auto;
-                  width: 20px;
-                  height: 40px;
-                  border-radius: 0;
-                  background: transparent;
-                  border: none;
-                }
-              `}</style>
             </div>
 
             {/* Action Bar */}
@@ -511,7 +595,7 @@ function VideoTrimmer() {
               >
                 {t('cancel')}
               </button>
-              
+
               <p ref={messageRef} className="text-sm text-indigo-500 font-mono line-clamp-1 flex-1 text-center px-4"></p>
 
               <Button
@@ -526,16 +610,16 @@ function VideoTrimmer() {
           <div className="grid grid-cols-1 gap-8 mb-12">
             <AnimatePresence mode="wait">
               {conversionStep === 'upload' && (
-                <motion.div 
+                <motion.div
                   className="relative max-w-2xl mx-auto w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
                   <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
-                    <FileUploader 
-                      videoFile={videoFile} 
-                      handleFileChange={handleFileChange} 
+                    <FileUploader
+                      videoFile={videoFile}
+                      handleFileChange={handleFileChange}
                       title={t('uploadTitle')}
                       subtitle={t('uploadSubtitle')}
                       dropText={t('uploadDropText')}
@@ -589,7 +673,7 @@ function VideoTrimmer() {
         )}
 
         {/* How to Use Section */}
-        <motion.div 
+        <motion.div
           className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

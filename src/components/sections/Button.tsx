@@ -11,7 +11,7 @@ function Button({ onClick, isProcessing = false, label, icon }: ButtonProps) {
             type="submit"
             onClick={onClick}
             disabled={isProcessing}
-            className={`inline-flex items-center px-2 sm:px-4 py-2 border border-transparent cursor-pointer text-xs sm:text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed ${isProcessing ? "opacity-50 cursor-not-allowed" : "hover:bg-indigo-700"}`}
+            className={`inline-flex items-center justify-center px-4 py-2.5 sm:px-6 sm:py-3 border border-transparent cursor-pointer text-sm font-semibold rounded-xl text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 ${isProcessing ? "opacity-75 cursor-not-allowed" : ""}`}
         >
             {isProcessing ? (
                 <div className="flex items-center gap-2">

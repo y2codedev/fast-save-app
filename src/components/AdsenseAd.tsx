@@ -18,8 +18,13 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
     if (inView && clientId && !isDevelopment) {
       const timer = setTimeout(() => {
         try {
-          (window as any).adsbygoogle = (window as any).adsbygoogle || [];
-          (window as any).adsbygoogle.push({});
+          // Check if there's an uninitialized ad container before pushing.
+          // Adblockers might remove the <ins> tag, causing a 'no_div' error if we push without it.
+          const uninitializedAds = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
+          if (uninitializedAds.length > 0) {
+            (window as any).adsbygoogle = (window as any).adsbygoogle || [];
+            (window as any).adsbygoogle.push({});
+          }
         } catch (e) {
           console.error('Error loading AdSense:', e);
         }

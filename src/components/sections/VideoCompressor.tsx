@@ -25,7 +25,7 @@ function VideoCompressor() {
     setIsLoading(true);
     const { FFmpeg } = await import("@ffmpeg/ffmpeg");
     const { toBlobURL } = await import("@ffmpeg/util");
-    
+
     if (!ffmpegRef.current) {
       ffmpegRef.current = new FFmpeg();
     }
@@ -76,7 +76,7 @@ function VideoCompressor() {
     try {
       const { fetchFile } = await import("@ffmpeg/util");
       await ffmpeg.writeFile("input.mp4", await fetchFile(videoFile));
-      
+
       let ffmpegArgs = ["-i", "input.mp4"];
 
       if (duration && duration > 0) {
@@ -90,9 +90,9 @@ function VideoCompressor() {
         const videoBitrate = targetTotalBitrate - audioBitrate;
 
         ffmpegArgs.push(
-          "-vcodec", "libx264", 
-          "-preset", "ultrafast", 
-          "-b:v", `${Math.round(videoBitrate)}`, 
+          "-vcodec", "libx264",
+          "-preset", "ultrafast",
+          "-b:v", `${Math.round(videoBitrate)}`,
           "-maxrate", `${Math.round(videoBitrate * 1.5)}`, // Allows minor spikes
           "-bufsize", `${Math.round(videoBitrate * 2)}`,
           "-acodec", "aac",
@@ -102,9 +102,9 @@ function VideoCompressor() {
       } else {
         // Fallback if duration extraction fails
         ffmpegArgs.push(
-          "-vcodec", "libx264", 
-          "-preset", "ultrafast", 
-          "-crf", "32", 
+          "-vcodec", "libx264",
+          "-preset", "ultrafast",
+          "-crf", "32",
           "-vf", "scale='min(1280,iw)':-2",
           "-acodec", "aac",
           "-b:a", "128k",
@@ -158,7 +158,7 @@ function VideoCompressor() {
   return (
     <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="relative max-w-5xl mx-auto w-full">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -179,48 +179,45 @@ function VideoCompressor() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="flex justify-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 border border-white/20 dark:border-gray-700/50">
-           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
                 { step: 'upload', label: t('step1'), icon: FiUpload },
                 { step: 'convert', label: t('step2'), icon: FiMinimize },
                 { step: 'complete', label: t('step3'), icon: FiDownload },
               ].map(({ step, label, icon: Icon }, index) => (
                 <div key={step} className="flex items-center gap-4">
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-                    conversionStep === step 
-                      ? 'bg-indigo-600 border-indigo-600 text-white' 
+                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${conversionStep === step
+                      ? 'bg-indigo-600 border-indigo-600 text-white'
                       : conversionStep === 'complete' && step === 'complete'
-                      ? 'bg-green-500 border-green-500 text-white'
-                      : index === 0 || (conversionStep === 'convert' && step === 'convert') || (conversionStep === 'complete')
-                      ? 'bg-indigo-100 border-indigo-600 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-400 dark:text-indigo-400'
-                      : 'bg-gray-100 border-gray-300 text-gray-400 dark:bg-gray-700 dark:border-gray-600'
-                  }`}>
+                        ? 'bg-green-500 border-green-500 text-white'
+                        : index === 0 || (conversionStep === 'convert' && step === 'convert') || (conversionStep === 'complete')
+                          ? 'bg-indigo-100 border-indigo-600 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-400 dark:text-indigo-400'
+                          : 'bg-gray-100 border-gray-300 text-gray-400 dark:bg-gray-700 dark:border-gray-600'
+                    }`}>
                     {conversionStep === 'complete' && step === 'complete' ? (
                       <FiCheck className="w-6 h-6" />
                     ) : (
                       <Icon className="w-6 h-6" />
                     )}
                   </div>
-                  <span className={`font-medium ${
-                    conversionStep === step || (conversionStep === 'complete' && step === 'complete')
+                  <span className={`font-medium ${conversionStep === step || (conversionStep === 'complete' && step === 'complete')
                       ? 'text-indigo-600 dark:text-indigo-400'
                       : 'text-gray-500 dark:text-gray-400'
-                  }`}>
+                    }`}>
                     {label}
                   </span>
                   {index < 2 && (
-                    <div className={`w-8 h-0.5 mx-4 ${
-                      index === 0 || conversionStep === 'convert' || conversionStep === 'complete'
+                    <div className={`w-8 h-0.5 mx-4 ${index === 0 || conversionStep === 'convert' || conversionStep === 'complete'
                         ? 'bg-indigo-600'
                         : 'bg-gray-300 dark:bg-gray-600'
-                    }`} />
+                      }`} />
                   )}
                 </div>
               ))}
@@ -229,7 +226,7 @@ function VideoCompressor() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -247,11 +244,11 @@ function VideoCompressor() {
                   )}
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {conversionStep === 'complete' 
-                    ? t('statusComplete') 
-                    : conversionStep === 'convert' 
-                    ? t('statusReady') 
-                    : t('statusUpload')}
+                  {conversionStep === 'complete'
+                    ? t('statusComplete')
+                    : conversionStep === 'convert'
+                      ? t('statusReady')
+                      : t('statusUpload')}
                 </h2>
               </div>
 
@@ -264,9 +261,9 @@ function VideoCompressor() {
                     exit={{ opacity: 0, y: -20 }}
                     className="space-y-6"
                   >
-                    <FileUploader 
-                      videoFile={videoFile} 
-                      handleFileChange={handleFileChange} 
+                    <FileUploader
+                      videoFile={videoFile}
+                      handleFileChange={handleFileChange}
                       title={t('uploadTitle')}
                       subtitle={t('uploadSubtitle')}
                       dropText={t('uploadDropText')}
@@ -327,14 +324,14 @@ function VideoCompressor() {
                           <span>{progress}%</span>
                         </div>
                         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                          <div 
-                            className="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" 
+                          <div
+                            className="bg-indigo-600 h-2.5 rounded-full transition-all duration-300"
                             style={{ width: `${progress}%` }}
                           ></div>
                         </div>
                       </div>
                     )}
-                    
+
                     <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono line-clamp-2"></p>
 
                     <div className="flex flex-col sm:flex-row gap-3">
@@ -344,12 +341,12 @@ function VideoCompressor() {
                         className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
                       >
                         {isLoading ? (
-                            <>
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                Compressing...
-                            </>
+                          <>
+                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            Compressing...
+                          </>
                         ) : (
-                            t('compressBtn')
+                          t('compressBtn')
                         )}
                       </button>
 
@@ -392,7 +389,7 @@ function VideoCompressor() {
                           </div>
                           {compressedSize && (
                             <p className={`text-sm mt-3 font-medium ${compressedSize > videoFile!.size ? 'text-orange-600 dark:text-orange-400' : 'text-green-700 dark:text-green-300'}`}>
-                              {compressedSize > videoFile!.size 
+                              {compressedSize > videoFile!.size
                                 ? `${t('sizeIncreased')} ${Math.round((compressedSize / videoFile!.size - 1) * 100)}%`
                                 : `${t('sizeSaved')} ${Math.round((1 - compressedSize / videoFile!.size) * 100)}%`
                               }
@@ -424,7 +421,7 @@ function VideoCompressor() {
             </div>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -432,15 +429,15 @@ function VideoCompressor() {
           >
             <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full flex items-center justify-center min-h-[400px]">
               {compressedVideoURL ? (
-                <video 
-                  src={compressedVideoURL} 
-                  controls 
-                  className="max-w-full h-auto max-h-[500px] rounded-lg shadow-lg bg-black" 
+                <video
+                  src={compressedVideoURL}
+                  controls
+                  className="max-w-full h-auto max-h-[500px] rounded-lg shadow-lg bg-black"
                 />
               ) : (
                 <div className="text-center text-gray-400">
                   <FiVideo className="h-20 w-20 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">{t('previewPlaceholder1')}<br/>{t('previewPlaceholder2')}</p>
+                  <p className="text-lg">{t('previewPlaceholder1')}<br />{t('previewPlaceholder2')}</p>
                 </div>
               )}
             </div>
@@ -448,7 +445,7 @@ function VideoCompressor() {
         </div>
 
         {/* How to Use Section */}
-        <motion.div 
+        <motion.div
           className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

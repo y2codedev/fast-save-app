@@ -16,13 +16,6 @@ export default function BgRemover() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const workerRef = useRef<Worker | null>(null)
-
-  useEffect(() => {
-    return () => {
-      workerRef.current?.terminate()
-    }
-  }, [])
 
   const handleFileUpload = (file: File) => {
     setError(null)
@@ -52,23 +45,19 @@ export default function BgRemover() {
     setError(null)
     setResultImage(null)
 
-    if (!workerRef.current) {
-      workerRef.current = new Worker(new URL('@/workers/bg-remover.worker.ts', import.meta.url), { type: 'module' });
+    try {
+      // Dynamic import to avoid SSR issues with heavy WASM libraries
+      const { removeBackground } = await import('@imgly/background-removal')
+      
+      const blob = await removeBackground(image)
+      const url = URL.createObjectURL(blob)
+      setResultImage(url)
+    } catch (err: any) {
+      console.error('Error removing background:', err)
+      setError('Failed to remove background. Please try another image.')
+    } finally {
+      setIsProcessing(false)
     }
-
-    workerRef.current.onmessage = (event) => {
-      const { success, blob, error } = event.data;
-      if (success) {
-        const url = URL.createObjectURL(blob);
-        setResultImage(url);
-      } else {
-        console.error('Error removing background:', error);
-        setError('Failed to remove background. Please try another image.');
-      }
-      setIsProcessing(false);
-    };
-
-    workerRef.current.postMessage({ image });
   }
 
   const resetAll = () => {
@@ -277,27 +266,65 @@ export default function BgRemover() {
                   {isProcessing ? (
                     <motion.div
                       key="loading"
-                      initial={{ opacity: 0, scale: 0.8 }}
+                      initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      className="text-center p-8"
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      className="w-full h-full p-4 flex flex-col items-center justify-center"
                     >
-                      <div className="flex flex-col items-center space-y-4">
-                        <div className="relative">
-                          <Loader />
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <Sparkle className="h-6 w-6 text-indigo-600 animate-pulse" />
+                      {image ? (
+                        <div className="relative w-full h-full rounded-xl overflow-hidden bg-gray-100/50 dark:bg-gray-800/50 border-2 border-indigo-500/30">
+                          <Image
+                            src={image}
+                            alt="Processing"
+                            fill
+                            className="object-contain opacity-40 blur-[2px]"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                          {/* Scanning laser line */}
+                          <motion.div
+                            className="absolute left-0 right-0 h-1 bg-indigo-500 shadow-[0_0_20px_rgba(99,102,241,1)] z-10"
+                            animate={{
+                              top: ['0%', '100%', '0%'],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                          />
+                          {/* Scanning overlay gradient effect */}
+                          <motion.div
+                            className="absolute left-0 right-0 top-0 bg-gradient-to-b from-indigo-500/0 to-indigo-500/20 z-0"
+                            animate={{
+                              bottom: ['100%', '0%', '100%'],
+                            }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "linear"
+                            }}
+                          />
+                          
+                          <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
+                            <div className="bg-white/90 dark:bg-gray-900/90 backdrop-blur-md px-8 py-5 rounded-2xl shadow-2xl flex flex-col items-center border border-indigo-100 dark:border-indigo-900">
+                              <Sparkle className="h-8 w-8 text-indigo-600 animate-pulse mb-3" />
+                              <p className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-transparent">
+                                {t('aiWorking')}
+                              </p>
+                              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 text-center max-w-[200px]">
+                                {t('aiWorkingDesc')}
+                              </p>
+                            </div>
                           </div>
                         </div>
-                        <div>
+                      ) : (
+                        <div className="flex flex-col items-center space-y-4">
+                          <Loader />
                           <p className="text-lg font-semibold text-gray-900 dark:text-white">
                             {t('aiWorking')}
                           </p>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 max-w-sm">
-                            {t('aiWorkingDesc')}
-                          </p>
                         </div>
-                      </div>
+                      )}
                     </motion.div>
                   ) : resultImage ? (
                     <motion.div

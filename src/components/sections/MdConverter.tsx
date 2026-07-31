@@ -13,6 +13,8 @@ function MdConverter() {
   const [mdFile, setMdFile] = useState<File | null>(null);
   const [htmlContent, setHtmlContent] = useState<string>("");
   const [conversionStep, setConversionStep] = useState<'upload' | 'preview'>('upload');
+  const [uploadMode, setUploadMode] = useState<'file' | 'paste'>('file');
+  const [pastedContent, setPastedContent] = useState('');
   
   const contentRef = useRef<HTMLDivElement>(null);
   const messageRef = useRef<HTMLParagraphElement | null>(null);
@@ -31,23 +33,43 @@ function MdConverter() {
     reader.readAsText(file);
   };
 
+  const handlePasteConvert = async () => {
+    if (!pastedContent.trim()) return;
+    const parsedHtml = await marked.parse(pastedContent);
+    setHtmlContent(parsedHtml);
+    setMdFile(new File([pastedContent], "pasted_document.md", { type: "text/markdown" }));
+    setConversionStep('preview');
+  };
+
   const convertToPdf = async () => {
     if (!htmlContent || !contentRef.current) return;
     setIsLoading(true);
     try {
       if (messageRef.current) messageRef.current.innerHTML = "Generating PDF...";
       const html2pdf = (await import('html2pdf.js')).default;
-      const element = contentRef.current;
       
+      // Measure the current rendered height to dynamically adjust scale and avoid browser canvas limits on massive documents
+      const height = contentRef.current.scrollHeight;
+      const scale = height > 15000 ? 1 : 2;
+
       const opt = {
-        margin:       1,
-        filename:     `${mdFile?.name.replace(/\.[^/.]+$/, "")}.pdf`,
+        margin:       0.5,
+        filename:     `${mdFile?.name?.replace(/\.[^/.]+$/, "") || 'document'}.pdf`,
         image:        { type: 'jpeg', quality: 0.98 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas:  { scale: scale, backgroundColor: '#ffffff', scrollY: 0, useCORS: true },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' },
+        pagebreak:    { mode: ['css', 'legacy', 'avoid-all'] }
       };
 
-      await html2pdf().set(opt).from(element).save();
+      // Pass an HTML string instead of a DOM element to avoid clipping from parent overflow-y containers.
+      // html2pdf will handle creating an unconstrained temporary container internally.
+      const pdfHtml = `
+        <div class="prose prose-sm sm:prose-base prose-indigo text-gray-900 max-w-none" style="padding: 20px; background-color: #ffffff;">
+          ${htmlContent}
+        </div>
+      `;
+
+      await html2pdf().set(opt).from(pdfHtml).save();
       
       if (messageRef.current) messageRef.current.innerHTML = "PDF Downloaded Successfully!";
     } catch (error) {
@@ -89,6 +111,7 @@ function MdConverter() {
   const resetConverter = () => {
     setMdFile(null);
     setHtmlContent("");
+    setPastedContent("");
     setConversionStep('upload');
     if (messageRef.current) messageRef.current.innerHTML = "";
   };
@@ -192,15 +215,50 @@ function MdConverter() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
-                    className="flex-1 flex flex-col justify-center space-y-6"
+                    className="flex-1 flex flex-col space-y-6"
                   >
-                    <FileUploader 
-                      videoFile={mdFile} 
-                      handleFileChange={handleFileChange} 
-                      title={t('selectDocTitle')}
-                      subtitle={t('selectDocSubtitle')}
-                      accept={{ 'text/markdown': ['.md'], 'text/plain': ['.txt'] }}
-                    />
+                    <div className="flex bg-gray-100 dark:bg-gray-700/50 p-1 rounded-xl w-full">
+                      <button 
+                        onClick={() => setUploadMode('file')}
+                        className={`flex-1 py-2 px-4 text-sm font-medium rounded-lg transition-colors ${uploadMode === 'file' ? 'bg-white dark:bg-gray-600 shadow text-indigo-600 dark:text-indigo-400' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+                      >
+                        Upload File
+                      </button>
+                      <button 
+                        onClick={() => setUploadMode('paste')}
+                        className={`flex-1 py-2 px-4 text-sm font-medium rounded-lg transition-colors ${uploadMode === 'paste' ? 'bg-white dark:bg-gray-600 shadow text-indigo-600 dark:text-indigo-400' : 'text-gray-500 hover:text-gray-700 dark:hover:text-gray-300'}`}
+                      >
+                        Paste Content
+                      </button>
+                    </div>
+
+                    {uploadMode === 'file' ? (
+                      <div className="flex-1 flex flex-col justify-center mt-4">
+                        <FileUploader 
+                          videoFile={mdFile} 
+                          handleFileChange={handleFileChange} 
+                          title={t('selectDocTitle')}
+                          subtitle={t('selectDocSubtitle')}
+                          accept={{ 'text/markdown': ['.md'], 'text/plain': ['.txt'] }}
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex-1 flex flex-col space-y-4 mt-4 h-full">
+                        <textarea
+                          value={pastedContent}
+                          onChange={(e) => setPastedContent(e.target.value)}
+                          placeholder="Paste your markdown content here..."
+                          className="flex-1 w-full p-4 min-h-[250px] border border-gray-300 dark:border-gray-600 rounded-xl bg-white dark:bg-gray-800 focus:ring-2 focus:ring-indigo-500 focus:border-transparent outline-none resize-none custom-scrollbar text-gray-800 dark:text-gray-200"
+                        ></textarea>
+                        <button
+                          onClick={handlePasteConvert}
+                          disabled={!pastedContent.trim()}
+                          className="w-full inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
+                        >
+                          Preview Content
+                        </button>
+                      </div>
+                    )}
                   </motion.div>
                 )}
 
@@ -221,7 +279,9 @@ function MdConverter() {
                           </p>
                           <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
                             <span className="truncate block" title={mdFile.name}>{mdFile.name}</span>
-                            <span className="flex-shrink-0 whitespace-nowrap opacity-80">({(mdFile.size / 1024).toFixed(2)} KB)</span>
+                            {uploadMode === 'file' && (
+                              <span className="flex-shrink-0 whitespace-nowrap opacity-80">({(mdFile.size / 1024).toFixed(2)} KB)</span>
+                            )}
                           </div>
                         </div>
                       </div>
@@ -300,6 +360,7 @@ function MdConverter() {
           .prose h1 { font-size: 2.25em; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3em; }
           .prose h2 { font-size: 1.5em; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.3em; }
           .prose p { margin-bottom: 1em; line-height: 1.6; }
+          .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6, .prose p, .prose li, .prose pre, .prose blockquote, .prose tr { page-break-inside: avoid; break-inside: avoid; }
           .prose a { color: #4f46e5; text-decoration: underline; }
           .prose ul { list-style-type: disc; padding-left: 1.5em; margin-bottom: 1em; }
           .prose ol { list-style-type: decimal; padding-left: 1.5em; margin-bottom: 1em; }

@@ -25,7 +25,7 @@ function VideoToAudioConverter() {
     setIsLoading(true);
     const { FFmpeg } = await import("@ffmpeg/ffmpeg");
     const { toBlobURL } = await import("@ffmpeg/util");
-    
+
     if (!ffmpegRef.current) {
       ffmpegRef.current = new FFmpeg();
     }
@@ -107,7 +107,7 @@ function VideoToAudioConverter() {
 
       <div className="relative max-w-7xl mx-auto w-full">
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -129,48 +129,45 @@ function VideoToAudioConverter() {
         </motion.div>
 
         {/* Conversion Steps Indicator */}
-        <motion.div 
+        <motion.div
           className="flex justify-center mb-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
-           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
                 { step: 'upload', label: t('step1'), icon: FiUpload },
                 { step: 'convert', label: t('step2'), icon: FiMusic },
                 { step: 'complete', label: t('step3'), icon: FiDownload },
               ].map(({ step, label, icon: Icon }, index) => (
                 <div key={step} className="flex items-center gap-4">
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
-                    conversionStep === step 
-                      ? 'bg-indigo-600 border-indigo-600 text-white' 
+                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${conversionStep === step
+                      ? 'bg-indigo-600 border-indigo-600 text-white'
                       : conversionStep === 'complete' && step === 'complete'
-                      ? 'bg-green-500 border-green-500 text-white'
-                      : index === 0 || (conversionStep === 'convert' && step === 'convert') || (conversionStep === 'complete')
-                      ? 'bg-indigo-100 border-indigo-600 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-400 dark:text-indigo-400'
-                      : 'bg-gray-100 border-gray-300 text-gray-400 dark:bg-gray-700 dark:border-gray-600'
-                  }`}>
+                        ? 'bg-green-500 border-green-500 text-white'
+                        : index === 0 || (conversionStep === 'convert' && step === 'convert') || (conversionStep === 'complete')
+                          ? 'bg-indigo-100 border-indigo-600 text-indigo-600 dark:bg-indigo-900/30 dark:border-indigo-400 dark:text-indigo-400'
+                          : 'bg-gray-100 border-gray-300 text-gray-400 dark:bg-gray-700 dark:border-gray-600'
+                    }`}>
                     {conversionStep === 'complete' && step === 'complete' ? (
                       <FiCheck className="w-6 h-6" />
                     ) : (
                       <Icon className="w-6 h-6" />
                     )}
                   </div>
-                  <span className={`font-medium ${
-                    conversionStep === step || (conversionStep === 'complete' && step === 'complete')
+                  <span className={`font-medium ${conversionStep === step || (conversionStep === 'complete' && step === 'complete')
                       ? 'text-indigo-600 dark:text-indigo-400'
                       : 'text-gray-500 dark:text-gray-400'
-                  }`}>
+                    }`}>
                     {label}
                   </span>
                   {index < 2 && (
-                    <div className={`w-8 h-0.5 mx-4 ${
-                      index === 0 || conversionStep === 'convert' || conversionStep === 'complete'
+                    <div className={`w-8 h-0.5 mx-4 ${index === 0 || conversionStep === 'convert' || conversionStep === 'complete'
                         ? 'bg-indigo-600'
                         : 'bg-gray-300 dark:bg-gray-600'
-                    }`} />
+                      }`} />
                   )}
                 </div>
               ))}
@@ -181,7 +178,7 @@ function VideoToAudioConverter() {
         {/* Main Converter Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
           {/* Upload & Convert Panel */}
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -199,11 +196,11 @@ function VideoToAudioConverter() {
                   )}
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-                  {conversionStep === 'complete' 
-                    ? t('statusComplete') 
-                    : conversionStep === 'convert' 
-                    ? t('statusReady') 
-                    : t('statusUpload')}
+                  {conversionStep === 'complete'
+                    ? t('statusComplete')
+                    : conversionStep === 'convert'
+                      ? t('statusReady')
+                      : t('statusUpload')}
                 </h2>
               </div>
 
@@ -216,9 +213,9 @@ function VideoToAudioConverter() {
                     exit={{ opacity: 0, y: -20 }}
                     className="space-y-6"
                   >
-                    <FileUploader 
-                      videoFile={videoFile} 
-                      handleFileChange={handleFileChange} 
+                    <FileUploader
+                      videoFile={videoFile}
+                      handleFileChange={handleFileChange}
                       title={t('uploadTitle')}
                       subtitle={t('uploadSubtitle')}
                       dropText={t('uploadDropText')}
@@ -260,12 +257,12 @@ function VideoToAudioConverter() {
                         className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
                       >
                         {isLoading ? (
-                            <>
-                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                {t('converting')}
-                            </>
+                          <>
+                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                            {t('converting')}
+                          </>
                         ) : (
-                            t('convertBtn')
+                          t('convertBtn')
                         )}
                       </button>
 
@@ -328,7 +325,7 @@ function VideoToAudioConverter() {
           </motion.div>
 
           {/* Music Player Panel */}
-          <motion.div 
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -345,7 +342,7 @@ function VideoToAudioConverter() {
         </div>
 
         {/* Features Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -387,7 +384,7 @@ function VideoToAudioConverter() {
 
 
         {/* How to Use Section */}
-        <motion.div 
+        <motion.div
           className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

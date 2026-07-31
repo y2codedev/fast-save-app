@@ -19,7 +19,7 @@ function AudioTrimmer() {
   const [startTime, setStartTime] = useState<number>(0);
   const [endTime, setEndTime] = useState<number>(100);
   const [isPlaying, setIsPlaying] = useState(false);
-  
+
   const [conversionStep, setConversionStep] = useState<'upload' | 'trim' | 'complete'>('upload');
   const messageRef = useRef<HTMLParagraphElement | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -29,7 +29,7 @@ function AudioTrimmer() {
     setIsLoading(true);
     const { FFmpeg } = await import("@ffmpeg/ffmpeg");
     const { toBlobURL } = await import("@ffmpeg/util");
-    
+
     if (!ffmpegRef.current) {
       ffmpegRef.current = new FFmpeg();
     }
@@ -99,30 +99,30 @@ function AudioTrimmer() {
   const trimAudio = async () => {
     if (!audioFile) return;
     if (startTime >= endTime) {
-       alert("Start time must be before end time");
-       return;
+      alert("Start time must be before end time");
+      return;
     }
     if (!loaded) await loadFFmpeg();
 
     const ffmpeg = ffmpegRef.current;
     setIsLoading(true);
-    if(audioRef.current) audioRef.current.pause();
+    if (audioRef.current) audioRef.current.pause();
     setIsPlaying(false);
-    
+
     try {
       const { fetchFile } = await import("@ffmpeg/util");
-      
+
       const fileExt = audioFile.name.split('.').pop()?.toLowerCase() || 'mp3';
       const inputName = `input.${fileExt}`;
       const outputName = `output.${fileExt}`;
-      
+
       await ffmpeg.writeFile(inputName, await fetchFile(audioFile));
-      
+
       await ffmpeg.exec([
-        "-i", inputName, 
-        "-ss", startTime.toString(), 
-        "-to", endTime.toString(), 
-        "-c", "copy", 
+        "-i", inputName,
+        "-ss", startTime.toString(),
+        "-to", endTime.toString(),
+        "-c", "copy",
         outputName
       ]);
 
@@ -165,7 +165,7 @@ function AudioTrimmer() {
   return (
     <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
       <div className="relative max-w-5xl mx-auto w-full">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -187,14 +187,14 @@ function AudioTrimmer() {
         </motion.div>
 
         {conversionStep === 'trim' && audioURL ? (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="mb-12 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 border border-white/20 dark:border-gray-700/50"
           >
             <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-2xl p-6 mb-8 text-center flex flex-col items-center justify-center min-h-[160px]">
               <FiMusic className="h-12 w-12 text-indigo-500 mb-4" />
-              <audio 
+              <audio
                 ref={audioRef}
                 src={audioURL}
                 onLoadedMetadata={onAudioLoaded}
@@ -221,71 +221,96 @@ function AudioTrimmer() {
                   {formatTime(endTime)}
                 </span>
               </div>
-              
-              <div className="relative h-16 flex items-center" ref={trackRef}>
-                {/* Background Track indicating a waveform ideally, simple block for now */}
-                <div className="absolute w-full h-8 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden flex items-center justify-center text-gray-400 text-xs">
-                   <div 
-                     className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500 opacity-80"
-                     style={{ 
-                       left: `${(startTime / duration) * 100}%`,
-                       right: `${100 - (endTime / duration) * 100}%`
-                     }}
-                   ></div>
+
+              <div className="relative h-16 flex items-center select-none touch-none" ref={trackRef}>
+                {/* Background Track */}
+                <div
+                  className="absolute w-full h-8 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden cursor-pointer"
+                  onPointerDown={(e) => {
+                    if (!trackRef.current || duration <= 0) return;
+                    const rect = trackRef.current.getBoundingClientRect();
+                    const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                    const clickedTime = pct * duration;
+                    const distToStart = Math.abs(clickedTime - startTime);
+                    const distToEnd = Math.abs(clickedTime - endTime);
+                    if (distToStart < distToEnd) {
+                      if (clickedTime < endTime - 0.1) {
+                        setStartTime(clickedTime);
+                        if (audioRef.current) audioRef.current.currentTime = clickedTime;
+                      }
+                    } else {
+                      if (clickedTime > startTime + 0.1) {
+                        setEndTime(clickedTime);
+                        if (audioRef.current) audioRef.current.currentTime = clickedTime;
+                      }
+                    }
+                  }}
+                >
+                  <div
+                    className="absolute h-full bg-gradient-to-r from-indigo-500 to-violet-500 opacity-80"
+                    style={{
+                      left: `${(startTime / duration) * 100}%`,
+                      right: `${100 - (endTime / duration) * 100}%`
+                    }}
+                  ></div>
                 </div>
 
-                <input 
-                  type="range"
-                  min={0}
-                  max={duration}
-                  step={0.01}
-                  value={startTime}
-                  onChange={handleStartChange}
-                  className="absolute w-full h-8 appearance-none pointer-events-none opacity-0 z-20"
-                />
-                <input 
-                  type="range"
-                  min={0}
-                  max={duration}
-                  step={0.01}
-                  value={endTime}
-                  onChange={handleEndChange}
-                  className="absolute w-full h-8 appearance-none pointer-events-none opacity-0 z-20"
-                />
-
-                <div 
-                  className="absolute h-12 w-4 bg-indigo-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border border-indigo-400"
+                {/* Start Handle — directly draggable */}
+                <div
+                  className="absolute h-14 w-5 bg-indigo-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border-2 border-indigo-400 hover:scale-110 hover:bg-indigo-500 transition-transform"
                   style={{ left: `${(startTime / duration) * 100}%` }}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+                    const onMove = (ev: PointerEvent) => {
+                      if (!trackRef.current || duration <= 0) return;
+                      const rect = trackRef.current.getBoundingClientRect();
+                      const pct = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+                      const newVal = pct * duration;
+                      if (newVal < endTime - 0.1) {
+                        setStartTime(newVal);
+                        if (audioRef.current) audioRef.current.currentTime = newVal;
+                      }
+                    };
+                    const onUp = () => {
+                      document.removeEventListener('pointermove', onMove);
+                      document.removeEventListener('pointerup', onUp);
+                    };
+                    document.addEventListener('pointermove', onMove);
+                    document.addEventListener('pointerup', onUp);
+                  }}
                 >
-                  <div className="w-0.5 h-6 bg-white/50 rounded-full"></div>
+                  <div className="w-0.5 h-6 bg-white/60 rounded-full"></div>
                 </div>
-                
-                <div 
-                  className="absolute h-12 w-4 bg-violet-600 rounded-sm shadow-md cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border border-violet-400"
+
+                {/* End Handle — directly draggable */}
+                <div
+                  className="absolute h-14 w-5 bg-violet-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border-2 border-violet-400 hover:scale-110 hover:bg-violet-500 transition-transform"
                   style={{ left: `${(endTime / duration) * 100}%` }}
+                  onPointerDown={(e) => {
+                    e.preventDefault();
+                    (e.target as HTMLElement).setPointerCapture(e.pointerId);
+                    const onMove = (ev: PointerEvent) => {
+                      if (!trackRef.current || duration <= 0) return;
+                      const rect = trackRef.current.getBoundingClientRect();
+                      const pct = Math.max(0, Math.min(1, (ev.clientX - rect.left) / rect.width));
+                      const newVal = pct * duration;
+                      if (newVal > startTime + 0.1) {
+                        setEndTime(newVal);
+                        if (audioRef.current) audioRef.current.currentTime = newVal;
+                      }
+                    };
+                    const onUp = () => {
+                      document.removeEventListener('pointermove', onMove);
+                      document.removeEventListener('pointerup', onUp);
+                    };
+                    document.addEventListener('pointermove', onMove);
+                    document.addEventListener('pointerup', onUp);
+                  }}
                 >
-                  <div className="w-0.5 h-6 bg-white/50 rounded-full"></div>
+                  <div className="w-0.5 h-6 bg-white/60 rounded-full"></div>
                 </div>
               </div>
-
-              <style jsx>{`
-                input[type=range]::-webkit-slider-thumb {
-                  pointer-events: auto;
-                  width: 20px;
-                  height: 48px;
-                  border-radius: 0;
-                  -webkit-appearance: none;
-                  background: transparent;
-                }
-                input[type=range]::-moz-range-thumb {
-                  pointer-events: auto;
-                  width: 20px;
-                  height: 48px;
-                  border-radius: 0;
-                  background: transparent;
-                  border: none;
-                }
-              `}</style>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-between border-t border-gray-200 dark:border-gray-800 pt-6">
@@ -295,7 +320,7 @@ function AudioTrimmer() {
               >
                 {t('cancel')}
               </button>
-              
+
               <p ref={messageRef} className="text-sm text-indigo-500 font-mono line-clamp-1 flex-1 text-center px-4"></p>
 
               <Button
@@ -310,16 +335,16 @@ function AudioTrimmer() {
           <div className="grid grid-cols-1 gap-8 mb-12">
             <AnimatePresence mode="wait">
               {conversionStep === 'upload' && (
-                <motion.div 
+                <motion.div
                   className="relative max-w-2xl mx-auto w-full"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
                   <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
-                    <FileUploader 
-                      videoFile={audioFile} 
-                      handleFileChange={handleFileChange} 
+                    <FileUploader
+                      videoFile={audioFile}
+                      handleFileChange={handleFileChange}
                       accept={{ 'audio/*': ['.mp3', '.wav', '.ogg', '.m4a'] }}
                       title={t('step1')}
                       subtitle={t('supportedFormats')}
@@ -372,7 +397,7 @@ function AudioTrimmer() {
         )}
 
         {/* How to Use Section */}
-        <motion.div 
+        <motion.div
           className="mt-16 mb-8 text-start max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

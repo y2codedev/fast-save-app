@@ -49,7 +49,7 @@ const FileUploadArea = forwardRef<HTMLInputElement, FileUploadAreaProps>(
                     }`}
                 >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        <div className="flex justify-center text-6xl text-gray-400">
+                        <div className="flex justify-center items-center w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg text-4xl text-white mb-4">
                             <FiUploadCloud />
                         </div>
                         <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
