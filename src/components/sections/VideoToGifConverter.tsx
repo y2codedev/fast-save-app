@@ -27,15 +27,17 @@ function VideoToGifConverter() {
         ffmpegRef.current = new FFmpeg();
       }
 
-      const baseURL = "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd";
+      const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
       const ffmpeg = ffmpegRef.current;
 
       ffmpeg.on("log", ({ message }: { message: string }) => {
-        if (messageRef.current) messageRef.current.innerHTML = message;
+        if (messageRef.current && !/frame=\s*\d+|fps=\s*\d+|bitrate=\s*|size=\s*|q=\s*\d+/i.test(message)) {
+          messageRef.current.innerHTML = message;
+        }
       });
 
       if (messageRef.current) {
-        messageRef.current.innerHTML = "Downloading video processor (one-time ~30MB download, please wait)...";
+        messageRef.current.innerHTML = "🔒 100% Private — Processing locally in your browser...";
       }
 
       await ffmpeg.load({

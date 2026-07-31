@@ -33,11 +33,13 @@ function AudioTrimmer() {
     if (!ffmpegRef.current) {
       ffmpegRef.current = new FFmpeg();
     }
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd";
+    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
     const ffmpeg = ffmpegRef.current;
 
     ffmpeg.on("log", ({ message }: { message: string }) => {
-      if (messageRef.current) messageRef.current.innerHTML = message;
+      if (messageRef.current && !/frame=\s*\d+|fps=\s*\d+|bitrate=\s*|size=\s*|q=\s*\d+/i.test(message)) {
+        messageRef.current.innerHTML = message;
+      }
     });
 
     await ffmpeg.load({
