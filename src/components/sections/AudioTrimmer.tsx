@@ -25,30 +25,75 @@ function AudioTrimmer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
 
+  const loadingPromiseRef = useRef<Promise<void> | null>(null);
+
   const loadFFmpeg = async () => {
-    setIsLoading(true);
-    const { FFmpeg } = await import("@ffmpeg/ffmpeg");
-    const { toBlobURL } = await import("@ffmpeg/util");
-
-    if (!ffmpegRef.current) {
-      ffmpegRef.current = new FFmpeg();
+    if (loaded) return;
+    if (loadingPromiseRef.current) {
+      return loadingPromiseRef.current;
     }
-    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-    const ffmpeg = ffmpegRef.current;
 
-    ffmpeg.on("log", ({ message }: { message: string }) => {
-      if (messageRef.current && !/frame=\s*\d+|fps=\s*\d+|bitrate=\s*|size=\s*|q=\s*\d+/i.test(message)) {
-        messageRef.current.innerHTML = message;
+    loadingPromiseRef.current = (async () => {
+      try {
+        const { FFmpeg } = await import("@ffmpeg/ffmpeg");
+        const { toBlobURL } = await import("@ffmpeg/util");
+
+        if (!ffmpegRef.current) {
+          ffmpegRef.current = new FFmpeg();
+        }
+        const ffmpeg = ffmpegRef.current;
+
+        ffmpeg.on("log", ({ message }: { message: string }) => {
+          if (messageRef.current && !/frame=\s*\d+|fps=\s*\d+|bitrate=\s*|size=\s*|q=\s*\d+/i.test(message)) {
+            messageRef.current.innerHTML = message;
+          }
+        });
+
+        const baseURLs = [
+          "https://unpkg.com/@ffmpeg/core@0.12.10/dist/umd",
+          "https://cdn.jsdelivr.net/npm/@ffmpeg/core@0.12.10/dist/umd"
+        ];
+
+        let loadedSuccessfully = false;
+        let lastErr: any = null;
+
+        for (const baseURL of baseURLs) {
+          try {
+            if (messageRef.current) {
+              messageRef.current.innerHTML = "🔒 100% Private — Processing locally in your browser...";
+            }
+            await ffmpeg.load({
+              coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
+              wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
+            });
+            loadedSuccessfully = true;
+            break;
+          } catch (err) {
+            console.warn(`Failed to load FFmpeg from ${baseURL}:`, err);
+            lastErr = err;
+          }
+        }
+
+        if (!loadedSuccessfully) {
+          throw lastErr || new Error("Failed to load audio processor from CDNs");
+        }
+
+        if (messageRef.current) {
+          messageRef.current.innerHTML = "🔒 100% Private — Local processor ready!";
+        }
+        setLoaded(true);
+      } catch (error) {
+        console.error("FFmpeg load error:", error);
+        if (messageRef.current) {
+          messageRef.current.innerHTML = `Error loading processor: ${error instanceof Error ? error.message : String(error)}`;
+        }
+        throw error;
+      } finally {
+        loadingPromiseRef.current = null;
       }
-    });
+    })();
 
-    await ffmpeg.load({
-      coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript"),
-      wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm"),
-    });
-
-    setLoaded(true);
-    setIsLoading(false);
+    return loadingPromiseRef.current;
   };
 
   const handleFileChange = (file: File) => {
@@ -59,6 +104,12 @@ function AudioTrimmer() {
     setStartTime(0);
     setConversionStep('trim');
   };
+
+  useEffect(() => {
+    if (conversionStep === 'trim' && !loaded) {
+      loadFFmpeg().catch((err) => console.error("Background FFmpeg load error:", err));
+    }
+  }, [conversionStep, loaded]);
 
   const onAudioLoaded = (e: React.SyntheticEvent<HTMLAudioElement, Event>) => {
     const audioDuration = e.currentTarget.duration;
