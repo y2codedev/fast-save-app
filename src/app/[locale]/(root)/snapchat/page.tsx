@@ -1,37 +1,21 @@
 
 import { DownloadForm, Group } from "@/constants";
-
 import type { Metadata } from "next";
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, TOOL_KEYWORDS } from '@/lib/seo';
 
-export const generateMetadata = (): Metadata => {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
     const title = "Snapchat Story Saver – Download Snaps Online";
 
     const description =
         "Download Snapchat videos in HD with ConvertAllNow. Save snaps, stories, and videos quickly. No watermark, no login, no app needed. Free and works on all devices.";
 
-    const keywords = [
-        "Snapchat Video Downloader",
-        "Download Snapchat Videos",
-        "Snapchat Story Saver",
-        "Save Snap Videos",
-        "HD Snapchat Downloader",
-        "Download Snaps Without Watermark",
-        "Snapchat Video Converter",
-        "Online Snapchat Downloader",
-        "Free Snapchat Video Download",
-        "Snapchat Downloader for Android",
-    ];
-
     return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}`),
-        other: {
-            "google-adsense-account": "ca-pub-1504999187644497",
-        },
         title,
         description,
-        keywords,
+        keywords: TOOL_KEYWORDS['snapchat'],
 
-        authors: [{ name: "ConvertAllNow", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/snapchat` }],
+        authors: [{ name: "ConvertAllNow", url: getCanonicalUrl(locale, '/snapchat') }],
         publisher: "ConvertAllNow",
         creator: "ConvertAllNow",
         robots: {
@@ -43,20 +27,17 @@ export const generateMetadata = (): Metadata => {
         },
 
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/snapchat`,
-            types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
-            },
+            canonical: getCanonicalUrl(locale, '/snapchat'),
+            languages: getAlternateLanguages('/snapchat'),
         },
 
         openGraph: {
             title,
             description,
             type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/snapchat`,
+            url: getCanonicalUrl(locale, '/snapchat'),
             siteName: "ConvertAllNow",
-            locale: "en_IN",
+            locale: getOgLocale(locale),
             images: [
                 {
                     url: "/images/snap.webp",
@@ -73,13 +54,11 @@ export const generateMetadata = (): Metadata => {
             images: ["/images/snap.webp"],
             creator: "@convertallnow",
             site: "@convertallnow",
-            creatorId: "convertallnow",
-            siteId: "convertallnow",
         },
         category: "Technology",
         applicationName: "ConvertAllNow - Snapchat Video Downloader",
     };
-};
+}
 
 export default function page() {
 

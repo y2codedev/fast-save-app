@@ -4,7 +4,7 @@ import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes, FaGlobe, FaChevronRight } f
 import Link from 'next/link';
 import { usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
-import { MEGA_MENU_ITEMS } from '@/constants/data';
+import { MEGA_MENU_ITEMS, ZIP_MENU_ITEMS } from '@/constants/data';
 import { useState, useEffect } from 'react';
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react';
 import { ChevronDownIcon, Sparkles } from 'lucide-react';
@@ -73,6 +73,12 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  const zipColumns = [
+    [ZIP_MENU_ITEMS[0], ZIP_MENU_ITEMS[1]],
+    [ZIP_MENU_ITEMS[2]],
+    [ZIP_MENU_ITEMS[3]]
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -161,6 +167,51 @@ const Navbar = () => {
                   </li>
                 )
               })}
+
+              {/* Custom ZIP Mega Menu */}
+              <li className="relative group hidden xl:block">
+                <button className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-colors font-bold text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800`}>
+                  {t('All ZIP tools')}
+                  <ChevronDownIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 opacity-70" />
+                </button>
+                
+                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="w-[960px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-5 pb-6 grid grid-cols-3 gap-5 relative max-h-[calc(100vh-110px)] overflow-y-auto">
+                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
+                    
+                    {zipColumns.map((colSections, colIdx) => (
+                      <div key={colIdx} className="space-y-4">
+                        {colSections.map((section, sIdx) => (
+                          <div key={sIdx} className="space-y-1.5">
+                            <h3 className="text-[11px] font-black tracking-wider text-gray-400 dark:text-gray-500 uppercase px-2.5">{t(section.header)}</h3>
+                            <div className="space-y-0.5">
+                              {section.items.map((tool, i) => {
+                                const Icon = tool.icon;
+                                const isActive = pathname === tool.path;
+                                return (
+                                  <Link key={i} href={tool.path} className={`flex items-center gap-2.5 px-2.5 py-1.5 rounded-xl transition-all duration-150 group/item ${isActive ? 'bg-indigo-50/90 dark:bg-indigo-900/25 shadow-xs ring-1 ring-indigo-300 dark:ring-indigo-700' : 'hover:bg-gray-50 dark:hover:bg-gray-800/70'}`}>
+                                    <div className={`w-8 h-8 flex-shrink-0 flex items-center justify-center rounded-lg transition-colors ${isActive ? 'bg-indigo-600 text-white shadow-sm' : 'bg-gray-100 dark:bg-gray-800 group-hover/item:bg-indigo-100 dark:group-hover/item:bg-indigo-900/50 text-gray-600 dark:text-gray-300 group-hover/item:text-indigo-600 dark:group-hover/item:text-indigo-400'}`}>
+                                      <Icon className="w-4 h-4" />
+                                    </div>
+                                    <div className="min-w-0 flex-1">
+                                      <div className={`font-bold text-[13px] leading-snug truncate ${isActive ? 'text-indigo-900 dark:text-indigo-200' : 'text-gray-900 dark:text-white group-hover/item:text-indigo-700 dark:group-hover/item:text-indigo-300'}`}>
+                                        {t(tool.name)}
+                                      </div>
+                                      <div className="text-[11px] text-gray-500 dark:text-gray-400 truncate leading-none mt-0.5">
+                                        {t(tool.desc)}
+                                      </div>
+                                    </div>
+                                  </Link>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </li>
             </ul>
 
             {/* Actions & Mobile Menu */}

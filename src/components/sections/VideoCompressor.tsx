@@ -102,13 +102,6 @@ function VideoCompressor() {
     setProgress(0);
     setCompressedSize(null);
     setConversionStep('convert');
-  };
-
-  useEffect(() => {
-    if (conversionStep === 'convert' && !loaded) {
-      loadFFmpeg().catch((err) => console.error("Background FFmpeg load error:", err));
-    }
-  }, [conversionStep, loaded]);
 
     // Extract duration to calculate original bitrate
     const videoElement = document.createElement('video');
@@ -119,6 +112,12 @@ function VideoCompressor() {
     };
     videoElement.src = URL.createObjectURL(file);
   };
+
+  useEffect(() => {
+    if (conversionStep === 'convert' && !loaded) {
+      loadFFmpeg().catch((err) => console.error("Background FFmpeg load error:", err));
+    }
+  }, [conversionStep, loaded]);
 
   const compressVideo = async () => {
     if (!videoFile) return;
@@ -206,6 +205,9 @@ function VideoCompressor() {
   useEffect(() => {
     return () => {
       if (compressedVideoURL) URL.revokeObjectURL(compressedVideoURL);
+      try {
+        if (ffmpegRef.current) ffmpegRef.current.terminate();
+      } catch (e) {}
     };
   }, [compressedVideoURL]);
 
@@ -337,82 +339,99 @@ function VideoCompressor() {
                     exit={{ opacity: 0, y: -20 }}
                     className="space-y-6"
                   >
-                    <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
-                      <div className="flex items-center gap-3">
-                        <FiVideo className="h-5 w-5 text-indigo-600" />
-                        <div>
-                          <p className="font-medium text-indigo-800 dark:text-indigo-200">
-                            {t('originalFile')}
+                    {!loaded ? (
+                      <div className="flex flex-col items-center justify-center py-12 space-y-4 bg-white/50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700">
+                        <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+                        <div className="text-center">
+                          <p className="text-gray-900 dark:text-white font-medium text-lg">
+                            Setting up local secure processor...
                           </p>
-                          <p className="text-sm text-indigo-700 dark:text-indigo-300 mt-1">
-                            {videoFile.name} ({formatSize(videoFile.size)})
+                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                            (This one-time download ensures your files never leave your device)
                           </p>
                         </div>
+                        <p ref={messageRef} className="text-xs font-mono text-indigo-500 text-center animate-pulse"></p>
                       </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm">
-                      <p className="font-semibold text-gray-900 dark:text-white mb-3">{t('targetCompression')}</p>
-                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {[
-                          { id: 'light', label: t('lightLabel'), desc: t('lightDesc') },
-                          { id: 'balanced', label: t('balancedLabel'), desc: t('balancedDesc') },
-                          { id: 'strong', label: t('strongLabel'), desc: t('strongDesc') },
-                        ].map(level => (
-                          <button
-                            key={level.id}
-                            onClick={() => setCompressionLevel(level.id as any)}
-                            className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all duration-300 ${compressionLevel === level.id ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 shadow-sm' : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
-                          >
-                            <span className="font-bold text-sm">{level.label}</span>
-                            <span className="text-xs mt-1 opacity-80">{level.desc}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {isLoading && progress > 0 && (
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-sm font-medium text-gray-700 dark:text-gray-300">
-                          <span>{t('compressingStatus')}</span>
-                          <span>{progress}%</span>
+                    ) : (
+                      <>
+                        <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-xl p-4">
+                          <div className="flex items-center gap-3">
+                            <FiVideo className="h-5 w-5 text-indigo-600" />
+                            <div>
+                              <p className="font-medium text-indigo-800 dark:text-indigo-200">
+                                {t('originalFile')}
+                              </p>
+                              <p className="text-sm text-indigo-700 dark:text-indigo-300 mt-1">
+                                {videoFile.name} ({formatSize(videoFile.size)})
+                              </p>
+                            </div>
+                          </div>
                         </div>
-                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
-                          <div
-                            className="bg-indigo-600 h-2.5 rounded-full transition-all duration-300"
-                            style={{ width: `${progress}%` }}
-                          ></div>
+
+                        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-4 shadow-sm">
+                          <p className="font-semibold text-gray-900 dark:text-white mb-3">{t('targetCompression')}</p>
+                          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            {[
+                              { id: 'light', label: t('lightLabel'), desc: t('lightDesc') },
+                              { id: 'balanced', label: t('balancedLabel'), desc: t('balancedDesc') },
+                              { id: 'strong', label: t('strongLabel'), desc: t('strongDesc') },
+                            ].map(level => (
+                              <button
+                                key={level.id}
+                                onClick={() => setCompressionLevel(level.id as any)}
+                                className={`flex flex-col items-center justify-center p-3 rounded-lg border-2 transition-all duration-300 ${compressionLevel === level.id ? 'border-indigo-600 bg-indigo-50 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 shadow-sm' : 'border-gray-200 dark:border-gray-700 hover:border-indigo-300 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'}`}
+                              >
+                                <span className="font-bold text-sm">{level.label}</span>
+                                <span className="text-xs mt-1 opacity-80">{level.desc}</span>
+                              </button>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                    )}
 
-                    <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono line-clamp-2"></p>
-
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <button
-                        onClick={compressVideo}
-                        disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
-                      >
-                        {isLoading ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            Compressing...
-                          </>
-                        ) : (
-                          t('compressBtn')
+                        {isLoading && progress > 0 && (
+                          <div className="space-y-2">
+                            <div className="flex justify-between text-sm font-medium text-gray-700 dark:text-gray-300">
+                              <span>{t('compressingStatus')}</span>
+                              <span>{progress}%</span>
+                            </div>
+                            <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
+                              <div
+                                className="bg-indigo-600 h-2.5 rounded-full transition-all duration-300"
+                                style={{ width: `${progress}%` }}
+                              ></div>
+                            </div>
+                          </div>
                         )}
-                      </button>
 
-                      <button
-                        onClick={resetConverter}
-                        disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <FiUpload className="w-4 h-4" />
-                        {t('chooseDiffBtn')}
-                      </button>
-                    </div>
+                        <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono line-clamp-2"></p>
+
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <button
+                            onClick={compressVideo}
+                            disabled={isLoading}
+                            className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
+                          >
+                            {isLoading ? (
+                              <>
+                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                Compressing...
+                              </>
+                            ) : (
+                              t('compressBtn')
+                            )}
+                          </button>
+
+                          <button
+                            onClick={resetConverter}
+                            disabled={isLoading}
+                            className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <FiUpload className="w-4 h-4" />
+                            {t('chooseDiffBtn')}
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 )}
 

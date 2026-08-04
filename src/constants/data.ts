@@ -171,7 +171,7 @@ export const STEP: Step[] = [
     },
 ]
 
-import { Sparkles, Image as ImageIcon, Zap, FileText, Film, Scissors, ImagePlus, Layers, Unlock, Lock } from 'lucide-react';
+import { Sparkles, Image as ImageIcon, Zap, FileText, FileCode, Film, Scissors, ImagePlus, Layers, Unlock, Lock, Code, Archive, FileArchive, Package, FolderArchive, Disc } from 'lucide-react';
 
 export const MEGA_MENU_ITEMS = [
   {
@@ -200,6 +200,10 @@ export const MEGA_MENU_ITEMS = [
       { name: "Image to PDF", path: "/image-to-pdf", icon: DocumentTextIcon, desc: "Convert images to PDF" },
       { name: "PDF to JPG", path: "/pdf-to-jpg", icon: ImagePlus, desc: "Extract images" },
       { name: "MD to PDF", path: "/md-converter", icon: FileText, desc: "Markdown to PDF" },
+      { name: "PDF to Word", path: "/pdf-to-docx", icon: FileText, desc: "Convert PDF to DOCX" },
+      { name: "Word to PDF", path: "/word-to-pdf", icon: FileText, desc: "Convert DOCX to PDF" },
+      { name: "Word to HTML", path: "/word-to-html", icon: FileCode, desc: "Convert DOCX to HTML" },
+      { name: "PDF to HTML", path: "/pdf-to-html", icon: FileCode, desc: "Convert PDF to HTML" },
       { name: "Unlock PDF", path: "/unlock-pdf", icon: Unlock, desc: "Remove passwords" },
       { name: "Protect PDF", path: "/protect-pdf", icon: Lock, desc: "Add passwords" },
     ]
@@ -208,6 +212,63 @@ export const MEGA_MENU_ITEMS = [
     category: "Social",
     items: [
       { name: "IG Downloader", path: "/ig-downloader", icon: FiInstagram, desc: "Download Instagram content" },
+    ]
+  },
+  {
+    category: "Dev Tools",
+    items: [
+      { name: "Data Formatter", path: "/data-formatter", icon: Code, desc: "Format JSON, XML, YAML, CSV" },
+    ]
+  }
+];
+
+export const ZIP_MENU_ITEMS = [
+  {
+    header: "ORGANIZE ZIP",
+    items: [
+      { name: "Create ZIP", path: "/create-zip", icon: Layers, desc: "Create new ZIP archive" },
+      { name: "Unzip ZIP", path: "/unzip-zip", icon: Unlock, desc: "Extract ZIP files" },
+      { name: "Edit ZIP", path: "/edit-zip", icon: FileText, desc: "Modify ZIP contents" },
+      { name: "Merge ZIP", path: "/merge-zip", icon: Layers, desc: "Combine ZIP files" },
+      { name: "Split ZIP", path: "/split-zip", icon: Scissors, desc: "Divide ZIP archives" },
+      { name: "View ZIP", path: "/view-zip", icon: Sparkles, desc: "Inspect ZIP contents" },
+    ]
+  },
+  {
+    header: "ZIP SECURITY",
+    items: [
+      { name: "Protect ZIP", path: "/protect-zip", icon: Lock, desc: "Add password to ZIP" },
+      { name: "Unlock ZIP", path: "/unlock-zip-file", icon: Unlock, desc: "Remove ZIP password" },
+    ]
+  },
+  {
+    header: "CONVERT TO ZIP",
+    items: [
+      { name: "RAR to ZIP", path: "/rar-to-zip", icon: Archive, desc: "Convert RAR format" },
+      { name: "7Z to ZIP", path: "/7z-to-zip", icon: FileArchive, desc: "Convert 7Z format" },
+      { name: "TAR to ZIP", path: "/tar-to-zip", icon: Package, desc: "Convert TAR format" },
+      { name: "TAR-GZ to ZIP", path: "/tar-gz-to-zip", icon: FolderArchive, desc: "Convert TAR-GZ format" },
+      { name: "TAR-BZ2 to ZIP", path: "/tar-bz2-to-zip", icon: Archive, desc: "Convert TAR-BZ2 format" },
+      { name: "TAR-XZ to ZIP", path: "/tar-xz-to-zip", icon: FileArchive, desc: "Convert TAR-XZ format" },
+      { name: "GZ to ZIP", path: "/gz-to-zip", icon: Package, desc: "Convert GZ format" },
+      { name: "BZ2 to ZIP", path: "/bz2-to-zip", icon: FolderArchive, desc: "Convert BZ2 format" },
+      { name: "XZ to ZIP", path: "/xz-to-zip", icon: Archive, desc: "Convert XZ format" },
+      { name: "ISO to ZIP", path: "/iso-to-zip", icon: Disc, desc: "Convert ISO format" },
+    ]
+  },
+  {
+    header: "CONVERT FROM ZIP",
+    items: [
+      { name: "ZIP to RAR", path: "/zip-to-rar", icon: Archive, desc: "Convert to RAR" },
+      { name: "ZIP to 7Z", path: "/zip-to-7z", icon: FileArchive, desc: "Convert to 7Z" },
+      { name: "ZIP to TAR", path: "/zip-to-tar", icon: Package, desc: "Convert to TAR" },
+      { name: "ZIP to TAR-GZ", path: "/zip-to-tar-gz", icon: FolderArchive, desc: "Convert to TAR-GZ" },
+      { name: "ZIP to TAR-BZ2", path: "/zip-to-tar-bz2", icon: Archive, desc: "Convert to TAR-BZ2" },
+      { name: "ZIP to TAR-XZ", path: "/zip-to-tar-xz", icon: FileArchive, desc: "Convert to TAR-XZ" },
+      { name: "ZIP to GZ", path: "/zip-to-gz", icon: Package, desc: "Convert to GZ" },
+      { name: "ZIP to BZ2", path: "/zip-to-bz2", icon: FolderArchive, desc: "Convert to BZ2" },
+      { name: "ZIP to XZ", path: "/zip-to-xz", icon: Archive, desc: "Convert to XZ" },
+      { name: "ZIP to ISO", path: "/zip-to-iso", icon: Disc, desc: "Convert to ISO" },
     ]
   }
 ];

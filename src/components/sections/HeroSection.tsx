@@ -3,7 +3,7 @@
 import AdsenseAd from '@/components/AdsenseAd';
 import TopText from '@/components/sections/TopText';
 import DownloadForm from '@/components/sections/DownloadForm';
-import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage, FileText, Layers, ImagePlus, Unlock, Lock, Image as ImageIcon } from 'lucide-react';
+import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage, FileText, FileCode, Layers, ImagePlus, Unlock, Lock, Image as ImageIcon, Code } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 
@@ -125,6 +125,41 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
               title: "MD to PDF & Word",
               description: "Convert Markdown files to PDF or DOCX format securely",
               color: "indigo"
+            },
+            {
+              href: "/pdf-to-docx",
+              icon: FileText,
+              title: "PDF to Word",
+              description: "Convert PDF documents to editable Word files instantly",
+              color: "cyan"
+            },
+            {
+              href: "/word-to-pdf",
+              icon: FileText,
+              title: "Word to PDF",
+              description: "Convert Microsoft Word documents to professional PDF files in browser",
+              color: "indigo"
+            },
+            {
+              href: "/word-to-html",
+              icon: FileCode,
+              title: "Word to HTML",
+              description: "Convert Word documents into clean HTML5 code with live preview",
+              color: "amber"
+            },
+            {
+              href: "/pdf-to-html",
+              icon: FileCode,
+              title: "PDF to HTML",
+              description: "Transform multi-page PDF documents into structured HTML webpages",
+              color: "violet"
+            },
+            {
+              href: "/data-formatter",
+              icon: Code,
+              title: "Data Formatter",
+              description: "Format, validate, and convert between JSON, XML, YAML, and CSV in browser",
+              color: "emerald"
             },
             {
               href: "/pdf-to-jpg",

@@ -51,9 +51,15 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
       "browser based tools",
     ],
     icons: {
-      icon: '/images/logo.png',
-      shortcut: '/images/logo.png',
-      apple: '/images/logo.png',
+      icon: [
+        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/images/icon.png', type: 'image/png', sizes: '192x192' },
+        { url: '/favicon.svg', type: 'image/svg+xml' },
+      ],
+      shortcut: '/favicon.ico',
+      apple: [
+        { url: '/images/icon.png', sizes: '180x180', type: 'image/png' },
+      ],
     },
 
     authors: [{ name: "ConvertAllNow", url: siteUrl }],

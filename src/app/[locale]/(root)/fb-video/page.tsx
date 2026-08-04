@@ -1,35 +1,21 @@
+
 import { DownloadForm, Group } from "@/constants";
 import type { Metadata } from "next";
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, TOOL_KEYWORDS } from '@/lib/seo';
 
-export const generateMetadata = (): Metadata => {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+    const { locale } = await params;
     const title = "Facebook Video Downloader – Save Videos Online Free";
 
     const description =
         "Download Facebook videos in HD quickly and free with ConvertAllNow. No watermark, no login needed. Save reels, feeds, pages & private videos on all devices.";
 
-    const keywords = [
-        "Facebook Video Downloader",
-        "Download Facebook Videos",
-        "FB Video Download",
-        "Save Facebook Videos",
-        "FB HD Video Downloader",
-        "Download Facebook Reels",
-        "Facebook Private Video Download",
-        "FB MP4 Download",
-        "Free Facebook Video Downloader",
-        "Facebook Video Saver",
-    ];
-
     return {
-        metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}`),
-        other: {
-            "google-adsense-account": "ca-pub-1504999187644497",
-        },
         title,
         description,
-        keywords,
+        keywords: TOOL_KEYWORDS['fb-video'],
 
-        authors: [{ name: "ConvertAllNow", url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/fb-video` }],
+        authors: [{ name: "ConvertAllNow", url: getCanonicalUrl(locale, '/fb-video') }],
         publisher: "ConvertAllNow",
         creator: "ConvertAllNow",
         robots: {
@@ -41,20 +27,17 @@ export const generateMetadata = (): Metadata => {
         },
 
         alternates: {
-            canonical: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/fb-video`,
-            types: {
-                "application/rss+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
-                "application/atom+xml": `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/feed.xml`,
-            },
+            canonical: getCanonicalUrl(locale, '/fb-video'),
+            languages: getAlternateLanguages('/fb-video'),
         },
 
         openGraph: {
             title,
             description,
             type: "website",
-            url: `${process.env.NEXT_PUBLIC_SITE_URL || "https://convertallnow.com"}/fb-video`,
+            url: getCanonicalUrl(locale, '/fb-video'),
             siteName: "ConvertAllNow",
-            locale: "en_IN",
+            locale: getOgLocale(locale),
             images: [
                 {
                     url: "/images/facebook.png",
@@ -71,13 +54,11 @@ export const generateMetadata = (): Metadata => {
             images: ["/images/facebook.png"],
             creator: "@convertallnow",
             site: "@convertallnow",
-            creatorId: "convertallnow",
-            siteId: "convertallnow",
         },
         category: "Technology",
         applicationName: "ConvertAllNow - Facebook Video Downloader",
     };
-};
+}
 
 export default function page() {
 

@@ -265,48 +265,65 @@ function VideoToGifConverter() {
                     exit={{ opacity: 0, y: -20 }}
                     className="space-y-6"
                   >
-                    <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 w-full">
-                      <div className="flex items-start sm:items-center gap-3">
-                        <FiVideo className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
-                        <div className="min-w-0 flex-1">
-                          <p className="font-medium text-green-800 dark:text-green-200">
-                            {t('fileReady')}
+                    {!loaded ? (
+                      <div className="flex flex-col items-center justify-center py-12 space-y-4 bg-white/50 dark:bg-gray-800/50 rounded-2xl border border-gray-100 dark:border-gray-700">
+                        <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+                        <div className="text-center">
+                          <p className="text-gray-900 dark:text-white font-medium text-lg">
+                            Setting up local secure processor...
                           </p>
-                          <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
-                            <span className="truncate block" title={videoFile.name}>{videoFile.name}</span>
-                            <span className="flex-shrink-0 whitespace-nowrap opacity-80">({(videoFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                          <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                            (This one-time download ensures your files never leave your device)
+                          </p>
+                        </div>
+                        <p ref={messageRef} className="text-xs font-mono text-indigo-500 text-center animate-pulse"></p>
+                      </div>
+                    ) : (
+                      <>
+                        <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-4 w-full">
+                          <div className="flex items-start sm:items-center gap-3">
+                            <FiVideo className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
+                            <div className="min-w-0 flex-1">
+                              <p className="font-medium text-green-800 dark:text-green-200">
+                                {t('fileReady')}
+                              </p>
+                              <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
+                                <span className="truncate block" title={videoFile.name}>{videoFile.name}</span>
+                                <span className="flex-shrink-0 whitespace-nowrap opacity-80">({(videoFile.size / (1024 * 1024)).toFixed(2)} MB)</span>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
 
-                    <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono"></p>
+                        <p ref={messageRef} className="text-center text-sm text-indigo-500 font-mono"></p>
 
-                    <div className="flex flex-col sm:flex-row gap-3">
-                      <button
-                        onClick={convertToGif}
-                        disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
-                      >
-                        {isLoading ? (
-                          <>
-                            <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            {t('generating')}
-                          </>
-                        ) : (
-                          t('convertBtn')
-                        )}
-                      </button>
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <button
+                            onClick={convertToGif}
+                            disabled={isLoading}
+                            className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-[8px] text-white bg-gradient-to-r from-indigo-500 to-violet-500 hover:from-indigo-600 hover:to-violet-600 disabled:opacity-50 disabled:cursor-not-allowed py-2 px-4 transition-all duration-300"
+                          >
+                            {isLoading ? (
+                              <>
+                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                {t('generating')}
+                              </>
+                            ) : (
+                              t('convertBtn')
+                            )}
+                          </button>
 
-                      <button
-                        onClick={resetConverter}
-                        disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                      >
-                        <FiUpload className="w-4 h-4" />
-                        {t('chooseDiffBtn')}
-                      </button>
-                    </div>
+                          <button
+                            onClick={resetConverter}
+                            disabled={isLoading}
+                            className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                          >
+                            <FiUpload className="w-4 h-4" />
+                            {t('chooseDiffBtn')}
+                          </button>
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 )}
 

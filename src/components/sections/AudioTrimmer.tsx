@@ -245,9 +245,24 @@ function AudioTrimmer() {
             animate={{ opacity: 1, scale: 1 }}
             className="mb-12 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 border border-white/20 dark:border-gray-700/50"
           >
-            <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-2xl p-6 mb-8 text-center flex flex-col items-center justify-center min-h-[160px]">
-              <FiMusic className="h-12 w-12 text-indigo-500 mb-4" />
-              <audio
+            {!loaded ? (
+              <div className="flex flex-col items-center justify-center py-12 space-y-4">
+                <div className="w-12 h-12 border-4 border-indigo-200 border-t-indigo-600 rounded-full animate-spin"></div>
+                <div className="text-center">
+                  <p className="text-gray-900 dark:text-white font-medium text-lg">
+                    Setting up local secure processor...
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    (This one-time download ensures your files never leave your device)
+                  </p>
+                </div>
+                <p ref={messageRef} className="text-xs font-mono text-indigo-500 text-center animate-pulse"></p>
+              </div>
+            ) : (
+              <>
+                <div className="bg-indigo-50 dark:bg-indigo-900/20 border border-indigo-200 dark:border-indigo-800 rounded-2xl p-6 mb-8 text-center flex flex-col items-center justify-center min-h-[160px]">
+                  <FiMusic className="h-12 w-12 text-indigo-500 mb-4" />
+                  <audio
                 ref={audioRef}
                 src={audioURL}
                 onLoadedMetadata={onAudioLoaded}
@@ -383,6 +398,8 @@ function AudioTrimmer() {
                 className="w-full sm:w-auto px-8"
               />
             </div>
+              </>
+            )}
           </motion.div>
         ) : (
           <div className="grid grid-cols-1 gap-8 mb-12">
