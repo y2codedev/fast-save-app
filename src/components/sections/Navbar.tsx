@@ -1,8 +1,7 @@
 'use client';
 
 import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes, FaGlobe, FaChevronRight } from 'react-icons/fa';
-import Link from 'next/link';
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { MEGA_MENU_ITEMS, ZIP_MENU_ITEMS } from '@/constants/data';
 import { useState, useEffect } from 'react';
@@ -110,7 +109,7 @@ const Navbar = () => {
             : "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30"
         }`}
       >
-        <nav className="mx-auto px-4 md:px-6 lg:px-8 max-w-7xl">
+        <nav className="mx-auto px-4 md:px-6 lg:px-8 max-w-[1440px]">
           <div className="flex h-20 sm:h-24 items-center justify-between">
 
 
@@ -127,21 +126,21 @@ const Navbar = () => {
             </Link>
 
             {/* Desktop Mega Menu Navigation */}
-            <ul className="hidden lg:flex items-center gap-2">
+            <ul className="hidden lg:flex items-center gap-1 xl:gap-1.5 2xl:gap-2">
               {MEGA_MENU_ITEMS.map((category, index) => {
                 const isActiveCat = category.items.some(t => t.path === pathname);
                 return (
                   <li key={index} className="relative group">
-                    <button className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-colors font-bold text-sm ${isActiveCat ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
+                    <button className={`flex items-center gap-1 xl:gap-1.5 px-2.5 xl:px-3.5 py-2 rounded-xl transition-colors font-bold text-xs xl:text-sm ${isActiveCat ? 'bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800'}`}>
                       {t(category.category)}
                       <ChevronDownIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 opacity-70" />
                     </button>
                     
                     {/* Hover Dropdown */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                    <div className={`absolute top-full ${index >= 3 ? 'right-0' : 'left-1/2 -translate-x-1/2'} pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50`}>
                       <div className="w-[520px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-4 grid grid-cols-2 gap-2 relative">
                         {/* Decorative Top Arrow */}
-                        <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
+                        <div className={`absolute -top-1.5 ${index >= 3 ? 'right-10' : 'left-1/2 -translate-x-1/2'} w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45`} />
                         
                         {category.items.map((tool, i) => {
                           const Icon = tool.icon;
@@ -170,14 +169,14 @@ const Navbar = () => {
 
               {/* Custom ZIP Mega Menu */}
               <li className="relative group hidden xl:block">
-                <button className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl transition-colors font-bold text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800`}>
+                <button className={`flex items-center gap-1 xl:gap-1.5 px-2.5 xl:px-3.5 py-2 rounded-xl transition-colors font-bold text-xs xl:text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800`}>
                   {t('All ZIP tools')}
                   <ChevronDownIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 opacity-70" />
                 </button>
                 
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                <div className="absolute top-full right-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
                   <div className="w-[960px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-5 pb-6 grid grid-cols-3 gap-5 relative max-h-[calc(100vh-110px)] overflow-y-auto">
-                    <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
+                    <div className="absolute -top-1.5 right-12 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
                     
                     {zipColumns.map((colSections, colIdx) => (
                       <div key={colIdx} className="space-y-4">

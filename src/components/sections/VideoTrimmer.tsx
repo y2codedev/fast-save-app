@@ -4,7 +4,7 @@ import { Button, FileUploader } from "@/constants";
 import { useRef, useState, useEffect, useCallback } from "react";
 import { FiUpload, FiDownload, FiCheck, FiScissors, FiFilm, FiVideo, FiPlay, FiPause } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 function VideoTrimmer() {

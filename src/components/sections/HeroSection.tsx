@@ -5,7 +5,7 @@ import TopText from '@/components/sections/TopText';
 import DownloadForm from '@/components/sections/DownloadForm';
 import { Zap, Shield, Globe, Smartphone, Sparkles, Scissors, Shrink, Film, Music, Instagram, Facebook, FileImage, FileText, FileCode, Layers, ImagePlus, Unlock, Lock, Image as ImageIcon, Code } from 'lucide-react';
 import { motion, Variants } from 'framer-motion';
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },

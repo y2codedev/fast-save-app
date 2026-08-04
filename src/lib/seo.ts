@@ -24,11 +24,11 @@ const OG_LOCALE_MAP: Record<string, string> = {
  * Other locales use prefix: https://convertallnow.com/es/merge-pdf
  */
 export function getCanonicalUrl(locale: string, path: string = ''): string {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const cleanPath = (path === '' || path === '/') ? '' : (path.startsWith('/') ? path : `/${path}`);
   if (locale === defaultLocale) {
-    return `${SITE_URL}${cleanPath || '/'}`;
+    return `${SITE_URL}${cleanPath}`;
   }
-  return `${SITE_URL}/${locale}${cleanPath || '/'}`;
+  return `${SITE_URL}/${locale}${cleanPath}`;
 }
 
 /**
@@ -36,19 +36,19 @@ export function getCanonicalUrl(locale: string, path: string = ''): string {
  * Used in metadata `alternates.languages`.
  */
 export function getAlternateLanguages(path: string = ''): Record<string, string> {
-  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  const cleanPath = (path === '' || path === '/') ? '' : (path.startsWith('/') ? path : `/${path}`);
   const languages: Record<string, string> = {};
 
   for (const locale of locales) {
     if (locale === defaultLocale) {
-      languages[locale] = `${SITE_URL}${cleanPath || '/'}`;
+      languages[locale] = `${SITE_URL}${cleanPath}`;
     } else {
-      languages[locale] = `${SITE_URL}/${locale}${cleanPath || '/'}`;
+      languages[locale] = `${SITE_URL}/${locale}${cleanPath}`;
     }
   }
 
   // x-default points to the default locale version
-  languages['x-default'] = `${SITE_URL}${cleanPath || '/'}`;
+  languages['x-default'] = `${SITE_URL}${cleanPath}`;
 
   return languages;
 }

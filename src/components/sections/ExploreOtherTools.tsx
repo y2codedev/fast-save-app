@@ -1,8 +1,7 @@
 'use client';
 
 import React from 'react';
-import Link from 'next/link';
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 import { ALL_TOOLS } from '@/lib/constants';

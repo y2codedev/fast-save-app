@@ -27,7 +27,7 @@ export default function LegalDisclaimer() {
                       Important Disclaimer
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      FastVideoSave.net is an independent service and is not affiliated with Instagram, Facebook, 
+                      ConvertAllNow.com is an independent service and is not affiliated with Instagram, Facebook, 
                       Snapchat, or their parent companies. This tool is designed for personal use only.
                     </p>
                   </div>

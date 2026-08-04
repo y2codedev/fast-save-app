@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { FooterProps, DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS } from '@/constants';
 import AppLogo from '@/components/AppLogo';
 import { useTranslations } from 'next-intl';

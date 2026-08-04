@@ -4,7 +4,7 @@ import { Button, FileUploader } from "@/constants";
 import { useRef, useState, useEffect } from "react";
 import { FiUpload, FiVideo, FiDownload, FiCheck, FiMinimize, FiFilm, FiScissors } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 
 function VideoCompressor() {

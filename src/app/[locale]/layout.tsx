@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import NextTopLoader from 'nextjs-toploader';
 import { Suspense } from 'react';
@@ -16,6 +16,16 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { getCanonicalUrl, getAlternateLanguages, getOgLocale, getSiteUrl } from '@/lib/seo';
 import OrganizationSchema from '@/components/seo/OrganizationSchema';
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
+    { media: "(prefers-color-scheme: dark)", color: "#111827" },
+  ],
+};
 
 export async function generateMetadata({ params }: { params: Promise<{locale: string}> }): Promise<Metadata> {
   const { locale } = await params;
@@ -146,7 +156,7 @@ export default async function RootLayout({
       `}
     </Script>
   </head>
-  <body suppressHydrationWarning>
+  <body className="overflow-x-hidden min-h-screen flex flex-col" suppressHydrationWarning>
         <Script id="register-sw" strategy="afterInteractive">
           {`
             if ('serviceWorker' in navigator) {
