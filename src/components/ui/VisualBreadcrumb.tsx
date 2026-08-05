@@ -27,13 +27,13 @@ export default function VisualBreadcrumb({ items, className = '' }: VisualBreadc
             className="flex items-center gap-1 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
             aria-label="Home"
           >
-            <HomeIcon className="h-3.5 w-3.5 flex-shrink-0" />
+            <HomeIcon className="h-3.5 w-3.5 flex-shrink-0" width={14} height={14} style={{ width: '14px', height: '14px', minWidth: '14px', minHeight: '14px' }} />
             <span className="hidden sm:inline">Home</span>
           </Link>
         </li>
         {items.map((item, index) => (
           <li key={index} className="flex items-center gap-1">
-            <ChevronRightIcon className="h-3.5 w-3.5 flex-shrink-0 text-gray-400 dark:text-gray-600" />
+            <ChevronRightIcon className="h-3.5 w-3.5 flex-shrink-0 text-gray-400 dark:text-gray-600" width={14} height={14} style={{ width: '14px', height: '14px', minWidth: '14px', minHeight: '14px' }} />
             {item.href ? (
               <Link
                 href={item.href}

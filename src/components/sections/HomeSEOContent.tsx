@@ -47,13 +47,27 @@ const features = [
   }
 ];
 
+const faqsList = [
+  { id: 1, qKey: 'Is ConvertAllNow completely free to use?', aKey: 'faq1_answer' },
+  { id: 2, qKey: 'Do you store my files on your servers?', aKey: 'faq2_answer' },
+  { id: 3, qKey: 'What platforms and devices are supported?', aKey: 'faq3_answer' },
+  { id: 4, qKey: 'Are there any file size limits?', aKey: 'faq4_answer' },
+  { id: 5, qKey: 'Do downloaded videos have watermarks?', aKey: 'faq5_answer' },
+];
+
+const featureList = [
+  { icon: Zap, title: "Lightning Fast Processing", descKey: "feature1_desc" },
+  { icon: Lock, title: "Bank-Grade Security", descKey: "feature2_desc" },
+  { icon: Sparkles, title: "Premium Quality Output", descKey: "feature3_desc" }
+];
+
 export default function HomeSEOContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const t = useTranslations('HomeSEO');
 
   const translatedFaqs = faqs.map(faq => ({
-    question: t(faq.question),
-    answer: t(faq.answer)
+    question: t.has(faq.question as any) ? t(faq.question as any) : faq.question,
+    answer: t.has(faq.answer as any) ? t(faq.answer as any) : faq.answer
   }));
 
   return (
@@ -92,10 +106,10 @@ export default function HomeSEOContent() {
                 <feature.icon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                {t(feature.title)}
+                {feature.title}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                {t(feature.description)}
+                {feature.description}
               </p>
             </div>
           ))}
@@ -140,7 +154,7 @@ export default function HomeSEOContent() {
                 className="w-full flex items-center justify-between p-6 text-start focus:outline-none"
               >
                 <span className="text-lg font-semibold text-gray-900 dark:text-white pe-4">
-                  {t(faq.question)}
+                  {faq.question}
                 </span>
                 <ChevronDown 
                   className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-indigo-600' : ''}`} 
@@ -156,7 +170,7 @@ export default function HomeSEOContent() {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
-                      {t(faq.answer)}
+                      {faq.answer}
                     </div>
                   </motion.div>
                 )}
