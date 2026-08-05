@@ -62,11 +62,10 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
     ],
     icons: {
       icon: [
-        { url: '/favicon.ico', sizes: 'any' },
+        { url: '/icon.png', type: 'image/png', sizes: '512x512' },
         { url: '/images/icon.png', type: 'image/png', sizes: '192x192' },
-        { url: '/favicon.svg', type: 'image/svg+xml' },
       ],
-      shortcut: '/favicon.ico',
+      shortcut: '/icon.png',
       apple: [
         { url: '/images/icon.png', sizes: '180x180', type: 'image/png' },
       ],
