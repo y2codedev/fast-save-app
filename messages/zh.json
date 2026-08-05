@@ -160,14 +160,24 @@
     "Resize, crop, rotate, and edit images with ease": "轻松调整大小、裁剪、旋转和编辑图像。",
     "Image Converter": "图像转换器",
     "Convert images between PNG, JPG, WebP and more": "在 PNG、JPG、WebP 等之间转换图像。",
-    "Lightning Fast": "闪电般快",
-    "Processing": "处理",
+    "Lightning Fast": "极速体验",
+    "Processing": "本地处理",
     "100% Secure": "100% 安全",
-    "Private & Safe": "私密与安全",
+    "Private & Safe": "私密安全",
     "Browser Based": "基于浏览器",
     "No Install": "无需安装",
     "Forever Free": "永久免费",
-    "No Watermark": "无水印"
+    "No Watermark": "无水印",
+    "PDF to Word": "PDF 转 Word",
+    "Convert PDF documents to editable Word files instantly": "立即将 PDF 文档转换为可编辑的 Word 文件。",
+    "Word to PDF": "Word 转 PDF",
+    "Convert Microsoft Word documents to professional PDF files in browser": "在浏览器中将 Microsoft Word 文档转换为专业的 PDF 文件。",
+    "Word to HTML": "Word 转 HTML",
+    "Convert Word documents into clean HTML5 code with live preview": "将 Word 文档转换为带有实时预览的干净 HTML5 代码。",
+    "PDF to HTML": "PDF 转 HTML",
+    "Transform multi-page PDF documents into structured HTML webpages": "将多页 PDF 文档转换为结构化的 HTML 网页。",
+    "Data Formatter": "数据格式化工具",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "在浏览器中对 JSON、XML、YAML 和 CSV 进行格式化、验证和互相转换。"
   },
   "Steps": {
     "Simple Process": "简单过程",
@@ -1099,5 +1109,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "什么是 {toolName}？",
+    "keyFeatures": "主要特点",
+    "howItWorks": "工作原理",
+    "commonUseCases": "常见应用场景",
+    "supportedFormats": "支持的格式",
+    "privacyAndSecurity": "隐私与安全",
+    "proTips": "实用技巧",
+    "faq": "常见问题解答",
+    "faqSubtitle": "关于 {toolName} 的常见疑问",
+    "updated": "更新时间：",
+    "byAuthor": "ConvertAllNow 团队",
+    "badgeText": "100% 免费 · 无需注册 · 浏览器即用"
+  },
+  "RelatedTools": {
+    "title": "相关工具",
+    "viewAll": "查看所有 {category}"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "免费在线 PDF 工具",
+    "pdfSubtitle": "合并、转换、压缩、保护和编辑 PDF 文件——全免费、基于浏览器、无需注册。",
+    "imageTitle": "免费在线图片工具",
+    "imageSubtitle": "压缩、转换、重置大小、编辑图片以及 AI 消除背景——全免费、浏览器即用。",
+    "videoTitle": "免费在线音视频工具",
+    "videoSubtitle": "压缩、剪輯、转换视频以及提取音频——由 FFmpeg WebAssembly 驱动，安全私密。",
+    "archiveTitle": "免费在线压缩包与 ZIP 工具",
+    "archiveSubtitle": "创建、解压、编辑、转换和加密 ZIP 压缩包——支持 ZIP、RAR、7Z、TAR、GZ 等格式。"
+  },
+  "Sitemap": {
+    "title": "网站地图",
+    "subtitle": "ConvertAllNow 上所有工具与页面的完整目录。",
+    "generalPages": "通用页面",
+    "viewCategory": "查看分类 →"
   }
 }

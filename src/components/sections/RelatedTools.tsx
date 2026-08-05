@@ -17,30 +17,35 @@ interface RelatedToolsProps {
   categoryPath?: string;
 }
 
+import { useTranslations } from 'next-intl';
+
 export default function RelatedTools({
   tools,
-  title = 'Related Tools',
+  title,
   categoryName,
   categoryPath,
 }: RelatedToolsProps) {
+  const t = useTranslations('RelatedTools');
   if (!tools || tools.length === 0) return null;
+
+  const displayTitle = title || t('title');
 
   return (
     <section
-      aria-label="Related Tools"
+      aria-label={displayTitle}
       className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-4"
     >
       <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-            {title}
+            {displayTitle}
           </h2>
           {categoryName && categoryPath && (
             <Link
               href={categoryPath}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
             >
-              View all {categoryName}
+              {t('viewAll', { category: categoryName })}
               <ArrowRightIcon className="h-3.5 w-3.5" />
             </Link>
           )}

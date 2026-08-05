@@ -160,14 +160,24 @@
     "Resize, crop, rotate, and edit images with ease": "Легко изменяйте размер, обрезайте и редактируйте изображения.",
     "Image Converter": "Конвертер Изображений",
     "Convert images between PNG, JPG, WebP and more": "Конвертируйте изображения между PNG, JPG, WebP и т.д.",
-    "Lightning Fast": "Молниеносно",
+    "Lightning Fast": "Molnienosno",
     "Processing": "Обработка",
     "100% Secure": "100% Безопасно",
-    "Private & Safe": "Приватно",
+    "Private & Safe": "Конфиденциально",
     "Browser Based": "В браузере",
     "No Install": "Без установки",
-    "Forever Free": "Всегда бесплатно",
-    "No Watermark": "Без водяных знаков"
+    "Forever Free": "Бесплатно всегда",
+    "No Watermark": "Без водяных знаков",
+    "PDF to Word": "PDF в Word",
+    "Convert PDF documents to editable Word files instantly": "Мгновенно преобразуйте документы PDF в редактируемые файлы Word.",
+    "Word to PDF": "Word в PDF",
+    "Convert Microsoft Word documents to professional PDF files in browser": "Преобразуйте документы Microsoft Word в профессиональные файлы PDF в браузере.",
+    "Word to HTML": "Word в HTML",
+    "Convert Word documents into clean HTML5 code with live preview": "Преобразуйте документы Word в чистый код HTML5 с предварительным просмотром.",
+    "PDF to HTML": "PDF в HTML",
+    "Transform multi-page PDF documents into structured HTML webpages": "Преобразуйте многостраничные PDF-документы в структурированные веб-страницы HTML.",
+    "Data Formatter": "Форматирование данных",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "Форматируйте, проверяйте и преобразуйте между JSON, XML, YAML и CSV в браузере."
   },
   "Steps": {
     "Simple Process": "Простой Процесс",
@@ -1099,5 +1109,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "Что такое {toolName}?",
+    "keyFeatures": "Основные возможности",
+    "howItWorks": "Как это работает",
+    "commonUseCases": "Частые сценарии использования",
+    "supportedFormats": "Поддерживаемые форматы",
+    "privacyAndSecurity": "Конфиденциальность и безопасность",
+    "proTips": "Советы экспертов",
+    "faq": "Часто задаваемые вопросы",
+    "faqSubtitle": "Частые вопросы о {toolName}",
+    "updated": "Обновлено:",
+    "byAuthor": "Команда ConvertAllNow",
+    "badgeText": "100% Бесплатно · Без регистрации · В браузере"
+  },
+  "RelatedTools": {
+    "title": "Похожие инструменты",
+    "viewAll": "Посмотреть все {category}"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "Бесплатные онлайн-инструменты PDF",
+    "pdfSubtitle": "Объединяйте, конвертируйте, сжимайте, защищайте и редактируйте PDF — бесплатно и прямо в браузере.",
+    "imageTitle": "Бесплатные онлайн-инструменты для изображений",
+    "imageSubtitle": "Сжимайте, конвертируйте, меняйте размер, редактируйте и удаляйте фон изображений бесплатно в браузере.",
+    "videoTitle": "Бесплатные онлайн-инструменты для видео и аудио",
+    "videoSubtitle": "Сжимайте, обрезайте, конвертируйте и извлекайте звук из видео с помощью FFmpeg WebAssembly.",
+    "archiveTitle": "Бесплатные онлайн-инструменты для архивов и ZIP",
+    "archiveSubtitle": "Создавайте, извлекайте, редактируйте и конвертируйте архивы ZIP. Поддерживает ZIP, RAR, 7Z, TAR и др."
+  },
+  "Sitemap": {
+    "title": "Карта сайта",
+    "subtitle": "Полный каталог всех инструментов и страниц ConvertAllNow.",
+    "generalPages": "Основные страницы",
+    "viewCategory": "Смотреть категорию →"
   }
 }

@@ -164,10 +164,20 @@
     "Processing": "Pemrosesan",
     "100% Secure": "100% Aman",
     "Private & Safe": "Pribadi & Aman",
-    "Browser Based": "Berbasis Peramban",
-    "No Install": "Tanpa Pemasangan",
-    "Forever Free": "Selamanya Gratis",
-    "No Watermark": "Tanpa Tanda Air"
+    "Browser Based": "Berbasis Browser",
+    "No Install": "Tanpa Instalasi",
+    "Forever Free": "Gratis Selamanya",
+    "No Watermark": "Tanpa Watermark",
+    "PDF to Word": "PDF ke Word",
+    "Convert PDF documents to editable Word files instantly": "Ubah dokumen PDF menjadi file Word yang dapat diedit secara instan.",
+    "Word to PDF": "Word ke PDF",
+    "Convert Microsoft Word documents to professional PDF files in browser": "Ubah dokumen Microsoft Word menjadi file PDF profesional di browser.",
+    "Word to HTML": "Word ke HTML",
+    "Convert Word documents into clean HTML5 code with live preview": "Ubah dokumen Word menjadi kode HTML5 bersih dengan pratinjau langsung.",
+    "PDF to HTML": "PDF ke HTML",
+    "Transform multi-page PDF documents into structured HTML webpages": "Ubah dokumen PDF multi-halaman menjadi halaman web HTML terstruktur.",
+    "Data Formatter": "Format Data",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "Format, validasi, dan konversi antara JSON, XML, YAML, dan CSV di browser."
   },
   "Steps": {
     "Simple Process": "Proses Sederhana",
@@ -1099,5 +1109,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "Apa itu {toolName}?",
+    "keyFeatures": "Fitur Utama",
+    "howItWorks": "Cara Kerja",
+    "commonUseCases": "Studi Kasus Umum",
+    "supportedFormats": "Format yang Didukung",
+    "privacyAndSecurity": "Privasi & Keamanan",
+    "proTips": "Tips Pro",
+    "faq": "Pertanyaan yang Sering Diajukan",
+    "faqSubtitle": "Pertanyaan umum tentang {toolName}",
+    "updated": "Diperbarui:",
+    "byAuthor": "Oleh Tim ConvertAllNow",
+    "badgeText": "100% Gratis · Tanpa Daftar · Berbasis Browser"
+  },
+  "RelatedTools": {
+    "title": "Alat Terkait",
+    "viewAll": "Lihat semua {category}"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "Alat PDF Gratis Online",
+    "pdfSubtitle": "Gabung, konversi, kompres, lindungi, dan edit file PDF — gratis, di browser, tanpa daftar.",
+    "imageTitle": "Alat Gambar Gratis Online",
+    "imageSubtitle": "Kompres, konversi, ubah ukuran, edit, dan hapus latar belakang gambar — gratis di browser Anda.",
+    "videoTitle": "Alat Video & Audio Gratis Online",
+    "videoSubtitle": "Kompres, potong, konversi, dan ekstrak audio dari video — didukung oleh FFmpeg WebAssembly.",
+    "archiveTitle": "Alat Arsip & ZIP Gratis Online",
+    "archiveSubtitle": "Buat, ekstrak, edit, konversi, dan amankan arsip ZIP di browser. Mendukung ZIP, RAR, 7Z, TAR, dll."
+  },
+  "Sitemap": {
+    "title": "Peta Situs",
+    "subtitle": "Direktori lengkap semua alat dan halaman di ConvertAllNow.",
+    "generalPages": "Halaman Umum",
+    "viewCategory": "Lihat Kategori →"
   }
 }

@@ -160,14 +160,24 @@
     "Resize, crop, rotate, and edit images with ease": "Redimensionar, recortar, rotar y editar imágenes con facilidad.",
     "Image Converter": "Convertidor de Imágenes",
     "Convert images between PNG, JPG, WebP and more": "Convertir imágenes entre PNG, JPG, WebP y más.",
-    "Lightning Fast": "Súper Rápido",
+    "Lightning Fast": "Ultrarrápido",
     "Processing": "Procesamiento",
     "100% Secure": "100% Seguro",
-    "Private & Safe": "Privado y Seguro",
-    "Browser Based": "Basado en Navegador",
-    "No Install": "Sin Instalación",
-    "Forever Free": "Siempre Gratis",
-    "No Watermark": "Sin Marca de Agua"
+    "Private & Safe": "Privado y seguro",
+    "Browser Based": "Basado en navegador",
+    "No Install": "Sin instalación",
+    "Forever Free": "Gratis para siempre",
+    "No Watermark": "Sin marca de agua",
+    "PDF to Word": "PDF a Word",
+    "Convert PDF documents to editable Word files instantly": "Convierte documentos PDF a archivos Word editables al instante.",
+    "Word to PDF": "Word a PDF",
+    "Convert Microsoft Word documents to professional PDF files in browser": "Convierte documentos de Microsoft Word a archivos PDF profesionales en el navegador.",
+    "Word to HTML": "Word a HTML",
+    "Convert Word documents into clean HTML5 code with live preview": "Convierte documentos Word en código HTML5 limpio con vista previa en vivo.",
+    "PDF to HTML": "PDF a HTML",
+    "Transform multi-page PDF documents into structured HTML webpages": "Transforma documentos PDF de varias páginas en páginas web HTML estructuradas.",
+    "Data Formatter": "Formateador de datos",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "Formatea, valida y convierte entre JSON, XML, YAML y CSV en el navegador."
   },
   "Steps": {
     "Simple Process": "Proceso Sencillo",
@@ -1099,5 +1109,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "¿Qué es {toolName}?",
+    "keyFeatures": "Características principales",
+    "howItWorks": "Cómo funciona",
+    "commonUseCases": "Casos de uso comunes",
+    "supportedFormats": "Formatos admitidos",
+    "privacyAndSecurity": "Privacidad y seguridad",
+    "proTips": "Consejos profesionales",
+    "faq": "Preguntas frecuentes",
+    "faqSubtitle": "Preguntas comunes sobre {toolName}",
+    "updated": "Actualizado:",
+    "byAuthor": "Por el equipo de ConvertAllNow",
+    "badgeText": "100% Gratis · Sin registro · Basado en navegador"
+  },
+  "RelatedTools": {
+    "title": "Herramientas relacionadas",
+    "viewAll": "Ver todas las herramientas de {category}"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "Herramientas PDF gratuitas en línea",
+    "pdfSubtitle": "Combina, convierte, comprime, protege y edita archivos PDF: todo gratis, en el navegador y sin registro.",
+    "imageTitle": "Herramientas de imagen gratuitas en línea",
+    "imageSubtitle": "Comprime, convierte, redimensiona, edita y elimina fondos de imágenes: gratis y en tu navegador.",
+    "videoTitle": "Herramientas de video y audio gratuitas en línea",
+    "videoSubtitle": "Comprime, recorta, convierte y extrae audio de videos con FFmpeg WebAssembly. Privacidad total.",
+    "archiveTitle": "Herramientas de archivo y ZIP gratuitas en línea",
+    "archiveSubtitle": "Crea, extrae, edita, convierte y asegura archivos ZIP en el navegador. Compatible con ZIP, RAR, 7Z, TAR, etc."
+  },
+  "Sitemap": {
+    "title": "Mapa del sitio",
+    "subtitle": "Un directorio completo de todas las herramientas y páginas de ConvertAllNow.",
+    "generalPages": "Páginas generales",
+    "viewCategory": "Ver categoría →"
   }
 }

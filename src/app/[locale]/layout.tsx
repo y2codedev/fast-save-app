@@ -133,13 +133,15 @@ export default async function RootLayout({
 
   const messages = await getMessages();
 
+  const adsenseClientId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID || 'ca-pub-1504999187644497';
+
   return (
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
-    <meta name="google-adsense-account" content="ca-pub-1504999187644497" />
+    <meta name="google-adsense-account" content={adsenseClientId} />
     <script
       async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
       crossOrigin="anonymous"
     ></script>
     {/* Google Analytics */}

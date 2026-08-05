@@ -164,10 +164,20 @@
     "Processing": "Verarbeitung",
     "100% Secure": "100% Sicher",
     "Private & Safe": "Privat & Sicher",
-    "Browser Based": "Browser-Basiert",
+    "Browser Based": "Browserbasiert",
     "No Install": "Keine Installation",
-    "Forever Free": "Für Immer Kostenlos",
-    "No Watermark": "Kein Wasserzeichen"
+    "Forever Free": "Dauerhaft kostenlos",
+    "No Watermark": "Ohne Wasserzeichen",
+    "PDF to Word": "PDF in Word",
+    "Convert PDF documents to editable Word files instantly": "Konvertieren Sie PDF-Dokumente sofort in bearbeitbare Word-Dateien.",
+    "Word to PDF": "Word in PDF",
+    "Convert Microsoft Word documents to professional PDF files in browser": "Konvertieren Sie Microsoft Word-Dokumente im Browser in professionelle PDF-Dateien.",
+    "Word to HTML": "Word in HTML",
+    "Convert Word documents into clean HTML5 code with live preview": "Konvertieren Sie Word-Dokumente in sauberen HTML5-Code mit Live-Vorschau.",
+    "PDF to HTML": "PDF in HTML",
+    "Transform multi-page PDF documents into structured HTML webpages": "Verwandeln Sie mehrseitige PDF-Dokumente in strukturierte HTML-Webseiten.",
+    "Data Formatter": "Daten-Formatierer",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "Formatieren, validieren und konvertieren Sie im Browser zwischen JSON, XML, YAML und CSV."
   },
   "Steps": {
     "Simple Process": "Einfacher Prozess",
@@ -1099,5 +1109,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "Was ist {toolName}?",
+    "keyFeatures": "Hauptmerkmale",
+    "howItWorks": "Wie es funktioniert",
+    "commonUseCases": "Häufige Anwendungsfälle",
+    "supportedFormats": "Unterstützte Formate",
+    "privacyAndSecurity": "Datenschutz & Sicherheit",
+    "proTips": "Profi-Tipps",
+    "faq": "Häufig gestellte Fragen",
+    "faqSubtitle": "Häufige Fragen zu {toolName}",
+    "updated": "Aktualisiert:",
+    "byAuthor": "Vom ConvertAllNow Team",
+    "badgeText": "100% Kostenlos · Keine Anmeldung · Browserbasiert"
+  },
+  "RelatedTools": {
+    "title": "Ähnliche Werkzeuge",
+    "viewAll": "Alle {category} anzeigen"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "Kostenlose PDF-Tools online",
+    "pdfSubtitle": "PDF-Dateien zusammenfügen, konvertieren, komprimieren, schützen und bearbeiten – kostenlos, browserbasiert, ohne Anmeldung.",
+    "imageTitle": "Kostenlose Bild-Tools online",
+    "imageSubtitle": "Bilder komprimieren, konvertieren, skalieren, bearbeiten und Hintergrund entfernen – kostenlos im Browser.",
+    "videoTitle": "Kostenlose Video- & Audio-Tools online",
+    "videoSubtitle": "Videos komprimieren, schneiden, konvertieren und Audio extrahieren – mit FFmpeg WebAssembly. Vollständig privat.",
+    "archiveTitle": "Kostenlose Archiv- & ZIP-Tools online",
+    "archiveSubtitle": "ZIP-Archive erstellen, entpacken, bearbeiten, konvertieren und sichern – unterstützt ZIP, RAR, 7Z, TAR, etc."
+  },
+  "Sitemap": {
+    "title": "Sitemap",
+    "subtitle": "Ein vollständiges Verzeichnis aller Tools und Seiten auf ConvertAllNow.",
+    "generalPages": "Allgemeine Seiten",
+    "viewCategory": "Kategorie anzeigen →"
   }
 }

@@ -160,14 +160,24 @@
     "Resize, crop, rotate, and edit images with ease": "تغيير الحجم والقص والتدوير وتعديل الصور بسهولة.",
     "Image Converter": "محول الصور",
     "Convert images between PNG, JPG, WebP and more": "تحويل الصور بين صيغ PNG و JPG و WebP والمزيد.",
-    "Lightning Fast": "سريع جداً",
-    "Processing": "جاري المعالجة",
+    "Lightning Fast": "سريع كالبرق",
+    "Processing": "معالجة",
     "100% Secure": "آمن 100%",
     "Private & Safe": "خاص وآمن",
-    "Browser Based": "يعمل في المتصفح",
+    "Browser Based": "يعمل على المتصفح",
     "No Install": "بدون تثبيت",
-    "Forever Free": "مجاني دائماً",
-    "No Watermark": "بدون علامة مائية"
+    "Forever Free": "مجاني دائمًا",
+    "No Watermark": "بدون علامة مائية",
+    "PDF to Word": "PDF إلى Word",
+    "Convert PDF documents to editable Word files instantly": "تحويل مستندات PDF إلى ملفات Word قابلة للتعديل فورًا.",
+    "Word to PDF": "Word إلى PDF",
+    "Convert Microsoft Word documents to professional PDF files in browser": "تحويل مستندات Microsoft Word إلى ملفات PDF احترافية في المتصفح.",
+    "Word to HTML": "Word إلى HTML",
+    "Convert Word documents into clean HTML5 code with live preview": "تحويل مستندات Word إلى كود HTML5 نظيف مع معاينة مباشرة.",
+    "PDF to HTML": "PDF إلى HTML",
+    "Transform multi-page PDF documents into structured HTML webpages": "تحويل مستندات PDF متعددة الصفحات إلى صفحات ويب HTML منظمة.",
+    "Data Formatter": "منسق البيانات",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "تنسيق البيانات والتحقق منها والتحويل بين JSON و XML و YAML و CSV في المتصفح."
   },
   "Steps": {
     "Simple Process": "عملية بسيطة",
@@ -1095,5 +1105,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "ما هو {toolName}؟",
+    "keyFeatures": "الميزات الرئيسية",
+    "howItWorks": "كيف يعمل",
+    "commonUseCases": "حالات الاستخدام الشائعة",
+    "supportedFormats": "الصيغ المدعومة",
+    "privacyAndSecurity": "الخصوصية والأمان",
+    "proTips": "نصائح احترافية",
+    "faq": "الأسئلة الشائعة",
+    "faqSubtitle": "أسئلة شائعة حول {toolName}",
+    "updated": "تم التحديث:",
+    "byAuthor": "بواسطة فريق ConvertAllNow",
+    "badgeText": "مجاني 100٪ · بدون تسجل · يعتمد على المتصفح"
+  },
+  "RelatedTools": {
+    "title": "أدوات ذات صلة",
+    "viewAll": "عرض جميع أدوات {category}"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "أدوات PDF مجانية عبر الإنترنت",
+    "pdfSubtitle": "دمج، تحويل، ضغط، حماية وتعديل ملفات PDF - كلها مجانية وعلى المتصفح وبدون تسجيل. ملفاتك لا تغادر جهازك أبداً.",
+    "imageTitle": "أدوات الصور المجانية عبر الإنترنت",
+    "imageSubtitle": "ضغط، تحويل، تغيير حجم، تعديل وإزالة الخلفية من الصور - مجاناً وفي متصفحك دون رفع الملفات.",
+    "videoTitle": "أدوات الفيديو والصوت المجانية عبر الإنترنت",
+    "videoSubtitle": "ضغط، قص، تحويل واستخراج الصوت من الفيديو - مدعوم بـ FFmpeg WebAssembly. بدون رفع للملفات، آمن وخاص.",
+    "archiveTitle": "أدوات الأرشيف و ZIP المجانية عبر الإنترنت",
+    "archiveSubtitle": "إنشاء، استخراج، تعديل، تحويل وحماية أرشيفات ZIP - في المتصفح. يدعم صيغ ZIP, RAR, 7Z, TAR, GZ وغيرها."
+  },
+  "Sitemap": {
+    "title": "خريطة الموقع",
+    "subtitle": "دليل كامل لجميع الأدوات والصفحات على ConvertAllNow.",
+    "generalPages": "الصفحات العامة",
+    "viewCategory": "عرض الفئة ←"
   }
 }

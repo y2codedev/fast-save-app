@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
+import { getTranslations } from 'next-intl/server';
 import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS } from '@/lib/seo';
 import FAQSchema from '@/components/seo/FAQSchema';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
@@ -78,6 +79,7 @@ const categorySchema = {
 
 export default async function VideoToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
 
   return (
     <>
@@ -94,10 +96,10 @@ export default async function VideoToolsPage({ params }: { params: Promise<{ loc
             Video & Audio Tools
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
-            Free Video & Audio Tools Online
+            {tHub('videoTitle')}
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Compress, trim, convert, and extract audio from videos — powered by FFmpeg WebAssembly. No upload to servers, no signup, completely private.
+            {tHub('videoSubtitle')}
           </p>
         </div>
 

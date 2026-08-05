@@ -1199,5 +1199,39 @@
     "step3Desc": "Click the download button to save your fully editable Word document to your device.",
     "pdfjs-dist": "pdfjs-dist",
     "docx": "docx"
+  },
+  "ToolContent": {
+    "whatIs": "What is {toolName}?",
+    "keyFeatures": "Key Features",
+    "howItWorks": "How It Works",
+    "commonUseCases": "Common Use Cases",
+    "supportedFormats": "Supported Formats",
+    "privacyAndSecurity": "Privacy & Security",
+    "proTips": "Pro Tips",
+    "faq": "Frequently Asked Questions",
+    "faqSubtitle": "Common questions about {toolName}",
+    "updated": "Updated:",
+    "byAuthor": "By ConvertAllNow Team",
+    "badgeText": "100% Free · No Signup · Browser-Based"
+  },
+  "RelatedTools": {
+    "title": "Related Tools",
+    "viewAll": "View all {category}"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "Free PDF Tools Online",
+    "pdfSubtitle": "Merge, convert, compress, protect, and edit PDF files — all free, all browser-based, no signup required. Your files never leave your device.",
+    "imageTitle": "Free Image Tools Online",
+    "imageSubtitle": "Compress, convert, resize, edit, and remove backgrounds from images — all free, all in your browser, no upload to servers.",
+    "videoTitle": "Free Video & Audio Tools Online",
+    "videoSubtitle": "Compress, trim, convert, and extract audio from videos — powered by FFmpeg WebAssembly. No upload to servers, no signup, completely private.",
+    "archiveTitle": "Free Archive & ZIP Tools Online",
+    "archiveSubtitle": "Create, extract, edit, convert, and secure ZIP archives — all browser-based. Supports ZIP, RAR, 7Z, TAR, GZ, BZ2, XZ, and ISO formats."
+  },
+  "Sitemap": {
+    "title": "Sitemap",
+    "subtitle": "A complete directory of all tools and pages on ConvertAllNow.",
+    "generalPages": "General Pages",
+    "viewCategory": "View Category →"
   }
 }

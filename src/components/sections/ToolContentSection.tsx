@@ -90,6 +90,8 @@ function FAQAccordion({ faqs }: { faqs: FAQItem[] }) {
   );
 }
 
+import { useTranslations } from 'next-intl';
+
 export default function ToolContentSection({
   toolName,
   introduction,
@@ -103,6 +105,7 @@ export default function ToolContentSection({
   tips,
   privacyNote,
 }: ToolContentSectionProps) {
+  const t = useTranslations('ToolContent');
   const today = lastUpdated || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   return (
@@ -114,26 +117,26 @@ export default function ToolContentSection({
           <svg className="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
             <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
           </svg>
-          <span>By <strong className="text-gray-700 dark:text-gray-300">ConvertAllNow Team</strong></span>
+          <span><strong className="text-gray-700 dark:text-gray-300">{t('byAuthor')}</strong></span>
         </span>
         <span className="flex items-center gap-1.5">
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <span>Updated: <time dateTime={today}>{today}</time></span>
+          <span>{t('updated')} <time dateTime={today}>{today}</time></span>
         </span>
         <span className="flex items-center gap-1.5">
           <svg className="h-3.5 w-3.5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
             <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
           </svg>
-          <span className="text-green-600 dark:text-green-400 font-medium">100% Free · No Signup · Browser-Based</span>
+          <span className="text-green-600 dark:text-green-400 font-medium">{t('badgeText')}</span>
         </span>
       </div>
 
       {/* Introduction */}
       <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-          What is {toolName}?
+          {t('whatIs', { toolName })}
         </h2>
         <div className="prose prose-sm sm:prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
           {introduction}
@@ -158,7 +161,7 @@ export default function ToolContentSection({
       {/* Features */}
       {features && features.length > 0 && (
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Key Features</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('keyFeatures')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {features.map((feature, i) => (
               <div key={i} className="flex gap-3">
@@ -182,7 +185,7 @@ export default function ToolContentSection({
       {/* How It Works */}
       {howToSteps && howToSteps.length > 0 && (
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">How It Works</h2>
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('howItWorks')}</h2>
           <ol className="space-y-4">
             {howToSteps.map((step, i) => (
               <li key={i} className="flex gap-4">
@@ -204,7 +207,7 @@ export default function ToolContentSection({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {useCases && useCases.length > 0 && (
             <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Common Use Cases</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t('commonUseCases')}</h2>
               <ul className="space-y-2">
                 {useCases.map((uc, i) => (
                   <li key={i} className="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
@@ -217,7 +220,7 @@ export default function ToolContentSection({
           )}
           {supportedFormats && supportedFormats.length > 0 && (
             <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">Supported Formats</h2>
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white mb-4">{t('supportedFormats')}</h2>
               <div className="flex flex-wrap gap-2">
                 {supportedFormats.map((fmt, i) => (
                   <span
@@ -242,7 +245,7 @@ export default function ToolContentSection({
             </svg>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-green-800 dark:text-green-300 mb-1">Privacy & Security</h3>
+            <h3 className="text-sm font-semibold text-green-800 dark:text-green-300 mb-1">{t('privacyAndSecurity')}</h3>
             <p className="text-sm text-green-700 dark:text-green-400">{privacyNote}</p>
           </div>
         </div>
@@ -252,7 +255,7 @@ export default function ToolContentSection({
       {tips && tips.length > 0 && (
         <div className="bg-amber-50 dark:bg-amber-900/10 border border-amber-200 dark:border-amber-700/30 rounded-2xl p-6">
           <h2 className="text-lg font-bold text-amber-800 dark:text-amber-300 mb-4 flex items-center gap-2">
-            <span>💡</span> Pro Tips
+            <span>💡</span> {t('proTips')}
           </h2>
           <ul className="space-y-2">
             {tips.map((tip, i) => (
@@ -269,10 +272,10 @@ export default function ToolContentSection({
       {faqs && faqs.length > 0 && (
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Frequently Asked Questions
+            {t('faq')}
           </h2>
           <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
-            Common questions about {toolName}
+            {t('faqSubtitle', { toolName })}
           </p>
           <FAQAccordion faqs={faqs} />
         </div>

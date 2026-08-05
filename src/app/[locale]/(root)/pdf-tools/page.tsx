@@ -94,6 +94,7 @@ const categorySchema = {
 
 export default async function PdfToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
 
   return (
     <>
@@ -111,10 +112,10 @@ export default async function PdfToolsPage({ params }: { params: Promise<{ local
             PDF Tools
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
-            Free PDF Tools Online
+            {tHub('pdfTitle')}
           </h1>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Merge, convert, compress, protect, and edit PDF files — all free, all browser-based, no signup required. Your files never leave your device.
+            {tHub('pdfSubtitle')}
           </p>
         </div>
 

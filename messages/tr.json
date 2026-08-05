@@ -161,13 +161,23 @@
     "Image Converter": "Resim Dönüştürücü",
     "Convert images between PNG, JPG, WebP and more": "Resimleri PNG, JPG, WebP ve daha fazlası arasında dönüştürün.",
     "Lightning Fast": "Işık Hızında",
-    "Processing": "İşlem",
+    "Processing": "İşleme",
     "100% Secure": "%100 Güvenli",
-    "Private & Safe": "Özel ve Güvenli",
+    "Private & Safe": "Gizli ve Güvenli",
     "Browser Based": "Tarayıcı Tabanlı",
     "No Install": "Kurulum Yok",
     "Forever Free": "Sonsuza Dek Ücretsiz",
-    "No Watermark": "Filigransız"
+    "No Watermark": "Filigransız",
+    "PDF to Word": "PDF'den Word'e",
+    "Convert PDF documents to editable Word files instantly": "PDF belgelerini anında düzenlenebilir Word dosyalarına dönüştürün.",
+    "Word to PDF": "Word'den PDF'ye",
+    "Convert Microsoft Word documents to professional PDF files in browser": "Microsoft Word belgelerini tarayıcıda profesyonel PDF dosyalarına dönüştürün.",
+    "Word to HTML": "Word'den HTML'e",
+    "Convert Word documents into clean HTML5 code with live preview": "Word belgelerini canlı önizlemeyle temiz HTML5 koduna dönüştürün.",
+    "PDF to HTML": "PDF'den HTML'e",
+    "Transform multi-page PDF documents into structured HTML webpages": "Çok sayfalı PDF belgelerini yapılandırılmış HTML web sayfalarına dönüştürün.",
+    "Data Formatter": "Veri Biçimlendirici",
+    "Format, validate, and convert between JSON, XML, YAML, and CSV in browser": "Tarayıcıda JSON, XML, YAML ve CSV arasında biçimlendirme, doğrulama ve dönüştürme yapın."
   },
   "Steps": {
     "Simple Process": "Basit Süreç",
@@ -1099,5 +1109,39 @@
     "step1Desc": "step1Desc",
     "step2Desc": "step2Desc",
     "step3Desc": "step3Desc"
+  },
+  "ToolContent": {
+    "whatIs": "{toolName} nedir?",
+    "keyFeatures": "Ana Özellikler",
+    "howItWorks": "Nasıl Çalışır",
+    "commonUseCases": "Yaygın Kullanım Alanları",
+    "supportedFormats": "Desteklenen Formatlar",
+    "privacyAndSecurity": "Gizlilik ve Güvenlik",
+    "proTips": "İpuçları",
+    "faq": "Sıkça Sorulan Sorular",
+    "faqSubtitle": "{toolName} hakkında sık sorulan sorular",
+    "updated": "Güncellendi:",
+    "byAuthor": "ConvertAllNow Ekibi Tarafından",
+    "badgeText": "%100 Ücretsiz · Kayıtsız · Tarayıcı Tabanlı"
+  },
+  "RelatedTools": {
+    "title": "İlgili Araçlar",
+    "viewAll": "Tüm {category} araçlarını gör"
+  },
+  "CategoryHubs": {
+    "pdfTitle": "Ücretsiz Çevrimiçi PDF Araçları",
+    "pdfSubtitle": "PDF dosyalarını birleştirin, dönüştürün, sıkıştırın, koruyun ve düzenleyin — ücretsiz, tarayıcıda, kayıtsız.",
+    "imageTitle": "Ücretsiz Çevrimiçi Görsel Araçları",
+    "imageSubtitle": "Görselleri sıkıştırın, dönüştürün, yeniden boyutlandırın, düzenleyin ve arka planını kaldırın.",
+    "videoTitle": "Ücretsiz Çevrimiçi Video ve Ses Araçları",
+    "videoSubtitle": "Videoları sıkıştırın, kırpın, dönüştürün ve ses çıkarın — FFmpeg WebAssembly ile desteklenir.",
+    "archiveTitle": "Ücretsiz Çevrimiçi Arşiv ve ZIP Araçları",
+    "archiveSubtitle": "ZIP arşivleri oluşturun, çıkarın, düzenleyin, dönüştürün ve koruyun. ZIP, RAR, 7Z, TAR destekler."
+  },
+  "Sitemap": {
+    "title": "Site Haritası",
+    "subtitle": "ConvertAllNow üzerindeki tüm araçların ve sayfaların eksiksiz dizini.",
+    "generalPages": "Genel Sayfalar",
+    "viewCategory": "Kategoriyi Gör →"
   }
 }

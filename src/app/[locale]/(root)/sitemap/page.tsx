@@ -63,22 +63,25 @@ const staticPages = [
   { name: 'Terms of Service', path: '/terms', desc: 'Terms and conditions for using ConvertAllNow' },
 ];
 
+import { getTranslations } from 'next-intl/server';
+
 export default async function SitemapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Sitemap' });
 
   return (
     <>
-      <BreadcrumbSchema locale={locale} items={[{ name: 'Sitemap' }]} />
+      <BreadcrumbSchema locale={locale} items={[{ name: t('title') }]} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <VisualBreadcrumb items={[{ name: 'Sitemap' }]} className="px-0 py-2 mb-2" />
+        <VisualBreadcrumb items={[{ name: t('title') }]} className="px-0 py-2 mb-2" />
 
         <div className="py-8 md:py-10">
           <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight mb-2">
-            Sitemap
+            {t('title')}
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
-            A complete directory of all tools and pages on ConvertAllNow.
+            {t('subtitle')}
           </p>
         </div>
 
@@ -86,7 +89,7 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
         <div className="mb-10">
           <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
             <span className="w-1 h-5 bg-gray-400 rounded-full inline-block" />
-            General Pages
+            {t('generalPages')}
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
             {staticPages.map(page => (
@@ -113,7 +116,7 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
                 href={cat.path}
                 className={`text-xs px-2.5 py-0.5 rounded-full font-semibold ${cat.bg} ${cat.color} ${cat.border} border hover:opacity-80 transition-opacity`}
               >
-                View Category →
+                {t('viewCategory')}
               </Link>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
