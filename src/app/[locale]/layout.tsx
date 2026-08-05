@@ -187,9 +187,11 @@ export default async function RootLayout({
               shadow="0 0 10px #4f46e5,0 0 5px #4f46e5"
             />
             <Navbar />
-            <div className="mx-auto max-w-7xl px-4 mt-4">
-              <AdsenseAd height="h-[50px] md:h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string} className="rounded-xl" />
-            </div>
+            {process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID && (
+              <div className="mx-auto max-w-7xl px-4 mt-4">
+                <AdsenseAd height="h-[50px] md:h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID} className="rounded-xl" />
+              </div>
+            )}
             <Suspense fallback={<FallbackLoader />}>
               {children}
             </Suspense>

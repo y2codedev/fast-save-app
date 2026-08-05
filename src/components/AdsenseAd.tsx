@@ -41,8 +41,8 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
     )
   }
 
-  // Hide completely in production if Client ID is missing
-  if (!clientId) {
+  // Hide completely in production if slot or clientId is missing
+  if (!clientId || !slot) {
     return null;
   }
 
@@ -61,7 +61,7 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
             className="adsbygoogle block w-full"
             style={{ display: 'block' }}
             data-ad-client={clientId}
-            {...(slot ? { 'data-ad-slot': slot } : {})}
+            data-ad-slot={slot}
             data-ad-format="auto"
             data-full-width-responsive="true"
           />

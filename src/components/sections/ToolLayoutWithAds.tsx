@@ -52,10 +52,12 @@ export default function ToolLayoutWithAds({
       </div>
 
       {/* Multiplex Ad / Pre-Footer Ad */}
-      <div className="mx-auto w-full max-w-7xl px-4 mt-16 mb-4">
-        <div className="text-center text-xs text-gray-400 mb-2 uppercase tracking-wider font-semibold">Advertisement</div>
-        <AdsenseAd height="h-[250px] sm:h-[300px]" slot={adsenseSlotId} className="rounded-2xl shadow-md border border-gray-200 dark:border-gray-800" />
-      </div>
+      {adsenseSlotId && (
+        <div className="mx-auto w-full max-w-7xl px-4 mt-16 mb-4">
+          <div className="text-center text-xs text-gray-400 mb-2 uppercase tracking-wider font-semibold">Advertisement</div>
+          <AdsenseAd height="h-[250px] sm:h-[300px]" slot={adsenseSlotId} className="rounded-2xl shadow-md border border-gray-200 dark:border-gray-800" />
+        </div>
+      )}
 
       {/* Related Tools Section */}
       {relatedTools && relatedTools.length > 0 && (
