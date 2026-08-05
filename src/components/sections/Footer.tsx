@@ -5,6 +5,14 @@ import { FooterProps, DEFAULT_SOCIAL_LINKS, DEFAULT_LEGAL_LINKS } from '@/consta
 import AppLogo from '@/components/AppLogo';
 import { useTranslations } from 'next-intl';
 
+const CATEGORY_LINKS = [
+  { href: '/pdf-tools', label: 'PDF Tools' },
+  { href: '/image-tools', label: 'Image Tools' },
+  { href: '/video-tools', label: 'Video & Audio Tools' },
+  { href: '/archive-tools', label: 'Archive Tools' },
+  { href: '/sitemap', label: 'All Tools' },
+];
+
 const Footer = ({
   year = new Date().getFullYear(),
   socialLinks = DEFAULT_SOCIAL_LINKS,
@@ -14,6 +22,25 @@ const Footer = ({
   return (
     <footer className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-t border-gray-200/50 dark:border-gray-700/50 mt-auto">
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+
+        {/* Category Tool Links */}
+        <div className="py-6 border-b border-gray-100 dark:border-gray-700/50">
+          <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-3 text-center">
+            Tool Categories
+          </p>
+          <nav className="flex flex-wrap justify-center gap-3" aria-label="Tool categories">
+            {CATEGORY_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors px-3 py-1.5 rounded-full bg-gray-100 dark:bg-gray-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border border-gray-200 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-indigo-700"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
         <div className="py-8 md:flex md:items-center md:justify-between">
           <div className="flex flex-col items-center md:flex-row md:items-center space-y-2 md:space-y-0">
             <Link href="/" className="flex flex-col md:flex-row items-center md:items-center gap-2 md:gap-3 mb-2 md:mb-0">
@@ -44,7 +71,7 @@ const Footer = ({
         </div>
 
         <div className="py-4 border-t border-gray-100 dark:border-gray-700">
-          <nav className="flex flex-wrap justify-center gap-4 md:gap-6">
+          <nav className="flex flex-wrap justify-center gap-4 md:gap-6" aria-label="Legal links">
             {legalLinks?.map((link) => (
               <Link
                 key={link?.id}

@@ -121,7 +121,9 @@
     "Toggle menu": "Alternar menu",
     "Language": "Idioma",
     "Dark Mode": "Modo Escuro",
-    "Share ConvertAllNow": "Compartilhar ConvertAllNow"
+    "Share ConvertAllNow": "Compartilhar ConvertAllNow",
+    "All ZIP tools": "All ZIP tools",
+    "jszip": "jszip"
   },
   "Hero": {
     "Explore more free tools": "Explore mais ferramentas gratuitas",
@@ -201,7 +203,18 @@
     "Download": "Baixar",
     "No Watermark": "Sem Marca D'água",
     "High Quality": "Alta Qualidade",
-    "Fast Download": "Download Rápido"
+    "Fast Download": "Download Rápido",
+    "error": "error",
+    "Please enter a URL": {
+      "": "Please enter a URL."
+    },
+    "Processing": {
+      "": {
+        "": {
+          "": "Processing..."
+        }
+      }
+    }
   },
   "Explore": {
     "Explore More Tools": "Explorar Mais Ferramentas",
@@ -229,7 +242,10 @@
     "Privacy Policy": "Política de Privacidade",
     "Terms of Service": "Termos de Serviço",
     "About Us": "Sobre Nós",
-    "Contact Us": "Fale Conosco"
+    "Contact Us": "Fale Conosco",
+    "All rights reserved": {
+      "": "All rights reserved."
+    }
   },
   "HomeSEO": {
     "What is ConvertAllNow?": "O que é ConvertAllNow?",
@@ -295,7 +311,13 @@
     "uploadTitle": "Selecionar Arquivo de Vídeo",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (Máx 100MB)",
     "uploadDropText": "Arraste e solte arquivos ou",
-    "uploadBrowseText": "navegar"
+    "uploadBrowseText": "navegar",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "VideoCompressorSEO": {
     "title": "Compressor de Vídeo Online - Grátis - ConvertAllNow",
@@ -344,7 +366,10 @@
     "uploadTitle": "Selecionar Arquivo de Vídeo",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (Máx 100MB)",
     "uploadDropText": "Arraste e solte arquivos ou",
-    "uploadBrowseText": "navegar"
+    "uploadBrowseText": "navegar",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video"
   },
   "VideoToGifSEO": {
     "title": "Conversor de Vídeo para GIF - Grátis - ConvertAllNow",
@@ -381,7 +406,12 @@
     "uploadTitle": "Selecionar Arquivo",
     "uploadSubtitle": "Máx 100MB",
     "uploadDropText": "Arraste e solte arquivos ou",
-    "uploadBrowseText": "navegar"
+    "uploadBrowseText": "navegar",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "": {
+      "": "."
+    }
   },
   "VideoToAudioSEO": {
     "title": "Conversor de Vídeo para MP3 - ConvertAllNow",
@@ -423,7 +453,12 @@
     "uploadTitle": "Selecionar Arquivo",
     "uploadSubtitle": "Máx 100MB",
     "uploadDropText": "Arraste e solte arquivos ou",
-    "uploadBrowseText": "navegar"
+    "uploadBrowseText": "navegar",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video",
+    "canvas": "canvas",
+    "2d": "2d"
   },
   "AudioTrimmerSEO": {
     "title": "Cortador de Áudio - Grátis - ConvertAllNow",
@@ -452,7 +487,13 @@
     "uploadTitle": "Selecionar Arquivo",
     "uploadSubtitle": "Máx 100MB",
     "uploadDropText": "Arraste e solte arquivos ou",
-    "uploadBrowseText": "navegar"
+    "uploadBrowseText": "navegar",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "IgDownloaderSEO": {
     "title": "Baixar Reels do Instagram - ConvertAllNow",
@@ -499,7 +540,11 @@
     "toolRotate": "Rotate",
     "toolFilters": "Filters",
     "toolCompress": "Compress",
-    "toolConvert": "Convert"
+    "toolConvert": "Convert",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    "/": "/"
   },
   "BgRemoverSEO": {
     "title": "Quitar Fondo de Imagen Gratis - ConvertAllNow",
@@ -545,7 +590,8 @@
     "tagFree": "Free to Use",
     "uploadSubtitle": "PNG, JPG ou WEBP (Máx. 5MB)",
     "uploadTitleText": "Clique para fazer upload",
-    "uploadDragText": "ou arraste e solte"
+    "uploadDragText": "ou arraste e solte",
+    "@imgly/background-removal": "@imgly/background-removal"
   },
   "ImageCompressorSEO": {
     "title": "Comprimir Imágenes Gratis - ConvertAllNow",
@@ -592,7 +638,12 @@
     "tagNoLoss": "No Quality Loss",
     "tagFast": "Fast Processing",
     "tagFree": "Free to Use",
-    "tagAllFormats": "All Formats"
+    "tagAllFormats": "All Formats",
+    "canvas": "canvas",
+    "2d": "2d",
+    "browser-image-compression": "browser-image-compression",
+    "a": "a",
+    "": ""
   },
   "ImageConverterSEO": {
     "title": "Convertidor de Imágenes a SVG - ConvertAllNow",
@@ -617,7 +668,11 @@
     "feature3Desc": "Mantenha a qualidade da imagem com saída SVG vetorial",
     "uploadTitleText": "Clique para fazer upload",
     "uploadDragText": "ou arraste e solte",
-    "uploadSubtitle": "Aceita formatos PNG, JPG, JPEG, GIF, MP4, MP3, WebP (Máx: 5MB)"
+    "uploadSubtitle": "Aceita formatos PNG, JPG, JPEG, GIF, MP4, MP3, WebP (Máx: 5MB)",
+    "error": "error",
+    "a": "a",
+    "@/utils/convert": "@/utils/convert",
+    "@/utils/load-ffmpeg": "@/utils/load-ffmpeg"
   },
   "MergePdfSEO": {
     "title": "Merge PDF Files Online Free - ConvertAllNow",
@@ -716,7 +771,16 @@
     "landscape": "Paisagem",
     "margin": "Margem",
     "noMargin": "Sem margem",
-    "preview": "Visualização"
+    "preview": "Visualização",
+    "You have reached the maximum limit of 30 images per PDF": {
+      "": "You have reached the maximum limit of 30 images per PDF."
+    },
+    "You can only add ${spaceLeft} more image(s)": {
+      " Only the first ${spaceLeft} images will be added": {
+        "": "You can only add ${spaceLeft} more image(s). Only the first ${spaceLeft} images will be added."
+      }
+    },
+    "blob": "blob"
   },
   "PdfToJpgSEO": {
     "title": "Convert PDF to JPG Online Free - ConvertAllNow",
@@ -759,7 +823,11 @@
     "step2Title": "Processamento",
     "step2Desc": "Nossa ferramenta escaneia instantaneamente todas as páginas do seu documento PDF e as converte em formatos de imagem JPG.",
     "step3Title": "Baixar Imagens",
-    "step3Desc": "Visualize as imagens extraídas e clique no botão de download em qualquer página individual para salvá-la em seu dispositivo."
+    "step3Desc": "Visualize as imagens extraídas e clique no botão de download em qualquer página individual para salvá-la em seu dispositivo.",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    " ": " "
   },
   "MdConverterSEO": {
     "title": "Markdown to PDF/Word Converter - ConvertAllNow",
@@ -806,7 +874,12 @@
     "chooseDiffBtn": "Escolher arquivo diferente",
     "docPreviewTitle": "Visualização do Documento",
     "previewEmptyTitle": "Nenhum conteúdo para visualizar",
-    "previewEmptySubtitle": "Digite ou envie conteúdo Markdown para ver a visualização aqui."
+    "previewEmptySubtitle": "Digite ou envie conteúdo Markdown para ver a visualização aqui.",
+    "html2pdf": {
+      "js": "html2pdf.js"
+    },
+    "a": "a",
+    "": ""
   },
   "UnlockPdfSEO": {
     "title": "Unlock PDF Online - Remove Password Free - ConvertAllNow",
@@ -998,5 +1071,33 @@
   "FileUploader": {
     "dropText": "Arraste e solte arquivos ou",
     "browseText": "procurar"
+  },
+  "PdfToDocxSEO": {
+    "title": "title",
+    "description": "description"
+  },
+  "PdfToDocx": {
+    "pdfjs-dist": "pdfjs-dist",
+    "docx": "docx",
+    "titleBadge": "titleBadge",
+    "titleMain": "titleMain",
+    "titleHighlight": "titleHighlight",
+    "subtitle": "subtitle",
+    "step1Title": "step1Title",
+    "step2Title": "step2Title",
+    "step3Title": "step3Title",
+    "uploadTitle": "uploadTitle",
+    "uploadDesc": "uploadDesc",
+    "convertingBtn": "convertingBtn",
+    "convertBtn": "convertBtn",
+    "resultTitle": "resultTitle",
+    "resultDesc": "resultDesc",
+    "downloadBtn": "downloadBtn",
+    "convertAnother": "convertAnother",
+    "willAppearHere": "willAppearHere",
+    "howToTitle": "howToTitle",
+    "step1Desc": "step1Desc",
+    "step2Desc": "step2Desc",
+    "step3Desc": "step3Desc"
   }
 }

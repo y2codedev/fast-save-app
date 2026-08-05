@@ -193,7 +193,8 @@
     "Convert TAR-XZ format": "Convert TAR-XZ format",
     "Convert to TAR-GZ": "Convert to TAR-GZ",
     "Convert to TAR-BZ2": "Convert to TAR-BZ2",
-    "Convert to TAR-XZ": "Convert to TAR-XZ"
+    "Convert to TAR-XZ": "Convert to TAR-XZ",
+    "jszip": "jszip"
   },
   "Hero": {
     "Explore more free tools": "Explore more free tools",
@@ -283,7 +284,18 @@
     "Download": "Download",
     "No Watermark": "No Watermark",
     "High Quality": "High Quality",
-    "Fast Download": "Fast Download"
+    "Fast Download": "Fast Download",
+    "error": "error",
+    "Please enter a URL": {
+      "": "Please enter a URL."
+    },
+    "Processing": {
+      "": {
+        "": {
+          "": "Processing..."
+        }
+      }
+    }
   },
   "Explore": {
     "Explore More Tools": "Explore More Tools",
@@ -317,7 +329,10 @@
     "Privacy Policy": "Privacy Policy",
     "Terms of Service": "Terms of Service",
     "About Us": "About Us",
-    "Contact Us": "Contact Us"
+    "Contact Us": "Contact Us",
+    "All rights reserved": {
+      "": "All rights reserved."
+    }
   },
   "HomeSEO": {
     "What is ConvertAllNow?": "What is ConvertAllNow?",
@@ -379,7 +394,13 @@
     "uploadTitle": "Select Video File",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (Max 100MB)",
     "uploadDropText": "Drag & drop files or",
-    "uploadBrowseText": "browse"
+    "uploadBrowseText": "browse",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "VideoCompressorSEO": {
     "title": "Video Compressor Online - Reduce Video Size Free - ConvertAllNow",
@@ -428,7 +449,10 @@
     "uploadTitle": "Select Video File",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (Max 100MB)",
     "uploadDropText": "Drag & drop files or",
-    "uploadBrowseText": "browse"
+    "uploadBrowseText": "browse",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video"
   },
   "VideoToGifSEO": {
     "title": "Video to GIF Converter - Create Animated GIFs Free - ConvertAllNow",
@@ -465,7 +489,12 @@
     "uploadTitle": "Select File",
     "uploadSubtitle": "Max 100MB",
     "uploadDropText": "Drag & drop files or",
-    "uploadBrowseText": "browse"
+    "uploadBrowseText": "browse",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "": {
+      "": "."
+    }
   },
   "VideoToAudioSEO": {
     "title": "Video to MP3 Converter - Extract Audio from Video - ConvertAllNow",
@@ -507,7 +536,12 @@
     "uploadTitle": "Select File",
     "uploadSubtitle": "Max 100MB",
     "uploadDropText": "Drag & drop files or",
-    "uploadBrowseText": "browse"
+    "uploadBrowseText": "browse",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video",
+    "canvas": "canvas",
+    "2d": "2d"
   },
   "AudioTrimmerSEO": {
     "title": "Audio Trimmer - Cut MP3 Online Free - ConvertAllNow",
@@ -536,7 +570,13 @@
     "uploadTitle": "Select File",
     "uploadSubtitle": "Max 100MB",
     "uploadDropText": "Drag & drop files or",
-    "uploadBrowseText": "browse"
+    "uploadBrowseText": "browse",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "IgDownloaderSEO": {
     "title": "Instagram Reels Downloader - ConvertAllNow",
@@ -583,7 +623,11 @@
     "toolRotate": "Rotate",
     "toolFilters": "Filters",
     "toolCompress": "Compress",
-    "toolConvert": "Convert"
+    "toolConvert": "Convert",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    "/": "/"
   },
   "BgRemoverSEO": {
     "title": "Remove Background from Image Free - AI Background Remover - ConvertAllNow",
@@ -629,7 +673,8 @@
     "tagFree": "Free to Use",
     "uploadSubtitle": "PNG, JPG, or WEBP (Max. 5MB)",
     "uploadTitleText": "Click to upload",
-    "uploadDragText": "or drag and drop"
+    "uploadDragText": "or drag and drop",
+    "@imgly/background-removal": "@imgly/background-removal"
   },
   "ImageCompressorSEO": {
     "title": "Image Compressor Online - Reduce Image Size Free - ConvertAllNow",
@@ -676,7 +721,12 @@
     "tagNoLoss": "No Quality Loss",
     "tagFast": "Fast Processing",
     "tagFree": "Free to Use",
-    "tagAllFormats": "All Formats"
+    "tagAllFormats": "All Formats",
+    "canvas": "canvas",
+    "2d": "2d",
+    "browser-image-compression": "browser-image-compression",
+    "a": "a",
+    "": ""
   },
   "ImageConverterSEO": {
     "title": "Image Converter & SVG Maker - ConvertAllNow",
@@ -701,7 +751,11 @@
     "feature3Desc": "Maintain image quality with vector-based SVG output",
     "uploadTitleText": "Click to upload",
     "uploadDragText": "or drag and drop",
-    "uploadSubtitle": "Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)"
+    "uploadSubtitle": "Accepts PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formats (Maximum file size: 5MB)",
+    "error": "error",
+    "a": "a",
+    "@/utils/convert": "@/utils/convert",
+    "@/utils/load-ffmpeg": "@/utils/load-ffmpeg"
   },
   "MergePdfSEO": {
     "title": "Merge PDF Files Online Free - ConvertAllNow",
@@ -800,7 +854,16 @@
     "landscape": "Landscape",
     "margin": "Margin",
     "noMargin": "No margin",
-    "preview": "Preview"
+    "preview": "Preview",
+    "You have reached the maximum limit of 30 images per PDF": {
+      "": "You have reached the maximum limit of 30 images per PDF."
+    },
+    "You can only add ${spaceLeft} more image(s)": {
+      " Only the first ${spaceLeft} images will be added": {
+        "": "You can only add ${spaceLeft} more image(s). Only the first ${spaceLeft} images will be added."
+      }
+    },
+    "blob": "blob"
   },
   "PdfToJpgSEO": {
     "title": "Convert PDF to JPG Online Free - ConvertAllNow",
@@ -843,7 +906,11 @@
     "step2Title": "Processing",
     "step2Desc": "Our tool instantly scans all the pages of your PDF document and converts them into high-quality JPG image formats.",
     "step3Title": "Download Images",
-    "step3Desc": "Preview the extracted images and click the download button on any individual page to save it as a JPG image to your device."
+    "step3Desc": "Preview the extracted images and click the download button on any individual page to save it as a JPG image to your device.",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    " ": " "
   },
   "MdConverterSEO": {
     "title": "Markdown to PDF/Word Converter - ConvertAllNow",
@@ -890,7 +957,12 @@
     "chooseDiffBtn": "Choose Different File",
     "docPreviewTitle": "Document Preview",
     "previewEmptyTitle": "Preview Empty",
-    "previewEmptySubtitle": "Your document preview will appear here"
+    "previewEmptySubtitle": "Your document preview will appear here",
+    "html2pdf": {
+      "js": "html2pdf.js"
+    },
+    "a": "a",
+    "": ""
   },
   "UnlockPdfSEO": {
     "title": "Unlock PDF Online - Remove Password Free - ConvertAllNow",
@@ -1124,6 +1196,8 @@
     "step2Title": "Processing",
     "step2Desc": "Our advanced engine converts the PDF layout, text, tables, and images accurately into a Word structure.",
     "step3Title": "Download DOCX",
-    "step3Desc": "Click the download button to save your fully editable Word document to your device."
+    "step3Desc": "Click the download button to save your fully editable Word document to your device.",
+    "pdfjs-dist": "pdfjs-dist",
+    "docx": "docx"
   }
 }

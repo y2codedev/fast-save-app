@@ -121,7 +121,9 @@
     "Toggle menu": "تبديل القائمة",
     "Language": "اللغة",
     "Dark Mode": "الوضع الداكن",
-    "Share ConvertAllNow": "مشاركة ConvertAllNow"
+    "Share ConvertAllNow": "مشاركة ConvertAllNow",
+    "All ZIP tools": "All ZIP tools",
+    "jszip": "jszip"
   },
   "Hero": {
     "Explore more free tools": "استكشف المزيد من الأدوات المجانية",
@@ -201,7 +203,18 @@
     "Download": "تحميل",
     "No Watermark": "بدون علامة مائية",
     "High Quality": "جودة عالية",
-    "Fast Download": "تحميل سريع"
+    "Fast Download": "تحميل سريع",
+    "error": "error",
+    "Please enter a URL": {
+      "": "Please enter a URL."
+    },
+    "Processing": {
+      "": {
+        "": {
+          "": "Processing..."
+        }
+      }
+    }
   },
   "Explore": {
     "Explore More Tools": "استكشف المزيد من الأدوات",
@@ -229,7 +242,10 @@
     "Privacy Policy": "سياسة الخصوصية",
     "Terms of Service": "شروط الخدمة",
     "About Us": "معلومات عنا",
-    "Contact Us": "اتصل بنا"
+    "Contact Us": "اتصل بنا",
+    "All rights reserved": {
+      "": "All rights reserved."
+    }
   },
   "HomeSEO": {
     "What is ConvertAllNow?": "ما هو ConvertAllNow؟",
@@ -291,7 +307,13 @@
     "uploadTitle": "حدد ملف الفيديو",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (الحد الأقصى 100 ميجابايت)",
     "uploadDropText": "اسحب وأفلت الملفات أو",
-    "uploadBrowseText": "تصفح"
+    "uploadBrowseText": "تصفح",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "ImageEditor": {
     "titleMain": "محرر الصور الاحترافي",
@@ -330,7 +352,11 @@
     "toolRotate": "تدوير",
     "toolFilters": "فلاتر",
     "toolCompress": "ضغط",
-    "toolConvert": "تحويل"
+    "toolConvert": "تحويل",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    "/": "/"
   },
   "IgDownloaderSEO": {
     "title": "محمل ريلز انستقرام - ConvertAllNow",
@@ -384,7 +410,8 @@
     "tagFree": "مجاني للاستخدام",
     "uploadSubtitle": "PNG، JPG، أو WEBP (الحد الأقصى 5 ميجابايت)",
     "uploadTitleText": "انقر للرفع",
-    "uploadDragText": "أو اسحب وأفلت"
+    "uploadDragText": "أو اسحب وأفلت",
+    "@imgly/background-removal": "@imgly/background-removal"
   },
   "ImageCompressorSEO": {
     "title": "ضغط الصور اونلاين - تقليل حجم الصورة مجانا - ConvertAllNow",
@@ -431,7 +458,12 @@
     "tagNoLoss": "بدون فقدان الجودة",
     "tagFast": "معالجة سريعة",
     "tagFree": "مجاني للاستخدام",
-    "tagAllFormats": "جميع الصيغ"
+    "tagAllFormats": "جميع الصيغ",
+    "canvas": "canvas",
+    "2d": "2d",
+    "browser-image-compression": "browser-image-compression",
+    "a": "a",
+    "": ""
   },
   "ImageConverterSEO": {
     "title": "محول الصور وصانع SVG - ConvertAllNow",
@@ -456,7 +488,11 @@
     "feature3Desc": "الحفاظ على جودة الصورة مع مخرجات SVG المستندة إلى المتجهات",
     "uploadTitleText": "انقر للرفع",
     "uploadDragText": "أو اسحب وأفلت",
-    "uploadSubtitle": "يقبل تنسيقات PNG، JPG، JPEG، GIF، MP4، MP3، WebP (الحد الأقصى 5 ميجابايت)"
+    "uploadSubtitle": "يقبل تنسيقات PNG، JPG، JPEG، GIF، MP4، MP3، WebP (الحد الأقصى 5 ميجابايت)",
+    "error": "error",
+    "a": "a",
+    "@/utils/convert": "@/utils/convert",
+    "@/utils/load-ffmpeg": "@/utils/load-ffmpeg"
   },
   "MergePdfSEO": {
     "title": "دمج ملفات PDF اونلاين مجانا - ConvertAllNow",
@@ -555,7 +591,16 @@
     "landscape": "أفقي",
     "margin": "الهامش",
     "noMargin": "بدون هامش",
-    "preview": "معاينة"
+    "preview": "معاينة",
+    "You have reached the maximum limit of 30 images per PDF": {
+      "": "You have reached the maximum limit of 30 images per PDF."
+    },
+    "You can only add ${spaceLeft} more image(s)": {
+      " Only the first ${spaceLeft} images will be added": {
+        "": "You can only add ${spaceLeft} more image(s). Only the first ${spaceLeft} images will be added."
+      }
+    },
+    "blob": "blob"
   },
   "PdfToJpgSEO": {
     "title": "تحويل PDF إلى JPG اونلاين مجانا - ConvertAllNow",
@@ -598,7 +643,11 @@
     "step2Title": "المعالجة",
     "step2Desc": "تقوم أداتنا بمسح جميع صفحات مستند PDF الخاص بك فوراً وتحويلها إلى تنسيقات صور JPG عالية الجودة.",
     "step3Title": "تنزيل الصور",
-    "step3Desc": "قم بمعاينة الصور المستخرجة وانقر على زر التنزيل في أي صفحة فردية لحفظها كصورة JPG على جهازك."
+    "step3Desc": "قم بمعاينة الصور المستخرجة وانقر على زر التنزيل في أي صفحة فردية لحفظها كصورة JPG على جهازك.",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    " ": " "
   },
   "MdConverterSEO": {
     "title": "محول ماركداون إلى PDF/Word - ConvertAllNow",
@@ -645,7 +694,12 @@
     "chooseDiffBtn": "اختر ملفاً آخر",
     "docPreviewTitle": "معاينة المستند",
     "previewEmptyTitle": "لا يوجد محتوى للمعاينة",
-    "previewEmptySubtitle": "اكتب أو ارفع محتوى ماركداون لرؤية المعاينة هنا."
+    "previewEmptySubtitle": "اكتب أو ارفع محتوى ماركداون لرؤية المعاينة هنا.",
+    "html2pdf": {
+      "js": "html2pdf.js"
+    },
+    "a": "a",
+    "": ""
   },
   "UnlockPdfSEO": {
     "title": "فتح PDF اونلاين - إزالة كلمة المرور مجانا - ConvertAllNow",
@@ -797,7 +851,10 @@
     "uploadTitle": "حدد ملف الفيديو",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (الحد الأقصى 100 ميجابايت)",
     "uploadDropText": "اسحب وأفلت الملفات أو",
-    "uploadBrowseText": "تصفح"
+    "uploadBrowseText": "تصفح",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video"
   },
   "VideoToGifSEO": {
     "title": "محول فيديو إلى GIF - إنشاء صور GIF متحركة مجانا - ConvertAllNow",
@@ -834,7 +891,12 @@
     "uploadTitle": "حدد الملف",
     "uploadSubtitle": "الحد الأقصى 100 ميجابايت",
     "uploadDropText": "اسحب وأفلت الملفات أو",
-    "uploadBrowseText": "تصفح"
+    "uploadBrowseText": "تصفح",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "": {
+      "": "."
+    }
   },
   "VideoToAudioSEO": {
     "title": "محول فيديو إلى MP3 - استخراج الصوت من الفيديو - ConvertAllNow",
@@ -876,7 +938,12 @@
     "uploadTitle": "حدد الملف",
     "uploadSubtitle": "الحد الأقصى 100 ميجابايت",
     "uploadDropText": "اسحب وأفلت الملفات أو",
-    "uploadBrowseText": "تصفح"
+    "uploadBrowseText": "تصفح",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video",
+    "canvas": "canvas",
+    "2d": "2d"
   },
   "AudioTrimmerSEO": {
     "title": "قص الصوت - قص MP3 اونلاين مجانا - ConvertAllNow",
@@ -905,7 +972,13 @@
     "uploadTitle": "حدد الملف",
     "uploadSubtitle": "الحد الأقصى 100 ميجابايت",
     "uploadDropText": "اسحب وأفلت الملفات أو",
-    "uploadBrowseText": "تصفح"
+    "uploadBrowseText": "تصفح",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "Contact": {
     "title": "اتصل",
@@ -994,5 +1067,33 @@
   "FileUploader": {
     "dropText": "اسحب وأفلت الملفات أو",
     "browseText": "تصفح"
+  },
+  "PdfToDocxSEO": {
+    "title": "title",
+    "description": "description"
+  },
+  "PdfToDocx": {
+    "pdfjs-dist": "pdfjs-dist",
+    "docx": "docx",
+    "titleBadge": "titleBadge",
+    "titleMain": "titleMain",
+    "titleHighlight": "titleHighlight",
+    "subtitle": "subtitle",
+    "step1Title": "step1Title",
+    "step2Title": "step2Title",
+    "step3Title": "step3Title",
+    "uploadTitle": "uploadTitle",
+    "uploadDesc": "uploadDesc",
+    "convertingBtn": "convertingBtn",
+    "convertBtn": "convertBtn",
+    "resultTitle": "resultTitle",
+    "resultDesc": "resultDesc",
+    "downloadBtn": "downloadBtn",
+    "convertAnother": "convertAnother",
+    "willAppearHere": "willAppearHere",
+    "howToTitle": "howToTitle",
+    "step1Desc": "step1Desc",
+    "step2Desc": "step2Desc",
+    "step3Desc": "step3Desc"
   }
 }

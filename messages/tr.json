@@ -121,7 +121,9 @@
     "Toggle menu": "Menüyü aç/kapat",
     "Language": "Dil",
     "Dark Mode": "Karanlık Mod",
-    "Share ConvertAllNow": "ConvertAllNow'u Paylaş"
+    "Share ConvertAllNow": "ConvertAllNow'u Paylaş",
+    "All ZIP tools": "All ZIP tools",
+    "jszip": "jszip"
   },
   "Hero": {
     "Explore more free tools": "Daha fazla ücretsiz aracı keşfedin",
@@ -201,7 +203,18 @@
     "Download": "İndir",
     "No Watermark": "Filigransız",
     "High Quality": "Yüksek Kalite",
-    "Fast Download": "Hızlı İndirme"
+    "Fast Download": "Hızlı İndirme",
+    "error": "error",
+    "Please enter a URL": {
+      "": "Please enter a URL."
+    },
+    "Processing": {
+      "": {
+        "": {
+          "": "Processing..."
+        }
+      }
+    }
   },
   "Explore": {
     "Explore More Tools": "Daha Fazla Araç Keşfedin",
@@ -229,7 +242,10 @@
     "Privacy Policy": "Gizlilik Politikası",
     "Terms of Service": "Hizmet Şartları",
     "About Us": "Hakkımızda",
-    "Contact Us": "Bize Ulaşın"
+    "Contact Us": "Bize Ulaşın",
+    "All rights reserved": {
+      "": "All rights reserved."
+    }
   },
   "HomeSEO": {
     "What is ConvertAllNow?": "ConvertAllNow Nedir?",
@@ -295,7 +311,13 @@
     "uploadTitle": "Video Dosyası Seç",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (Maks 100MB)",
     "uploadDropText": "Dosyaları sürükleyip bırakın veya",
-    "uploadBrowseText": "göz atın"
+    "uploadBrowseText": "göz atın",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "VideoCompressorSEO": {
     "title": "Çevrimiçi Video Sıkıştırıcı - Ücretsiz - ConvertAllNow",
@@ -344,7 +366,10 @@
     "uploadTitle": "Video Dosyası Seç",
     "uploadSubtitle": "MP4, WebM, AVI, MOV (Maks 100MB)",
     "uploadDropText": "Dosyaları sürükleyip bırakın veya",
-    "uploadBrowseText": "göz atın"
+    "uploadBrowseText": "göz atın",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video"
   },
   "VideoToGifSEO": {
     "title": "Video'dan GIF'e Dönüştürücü - ConvertAllNow",
@@ -381,7 +406,12 @@
     "uploadTitle": "Dosya Seç",
     "uploadSubtitle": "Maks 100MB",
     "uploadDropText": "Dosyaları sürükleyip bırakın veya",
-    "uploadBrowseText": "göz atın"
+    "uploadBrowseText": "göz atın",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "": {
+      "": "."
+    }
   },
   "VideoToAudioSEO": {
     "title": "Video'dan MP3'e Dönüştürücü - ConvertAllNow",
@@ -423,7 +453,12 @@
     "uploadTitle": "Dosya Seç",
     "uploadSubtitle": "Maks 100MB",
     "uploadDropText": "Dosyaları sürükleyip bırakın veya",
-    "uploadBrowseText": "göz atın"
+    "uploadBrowseText": "göz atın",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "video": "video",
+    "canvas": "canvas",
+    "2d": "2d"
   },
   "AudioTrimmerSEO": {
     "title": "Ses Kesici - Ücretsiz MP3 Kes - ConvertAllNow",
@@ -452,7 +487,13 @@
     "uploadTitle": "Dosya Seç",
     "uploadSubtitle": "Maks 100MB",
     "uploadDropText": "Dosyaları sürükleyip bırakın veya",
-    "uploadBrowseText": "göz atın"
+    "uploadBrowseText": "göz atın",
+    "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",
+    "@ffmpeg/util": "@ffmpeg/util",
+    "Start time must be before end time": "Start time must be before end time",
+    "": {
+      "": "."
+    }
   },
   "IgDownloaderSEO": {
     "title": "Instagram Reels İndir - ConvertAllNow",
@@ -499,7 +540,11 @@
     "toolRotate": "Rotate",
     "toolFilters": "Filters",
     "toolCompress": "Compress",
-    "toolConvert": "Convert"
+    "toolConvert": "Convert",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    "/": "/"
   },
   "BgRemoverSEO": {
     "title": "Quitar Fondo de Imagen Gratis - ConvertAllNow",
@@ -545,7 +590,8 @@
     "tagFree": "Free to Use",
     "uploadSubtitle": "PNG, JPG veya WEBP (Maks. 5MB)",
     "uploadTitleText": "Yüklemek için tıklayın",
-    "uploadDragText": "veya sürükleyip bırakın"
+    "uploadDragText": "veya sürükleyip bırakın",
+    "@imgly/background-removal": "@imgly/background-removal"
   },
   "ImageCompressorSEO": {
     "title": "Comprimir Imágenes Gratis - ConvertAllNow",
@@ -592,7 +638,12 @@
     "tagNoLoss": "No Quality Loss",
     "tagFast": "Fast Processing",
     "tagFree": "Free to Use",
-    "tagAllFormats": "All Formats"
+    "tagAllFormats": "All Formats",
+    "canvas": "canvas",
+    "2d": "2d",
+    "browser-image-compression": "browser-image-compression",
+    "a": "a",
+    "": ""
   },
   "ImageConverterSEO": {
     "title": "Convertidor de Imágenes a SVG - ConvertAllNow",
@@ -617,7 +668,11 @@
     "feature3Desc": "Vektör tabanlı SVG çıktısı ile görüntü kalitesini koruyun",
     "uploadTitleText": "Yüklemek için tıklayın",
     "uploadDragText": "veya sürükleyip bırakın",
-    "uploadSubtitle": "PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formatlarını Kabul Eder (Maks: 5MB)"
+    "uploadSubtitle": "PNG, JPG, JPEG, GIF, MP4, MP3, WebP Formatlarını Kabul Eder (Maks: 5MB)",
+    "error": "error",
+    "a": "a",
+    "@/utils/convert": "@/utils/convert",
+    "@/utils/load-ffmpeg": "@/utils/load-ffmpeg"
   },
   "MergePdfSEO": {
     "title": "Merge PDF Files Online Free - ConvertAllNow",
@@ -716,7 +771,16 @@
     "landscape": "Yatay",
     "margin": "Kenar Boşluğu",
     "noMargin": "Kenar boşluğu yok",
-    "preview": "Önizleme"
+    "preview": "Önizleme",
+    "You have reached the maximum limit of 30 images per PDF": {
+      "": "You have reached the maximum limit of 30 images per PDF."
+    },
+    "You can only add ${spaceLeft} more image(s)": {
+      " Only the first ${spaceLeft} images will be added": {
+        "": "You can only add ${spaceLeft} more image(s). Only the first ${spaceLeft} images will be added."
+      }
+    },
+    "blob": "blob"
   },
   "PdfToJpgSEO": {
     "title": "Convert PDF to JPG Online Free - ConvertAllNow",
@@ -759,7 +823,11 @@
     "step2Title": "İşleniyor",
     "step2Desc": "Aracımız PDF belgenizin tüm sayfalarını anında tarar ve bunları yüksek kaliteli JPG resim formatlarına dönüştürür.",
     "step3Title": "Görüntüleri İndir",
-    "step3Desc": "Çıkarılan görüntüleri önizleyin ve cihazınıza kaydetmek için herhangi bir sayfadaki indirme düğmesine tıklayın."
+    "step3Desc": "Çıkarılan görüntüleri önizleyin ve cihazınıza kaydetmek için herhangi bir sayfadaki indirme düğmesine tıklayın.",
+    "canvas": "canvas",
+    "2d": "2d",
+    "a": "a",
+    " ": " "
   },
   "MdConverterSEO": {
     "title": "Markdown to PDF/Word Converter - ConvertAllNow",
@@ -806,7 +874,12 @@
     "chooseDiffBtn": "Farklı bir dosya seçin",
     "docPreviewTitle": "Belge Önizlemesi",
     "previewEmptyTitle": "Önizlenecek içerik yok",
-    "previewEmptySubtitle": "Önizlemeyi burada görmek için Markdown yazın veya yükleyin."
+    "previewEmptySubtitle": "Önizlemeyi burada görmek için Markdown yazın veya yükleyin.",
+    "html2pdf": {
+      "js": "html2pdf.js"
+    },
+    "a": "a",
+    "": ""
   },
   "UnlockPdfSEO": {
     "title": "Unlock PDF Online - Remove Password Free - ConvertAllNow",
@@ -998,5 +1071,33 @@
   "FileUploader": {
     "dropText": "Dosyaları sürükleyip bırakın veya",
     "browseText": "göz atın"
+  },
+  "PdfToDocxSEO": {
+    "title": "title",
+    "description": "description"
+  },
+  "PdfToDocx": {
+    "pdfjs-dist": "pdfjs-dist",
+    "docx": "docx",
+    "titleBadge": "titleBadge",
+    "titleMain": "titleMain",
+    "titleHighlight": "titleHighlight",
+    "subtitle": "subtitle",
+    "step1Title": "step1Title",
+    "step2Title": "step2Title",
+    "step3Title": "step3Title",
+    "uploadTitle": "uploadTitle",
+    "uploadDesc": "uploadDesc",
+    "convertingBtn": "convertingBtn",
+    "convertBtn": "convertBtn",
+    "resultTitle": "resultTitle",
+    "resultDesc": "resultDesc",
+    "downloadBtn": "downloadBtn",
+    "convertAnother": "convertAnother",
+    "willAppearHere": "willAppearHere",
+    "howToTitle": "howToTitle",
+    "step1Desc": "step1Desc",
+    "step2Desc": "step2Desc",
+    "step3Desc": "step3Desc"
   }
 }
