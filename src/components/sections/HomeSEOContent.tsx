@@ -66,8 +66,8 @@ export default function HomeSEOContent() {
   const t = useTranslations('HomeSEO');
 
   const translatedFaqs = faqs.map(faq => ({
-    question: t.has(faq.question as any) ? t(faq.question as any) : faq.question,
-    answer: t.has(faq.answer as any) ? t(faq.answer as any) : faq.answer
+    question: faq.question,
+    answer: faq.answer
   }));
 
   return (
