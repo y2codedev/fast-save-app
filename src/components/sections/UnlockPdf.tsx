@@ -96,7 +96,7 @@ export default function UnlockPdf() {
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
       <div className="text-center mb-10">
         <motion.div
-          className="inline-flex items-center justify-center p-3 bg-indigo-100 dark:bg-indigo-900/40 rounded-2xl mb-4"
+          className=" inline-flex items-center whitespace-nowrap justify-center p-3 bg-indigo-100 dark:bg-indigo-900/40 rounded-2xl mb-4"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -158,7 +158,7 @@ export default function UnlockPdf() {
                 <p className="text-gray-500 dark:text-gray-400 text-sm">{t('uploadDesc')}</p>
               </div>
             ) : (
-              <div className="flex flex-col h-full flex-1 items-center justify-center text-center">
+              <div className="flex flex-col h-full flex-1 inline-flex items-center justify-center text-center">
                 <div className="bg-white dark:bg-gray-700 p-6 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-600 w-full max-w-sm mb-6">
                   <FiLock className="h-12 w-12 text-indigo-500 mx-auto mb-4" />
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 truncate" title={file.name}>
@@ -251,12 +251,12 @@ export default function UnlockPdf() {
               </div>
             ) : (
               <div className="flex flex-col h-full flex-1">
-                <div className="flex items-center justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
+                <div className=" inline-flex items-center whitespace-nowrap justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
                   <FiCheck className="w-5 h-5" />
                   <span className="font-medium">{t('successMsg')}</span>
                 </div>
 
-                <div className="flex-1 flex items-center justify-center text-center p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 mb-6">
+                <div className="flex-1 inline-flex items-center whitespace-nowrap justify-center text-center p-6 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-100 dark:border-gray-800 mb-6">
                   <p className="text-gray-500 dark:text-gray-400">
                     {t('successDesc')}
                   </p>
@@ -266,7 +266,7 @@ export default function UnlockPdf() {
                   <a
                     href={unlockedUrl}
                     download={`unlocked_${file?.name || 'document.pdf'}`}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                    className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                   >
                     <FiDownload className="h-5 w-5" />
                     {t('downloadBtn')}
@@ -295,21 +295,21 @@ export default function UnlockPdf() {
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>

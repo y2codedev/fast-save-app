@@ -85,7 +85,7 @@ export default function MergePdf() {
   return (
     <div className="mx-auto w-full max-w-4xl space-y-8 px-4 sm:px-6">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-rose-100 dark:bg-rose-900/30 mb-4">
+        <div className=" inline-flex items-center whitespace-nowrap justify-center w-16 h-16 rounded-full bg-rose-100 dark:bg-rose-900/30 mb-4">
             <Layers className="w-8 h-8 text-rose-600 dark:text-rose-400" />
         </div>
         <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
@@ -118,7 +118,7 @@ export default function MergePdf() {
       </div>
 
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-4 rounded-xl flex items-center gap-3 text-red-600 dark:text-red-400">
+        <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-4 rounded-xl inline-flex items-center whitespace-nowrap gap-3 text-red-600 dark:text-red-400">
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <p className="font-medium text-sm">{error}</p>
         </div>
@@ -139,7 +139,7 @@ export default function MergePdf() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  className="flex items-center justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700"
+                  className=" inline-flex items-center whitespace-nowrap justify-between p-3 sm:p-4 bg-gray-50 dark:bg-gray-900 rounded-xl border border-gray-200 dark:border-gray-700"
                 >
                   <div className="flex items-center gap-4 overflow-hidden">
                     <div className="hidden sm:flex flex-col gap-1">
@@ -150,7 +150,7 @@ export default function MergePdf() {
                         <ArrowDown className="w-3 h-3 text-gray-600 dark:text-gray-400" />
                       </button>
                     </div>
-                    <div className="flex items-center justify-center w-10 h-10 bg-rose-100 dark:bg-rose-900/30 rounded-lg shrink-0">
+                    <div className=" inline-flex items-center whitespace-nowrap justify-center w-10 h-10 bg-rose-100 dark:bg-rose-900/30 rounded-lg shrink-0">
                       <span className="font-bold text-rose-600 dark:text-rose-400">{index + 1}</span>
                     </div>
                     <div className="truncate">
@@ -177,7 +177,7 @@ export default function MergePdf() {
             <button 
               onClick={mergePdfs}
               disabled={files.length < 2 || loading}
-              className="w-full mt-4 flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
+              className="w-full mt-4 inline-flex items-center whitespace-nowrap justify-center gap-2 py-4 px-6 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:translate-y-0"
             >
               {loading ? (
                 <div className="flex items-center gap-3">
@@ -196,7 +196,7 @@ export default function MergePdf() {
               <a 
                 href={mergedPdfUrl}
                 download="merged_document.pdf"
-                className="w-full sm:flex-1 flex items-center justify-center gap-2 py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5"
+                className="w-full sm:flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 py-4 px-6 bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white font-bold rounded-xl shadow-lg transition-all hover:-translate-y-0.5"
               >
                 <Download className="w-5 h-5" />
                 <span>{t('downloadBtn')}</span>
@@ -222,21 +222,21 @@ export default function MergePdf() {
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Mail, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale } from '@/lib/seo';
+import { getCanonicalUrl, RELATED_TOOLS, getAlternateLanguages, getOgLocale } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -30,6 +30,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const title = "Online Tool";
+
+  
+
   const t = await getTranslations({ locale, namespace: 'Contact' });
 
   return (

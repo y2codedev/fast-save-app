@@ -38,7 +38,7 @@ export default function DownloadSteps() {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <div className="inline-flex items-center gap-2 bg-indigo-50 dark:bg-indigo-900/30 rounded-full px-4 py-2 mb-6 border border-indigo-100 dark:border-indigo-800">
+                    <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-indigo-50 dark:bg-indigo-900/30 rounded-full px-4 py-2 mb-6 border border-indigo-100 dark:border-indigo-800">
                         <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
                             {t('Simple Process')}
                         </span>
@@ -74,7 +74,7 @@ export default function DownloadSteps() {
                                 </div>
                                 
                                 <div className="relative z-10 flex flex-col h-full">
-                                    <div className="w-14 h-14 rounded-2xl bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center mb-6 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
+                                    <div className="w-14 h-14 rounded-2xl bg-indigo-100 dark:bg-indigo-900/50 inline-flex items-center whitespace-nowrap justify-center mb-6 text-indigo-600 dark:text-indigo-400 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300">
                                         <step.icon className="h-7 w-7" aria-hidden="true" />
                                     </div>
                                     <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
@@ -113,7 +113,7 @@ export default function DownloadSteps() {
                         </p>
                         <a 
                             href="#download-section" 
-                            className="inline-flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:-translate-y-1"
+                            className=" inline-flex items-center whitespace-nowrap justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-10 py-4 rounded-full transition-all duration-300 shadow-lg shadow-indigo-500/30 hover:-translate-y-1"
                         >
                             {t('Start Downloading')}
                             <ArrowRight className="w-5 h-5 rtl:-scale-x-100" />

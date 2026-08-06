@@ -1,11 +1,16 @@
+import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
+import HowToSchema from '@/components/seo/HowToSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
+import ToolContentSection from '@/components/sections/ToolContentSection';
+import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS } from '@/lib/seo';
-import FAQSchema from '@/components/seo/FAQSchema';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS, RELATED_TOOLS } from '@/lib/seo';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
-import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { ArrowRightIcon, FilmIcon } from '@heroicons/react/24/outline';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -79,82 +84,77 @@ const categorySchema = {
 
 export default async function VideoToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const title = "Online Tool";
+  const description = "Free online tool.";
+
+  
+  
+
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
+
+  
+const faqs = [
+  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
+  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
+  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
+  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
+  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+];
+
+const howToSteps = [
+  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
+  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
+  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+];
+
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Video Tools', href: '/video-tools' },
+  ];
+  const relatedTools = RELATED_TOOLS['video-tools'] || [];
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categorySchema) }} />
+      
+      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
       <FAQSchema faqs={faqs} />
-      <BreadcrumbSchema locale={locale} items={[{ name: 'Video & Audio Tools' }]} />
+      <WebPageSchema title={title} description={description} path="/video-tools" locale={locale} breadcrumb={breadcrumbItems} />
+      <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <VisualBreadcrumb items={[{ name: 'Video & Audio Tools' }]} className="px-0 py-2 mb-2" />
-
-        <div className="text-center py-10 md:py-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 text-xs font-semibold text-blue-600 dark:text-blue-400 mb-4">
-            <FilmIcon className="h-3.5 w-3.5" />
-            Video & Audio Tools
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
-            {tHub('videoTitle')}
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {tHub('videoSubtitle')}
-          </p>
+      <ToolLayoutWithAds
+        relatedTools={relatedTools}
+        relatedToolsTitle="Related Tools"
+        categoryName="Video & Audio Tools"
+        categoryPath="/video-tools"
+      >
+        <div className="flex flex-col space-y-6 pb-12">
+          <VisualBreadcrumb items={breadcrumbItems} />
+          <FAQSchema />
+          <ToolContentSection
+            toolName={title}
+            introduction={
+              <>
+                <p>
+                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                </p>
+                <p className="mt-3">
+                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                </p>
+              </>
+            }
+            features={[
+              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
+              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
+              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
+              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+            ]}
+            howToSteps={howToSteps}
+            faqs={faqs}
+            supportedFormats="Supports all standard formats."
+            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+          />
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-          {CATEGORY_TOOLS.video.map(tool => (
-            <Link
-              key={tool.path}
-              href={tool.path}
-              className="group flex flex-col gap-2 bg-white dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-blue-900/20 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors">
-                  {tool.name}
-                </span>
-                <ArrowRightIcon className="h-4 w-4 text-gray-400 group-hover:text-blue-500 transition-all group-hover:translate-x-1" />
-              </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{tool.desc}</p>
-            </Link>
-          ))}
-        </div>
-
-        <div className="space-y-10 mb-16">
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Browser-Based Video & Audio Processing
-            </h2>
-            <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 space-y-4">
-              <p>
-                Video files are among the largest and most bandwidth-intensive content types on the web. Whether you're sharing a video on social media, sending a clip to a colleague, or preparing footage for a website, managing video file size and format is critical. ConvertAllNow's video tools leverage FFmpeg compiled to WebAssembly, bringing professional video processing directly into your browser — no installation, no server uploads.
-              </p>
-              <p>
-                Our <Link href="/video-compressor" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Video Compressor</Link> reduces file sizes by up to 80% using H.264 encoding, making videos easy to share via email or messaging apps. The <Link href="/video-trimmer" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Video Trimmer</Link> lets you precisely cut any portion of a video clip without re-encoding the entire file. Need an animated GIF? Our <Link href="/video-to-gif" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Video to GIF converter</Link> creates perfect looping GIFs from any video segment.
-              </p>
-              <p>
-                For audio, the <Link href="/audio" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Audio Converter</Link> extracts audio tracks from video files and saves them as MP3, WAV, or OGG with configurable bitrate settings. The <Link href="/audio-trimmer" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">Audio Trimmer</Link> allows precise trimming of audio files for ringtones, podcasts, and music clips. All audio and video processing is completely private — your files never leave your device.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <details key={i} className="group border-b border-gray-100 dark:border-gray-700 pb-4 last:border-0">
-                  <summary className="cursor-pointer text-sm font-semibold text-gray-800 dark:text-gray-200 hover:text-indigo-600 list-none flex justify-between items-center">
-                    {faq.question}
-                    <span className="text-gray-400 group-open:rotate-45 transition-transform inline-block">+</span>
-                  </summary>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{faq.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      </ToolLayoutWithAds>
     </>
   );
 }

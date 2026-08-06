@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import { FiUpload, FiFileText, FiDownload, FiCheck, FiFile } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDropzone } from "react-dropzone";
+import { useTranslations } from "next-intl";
 
 export default function WordToPdfConverter() {
+  const t = useTranslations('ConverterUI');
   const [isLoading, setIsLoading] = useState(false);
   const [pdfBlobURL, setPdfBlobURL] = useState<string | null>(null);
   const [wordFile, setWordFile] = useState<File | null>(null);
@@ -136,17 +138,17 @@ export default function WordToPdfConverter() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
             <FiFileText className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              Browser-Based Document Converter
+              {t('badgeBrowser')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6 tracking-tight">
-            Word to <span className="text-indigo-600 dark:text-indigo-400">PDF Converter</span>
+            {t('wordToPdfTitle')}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Convert Microsoft Word documents (.docx) to professional PDF files instantaneously in your browser with zero data uploads.
+            {t('wordToPdfSubtitle')}
           </p>
         </motion.div>
 
@@ -160,9 +162,9 @@ export default function WordToPdfConverter() {
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
-                { step: 'upload', label: 'Upload Word', icon: FiUpload },
-                { step: 'convert', label: 'Convert', icon: FiFileText },
-                { step: 'complete', label: 'Download PDF', icon: FiDownload },
+                { step: 'upload', label: t('stepUploadWord'), icon: FiUpload },
+                { step: 'convert', label: t('stepConvert'), icon: FiFileText },
+                { step: 'complete', label: t('stepDownloadPdf'), icon: FiDownload },
               ].map(({ step, label, icon: Icon }, index) => (
                 <div key={step} className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
@@ -219,7 +221,7 @@ export default function WordToPdfConverter() {
                   >
                     <div className="mb-6">
                       <label className="block sm:text-sm text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">
-                        Upload Microsoft Word File (.docx or .doc)
+                        {t('uploadLabelWord')}
                       </label>
                       <div
                         {...getRootProps()}
@@ -228,21 +230,21 @@ export default function WordToPdfConverter() {
                       >
                         <input {...getInputProps()} />
                         <div className="flex flex-col items-center justify-center space-y-3">
-                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg flex items-center justify-center">
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg inline-flex items-center whitespace-nowrap justify-center">
                             <FiUpload className="text-xl sm:text-2xl text-white" />
                           </div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-medium text-gray-700 dark:text-gray-300">Drag & drop your Word file or</span>{' '}
-                            <span className="text-indigo-600 dark:text-indigo-400 underline">browse</span>
+                            <span className="font-medium text-gray-700 dark:text-gray-300">{t('dragDropWord')}</span>{' '}
+                            <span className="text-indigo-600 dark:text-indigo-400 underline">{t('browse')}</span>
                           </p>
                           <p className="text-xs text-gray-400 dark:text-gray-500">
-                            Supported formats: DOCX & DOC (Max 30MB)
+                            {t('supportedDocxMax')}
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className="text-center text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 py-2.5 px-4 rounded-xl border border-indigo-100 dark:border-indigo-800/50">
-                      ⚡ 100% Client-Side & Private • No documents leave your computer
+                      {t('clientSideNotice')}
                     </div>
                   </motion.div>
                 )}
@@ -276,7 +278,7 @@ export default function WordToPdfConverter() {
                       <button
                         onClick={convertToPdf}
                         disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-bold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 px-6 transition-all duration-300 shadow-md"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent cursor-pointer text-sm font-bold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 px-6 transition-all duration-300 shadow-md"
                       >
                         {isLoading ? (
                           <>
@@ -294,7 +296,7 @@ export default function WordToPdfConverter() {
                       <button
                         onClick={resetConverter}
                         disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3 px-4 rounded-xl text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3 px-4 rounded-xl text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiUpload className="w-4 h-4" />
                         Different File
@@ -316,10 +318,10 @@ export default function WordToPdfConverter() {
                         <FiCheck className="h-5 w-5 text-green-600" />
                         <div>
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            PDF Ready for Download!
+                            {t('pdfReadyTitle')}
                           </p>
                           <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                            Your Word document has been compiled into a high-resolution PDF.
+                            {t('pdfReadyDesc')}
                           </p>
                         </div>
                       </div>
@@ -329,16 +331,16 @@ export default function WordToPdfConverter() {
                       <a
                         href={pdfBlobURL}
                         download={`${wordFile?.name.replace(/\.[^/.]+$/, "") || 'converted'}.pdf`}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-0.5"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-0.5"
                       >
                         <FiDownload className="h-5 w-5" />
-                        Download PDF
+                        {t('downloadPdfBtn')}
                       </a>
                       <button
                         onClick={resetConverter}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer"
                       >
-                        Convert Another
+                        {t('convertAnother')}
                       </button>
                     </div>
                   </motion.div>
@@ -356,22 +358,22 @@ export default function WordToPdfConverter() {
             <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-8 h-full flex flex-col justify-center min-h-[400px]">
               {pdfBlobURL ? (
                 <div className="text-center text-green-600 dark:text-green-400 space-y-3">
-                  <div className="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mx-auto mb-4 shadow-inner">
+                  <div className="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 inline-flex items-center whitespace-nowrap justify-center mx-auto mb-4 shadow-inner">
                     <FiCheck className="h-10 w-10 text-green-600 dark:text-green-400" />
                   </div>
-                  <p className="text-xl font-bold text-gray-900 dark:text-white">PDF Compiled Successfully</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Your layout, fonts, and styling have been formatted into an industry-standard PDF.</p>
+                  <p className="text-xl font-bold text-gray-900 dark:text-white">{t('pdfCompiledSuccess')}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{t('pdfCompiledSuccessDesc')}</p>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">Why Use Browser Word ➡️ PDF?</h3>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white">{t('whyUseTitleWord')}</h3>
                   {[
-                    { title: 'Local Formatting', desc: 'Parses Word font styling and tables locally in Javascript' },
-                    { title: 'Zero Cloud Storage', desc: 'Confidential corporate contracts and letters stay on your machine' },
-                    { title: 'No Server Delays', desc: 'Converts instantaneously without uploading large doc files over internet' },
+                    { title: t('localFormatting'), desc: t('localFormattingDesc') },
+                    { title: t('zeroCloudStorage'), desc: t('zeroCloudStorageDesc') },
+                    { title: t('noServerDelays'), desc: t('noServerDelaysDesc') },
                   ].map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 inline-flex items-center whitespace-nowrap justify-center flex-shrink-0 mt-0.5">
                         <FiCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                       </div>
                       <div>

@@ -48,7 +48,7 @@ export default function ReelResult({ data, isSaving, setIsSaving }: ReelResultPr
                                 priority={true}
                             />
                         ) : (
-                            <div className="w-full h-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                            <div className="w-full h-full bg-gray-200 dark:bg-gray-700 inline-flex items-center whitespace-nowrap justify-center">
                                 <span className="text-gray-500">No thumbnail available</span>
                             </div>
                         )}

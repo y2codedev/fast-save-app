@@ -1,11 +1,16 @@
+import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
+import HowToSchema from '@/components/seo/HowToSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
+import ToolContentSection from '@/components/sections/ToolContentSection';
+import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS } from '@/lib/seo';
-import FAQSchema from '@/components/seo/FAQSchema';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS, RELATED_TOOLS } from '@/lib/seo';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
-import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { ArrowRightIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -94,112 +99,77 @@ const categorySchema = {
 
 export default async function PdfToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const title = "Online Tool";
+  const description = "Free online tool.";
+
+  
+  
+
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
+
+  
+const faqs = [
+  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
+  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
+  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
+  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
+  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+];
+
+const howToSteps = [
+  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
+  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
+  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+];
+
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Pdf Tools', href: '/pdf-tools' },
+  ];
+  const relatedTools = RELATED_TOOLS['pdf-tools'] || [];
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categorySchema) }} />
+      
+      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
       <FAQSchema faqs={faqs} />
-      <BreadcrumbSchema locale={locale} items={[{ name: 'PDF Tools' }]} />
+      <WebPageSchema title={title} description={description} path="/pdf-tools" locale={locale} breadcrumb={breadcrumbItems} />
+      <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <VisualBreadcrumb items={[{ name: 'PDF Tools' }]} className="px-0 py-2 mb-2" />
-
-        {/* Hero */}
-        <div className="text-center py-10 md:py-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-800/30 text-xs font-semibold text-red-600 dark:text-red-400 mb-4">
-            <DocumentTextIcon className="h-3.5 w-3.5" />
-            PDF Tools
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
-            {tHub('pdfTitle')}
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {tHub('pdfSubtitle')}
-          </p>
+      <ToolLayoutWithAds
+        relatedTools={relatedTools}
+        relatedToolsTitle="Related Tools"
+        categoryName="PDF Tools"
+        categoryPath="/pdf-tools"
+      >
+        <div className="flex flex-col space-y-6 pb-12">
+          <VisualBreadcrumb items={breadcrumbItems} />
+          <FAQSchema />
+          <ToolContentSection
+            toolName={title}
+            introduction={
+              <>
+                <p>
+                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                </p>
+                <p className="mt-3">
+                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                </p>
+              </>
+            }
+            features={[
+              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
+              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
+              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
+              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+            ]}
+            howToSteps={howToSteps}
+            faqs={faqs}
+            supportedFormats="Supports all standard formats."
+            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+          />
         </div>
-
-        {/* Tools Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-          {CATEGORY_TOOLS.pdf.map(tool => (
-            <Link
-              key={tool.path}
-              href={tool.path}
-              className="group flex flex-col gap-2 bg-white dark:bg-gray-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
-                  {tool.name}
-                </span>
-                <ArrowRightIcon className="h-4 w-4 text-gray-400 group-hover:text-indigo-500 transition-all group-hover:translate-x-1" />
-              </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{tool.desc}</p>
-            </Link>
-          ))}
-        </div>
-
-        {/* Content Section */}
-        <div className="space-y-10 mb-16">
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              All-in-One PDF Tools — Free, Fast & Secure
-            </h2>
-            <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 space-y-4">
-              <p>
-                PDF (Portable Document Format) is the world's most widely used document format, trusted by businesses, students, and professionals globally. Managing PDFs efficiently — merging multiple documents, extracting content, converting formats, or protecting sensitive files — is an everyday necessity. ConvertAllNow provides a complete suite of professional-grade PDF tools, entirely free and 100% browser-based.
-              </p>
-              <p>
-                Unlike desktop software that requires installation or cloud services that upload your files to remote servers, all ConvertAllNow PDF tools operate directly in your web browser using modern JavaScript APIs. This means your documents are processed locally on your device, ensuring maximum privacy and security. There are no file size limits imposed by server storage, no account creation, no watermarks, and no restrictions.
-              </p>
-              <p>
-                Whether you need to <Link href="/merge-pdf" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">merge multiple PDFs</Link> into a single file, <Link href="/pdf-to-docx" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">convert a PDF to an editable Word document</Link>, extract images with <Link href="/pdf-to-jpg" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">PDF to JPG</Link>, or <Link href="/protect-pdf" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">add a password to protect sensitive PDFs</Link>, all tools are available instantly without any download or installation.
-              </p>
-              <p>
-                Our PDF tools are designed for everyone — students combining research papers, legal professionals managing contracts, marketers creating presentations, and developers working with document workflows. Each tool has a clean, intuitive interface that takes seconds to master, while delivering professional results.
-              </p>
-            </div>
-          </div>
-
-          {/* Why Choose */}
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Why Choose ConvertAllNow PDF Tools?</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {[
-                { title: 'No Upload Required', desc: 'All processing happens in your browser. Files never leave your device.' },
-                { title: '100% Free Forever', desc: 'No hidden fees, no premium tiers, no subscription needed.' },
-                { title: 'No Watermarks', desc: 'Output files are clean with no branding added to your documents.' },
-                { title: 'No Signup', desc: 'Use any tool instantly without creating an account.' },
-                { title: 'Works on All Devices', desc: 'Fully responsive — works on desktop, tablet, and mobile.' },
-                { title: 'Supports All Browsers', desc: 'Compatible with Chrome, Firefox, Safari, and Edge.' },
-              ].map((item, i) => (
-                <div key={i} className="flex gap-3">
-                  <span className="flex-shrink-0 mt-0.5 text-indigo-500">✓</span>
-                  <div>
-                    <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">{item.title} — </span>
-                    <span className="text-sm text-gray-600 dark:text-gray-400">{item.desc}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* FAQ */}
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <details key={i} className="group border-b border-gray-100 dark:border-gray-700 pb-4 last:border-0">
-                  <summary className="cursor-pointer text-sm font-semibold text-gray-800 dark:text-gray-200 hover:text-indigo-600 list-none flex justify-between items-center">
-                    {faq.question}
-                    <span className="text-gray-400 group-open:rotate-45 transition-transform inline-block">+</span>
-                  </summary>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{faq.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      </ToolLayoutWithAds>
     </>
   );
 }

@@ -28,8 +28,8 @@ export default function ToolLayoutWithAds({
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
 
   return (
-    <div className="flex flex-col min-h-screen py-4 md:py-8">
-      <div className="mx-auto w-full max-w-[1600px] px-2 sm:px-4 flex flex-col xl:flex-row gap-4 lg:gap-6 flex-1">
+    <div suppressHydrationWarning className="flex flex-col min-h-screen py-4 md:py-8">
+      <div suppressHydrationWarning className="mx-auto w-full max-w-[1600px] px-2 sm:px-4 flex flex-col xl:flex-row gap-4 lg:gap-6 flex-1">
 
         {/* Left Sidebar (Desktop Only) */}
         <aside className="hidden xl:block w-[160px] 2xl:w-[200px] flex-shrink-0">

@@ -1,10 +1,15 @@
 import ArchiveConverter from '@/components/sections/ArchiveConverter';
-import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
 import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
+import HowToSchema from '@/components/seo/HowToSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
+import ToolContentSection from '@/components/sections/ToolContentSection';
+import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale } from '@/lib/seo';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, RELATED_TOOLS } from '@/lib/seo';
 
 const SLUG = 'zip-to-7z';
 const PAGE_TITLE = 'ZIP to 7Z Converter – Convert ZIP Files Online Free';
@@ -84,6 +89,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const title = "Online Tool";
+  const description = "Free online tool.";
+
+  
+  
+
 
   const softwareSchema = createToolSchema({
     name: 'ZIP to 7Z Converter – Client-Side Browser Tool',
@@ -112,99 +123,67 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
     })),
   };
 
+  
+const faqs = [
+  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
+  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
+  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
+  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
+  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+];
+
+const howToSteps = [
+  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
+  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
+  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+];
+
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Zip To 7z', href: '/zip-to-7z' },
+  ];
+  const relatedTools = RELATED_TOOLS['zip-to-7z'] || [];
+
   return (
     <>
-      <SchemaMarkup data={softwareSchema} />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <BreadcrumbSchema
-        locale={locale}
-        items={[
-          { name: 'Home', href: '/' },
-          { name: 'Archive Converters', href: `/${SLUG}` },
-          { name: 'ZIP to 7Z Converter' },
-        ]}
-      />
-      <ToolLayoutWithAds>
-        <div className="flex flex-col space-y-16 pb-16">
-          {/* Main Interactive Converter Client Component */}
+      
+      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
+      <FAQSchema faqs={faqs} />
+      <WebPageSchema title={title} description={description} path="/zip-to-7z" locale={locale} breadcrumb={breadcrumbItems} />
+      <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
+
+      <ToolLayoutWithAds
+        relatedTools={relatedTools}
+        relatedToolsTitle="Related Tools"
+        categoryName="Archive Tools"
+        categoryPath="/archive-tools"
+      >
+        <div className="flex flex-col space-y-6 pb-12">
+          <VisualBreadcrumb items={breadcrumbItems} />
           <ArchiveConverter />
-
-          {/* Server-Rendered Indexable SEO & Explanatory Content */}
-          <section className="max-w-4xl mx-auto px-4 sm:px-6 w-full space-y-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-gray-800 dark:text-gray-200">
-            <header className="space-y-3 text-center sm:text-left">
-              <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                About the Free ZIP to 7Z Online Converter
-              </h2>
-              <p className="text-base text-gray-600 dark:text-gray-400 leading-relaxed">
-                ConvertAllNow offers a secure, zero-upload online utility specifically architected to transform ZIP archives into highly compressed 7Z archives right inside your web browser. Utilizing modern WebAssembly (WASM) technology, this converter bypasses cloud servers entirely, offering unequaled privacy, immediate processing speed, and zero external transfer latency.
-              </p>
-            </header>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <article className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/80 dark:border-gray-700/60 space-y-3 shadow-sm">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Why Upgrade from ZIP to 7Z?
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  While ZIP is widely recognized, the 7Z archive format employs sophisticated LZMA and LZMA2 algorithms that deliver significantly higher compression ratios. Converting large file archives from standard ZIP to 7Z saves important local disk storage and reduces bandwidth consumption when sharing files online, all while perfectly preserving internal folder hierarchies and multilingual Unicode file naming conventions.
+          <ToolContentSection
+            toolName={title}
+            introduction={
+              <>
+                <p>
+                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
                 </p>
-              </article>
-
-              <article className="p-6 rounded-2xl bg-gray-50 dark:bg-gray-800/60 border border-gray-200/80 dark:border-gray-700/60 space-y-3 shadow-sm">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Client-Side Web Worker Security
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                  Traditional conversion tools force you to upload personal documents or company archives to third-party servers, posing serious data confidentiality risks. Our converter runs a compiled 7-Zip engine inside an isolated background Web Worker on your device. Your data never transmits across the network, ensuring complete zero-knowledge privacy and instant memory disposal upon completion.
+                <p className="mt-3">
+                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
                 </p>
-              </article>
-            </div>
-
-            <div className="space-y-6 bg-white dark:bg-gray-800/40 p-6 sm:p-8 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-sm">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                How to Convert ZIP to 7Z Online
-              </h3>
-              <ol className="space-y-4 text-sm sm:text-base list-decimal list-inside text-gray-700 dark:text-gray-300 font-medium">
-                <li className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700/30">
-                  <strong className="text-indigo-600 dark:text-indigo-400">Select or Drag File:</strong> Click the upload dropzone above or drag and drop your target .zip file into the box.
-                </li>
-                <li className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700/30">
-                  <strong className="text-indigo-600 dark:text-indigo-400">Start Conversion:</strong> Click the <span className="underline decoration-indigo-500">Convert to 7Z</span> button. The WebAssembly engine will initialize cleanly in memory without freezing your browser interface.
-                </li>
-                <li className="p-2 rounded-lg bg-gray-50 dark:bg-gray-700/30">
-                  <strong className="text-indigo-600 dark:text-indigo-400">Save Your 7Z File:</strong> Once extraction and LZMA re-compression complete, click <span className="underline decoration-green-500">Download .7z Archive</span> to save the newly created archive instantly to your device disk.
-                </li>
-              </ol>
-            </div>
-
-            {/* Server-Rendered FAQ Section */}
-            <section className="space-y-6 pt-6">
-              <div className="text-center sm:text-left">
-                <h3 className="text-2xl font-extrabold text-gray-900 dark:text-white">
-                  Frequently Asked Questions
-                </h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                  Everything you need to know about our browser-based ZIP to 7Z file converter.
-                </p>
-              </div>
-
-              <div className="divide-y divide-gray-200 dark:divide-gray-700 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden bg-white dark:bg-gray-800/50 shadow-sm">
-                {FAQ_ITEMS.map((faq, i) => (
-                  <div key={i} className="p-5 sm:p-6 space-y-2 hover:bg-gray-50/50 dark:hover:bg-gray-750/50 transition-colors">
-                    <h4 className="font-bold text-base sm:text-lg text-gray-900 dark:text-white flex items-center justify-between">
-                      <span>{faq.question}</span>
-                    </h4>
-                    <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
-                      {faq.answer}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-          </section>
+              </>
+            }
+            features={[
+              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
+              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
+              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
+              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+            ]}
+            howToSteps={howToSteps}
+            faqs={faqs}
+            supportedFormats="Supports all standard formats."
+            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+          />
         </div>
       </ToolLayoutWithAds>
     </>

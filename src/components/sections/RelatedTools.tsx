@@ -3,6 +3,8 @@
 import React from 'react';
 import { Link } from '@/i18n/routing';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import { useTranslations, useLocale } from 'next-intl';
+import { useGetT } from '@/hooks/useGetT';
 
 interface RelatedTool {
   name: string;
@@ -17,8 +19,6 @@ interface RelatedToolsProps {
   categoryPath?: string;
 }
 
-import { useTranslations } from 'next-intl';
-
 export default function RelatedTools({
   tools,
   title,
@@ -26,9 +26,14 @@ export default function RelatedTools({
   categoryPath,
 }: RelatedToolsProps) {
   const t = useTranslations('RelatedTools');
+  const getT = useGetT();
+  const locale = useLocale();
+
   if (!tools || tools.length === 0) return null;
 
-  const displayTitle = title || t('title');
+  const displayTitle = title ? getT(title) : t('title');
+  const displayCategory = categoryName ? getT(categoryName) : '';
+  const uniqueTools = Array.from(new Map(tools.map((t) => [t.path, t])).values());
 
   return (
     <section
@@ -45,24 +50,24 @@ export default function RelatedTools({
               href={categoryPath}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-indigo-600 dark:text-indigo-400 hover:text-indigo-800 dark:hover:text-indigo-300 transition-colors"
             >
-              {t('viewAll', { category: categoryName })}
+              {t('viewAll', { category: displayCategory })}
               <ArrowRightIcon className="h-3.5 w-3.5" />
             </Link>
           )}
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {tools.map((tool) => (
+          {uniqueTools.map((tool, idx) => (
             <Link
-              key={tool.path}
+              key={`${tool.path}-${idx}`}
               href={tool.path}
               className="group flex flex-col gap-1 bg-gray-50 dark:bg-gray-700/50 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 border border-gray-200 dark:border-gray-600 hover:border-indigo-300 dark:hover:border-indigo-500 rounded-xl p-3.5 transition-all duration-200 hover:-translate-y-0.5"
             >
               <span className="text-sm font-semibold text-gray-800 dark:text-gray-100 group-hover:text-indigo-700 dark:group-hover:text-indigo-300 transition-colors">
-                {tool.name}
+                {getT(tool.name)}
               </span>
               <span className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                {tool.desc}
+                {getT(tool.desc)}
               </span>
             </Link>
           ))}

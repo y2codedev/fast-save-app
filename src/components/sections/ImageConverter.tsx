@@ -53,7 +53,7 @@ export default function ImageConverter() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
             >
-                <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+                <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
                     <FiImage className="h-5 w-5 text-indigo-600" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {t('titleBadge')}

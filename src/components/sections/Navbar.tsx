@@ -88,10 +88,10 @@ const Navbar = () => {
 
   if (!mounted) {
     return (
-      <header className="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 transition-all duration-300">
-        <nav className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex h-20 sm:h-24 items-center justify-between">
-            <div className="flex items-center space-x-4">
+      <header suppressHydrationWarning className="sticky top-0 z-50 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm border-b border-gray-200/50 dark:border-gray-700/50 transition-all duration-300">
+        <nav suppressHydrationWarning className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div suppressHydrationWarning className="flex h-20 sm:h-24 items-center justify-between">
+            <div suppressHydrationWarning className="flex items-center space-x-4">
               <div className="w-24 h-6 bg-gray-200 dark:bg-gray-700 rounded animate-pulse"></div>
             </div>
           </div>
@@ -103,14 +103,15 @@ const Navbar = () => {
   return (
     <>
       <header
+        suppressHydrationWarning
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
             ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm"
             : "bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200/30 dark:border-gray-700/30"
         }`}
       >
-        <nav className="mx-auto px-4 md:px-6 lg:px-8 max-w-[1440px]">
-          <div className="flex h-20 sm:h-24 items-center justify-between">
+        <nav suppressHydrationWarning className="mx-auto px-4 md:px-6 lg:px-8 max-w-[1440px]">
+          <div suppressHydrationWarning className="flex h-20 sm:h-24 items-center justify-between">
 
 
             {/* Logo */}
@@ -137,10 +138,10 @@ const Navbar = () => {
                     </button>
                     
                     {/* Hover Dropdown */}
-                    <div className={`absolute top-full ${index >= 3 ? 'right-0' : 'left-1/2 -translate-x-1/2'} pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50`}>
-                      <div className="w-[520px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-4 grid grid-cols-2 gap-2 relative">
+                    <div className={`absolute top-full ${index >= 3 ? 'end-0' : 'start-1/2 -translate-x-1/2 rtl:translate-x-1/2'} pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50`}>
+                      <div className="w-[min(520px,calc(100vw-2rem))] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-4 grid grid-cols-2 gap-2 relative">
                         {/* Decorative Top Arrow */}
-                        <div className={`absolute -top-1.5 ${index >= 3 ? 'right-10' : 'left-1/2 -translate-x-1/2'} w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45`} />
+                        <div className={`absolute -top-1.5 ${index >= 3 ? 'end-10' : 'start-1/2 -translate-x-1/2'} w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45`} />
                         
                         {category.items.map((tool, i) => {
                           const Icon = tool.icon;
@@ -174,9 +175,9 @@ const Navbar = () => {
                   <ChevronDownIcon className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180 opacity-70" />
                 </button>
                 
-                <div className="absolute top-full right-0 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
-                  <div className="w-[960px] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-5 pb-6 grid grid-cols-3 gap-5 relative max-h-[calc(100vh-110px)] overflow-y-auto">
-                    <div className="absolute -top-1.5 right-12 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
+                <div className="absolute top-full start-1/2 -translate-x-1/2 rtl:translate-x-1/2 pt-3 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50">
+                  <div className="w-[min(920px,calc(100vw-2rem))] bg-white/95 dark:bg-gray-900/95 backdrop-blur-2xl border border-gray-200/60 dark:border-gray-700/60 rounded-2xl shadow-2xl p-5 pb-6 grid grid-cols-3 gap-5 relative max-h-[calc(100vh-110px)] overflow-y-auto">
+                    <div className="absolute -top-1.5 start-1/2 -translate-x-1/2 w-3 h-3 bg-white dark:bg-gray-900 border-t border-s border-gray-200/60 dark:border-gray-700/60 rotate-45" />
                     
                     {zipColumns.map((colSections, colIdx) => (
                       <div key={colIdx} className="space-y-4">
@@ -293,7 +294,7 @@ const Navbar = () => {
 
                 {/* Mobile Drawer Settings */}
                 <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800 space-y-2">
-                  <div className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                  <div className=" inline-flex items-center whitespace-nowrap justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
                     <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
                       <FaGlobe className="w-4 h-4" />
                       {t('Language')}
@@ -301,7 +302,7 @@ const Navbar = () => {
                     <LanguageSwitcher />
                   </div>
                   
-                  <div className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                  <div className=" inline-flex items-center whitespace-nowrap justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
                     <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
                       {theme === 'dark' ? <FaMoon className="w-4 h-4" /> : <FaSun className="w-4 h-4" />}
                       {t('Dark Mode')}
@@ -316,7 +317,7 @@ const Navbar = () => {
 
                   <button 
                     onClick={() => { setMobileMenuOpen(false); setIsOpen(true); }}
-                    className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                    className=" inline-flex items-center whitespace-nowrap justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                   >
                     <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
                       <FaShareAlt className="w-4 h-4" />

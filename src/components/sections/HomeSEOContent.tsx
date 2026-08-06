@@ -5,6 +5,7 @@ import { ShieldCheck, Zap, Sparkles, Lock, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import FAQSchema from '@/components/seo/FAQSchema';
+import { useGetT } from '@/hooks/useGetT';
 
 const faqs = [
   {
@@ -47,27 +48,14 @@ const features = [
   }
 ];
 
-const faqsList = [
-  { id: 1, qKey: 'Is ConvertAllNow completely free to use?', aKey: 'faq1_answer' },
-  { id: 2, qKey: 'Do you store my files on your servers?', aKey: 'faq2_answer' },
-  { id: 3, qKey: 'What platforms and devices are supported?', aKey: 'faq3_answer' },
-  { id: 4, qKey: 'Are there any file size limits?', aKey: 'faq4_answer' },
-  { id: 5, qKey: 'Do downloaded videos have watermarks?', aKey: 'faq5_answer' },
-];
-
-const featureList = [
-  { icon: Zap, title: "Lightning Fast Processing", descKey: "feature1_desc" },
-  { icon: Lock, title: "Bank-Grade Security", descKey: "feature2_desc" },
-  { icon: Sparkles, title: "Premium Quality Output", descKey: "feature3_desc" }
-];
-
 export default function HomeSEOContent() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const t = useTranslations('HomeSEO');
+  const getT = useGetT();
 
   const translatedFaqs = faqs.map(faq => ({
-    question: faq.question,
-    answer: faq.answer
+    question: getT(faq.question),
+    answer: getT(faq.answer)
   }));
 
   return (
@@ -102,14 +90,14 @@ export default function HomeSEOContent() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, idx) => (
             <div key={idx} className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-              <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center mb-6">
+              <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-xl inline-flex items-center whitespace-nowrap justify-center mb-6">
                 <feature.icon className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                {feature.title}
+                {getT(feature.title)}
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                {feature.description}
+                {getT(feature.description)}
               </p>
             </div>
           ))}
@@ -154,7 +142,7 @@ export default function HomeSEOContent() {
                 className="w-full flex items-center justify-between p-6 text-start focus:outline-none"
               >
                 <span className="text-lg font-semibold text-gray-900 dark:text-white pe-4">
-                  {faq.question}
+                  {getT(faq.question)}
                 </span>
                 <ChevronDown 
                   className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${openFaq === index ? 'rotate-180 text-indigo-600' : ''}`} 
@@ -170,7 +158,7 @@ export default function HomeSEOContent() {
                     transition={{ duration: 0.3 }}
                   >
                     <div className="px-6 pb-6 text-gray-600 dark:text-gray-400 leading-relaxed border-t border-gray-100 dark:border-gray-700 pt-4">
-                      {faq.answer}
+                      {getT(faq.answer)}
                     </div>
                   </motion.div>
                 )}

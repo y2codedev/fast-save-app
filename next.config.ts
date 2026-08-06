@@ -29,18 +29,37 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   async headers() {
+    // Only apply COOP/COEP to routes that need SharedArrayBuffer (FFmpeg WASM, 7z-wasm)
+    const coopCoepRoutes = [
+      '/video-trimmer',
+      '/video-compressor',
+      '/video-to-gif',
+      '/audio',
+      '/audio-trimmer',
+      // Archive tools using 7z-wasm
+      '/create-zip', '/unzip-zip', '/edit-zip', '/merge-zip', '/split-zip',
+      '/view-zip', '/protect-zip', '/unlock-zip-file',
+      '/rar-to-zip', '/7z-to-zip', '/tar-to-zip', '/tar-gz-to-zip',
+      '/tar-bz2-to-zip', '/tar-xz-to-zip', '/gz-to-zip', '/bz2-to-zip',
+      '/xz-to-zip', '/iso-to-zip',
+      '/zip-to-rar', '/zip-to-7z', '/zip-to-tar', '/zip-to-tar-gz',
+      '/zip-to-tar-bz2', '/zip-to-tar-xz', '/zip-to-gz', '/zip-to-bz2',
+      '/zip-to-xz', '/zip-to-iso',
+    ];
+    const coopCoepHeaders = [
+      { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+      { key: 'Cross-Origin-Opener-Policy', value: 'same-origin' },
+    ];
+    const coopHeaders = coopCoepRoutes.flatMap(route => [
+      { source: route, headers: coopCoepHeaders },
+      { source: `/:locale(ar|de|es|fr|id|pt|ru|tr|zh)${route}`, headers: coopCoepHeaders },
+    ]);
     return [
+      ...coopHeaders,
       {
-        source: '/:path*',
+        source: '/wasm/:path*',
         headers: [
-          {
-            key: 'Cross-Origin-Embedder-Policy',
-            value: 'require-corp',
-          },
-          {
-            key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin',
-          },
+          { key: 'Cross-Origin-Resource-Policy', value: 'cross-origin' },
         ],
       },
     ];

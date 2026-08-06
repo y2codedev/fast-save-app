@@ -58,6 +58,12 @@ const howToSteps = [
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
+  const title = "Online Tool";
+  const description = "Free online tool.";
+
+  
+  
+
   const t = await getTranslations({ locale, namespace: 'UnlockPdfSEO' });
 
   const schemaData = createToolSchema({

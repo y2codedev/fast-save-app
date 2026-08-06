@@ -246,7 +246,7 @@ export default function ImageToPdfConverter() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiFileText className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
@@ -480,12 +480,12 @@ export default function ImageToPdfConverter() {
                  </div>
               ) : (
                 <div className="flex flex-col h-full">
-                  <div className="flex items-center justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
+                  <div className=" inline-flex items-center whitespace-nowrap justify-center gap-3 mb-6 bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-300 py-3 px-4 rounded-xl border border-green-200 dark:border-green-800">
                     <FiCheck className="w-5 h-5" />
                     <span className="font-medium">{t('resultTitle')} - {t('resultDesc')}</span>
                   </div>
                   
-                  <div className="w-full aspect-[4/5] bg-gray-100 dark:bg-gray-900 rounded-xl mb-6 overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center justify-center relative">
+                  <div className="w-full aspect-[4/5] bg-gray-100 dark:bg-gray-900 rounded-xl mb-6 overflow-hidden border border-gray-200 dark:border-gray-700 inline-flex items-center whitespace-nowrap justify-center relative">
                     <iframe src={`${pdfUrl}#toolbar=0`} className="w-full h-full" title="PDF Preview" />
                     <div className="absolute bottom-4 end-4 text-xs font-medium bg-black/60 text-white px-3 py-1 rounded-full backdrop-blur-md">{t('preview')}</div>
                   </div>
@@ -494,7 +494,7 @@ export default function ImageToPdfConverter() {
                     <a
                       href={pdfUrl}
                       download="Converted_Images.pdf"
-                      className="w-full inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
+                      className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
                     >
                       <FiDownload className="h-5 w-5" />
                       {t('downloadBtn')}
@@ -505,7 +505,7 @@ export default function ImageToPdfConverter() {
                         setPdfUrl(null);
                         setConversionStep('convert');
                       }}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"
+                      className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/30 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"
                     >
                       <FiLayers className="h-5 w-5" />
                       Edit Settings & Regenerate
@@ -513,7 +513,7 @@ export default function ImageToPdfConverter() {
 
                     <button
                       onClick={resetConverter}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"
+                      className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3.5 px-6 rounded-xl transition-all duration-300"
                     >
                       {t('convertAnother')}
                     </button>
@@ -576,21 +576,21 @@ export default function ImageToPdfConverter() {
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>

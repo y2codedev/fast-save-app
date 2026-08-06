@@ -15,7 +15,9 @@ export async function GET() {
   xml += `<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
-  const date = new Date().toISOString();
+  // Use a fixed date to avoid Google penalizing dynamic "fake freshness" lastmod values.
+  // Update this date when content actually changes.
+  const date = '2026-08-05T00:00:00.000Z';
 
   for (const path of allPaths) {
     const languages = getAlternateLanguages(path);

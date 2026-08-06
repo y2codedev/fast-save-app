@@ -196,7 +196,7 @@ export default function WordToHtmlConverter() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
             <FiCode className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
               Browser-Based HTML Engine
@@ -288,7 +288,7 @@ export default function WordToHtmlConverter() {
                       >
                         <input {...getInputProps()} />
                         <div className="flex flex-col items-center justify-center space-y-3">
-                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg flex items-center justify-center">
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg inline-flex items-center whitespace-nowrap justify-center">
                             <FiUpload className="text-xl sm:text-2xl text-white" />
                           </div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -336,7 +336,7 @@ export default function WordToHtmlConverter() {
                       <button
                         onClick={convertToHtml}
                         disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-bold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 px-6 transition-all duration-300 shadow-md"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent cursor-pointer text-sm font-bold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 px-6 transition-all duration-300 shadow-md"
                       >
                         {isLoading ? (
                           <>
@@ -354,7 +354,7 @@ export default function WordToHtmlConverter() {
                       <button
                         onClick={resetConverter}
                         disabled={isLoading}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3 px-4 rounded-xl text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3 px-4 rounded-xl text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiUpload className="w-4 h-4" />
                         Different File
@@ -389,14 +389,14 @@ export default function WordToHtmlConverter() {
                       <a
                         href={htmlBlobURL}
                         download={`${wordFile?.name.replace(/\.[^/.]+$/, "") || 'document'}.html`}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-center"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-center"
                       >
                         <FiDownload className="h-5 w-5" />
                         Download .html File
                       </a>
                       <button
                         onClick={copyToClipboard}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/40 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer text-center"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/40 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer text-center"
                       >
                         <FiCopy className="h-5 w-5" />
                         {copied ? "Copied to Clipboard!" : "Copy HTML Code"}
@@ -405,7 +405,7 @@ export default function WordToHtmlConverter() {
 
                     <button
                       onClick={resetConverter}
-                      className="w-full inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer"
+                      className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer"
                     >
                       Convert Another File
                     </button>
@@ -468,7 +468,7 @@ export default function WordToHtmlConverter() {
                 </div>
               ) : (
                 <div className="flex flex-col justify-center items-center h-full space-y-6 text-center py-12">
-                  <div className="w-20 h-20 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center">
+                  <div className="w-20 h-20 rounded-2xl bg-indigo-50 dark:bg-indigo-900/30 inline-flex items-center whitespace-nowrap justify-center">
                     <FiCode className="w-10 h-10 text-indigo-600 dark:text-indigo-400" />
                   </div>
                   <div>

@@ -9,16 +9,34 @@ function nestMessages(messages: any) {
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
       result[key] = nestMessages(value);
     } else {
-      const parts = key.split('.');
-      let current = result;
-      for (let i = 0; i < parts.length - 1; i++) {
-        const part = parts[i];
-        if (!current[part]) {
-          current[part] = {};
+      // Only nest keys that are valid short dot-separated identifiers (e.g. "Index.title")
+      const isSimpleIdentifierKey = /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(key);
+
+      if (!isSimpleIdentifierKey) {
+        result[key] = value;
+      } else {
+        const parts = key.split('.');
+        let current = result;
+        let canNest = true;
+
+        for (let i = 0; i < parts.length - 1; i++) {
+          const part = parts[i];
+          if (current[part] && typeof current[part] !== 'object') {
+            canNest = false;
+            break;
+          }
+          if (!current[part]) {
+            current[part] = {};
+          }
+          current = current[part];
         }
-        current = current[part];
+
+        if (canNest && typeof current === 'object' && current !== null) {
+          current[parts[parts.length - 1]] = value;
+        } else {
+          result[key] = value;
+        }
       }
-      current[parts[parts.length - 1]] = value;
     }
   }
   return result;

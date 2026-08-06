@@ -58,6 +58,12 @@ const howToSteps = [
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
+  const title = typeof config !== "undefined" && config.toolName ? `${config.toolName} Converter` : "Online Tool";
+  const description = typeof config !== "undefined" && config.description ? config.description : "Free online tool.";
+
+  
+  
+
   const t = await getTranslations({ locale, namespace: 'ProtectPdfSEO' });
 
   const schemaData = createToolSchema({

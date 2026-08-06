@@ -125,7 +125,7 @@ function MdConverter() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiFileText className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
@@ -253,7 +253,7 @@ function MdConverter() {
                         <button
                           onClick={handlePasteConvert}
                           disabled={!pastedContent.trim()}
-                          className="w-full inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
+                          className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-indigo-600 hover:bg-indigo-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
                         >
                           Preview Content
                         </button>
@@ -293,7 +293,7 @@ function MdConverter() {
                       <button
                         onClick={convertToPdf}
                         disabled={isLoading}
-                        className="w-full inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-red-600 hover:bg-red-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
+                        className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-red-600 hover:bg-red-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
                       >
                         {isLoading ? t('processingBtn') : (
                            <><FiDownload className="w-5 h-5" /> {t('exportPdfBtn')}</>
@@ -303,7 +303,7 @@ function MdConverter() {
                       <button
                         onClick={convertToDocx}
                         disabled={isLoading}
-                        className="w-full inline-flex items-center justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
+                        className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent cursor-pointer text-sm font-medium rounded-xl text-white bg-blue-600 hover:bg-blue-700 shadow-md disabled:opacity-50 disabled:cursor-not-allowed py-3 px-4 transition-all duration-300 hover:-translate-y-1"
                       >
                         {isLoading ? t('processingBtn') : (
                            <><FiDownload className="w-5 h-5" /> {t('exportWordBtn')}</>
@@ -313,7 +313,7 @@ function MdConverter() {
                       <button
                         onClick={resetConverter}
                         disabled={isLoading}
-                        className="w-full inline-flex items-center justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-3 px-4 rounded-xl text-sm transition-all duration-300 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-3 px-4 rounded-xl text-sm transition-all duration-300 mt-4 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         {t('chooseDiffBtn')}
                       </button>
@@ -332,7 +332,7 @@ function MdConverter() {
             transition={{ duration: 0.6, delay: 0.4 }}
           >
             <div className="relative bg-white dark:bg-gray-50 backdrop-blur-xl rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50 h-[600px] flex flex-col overflow-hidden">
-              <div className="bg-gray-100 dark:bg-gray-200 border-b border-gray-300 px-4 py-2 flex items-center justify-center text-sm font-medium text-gray-600">
+              <div className="bg-gray-100 dark:bg-gray-200 border-b border-gray-300 px-4 py-2 inline-flex items-center whitespace-nowrap justify-center text-sm font-medium text-gray-600">
                 {t('docPreviewTitle')}
               </div>
               <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">

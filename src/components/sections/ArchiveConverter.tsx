@@ -231,7 +231,7 @@ export default function ArchiveConverter(): React.ReactElement {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-5 py-2.5 mb-5 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-5 py-2.5 mb-5 border border-gray-200 dark:border-gray-700 shadow-sm">
             <FiArchive className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
             <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
               100% Client-Side Archive Converter
@@ -245,7 +245,7 @@ export default function ArchiveConverter(): React.ReactElement {
           </p>
 
           {/* Prominent Privacy Message */}
-          <div className="inline-flex items-center gap-2.5 px-6 py-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-950 dark:text-indigo-200 text-sm sm:text-base font-medium shadow-sm">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2.5 px-6 py-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-950 dark:text-indigo-200 text-sm sm:text-base font-medium shadow-sm">
             <FiShield className="w-5 h-5 flex-shrink-0 text-indigo-600 dark:text-indigo-400" />
             <span>Your files never leave your device. Conversion happens entirely inside your browser.</span>
           </div>
@@ -254,7 +254,7 @@ export default function ArchiveConverter(): React.ReactElement {
         {/* Unsupported Browser Alert */}
         {!isBrowserSupported && (
           <div
-            className="mb-8 p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 flex items-center gap-3 text-amber-900 dark:text-amber-200"
+            className="mb-8 p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 inline-flex items-center whitespace-nowrap gap-3 text-amber-900 dark:text-amber-200"
             role="alert"
             aria-live="assertive"
           >
@@ -357,7 +357,7 @@ export default function ArchiveConverter(): React.ReactElement {
                       >
                         <input {...getInputProps()} />
                         <div className="flex flex-col items-center justify-center space-y-4">
-                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md flex items-center justify-center text-white">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 shadow-md inline-flex items-center whitespace-nowrap justify-center text-white">
                             <FiUpload className="text-2xl sm:text-3xl" />
                           </div>
                           {file ? (
@@ -389,7 +389,7 @@ export default function ArchiveConverter(): React.ReactElement {
                     {/* Selected File Details & Large File Warning */}
                     {file && (
                       <div className="space-y-4">
-                        <div className="p-4 rounded-xl bg-indigo-50/50 dark:bg-gray-700/50 border border-indigo-100 dark:border-gray-600 flex items-center justify-between">
+                        <div className="p-4 rounded-xl bg-indigo-50/50 dark:bg-gray-700/50 border border-indigo-100 dark:border-gray-600 inline-flex items-center whitespace-nowrap justify-between">
                           <div className="flex items-center gap-3 overflow-hidden">
                             <FiFile className="w-6 h-6 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
                             <div className="truncate">
@@ -460,7 +460,7 @@ export default function ArchiveConverter(): React.ReactElement {
                           type="button"
                           onClick={resetConverter}
                           aria-label="Choose a different file"
-                          className="flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-bold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
+                          className=" inline-flex items-center whitespace-nowrap justify-center gap-2 py-4 px-6 rounded-xl font-bold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700/80 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
                         >
                           <FiUpload className="w-5 h-5" />
                           Choose Different File
@@ -538,7 +538,7 @@ export default function ArchiveConverter(): React.ReactElement {
                       type="button"
                       onClick={handleCancel}
                       aria-label="Cancel conversion"
-                      className="flex items-center gap-2 py-3 px-6 rounded-xl font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-900/60 transition-colors cursor-pointer text-sm"
+                      className=" inline-flex items-center whitespace-nowrap gap-2 py-3 px-6 rounded-xl font-semibold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-900/60 transition-colors cursor-pointer text-sm"
                     >
                       <FiX className="w-4 h-4" />
                       Cancel Conversion
@@ -554,7 +554,7 @@ export default function ArchiveConverter(): React.ReactElement {
                     exit={{ opacity: 0, scale: 0.98 }}
                     className="flex flex-col items-center justify-center py-10 space-y-6 flex-1"
                   >
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center shadow-lg text-white">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 inline-flex items-center whitespace-nowrap justify-center shadow-lg text-white">
                       <FiCheck className="w-10 h-10 stroke-[2.5]" />
                     </div>
 
@@ -566,7 +566,7 @@ export default function ArchiveConverter(): React.ReactElement {
                     </div>
 
                     {/* Result Summary Box */}
-                    <div className="w-full max-w-sm p-4 rounded-xl bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600/60 flex items-center justify-between">
+                    <div className="w-full max-w-sm p-4 rounded-xl bg-gray-50 dark:bg-gray-700/40 border border-gray-200 dark:border-gray-600/60 inline-flex items-center whitespace-nowrap justify-between">
                       <div className="flex items-center gap-3 overflow-hidden">
                         <FiArchive className="w-6 h-6 text-green-500 flex-shrink-0" />
                         <div className="truncate">
@@ -587,7 +587,7 @@ export default function ArchiveConverter(): React.ReactElement {
                           download={resultName}
                           role="button"
                           aria-label={`Download ${resultName}`}
-                          className="w-full flex items-center justify-center gap-2.5 py-4 px-8 rounded-xl font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 text-base"
+                          className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2.5 py-4 px-8 rounded-xl font-bold text-white bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 shadow-lg hover:shadow-xl transition-all duration-300 text-base"
                         >
                           <FiDownload className="w-5 h-5" />
                           Download .7z Archive
@@ -598,7 +598,7 @@ export default function ArchiveConverter(): React.ReactElement {
                         type="button"
                         onClick={resetConverter}
                         aria-label="Convert another file"
-                        className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer text-sm"
+                        className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer text-sm"
                       >
                         <FiUpload className="w-4 h-4" />
                         Convert Another File
@@ -642,7 +642,7 @@ export default function ArchiveConverter(): React.ReactElement {
                   },
                 ].map((feature, idx) => (
                   <div key={idx} className="flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-900/40 flex items-center justify-center flex-shrink-0 text-indigo-600 dark:text-indigo-400 font-bold text-sm shadow-sm">
+                    <div className="w-8 h-8 rounded-xl bg-indigo-50 dark:bg-indigo-900/40 inline-flex items-center whitespace-nowrap justify-center flex-shrink-0 text-indigo-600 dark:text-indigo-400 font-bold text-sm shadow-sm">
                       ✓
                     </div>
                     <div>

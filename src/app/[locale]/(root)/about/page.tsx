@@ -2,7 +2,7 @@ import React from 'react';
 import { Metadata } from 'next';
 import { Target, Users, Zap, Shield, Heart } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale } from '@/lib/seo';
+import { getCanonicalUrl, RELATED_TOOLS, getAlternateLanguages, getOgLocale } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;

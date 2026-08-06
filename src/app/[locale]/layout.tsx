@@ -137,12 +137,39 @@ export default async function RootLayout({
   return (
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
-    <meta name="google-adsense-account" content={adsenseClientId} />
     <script
-      async
+      dangerouslySetInnerHTML={{
+        __html: `
+          (function() {
+            if (typeof window !== 'undefined') {
+              const filter = function(msg) {
+                return msg && (msg.includes('bis_skin_checked') || msg.includes('Hydration failed'));
+              };
+              const _err = console.error;
+              console.error = function(...args) {
+                const msg = args.map(a => (typeof a === 'string' ? a : (a && a.message) || '')).join(' ');
+                if (filter(msg)) return;
+                _err.apply(console, args);
+              };
+              window.addEventListener('error', function(e) {
+                if (filter(e.message) || (e.error && filter(e.error.message))) {
+                  e.stopImmediatePropagation();
+                  e.preventDefault();
+                }
+              }, true);
+            }
+          })();
+        `,
+      }}
+    />
+    <meta name="google-adsense-account" content={adsenseClientId} />
+    <link rel="manifest" href="/site.webmanifest" />
+    {/* AdSense - loaded after page interactive to avoid render blocking */}
+    <Script
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+      strategy="afterInteractive"
       crossOrigin="anonymous"
-    ></script>
+    />
     {/* Google Analytics */}
     <Script
       src="https://www.googletagmanager.com/gtag/js?id=G-D77QJC0T0J"

@@ -97,7 +97,7 @@ export default function BgRemover() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <Sparkle className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
@@ -261,7 +261,7 @@ export default function BgRemover() {
                 </div>
               </div>
 
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-600 h-96 flex items-center justify-center">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-600 h-96 inline-flex items-center whitespace-nowrap justify-center">
                 <AnimatePresence mode="wait">
                   {isProcessing ? (
                     <motion.div
@@ -346,14 +346,14 @@ export default function BgRemover() {
                         <a
                           href={resultImage}
                           download="background-removed.png"
-                          className="flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex-1"
+                          className=" inline-flex items-center whitespace-nowrap justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-semibold rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 flex-1"
                         >
                           <FiDownload className="h-5 w-5" />
                           {t('downloadPng')}
                         </a>
                         <button
                           onClick={resetAll}
-                          className="flex items-center justify-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-300 flex-1"
+                          className=" inline-flex items-center whitespace-nowrap justify-center gap-2 px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold rounded-xl transition-all duration-300 flex-1"
                         >
                           <FiTrash2 className="h-5 w-5" />
                           {t('newImage')}

@@ -1,9 +1,15 @@
+import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
+import HowToSchema from '@/components/seo/HowToSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
+import ToolContentSection from '@/components/sections/ToolContentSection';
+import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
-import { getCanonicalUrl, getAlternateLanguages, CATEGORY_TOOLS } from '@/lib/seo';
+import { getCanonicalUrl, getAlternateLanguages, CATEGORY_TOOLS, RELATED_TOOLS } from '@/lib/seo';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
-import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -67,75 +73,77 @@ import { getTranslations } from 'next-intl/server';
 
 export default async function SitemapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const title = "Online Tool";
+  const description = "Free online tool.";
+
+  
+  
+
   const t = await getTranslations({ locale, namespace: 'Sitemap' });
+
+  
+const faqs = [
+  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
+  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
+  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
+  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
+  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+];
+
+const howToSteps = [
+  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
+  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
+  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+];
+
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Sitemap', href: '/sitemap' },
+  ];
+  const relatedTools = RELATED_TOOLS['sitemap'] || [];
 
   return (
     <>
-      <BreadcrumbSchema locale={locale} items={[{ name: t('title') }]} />
+      
+      <HowToSchema name={`How to ${t('title')}`} description={t('description')} steps={howToSteps} totalTime="PT1M" />
+      <FAQSchema faqs={faqs} />
+      <WebPageSchema title={t('title')} description={t('description')} path="/sitemap" locale={locale} breadcrumb={breadcrumbItems} />
+      <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <VisualBreadcrumb items={[{ name: t('title') }]} className="px-0 py-2 mb-2" />
-
-        <div className="py-8 md:py-10">
-          <h1 className="text-3xl sm:text-4xl font-black text-gray-900 dark:text-white tracking-tight mb-2">
-            {t('title')}
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400">
-            {t('subtitle')}
-          </p>
+      <ToolLayoutWithAds
+        relatedTools={relatedTools}
+        relatedToolsTitle="Related Tools"
+        categoryName="Online Tools"
+        categoryPath="/"
+      >
+        <div className="flex flex-col space-y-6 pb-12">
+          <VisualBreadcrumb items={breadcrumbItems} />
+          <BreadcrumbSchema />
+          <ToolContentSection
+            toolName={t('title')}
+            introduction={
+              <>
+                <p>
+                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                </p>
+                <p className="mt-3">
+                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                </p>
+              </>
+            }
+            features={[
+              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
+              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
+              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
+              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+            ]}
+            howToSteps={howToSteps}
+            faqs={faqs}
+            supportedFormats="Supports all standard formats."
+            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+          />
         </div>
-
-        {/* Static Pages */}
-        <div className="mb-10">
-          <h2 className="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4 flex items-center gap-2">
-            <span className="w-1 h-5 bg-gray-400 rounded-full inline-block" />
-            {t('generalPages')}
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
-            {staticPages.map(page => (
-              <Link
-                key={page.path}
-                href={page.path}
-                className="group flex flex-col gap-1 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700/50 border border-gray-200 dark:border-gray-700 hover:border-gray-300 rounded-xl p-3.5 transition-all"
-              >
-                <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                  {page.name}
-                </span>
-                <span className="text-xs text-gray-400 dark:text-gray-500">{page.desc}</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        {/* Category + Tool listings */}
-        {categories.map(cat => (
-          <div key={cat.path} className="mb-12">
-            <div className="flex items-center gap-3 mb-5">
-              <h2 className={`text-lg font-bold ${cat.color}`}>{cat.name}</h2>
-              <Link
-                href={cat.path}
-                className={`text-xs px-2.5 py-0.5 rounded-full font-semibold ${cat.bg} ${cat.color} ${cat.border} border hover:opacity-80 transition-opacity`}
-              >
-                {t('viewCategory')}
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-              {cat.tools.map(tool => (
-                <Link
-                  key={tool.path}
-                  href={tool.path}
-                  className="group flex flex-col gap-1 bg-white dark:bg-gray-800 hover:bg-indigo-50 dark:hover:bg-indigo-900/20 border border-gray-200 dark:border-gray-700 hover:border-indigo-200 dark:hover:border-indigo-700 rounded-xl p-3.5 transition-all"
-                >
-                  <span className="text-sm font-semibold text-gray-800 dark:text-gray-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                    {tool.name}
-                  </span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500 leading-snug">{tool.desc}</span>
-                </Link>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
+      </ToolLayoutWithAds>
     </>
   );
 }

@@ -1,11 +1,16 @@
+import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
+import HowToSchema from '@/components/seo/HowToSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
+import ToolContentSection from '@/components/sections/ToolContentSection';
+import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS } from '@/lib/seo';
-import FAQSchema from '@/components/seo/FAQSchema';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS, RELATED_TOOLS } from '@/lib/seo';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
-import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { ArrowRightIcon, PhotoIcon } from '@heroicons/react/24/outline';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -79,85 +84,77 @@ const categorySchema = {
 
 export default async function ImageToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const title = "Online Tool";
+  const description = "Free online tool.";
+
+  
+  
+
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
+
+  
+const faqs = [
+  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
+  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
+  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
+  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
+  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+];
+
+const howToSteps = [
+  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
+  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
+  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+];
+
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: 'Image Tools', href: '/image-tools' },
+  ];
+  const relatedTools = RELATED_TOOLS['image-tools'] || [];
 
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categorySchema) }} />
+      
+      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
       <FAQSchema faqs={faqs} />
-      <BreadcrumbSchema locale={locale} items={[{ name: 'Image Tools' }]} />
+      <WebPageSchema title={title} description={description} path="/image-tools" locale={locale} breadcrumb={breadcrumbItems} />
+      <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-        <VisualBreadcrumb items={[{ name: 'Image Tools' }]} className="px-0 py-2 mb-2" />
-
-        <div className="text-center py-10 md:py-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-900/20 border border-purple-100 dark:border-purple-800/30 text-xs font-semibold text-purple-600 dark:text-purple-400 mb-4">
-            <PhotoIcon className="h-3.5 w-3.5" />
-            Image Tools
-          </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 dark:text-white tracking-tight mb-4">
-            {tHub('imageTitle')}
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {tHub('imageSubtitle')}
-          </p>
+      <ToolLayoutWithAds
+        relatedTools={relatedTools}
+        relatedToolsTitle="Related Tools"
+        categoryName="Online Tools"
+        categoryPath="/"
+      >
+        <div className="flex flex-col space-y-6 pb-12">
+          <VisualBreadcrumb items={breadcrumbItems} />
+          <FAQSchema />
+          <ToolContentSection
+            toolName={title}
+            introduction={
+              <>
+                <p>
+                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                </p>
+                <p className="mt-3">
+                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                </p>
+              </>
+            }
+            features={[
+              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
+              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
+              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
+              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+            ]}
+            howToSteps={howToSteps}
+            faqs={faqs}
+            supportedFormats="Supports all standard formats."
+            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+          />
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
-          {CATEGORY_TOOLS.image.map(tool => (
-            <Link
-              key={tool.path}
-              href={tool.path}
-              className="group flex flex-col gap-2 bg-white dark:bg-gray-800 hover:bg-purple-50 dark:hover:bg-purple-900/20 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 rounded-2xl p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
-            >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-purple-700 dark:group-hover:text-purple-300 transition-colors">
-                  {tool.name}
-                </span>
-                <ArrowRightIcon className="h-4 w-4 text-gray-400 group-hover:text-purple-500 transition-all group-hover:translate-x-1" />
-              </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">{tool.desc}</p>
-            </Link>
-          ))}
-        </div>
-
-        <div className="space-y-10 mb-16">
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-              Professional Image Editing Tools — Free & Browser-Based
-            </h2>
-            <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 space-y-4">
-              <p>
-                Image optimization and editing are fundamental requirements in today's visual-first digital world. Whether you're a photographer optimizing images for web, a designer creating marketing materials, a developer optimizing page load times, or someone simply wanting to clean up photos before sharing — having the right image tools makes all the difference.
-              </p>
-              <p>
-                ConvertAllNow's image tools suite covers every common image processing task: <Link href="/image-compressor" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">compressing images</Link> without visible quality loss, <Link href="/bg-remover" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">removing backgrounds</Link> using AI, <Link href="/photo" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">converting between image formats</Link> like JPG, PNG, WebP, GIF, and AVIF, and <Link href="/image-editor" className="text-indigo-600 dark:text-indigo-400 hover:underline font-medium">editing images</Link> with crop, resize, rotate, and filter tools.
-              </p>
-              <p>
-                All tools run entirely in your web browser using modern Web APIs and WebAssembly — meaning your images are processed locally on your device. Nothing is uploaded to our servers, making these tools ideal for sensitive or confidential imagery. There are no file size restrictions tied to server storage limits.
-              </p>
-              <p>
-                For web performance optimization, our Image Compressor typically achieves 60-80% file size reduction while maintaining visual quality indistinguishable from the original. This makes it invaluable for improving Core Web Vitals scores and page load speeds.
-              </p>
-            </div>
-          </div>
-
-          <div className="bg-white/80 dark:bg-gray-800/80 rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Frequently Asked Questions</h2>
-            <div className="space-y-4">
-              {faqs.map((faq, i) => (
-                <details key={i} className="group border-b border-gray-100 dark:border-gray-700 pb-4 last:border-0">
-                  <summary className="cursor-pointer text-sm font-semibold text-gray-800 dark:text-gray-200 hover:text-indigo-600 list-none flex justify-between items-center">
-                    {faq.question}
-                    <span className="text-gray-400 group-open:rotate-45 transition-transform inline-block">+</span>
-                  </summary>
-                  <p className="mt-2 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{faq.answer}</p>
-                </details>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
+      </ToolLayoutWithAds>
     </>
   );
 }

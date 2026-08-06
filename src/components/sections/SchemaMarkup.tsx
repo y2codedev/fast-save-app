@@ -20,10 +20,11 @@ interface WebApplicationSchema {
 }
 
 interface SchemaMarkupProps {
-    data: WebApplicationSchema;
+    data?: WebApplicationSchema;
 }
 
-export default function SchemaMarkup({ data }: SchemaMarkupProps): ReactElement {
+export default function SchemaMarkup({ data }: SchemaMarkupProps): ReactElement | null {
+    if (!data) return null;
     return (
         <script
             type="application/ld+json"

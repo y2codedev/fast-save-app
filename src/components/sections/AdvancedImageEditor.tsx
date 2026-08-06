@@ -248,17 +248,17 @@ export default function AdvancedImageEditor() {
       <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-8">{t('howToTitle')}</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-          <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">1</div>
+          <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full inline-flex items-center whitespace-nowrap justify-center font-bold text-xl mx-auto mb-4">1</div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('step1Title')}</h3>
           <p className="text-gray-600 dark:text-gray-400 text-sm">{t('step1Desc')}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-          <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">2</div>
+          <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full inline-flex items-center whitespace-nowrap justify-center font-bold text-xl mx-auto mb-4">2</div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('step2Title')}</h3>
           <p className="text-gray-600 dark:text-gray-400 text-sm">{t('step2Desc')}</p>
         </div>
         <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700">
-          <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full flex items-center justify-center font-bold text-xl mx-auto mb-4">3</div>
+          <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full inline-flex items-center whitespace-nowrap justify-center font-bold text-xl mx-auto mb-4">3</div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">{t('step3Title')}</h3>
           <p className="text-gray-600 dark:text-gray-400 text-sm">{t('step3Desc')}</p>
         </div>
@@ -281,7 +281,7 @@ export default function AdvancedImageEditor() {
               onChange={onFileChange} 
               className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
             />
-            <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 bg-indigo-50 dark:bg-indigo-900/30 rounded-2xl inline-flex items-center whitespace-nowrap justify-center mx-auto mb-6">
               <Upload className="w-10 h-10 text-indigo-500" />
             </div>
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{t('uploadTitle')}</h3>
@@ -367,10 +367,10 @@ export default function AdvancedImageEditor() {
 
                   {activeTool === 'mirror' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
-                      <button onClick={() => applyFlip(true, false)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
+                      <button onClick={() => applyFlip(true, false)} className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
                         <FlipHorizontal className="w-5 h-5" /> {t('flipHoriz')}
                       </button>
-                      <button onClick={() => applyFlip(false, true)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
+                      <button onClick={() => applyFlip(false, true)} className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
                         <FlipVertical className="w-5 h-5" /> {t('flipVert')}
                       </button>
                     </motion.div>
@@ -378,10 +378,10 @@ export default function AdvancedImageEditor() {
 
                   {activeTool === 'rotate' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
-                      <button onClick={() => applyRotate(90)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
+                      <button onClick={() => applyRotate(90)} className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
                         <RotateCw className="w-5 h-5" /> {t('rotateCw')}
                       </button>
-                      <button onClick={() => applyRotate(270)} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
+                      <button onClick={() => applyRotate(270)} className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
                         <RotateCcw className="w-5 h-5" /> {t('rotateCcw')}
                       </button>
                     </motion.div>
@@ -389,10 +389,10 @@ export default function AdvancedImageEditor() {
 
                   {activeTool === 'filter' && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="space-y-3">
-                      <button onClick={() => applyFilter('grayscale')} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
+                      <button onClick={() => applyFilter('grayscale')} className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
                         {t('grayscale')}
                       </button>
-                      <button onClick={() => applyFilter('pixelate')} className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
+                      <button onClick={() => applyFilter('pixelate')} className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition">
                         {t('pixelate')}
                       </button>
                     </motion.div>
@@ -432,19 +432,19 @@ export default function AdvancedImageEditor() {
                 <button 
                   onClick={undo}
                   disabled={undoStack.length === 0}
-                  className="w-full flex items-center justify-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-900 dark:text-white font-bold py-3 px-4 rounded-xl transition disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <Undo className="w-5 h-5" /> {t('undo')}
                 </button>
                 <button 
                   onClick={handleDownload}
-                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-4 px-4 rounded-xl transition shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                  className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-bold py-4 px-4 rounded-xl transition shadow-lg hover:shadow-xl hover:-translate-y-0.5"
                 >
                   <Download className="w-5 h-5" /> {t('download')}
                 </button>
                 <button 
                   onClick={() => { setFile(null); setImageSrc(''); }}
-                  className="w-full flex items-center justify-center gap-2 text-gray-500 hover:text-gray-800 dark:hover:text-white font-semibold py-2 transition"
+                  className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 text-gray-500 hover:text-gray-800 dark:hover:text-white font-semibold py-2 transition"
                 >
                   <ArrowLeft className="w-4 h-4 rtl:-scale-x-100" /> {t('back')}
                 </button>
@@ -452,7 +452,7 @@ export default function AdvancedImageEditor() {
             </div>
 
             {/* Right Canvas - Preview */}
-            <div className="flex-1 bg-gray-100 dark:bg-gray-900 p-4 md:p-8 flex items-center justify-center relative overflow-hidden">
+            <div className="flex-1 bg-gray-100 dark:bg-gray-900 p-4 md:p-8 inline-flex items-center whitespace-nowrap justify-center relative overflow-hidden">
               {/* Transparent Checkered Background Pattern for images with transparency */}
               <div 
                 className="absolute inset-0 opacity-20 dark:opacity-10 pointer-events-none" 
@@ -463,7 +463,7 @@ export default function AdvancedImageEditor() {
                 }}
               />
               
-              <div className="relative z-10 max-w-full max-h-full flex items-center justify-center bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
+              <div className="relative z-10 max-w-full max-h-full inline-flex items-center whitespace-nowrap justify-center bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700">
                 {activeTool === 'crop' ? (
                   <ReactCrop
                     crop={crop}

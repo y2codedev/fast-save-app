@@ -290,7 +290,7 @@ export default function HeroSection({ children }: { children?: React.ReactNode }
             { icon: Smartphone, value: 'Forever Free', label: 'No Watermark' },
           ].map((stat, index) => (
             <motion.div key={index} variants={itemVariants} className="bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl border border-white/40 dark:border-gray-700/50 p-6 rounded-3xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="bg-white/60 dark:bg-gray-700/60 w-16 h-16 mx-auto rounded-2xl flex items-center justify-center mb-4">
+              <div className="bg-white/60 dark:bg-gray-700/60 w-16 h-16 mx-auto rounded-2xl inline-flex items-center whitespace-nowrap justify-center mb-4">
                 <stat.icon className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
               </div>
               <div className="text-xl md:text-2xl font-extrabold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-1">{t(stat.value)}</div>

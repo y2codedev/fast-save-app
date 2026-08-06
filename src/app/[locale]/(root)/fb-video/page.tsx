@@ -1,7 +1,7 @@
 
 import { DownloadForm, Group } from "@/constants";
 import type { Metadata } from "next";
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale, TOOL_KEYWORDS } from '@/lib/seo';
+import { getCanonicalUrl, RELATED_TOOLS, getAlternateLanguages, getOgLocale, TOOL_KEYWORDS } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;

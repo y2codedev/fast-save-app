@@ -116,7 +116,7 @@ export default function ImageToSVG() {
             {/* Original Preview */}
             <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col items-center p-6 shadow-inner">
               <span className="font-bold text-sm text-gray-400 mb-4 uppercase tracking-wider">Original Raster</span>
-              <div className="relative w-full h-64 flex items-center justify-center bg-gray-50/50 dark:bg-gray-800/50 rounded-lg">
+              <div className="relative w-full h-64 inline-flex items-center whitespace-nowrap justify-center bg-gray-50/50 dark:bg-gray-800/50 rounded-lg">
                 <img src={preview} className="max-w-full max-h-full object-contain drop-shadow-md" alt="Original" />
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function ImageToSVG() {
             {/* SVG Preview */}
             <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col items-center p-6 shadow-inner">
               <span className="font-bold text-sm text-indigo-500 mb-4 uppercase tracking-wider">Vector SVG</span>
-              <div className="relative w-full h-64 flex items-center justify-center bg-gray-50/50 dark:bg-gray-800/50 rounded-lg overflow-hidden">
+              <div className="relative w-full h-64 inline-flex items-center whitespace-nowrap justify-center bg-gray-50/50 dark:bg-gray-800/50 rounded-lg overflow-hidden">
                 <img 
                   src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`} 
                   className="max-w-full max-h-full object-contain drop-shadow-md" 
@@ -137,21 +137,21 @@ export default function ImageToSVG() {
           <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-3xl mx-auto">
             <button 
               onClick={handleDownload} 
-              className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold px-6 py-4 rounded-xl shadow-md transition-all hover:-translate-y-0.5 flex items-center justify-center gap-2"
+              className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold px-6 py-4 rounded-xl shadow-md transition-all hover:-translate-y-0.5 inline-flex items-center whitespace-nowrap justify-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
               Download SVG
             </button>
             <button 
               onClick={handleCopyCode} 
-              className="flex-1 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600 font-semibold px-6 py-4 rounded-xl shadow-sm transition-all flex items-center justify-center gap-2 hover:-translate-y-0.5"
+              className="flex-1 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600 font-semibold px-6 py-4 rounded-xl shadow-sm transition-all inline-flex items-center whitespace-nowrap justify-center gap-2 hover:-translate-y-0.5"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
               {showCode ? 'Copied to Clipboard!' : 'Copy SVG Code'}
             </button>
             <button 
               onClick={() => { setSvg(null); setPreview(null); }} 
-              className="flex-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-transparent hover:border-red-200 dark:hover:border-red-800 font-semibold px-6 py-4 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors flex items-center justify-center hover:-translate-y-0.5"
+              className="flex-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-transparent hover:border-red-200 dark:hover:border-red-800 font-semibold px-6 py-4 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors inline-flex items-center whitespace-nowrap justify-center hover:-translate-y-0.5"
             >
               Convert Another
             </button>

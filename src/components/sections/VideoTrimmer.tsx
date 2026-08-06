@@ -336,7 +336,7 @@ function VideoTrimmer() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiScissors className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
@@ -393,8 +393,8 @@ function VideoTrimmer() {
                 }}
               />
               {!isPlaying && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/30 backdrop-blur-[2px] transition-all">
-                  <div className="w-16 h-16 bg-white/25 backdrop-blur-md rounded-full flex items-center justify-center border border-white/50 shadow-xl hover:scale-110 transition-transform">
+                <div className="absolute inset-0 inline-flex items-center whitespace-nowrap justify-center bg-black/30 backdrop-blur-[2px] transition-all">
+                  <div className="w-16 h-16 bg-white/25 backdrop-blur-md rounded-full inline-flex items-center whitespace-nowrap justify-center border border-white/50 shadow-xl hover:scale-110 transition-transform">
                     <FiPlay className="w-8 h-8 text-white fill-current ms-1" />
                   </div>
                 </div>
@@ -409,7 +409,7 @@ function VideoTrimmer() {
                     onClick={togglePlay}
                     type="button"
                     aria-label={isPlaying ? "Pause Video" : "Play Video"}
-                    className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 flex-shrink-0"
+                    className="w-12 h-12 rounded-full bg-gradient-to-r from-indigo-500 to-violet-600 hover:from-indigo-600 hover:to-violet-700 text-white inline-flex items-center whitespace-nowrap justify-center shadow-lg transition-transform hover:scale-105 active:scale-95 flex-shrink-0"
                   >
                     {isPlaying ? (
                       <FiPause className="w-6 h-6 fill-current" />
@@ -438,7 +438,7 @@ function VideoTrimmer() {
               {/* Music Player Range Slider (From 0:00 to trimmedLength) */}
               <div className="relative pt-2 pb-1 px-1">
                 {/* Seek Bar Track */}
-                <div className="relative h-2 w-full bg-gray-700/80 rounded-full flex items-center cursor-pointer group">
+                <div className="relative h-2 w-full bg-gray-700/80 rounded-full inline-flex items-center whitespace-nowrap cursor-pointer group">
                   {/* Progress Fill — no CSS transition so it tracks every rAF frame */}
                   <div
                     className="absolute h-full bg-white rounded-full group-hover:bg-indigo-400"
@@ -570,7 +570,7 @@ function VideoTrimmer() {
                     }}
                   >
                     {/* The visual thin line */}
-                    <div className="absolute h-10 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] flex items-center justify-center pointer-events-none">
+                    <div className="absolute h-10 w-[2px] bg-white shadow-[0_0_8px_rgba(0,0,0,0.8)] inline-flex items-center whitespace-nowrap justify-center pointer-events-none">
                       <div className="absolute -top-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow pointer-events-none"></div>
                       <div className="absolute -bottom-1 w-2.5 h-2.5 bg-indigo-500 rounded-full shadow pointer-events-none"></div>
                     </div>
@@ -579,7 +579,7 @@ function VideoTrimmer() {
 
                 {/* Start Handle — directly draggable */}
                 <div
-                  className="absolute h-10 w-6 bg-indigo-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-30 -translate-x-1/2 flex items-center justify-center border-2 border-indigo-400 hover:scale-110 hover:bg-indigo-500 transition-transform"
+                  className="absolute h-10 w-6 bg-indigo-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-30 -translate-x-1/2 inline-flex items-center whitespace-nowrap justify-center border-2 border-indigo-400 hover:scale-110 hover:bg-indigo-500 transition-transform"
                   style={{ left: `${duration > 0 ? (startTime / duration) * 100 : 0}%` }}
                   onPointerDown={(e) => {
                     e.preventDefault();
@@ -610,7 +610,7 @@ function VideoTrimmer() {
 
                 {/* End Handle — directly draggable */}
                 <div
-                  className="absolute h-10 w-6 bg-violet-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-30 -translate-x-1/2 flex items-center justify-center border-2 border-violet-400 hover:scale-110 hover:bg-violet-500 transition-transform"
+                  className="absolute h-10 w-6 bg-violet-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-30 -translate-x-1/2 inline-flex items-center whitespace-nowrap justify-center border-2 border-violet-400 hover:scale-110 hover:bg-violet-500 transition-transform"
                   style={{ left: `${duration > 0 ? (endTime / duration) * 100 : 100}%` }}
                   onPointerDown={(e) => {
                     e.preventDefault();
@@ -694,7 +694,7 @@ function VideoTrimmer() {
                 >
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8">
                     <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 mb-8 text-center">
-                      <div className="w-16 h-16 bg-green-100 dark:bg-green-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-green-100 dark:bg-green-800/50 rounded-full inline-flex items-center whitespace-nowrap justify-center mx-auto mb-4">
                         <FiCheck className="h-8 w-8 text-green-600 dark:text-green-400" />
                       </div>
                       <h3 className="text-2xl font-bold text-green-800 dark:text-green-200 mb-2">
@@ -709,14 +709,14 @@ function VideoTrimmer() {
                       <a
                         href={trimmedVideoURL}
                         download={`trimmed_${videoFile?.name}`}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-lg"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-lg"
                       >
                         <FiDownload className="h-6 w-6" />
                         {t('downloadBtn')}
                       </a>
                       <button
                         onClick={resetConverter}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg"
                       >
                         {t('trimAnotherBtn')}
                       </button>
@@ -738,21 +738,21 @@ function VideoTrimmer() {
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>

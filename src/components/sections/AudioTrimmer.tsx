@@ -224,7 +224,7 @@ function AudioTrimmer() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
             <FiScissors className="h-5 w-5 text-indigo-600" />
             <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
@@ -325,7 +325,7 @@ function AudioTrimmer() {
 
                 {/* Start Handle — directly draggable */}
                 <div
-                  className="absolute h-14 w-5 bg-indigo-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border-2 border-indigo-400 hover:scale-110 hover:bg-indigo-500 transition-transform"
+                  className="absolute h-14 w-5 bg-indigo-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 inline-flex items-center whitespace-nowrap justify-center border-2 border-indigo-400 hover:scale-110 hover:bg-indigo-500 transition-transform"
                   style={{ left: `${(startTime / duration) * 100}%` }}
                   onPointerDown={(e) => {
                     e.preventDefault();
@@ -353,7 +353,7 @@ function AudioTrimmer() {
 
                 {/* End Handle — directly draggable */}
                 <div
-                  className="absolute h-14 w-5 bg-violet-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 flex items-center justify-center border-2 border-violet-400 hover:scale-110 hover:bg-violet-500 transition-transform"
+                  className="absolute h-14 w-5 bg-violet-600 rounded-md shadow-lg cursor-grab active:cursor-grabbing z-10 transform -translate-x-1/2 inline-flex items-center whitespace-nowrap justify-center border-2 border-violet-400 hover:scale-110 hover:bg-violet-500 transition-transform"
                   style={{ left: `${(endTime / duration) * 100}%` }}
                   onPointerDown={(e) => {
                     e.preventDefault();
@@ -434,7 +434,7 @@ function AudioTrimmer() {
                 >
                   <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8">
                     <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl p-6 mb-8 text-center">
-                      <div className="w-16 h-16 bg-green-100 dark:bg-green-800/50 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="w-16 h-16 bg-green-100 dark:bg-green-800/50 rounded-full inline-flex items-center whitespace-nowrap justify-center mx-auto mb-4">
                         <FiCheck className="h-8 w-8 text-green-600 dark:text-green-400" />
                       </div>
                       <h3 className="text-2xl font-bold text-green-800 dark:text-green-200 mb-4">
@@ -447,14 +447,14 @@ function AudioTrimmer() {
                       <a
                         href={trimmedAudioURL}
                         download={`trimmed_${audioFile?.name}`}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-lg"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 hover:shadow-lg hover:-translate-y-1 text-lg"
                       >
                         <FiDownload className="h-6 w-6" />
                         Download Audio
                       </a>
                       <button
                         onClick={resetConverter}
-                        className="flex-1 inline-flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg"
+                        className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300 font-bold py-4 px-6 rounded-xl transition-all duration-300 text-lg"
                       >
                         Trim Another
                       </button>
@@ -476,21 +476,21 @@ function AudioTrimmer() {
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
           <div className="space-y-4">
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo1Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo1Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo2Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo2Desc')}</p>
               </div>
             </div>
             <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-              <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+              <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
               <div>
                 <h4 className="font-semibold text-gray-900 dark:text-white">{t('howTo3Title')}</h4>
                 <p className="text-sm text-gray-600 dark:text-gray-400">{t('howTo3Desc')}</p>

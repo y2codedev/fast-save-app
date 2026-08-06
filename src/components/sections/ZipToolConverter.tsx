@@ -363,7 +363,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
             {slug === 'protect-zip' ? (
               <FiLock className="h-5 w-5 text-indigo-600" />
             ) : slug === 'unlock-zip-file' ? (
@@ -467,7 +467,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                       >
                         <input {...getInputProps()} />
                         <div className="flex flex-col items-center justify-center space-y-3">
-                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg flex items-center justify-center">
+                          <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 shadow-lg inline-flex items-center whitespace-nowrap justify-center">
                             <FiUpload className="text-xl sm:text-2xl text-white" />
                           </div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -497,7 +497,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                     {isMultiFile && files.length > 0 && (
                       <div className="space-y-2 max-h-40 overflow-y-auto">
                         {files.map((f, i) => (
-                          <div key={i} className="flex items-center justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
+                          <div key={i} className=" inline-flex items-center whitespace-nowrap justify-between bg-gray-50 dark:bg-gray-700/50 rounded-lg p-3">
                             <div className="flex items-center gap-2">
                               <FiFile className="text-indigo-500" />
                               <span className="text-sm text-gray-700 dark:text-gray-300 truncate max-w-[200px]">{f.name}</span>
@@ -574,14 +574,14 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-3 pt-2">
                         <div className="flex items-center justify-between">
                           <h4 className="text-sm font-bold text-gray-900 dark:text-white">Archive File Manager ({editableFiles.length})</h4>
-                          <label className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 rounded-lg text-xs font-bold cursor-pointer transition-colors">
+                          <label className=" inline-flex items-center whitespace-nowrap gap-1.5 px-3 py-1.5 bg-indigo-50 dark:bg-indigo-900/40 hover:bg-indigo-100 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 rounded-lg text-xs font-bold cursor-pointer transition-colors">
                             <FiPlus className="w-4 h-4" /> Add More Files
                             <input type="file" multiple className="hidden" onChange={handleAddFilesToEdit} />
                           </label>
                         </div>
                         <div className="divide-y divide-gray-200 dark:divide-gray-700 border border-gray-200 dark:border-gray-700 rounded-xl max-h-56 overflow-y-auto bg-gray-50/50 dark:bg-gray-900/50 p-2">
                           {editableFiles.map((item, idx) => (
-                            <div key={idx} className="flex items-center justify-between py-2 px-3 hover:bg-white dark:hover:bg-gray-800 rounded-lg transition-colors">
+                            <div key={idx} className=" inline-flex items-center whitespace-nowrap justify-between py-2 px-3 hover:bg-white dark:hover:bg-gray-800 rounded-lg transition-colors">
                               <div className="flex items-center gap-2 overflow-hidden pr-2">
                                 <FiFile className="text-indigo-500 w-4 h-4 flex-shrink-0" />
                                 <span className="text-xs font-medium text-gray-800 dark:text-gray-200 truncate">{item.name}</span>
@@ -644,7 +644,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                       {hasFiles && (
                         <button
                           onClick={resetConverter}
-                          className="flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
+                          className=" inline-flex items-center whitespace-nowrap justify-center gap-2 py-4 px-6 rounded-xl font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
                         >
                           <FiUpload className="w-5 h-5" />
                           Choose Different File
@@ -698,7 +698,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                     exit={{ opacity: 0, scale: 0.95 }}
                     className="flex flex-col items-center justify-center py-12 space-y-6"
                   >
-                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center shadow-lg">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 inline-flex items-center whitespace-nowrap justify-center shadow-lg">
                       <FiCheck className="w-10 h-10 text-white" />
                     </div>
 
@@ -707,7 +707,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                         <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 text-center">ZIP Contents</h3>
                         <div className="space-y-1 max-h-60 overflow-y-auto bg-gray-50 dark:bg-gray-700/50 rounded-xl p-4">
                           {JSON.parse(resultUrl).map((entry: any, i: number) => (
-                            <div key={i} className="flex items-center gap-2 py-1.5 px-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600/50">
+                            <div key={i} className=" inline-flex items-center whitespace-nowrap gap-2 py-1.5 px-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600/50">
                               <FiFile className="w-4 h-4 text-indigo-500 flex-shrink-0" />
                               <span className="text-sm text-gray-700 dark:text-gray-300 truncate">{entry.name}</span>
                             </div>
@@ -724,7 +724,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                         </div>
                         <div className="space-y-2.5 max-h-72 overflow-y-auto bg-gray-50 dark:bg-gray-700/50 p-4 rounded-xl border border-gray-200 dark:border-gray-600">
                           {splitResults.map((part, idx) => (
-                            <div key={idx} className="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
+                            <div key={idx} className=" inline-flex items-center whitespace-nowrap justify-between bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm">
                               <div className="flex items-center gap-2.5 overflow-hidden pr-2">
                                 <FiLayers className="text-indigo-600 flex-shrink-0 w-5 h-5" />
                                 <span className="text-sm font-medium text-gray-800 dark:text-gray-200 truncate">{part.name}</span>
@@ -734,7 +734,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                                 <a
                                   href={part.url}
                                   download={part.name}
-                                  className="inline-flex items-center gap-1.5 py-1.5 px-3 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-sm"
+                                  className=" inline-flex items-center whitespace-nowrap gap-1.5 py-1.5 px-3 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-sm"
                                 >
                                   <FiDownload className="w-3.5 h-3.5" /> Download
                                 </a>
@@ -763,7 +763,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                           <a
                             href={resultUrl}
                             download={resultName || `converted.${config.toFormat.toLowerCase().replace('.', '-')}`}
-                            className="flex items-center gap-2 py-4 px-8 rounded-xl font-bold text-white bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
+                            className=" inline-flex items-center whitespace-nowrap gap-2 py-4 px-8 rounded-xl font-bold text-white bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
                           >
                             <FiDownload className="w-5 h-5" />
                             Download {resultName ? resultName : config.toFormat}
@@ -774,7 +774,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
 
                     <button
                       onClick={resetConverter}
-                      className="flex items-center gap-2 py-3 px-6 rounded-xl font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
+                      className=" inline-flex items-center whitespace-nowrap gap-2 py-3 px-6 rounded-xl font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
                     >
                       Process Another File
                     </button>
@@ -794,7 +794,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
             <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm border border-gray-200 dark:border-gray-700/50 p-8 h-full">
               {step === 'upload' && !hasFiles ? (
                 <div className="flex flex-col items-center justify-center h-full text-center space-y-4 py-12">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-100 to-violet-100 dark:from-indigo-900/30 dark:to-violet-900/30 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-100 to-violet-100 dark:from-indigo-900/30 dark:to-violet-900/30 inline-flex items-center whitespace-nowrap justify-center">
                     {slug === 'protect-zip' ? (
                       <FiLock className="w-8 h-8 text-indigo-600 dark:text-indigo-400" />
                     ) : slug === 'unlock-zip-file' ? (
@@ -821,7 +821,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                     { title: 'Zero Uploads', desc: 'Your confidential archives never touch any server' },
                   ].map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 flex items-center justify-center flex-shrink-0">
+                      <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 inline-flex items-center whitespace-nowrap justify-center flex-shrink-0">
                         <FiCheck className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
                       </div>
                       <div>

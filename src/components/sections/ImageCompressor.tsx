@@ -203,7 +203,7 @@ export default function ImageCompressor() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
             >
-                <div className="inline-flex items-center gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
+                <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
                     <FiZap className="h-5 w-5 text-indigo-600" />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
                         {t('titleBadge')}
@@ -322,7 +322,7 @@ export default function ImageCompressor() {
                                 >
                                     <div className="mb-6 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
                                         {/* Image Preview */}
-                                        <div className="relative h-48 w-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center overflow-hidden">
+                                        <div className="relative h-48 w-full bg-gray-100 dark:bg-gray-800 inline-flex items-center whitespace-nowrap justify-center overflow-hidden">
                                             <img 
                                                 src={original.src} 
                                                 alt="Original Preview" 
@@ -406,7 +406,7 @@ export default function ImageCompressor() {
                             </div>
                         </div>
 
-                        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-600 min-h-[400px] flex items-center justify-center">
+                        <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-600 min-h-[400px] inline-flex items-center whitespace-nowrap justify-center">
                             <AnimatePresence mode="wait">
                                 {loading ? (
                                     <motion.div

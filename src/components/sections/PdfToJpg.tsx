@@ -102,7 +102,7 @@ export default function PdfToJpg() {
   return (
     <div className="mx-auto w-full max-w-5xl space-y-8 px-4 sm:px-6">
       <div className="text-center mb-8">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-cyan-100 dark:bg-cyan-900/30 mb-4">
+        <div className=" inline-flex items-center whitespace-nowrap justify-center w-16 h-16 rounded-full bg-cyan-100 dark:bg-cyan-900/30 mb-4">
             <ImagePlus className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
         </div>
         <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
@@ -136,7 +136,7 @@ export default function PdfToJpg() {
       )}
 
       {error && (
-        <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-4 rounded-xl flex items-center gap-3 text-red-600 dark:text-red-400">
+        <div className="bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-800 p-4 rounded-xl inline-flex items-center whitespace-nowrap gap-3 text-red-600 dark:text-red-400">
           <AlertCircle className="w-5 h-5 flex-shrink-0" />
           <p className="font-medium text-sm">{error}</p>
         </div>
@@ -167,7 +167,7 @@ export default function PdfToJpg() {
             </div>
             <button 
               onClick={resetState}
-              className="w-full sm:w-auto px-6 py-2.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-xl transition-colors flex items-center justify-center gap-2 border border-gray-200 dark:border-gray-600"
+              className="w-full sm:w-auto px-6 py-2.5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-white font-medium rounded-xl transition-colors inline-flex items-center whitespace-nowrap justify-center gap-2 border border-gray-200 dark:border-gray-600"
             >
               <RefreshCcw className="w-4 h-4" />
               {t('convertAnother')}
@@ -183,7 +183,7 @@ export default function PdfToJpg() {
                   animate={{ opacity: 1, scale: 1 }}
                   className="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm hover:shadow-lg transition-shadow group flex flex-col"
                 >
-                  <div className="relative aspect-[3/4] w-full bg-gray-100 dark:bg-gray-900 flex items-center justify-center p-4">
+                  <div className="relative aspect-[3/4] w-full bg-gray-100 dark:bg-gray-900 inline-flex items-center whitespace-nowrap justify-center p-4">
                     <img src={img.url} alt={`Page ${img.index}`} className="max-w-full max-h-full object-contain drop-shadow-md" />
                     <div className="absolute top-2 start-2 bg-black/60 backdrop-blur-md text-white text-xs font-bold px-2.5 py-1 rounded-md">
                       Page {img.index}
@@ -192,7 +192,7 @@ export default function PdfToJpg() {
                   <div className="p-4 mt-auto">
                     <button 
                       onClick={() => downloadImage(img.url, img.index)}
-                      className="w-full py-2.5 bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-900/20 dark:hover:bg-cyan-900/40 text-cyan-700 dark:text-cyan-400 font-semibold rounded-xl transition-colors flex items-center justify-center gap-2"
+                      className="w-full py-2.5 bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-900/20 dark:hover:bg-cyan-900/40 text-cyan-700 dark:text-cyan-400 font-semibold rounded-xl transition-colors inline-flex items-center whitespace-nowrap justify-center gap-2"
                     >
                       <Download className="w-4 h-4" />
                       {t('downloadZipBtn').split(' ')[0]} JPG
@@ -215,21 +215,21 @@ export default function PdfToJpg() {
         <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">{t('howToTitle')}</h3>
         <div className="space-y-4">
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">1</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step1Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step1Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">2</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step2Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step2Desc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-4 p-4 rounded-xl bg-white/40 dark:bg-gray-800/40 border border-gray-200/50 dark:border-gray-700/50">
-            <div className="flex items-center justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
+            <div className=" inline-flex items-center whitespace-nowrap justify-center w-8 h-8 rounded-full bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold shrink-0">3</div>
             <div>
               <h4 className="font-semibold text-gray-900 dark:text-white">{t('step3Title')}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">{t('step3Desc')}</p>
