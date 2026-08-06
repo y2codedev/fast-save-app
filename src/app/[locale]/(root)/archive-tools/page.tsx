@@ -92,6 +92,16 @@ export default async function ArchiveToolsPage({ params }: { params: Promise<{ l
 
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
 
+  const getT = (text: string) => {
+    if (!text) return text;
+    const key = text.replace(/\./g, '_');
+    try {
+      if (tHub.has(key)) return tHub(key);
+      if (tHub.has(text)) return tHub(text);
+    } catch {}
+    return text;
+  };
+
   // Group archive tools
   const organizeTools = CATEGORY_TOOLS.archive.slice(0, 8);
   const convertToZip = CATEGORY_TOOLS.archive.slice(8);
@@ -143,14 +153,14 @@ const howToSteps = [
                 <div>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                      {tool.name}
+                      {getT(tool.name)}
                     </h3>
                     <span className="w-8 h-8 flex items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white dark:group-hover:bg-indigo-500 transition-all duration-300">
                       →
                     </span>
                   </div>
                   <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {tool.desc}
+                    {getT(tool.desc)}
                   </p>
                 </div>
               </Link>

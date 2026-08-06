@@ -83,38 +83,27 @@ function PdfToDocxConverter() {
           const avgFontSize = words[0]?.fontSize || 12;
           const isLineBold = words[0]?.isBold || false;
 
-          if (!lineText.trim()) continue;
+          // Filter out invalid XML control characters which corrupt MS Word DOCX
+          const cleanText = lineText.replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F-\x9F]/g, '');
+          if (!cleanText.trim()) continue;
 
-          if (avgFontSize >= 22) {
-            docChildren.push(
-              new Paragraph({
-                text: lineText,
-                heading: HeadingLevel.HEADING_1,
-                spacing: { before: 240, after: 120 },
-              })
-            );
-          } else if (avgFontSize >= 16) {
-            docChildren.push(
-              new Paragraph({
-                text: lineText,
-                heading: HeadingLevel.HEADING_2,
-                spacing: { before: 180, after: 80 },
-              })
-            );
-          } else {
-            docChildren.push(
-              new Paragraph({
-                children: [
-                  new TextRun({
-                    text: lineText,
-                    size: Math.min(36, Math.max(16, Math.round(avgFontSize * 2))),
-                    bold: isLineBold,
-                  }),
-                ],
-                spacing: { line: 276, after: 120 },
-              })
-            );
-          }
+          let size = Math.round(avgFontSize * 2);
+          if (size < 16) size = 16;
+          if (size > 48) size = 48;
+
+          docChildren.push(
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: cleanText,
+                  size: size,
+                  bold: isLineBold,
+                  color: "000000",
+                }),
+              ],
+              spacing: { after: 120 },
+            })
+          );
         }
 
         if (i < pdf.numPages) {

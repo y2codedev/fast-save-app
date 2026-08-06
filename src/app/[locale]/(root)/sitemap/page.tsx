@@ -80,6 +80,17 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
   
 
   const t = await getTranslations({ locale, namespace: 'Sitemap' });
+  const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
+
+  const getT = (text: string) => {
+    if (!text) return text;
+    const key = text.replace(/\./g, '_');
+    try {
+      if (tHub.has(key)) return tHub(key);
+      if (tHub.has(text)) return tHub(text);
+    } catch {}
+    return text;
+  };
 
   
 const faqs = [
@@ -123,10 +134,10 @@ const howToSteps = [
               <div key={cat.path} className="space-y-4">
                 <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
                   <h2 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-tight">
-                    {cat.name}
+                    {getT(cat.name)}
                   </h2>
                   <Link href={cat.path} className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
-                    View Category →
+                    {getT("View Category →")}
                   </Link>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -138,10 +149,10 @@ const howToSteps = [
                     >
                       <div>
                         <h3 className="text-base font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-1.5">
-                          {tool.name}
+                          {getT(tool.name)}
                         </h3>
                         <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                          {tool.desc}
+                          {getT(tool.desc)}
                         </p>
                       </div>
                     </Link>
@@ -152,7 +163,7 @@ const howToSteps = [
 
             <div className="space-y-4 pt-6">
               <h2 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-tight border-b border-gray-200 dark:border-gray-700 pb-3">
-                General Pages
+                {getT("General Pages")}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {staticPages.map((page) => (
@@ -163,10 +174,10 @@ const howToSteps = [
                   >
                     <div>
                       <h3 className="text-base font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-1.5">
-                        {page.name}
+                        {getT(page.name)}
                       </h3>
                       <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                        {page.desc}
+                        {getT(page.desc)}
                       </p>
                     </div>
                   </Link>

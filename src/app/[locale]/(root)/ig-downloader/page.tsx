@@ -96,6 +96,8 @@ const howToSteps = [
         <div className="flex flex-col space-y-6 pb-12">
           <VisualBreadcrumb items={breadcrumbItems} />
           <TopText />
+          <DownloadForm />
+          <DownloadSteps />
           <ToolContentSection
             toolName={t('title')}
             introduction={

@@ -13,6 +13,7 @@ export function useGetT() {
     if (locale === 'en') return key;
 
     const namespaces = [
+      messages?.HomeSEO,
       messages?.ToolContent,
       messages?.RelatedTools,
       messages?.Navigation,
