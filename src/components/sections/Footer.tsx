@@ -55,7 +55,7 @@ const Footer = ({
               </div>
             </Link>
             <p className="text-sm text-gray-500 dark:text-gray-400 md:ms-4">
-              &copy; {year} ConvertAllNow {t('All rights reserved.')}
+              &copy; {year} ConvertAllNow {t('All rights reserved')}
             </p>
           </div>
 

@@ -22,7 +22,7 @@ export default function DownloadForm() {
     setIsLoading(true);
 
     if (!url) {
-      Toast('error', t('Please enter a URL.'));
+      Toast('error', t('Please enter a URL'));
       setIsLoading(false);
       return;
     }
@@ -136,7 +136,7 @@ export default function DownloadForm() {
                 : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30 hover:-translate-y-1'
               }`}
             >
-              {isLoading ? t('Processing...') : t('Download')}
+              {isLoading ? t('Processing') : t('Download')}
               {!isLoading && <Download className="h-5 w-5" />}
             </button>
           </motion.form>

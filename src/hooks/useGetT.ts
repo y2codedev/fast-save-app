@@ -38,7 +38,7 @@ export function useGetT() {
     const noEllipsis = clean.replace(/\.\.\.$/, '');
     const withEllipsis = noEllipsis + '...';
 
-    const candidates = [
+    const initialCandidates = [
       key,
       clean,
       noDot,
@@ -50,6 +50,14 @@ export function useGetT() {
       withEllipsis,
     ];
 
+    const candidates = Array.from(
+      new Set([
+        ...initialCandidates,
+        ...initialCandidates.map((c) => (typeof c === 'string' ? c.replace(/\./g, '_') : c)),
+        ...initialCandidates.map((c) => (typeof c === 'string' ? c.replace(/\./g, '') : c)),
+      ])
+    );
+
     for (const ns of namespaces) {
       if (!ns || typeof ns !== 'object') continue;
       for (const cand of candidates) {
@@ -60,6 +68,8 @@ export function useGetT() {
     }
 
     try {
+      const safeKey = typeof key === 'string' ? key.replace(/\./g, '_') : key;
+      if (tContent.has(safeKey)) return tContent(safeKey);
       if (tContent.has(key)) return tContent(key);
     } catch {
       // Ignore Next-Intl dot splitting or missing key throw

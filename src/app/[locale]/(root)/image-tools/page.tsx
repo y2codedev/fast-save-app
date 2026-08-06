@@ -129,7 +129,29 @@ const howToSteps = [
       >
         <div className="flex flex-col space-y-6 pb-12">
           <VisualBreadcrumb items={breadcrumbItems} />
-          <FAQSchema />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2 pb-6">
+            {CATEGORY_TOOLS.image?.map((tool) => (
+              <Link
+                key={tool.path}
+                href={tool.path}
+                className="group p-6 bg-white dark:bg-gray-800/80 rounded-2xl border border-gray-200/80 dark:border-gray-700/50 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                      {tool.name}
+                    </h3>
+                    <span className="w-8 h-8 flex items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white dark:group-hover:bg-indigo-500 transition-all duration-300">
+                      →
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                    {tool.desc}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
           <ToolContentSection
             toolName={title}
             introduction={

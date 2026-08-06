@@ -118,7 +118,62 @@ const howToSteps = [
       >
         <div className="flex flex-col space-y-6 pb-12">
           <VisualBreadcrumb items={breadcrumbItems} />
-          <BreadcrumbSchema />
+          <div className="space-y-12 pt-2 pb-8">
+            {categories.map((cat) => (
+              <div key={cat.path} className="space-y-4">
+                <div className="flex items-center justify-between border-b border-gray-200 dark:border-gray-700 pb-3">
+                  <h2 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+                    {cat.name}
+                  </h2>
+                  <Link href={cat.path} className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:underline">
+                    View Category →
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {cat.tools?.map((tool) => (
+                    <Link
+                      key={tool.path}
+                      href={tool.path}
+                      className="group p-5 bg-white dark:bg-gray-800/80 rounded-xl border border-gray-200/80 dark:border-gray-700/50 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 flex flex-col justify-between"
+                    >
+                      <div>
+                        <h3 className="text-base font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-1.5">
+                          {tool.name}
+                        </h3>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                          {tool.desc}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+
+            <div className="space-y-4 pt-6">
+              <h2 className="text-xl font-extrabold text-gray-900 dark:text-white tracking-tight border-b border-gray-200 dark:border-gray-700 pb-3">
+                General Pages
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                {staticPages.map((page) => (
+                  <Link
+                    key={page.path}
+                    href={page.path}
+                    className="group p-5 bg-white dark:bg-gray-800/80 rounded-xl border border-gray-200/80 dark:border-gray-700/50 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 flex flex-col justify-between"
+                  >
+                    <div>
+                      <h3 className="text-base font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors mb-1.5">
+                        {page.name}
+                      </h3>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                        {page.desc}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
           <ToolContentSection
             toolName={t('title')}
             introduction={

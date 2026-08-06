@@ -7,13 +7,15 @@ function nestMessages(messages: any) {
   const result: any = {};
   for (const [key, value] of Object.entries(messages)) {
     if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-      result[key] = nestMessages(value);
+      const safeNamespaceKey = key.includes('.') ? key.replace(/\./g, '_') : key;
+      result[safeNamespaceKey] = nestMessages(value);
     } else {
       // Only nest keys that are valid short dot-separated identifiers (e.g. "Index.title")
       const isSimpleIdentifierKey = /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(key);
 
       if (!isSimpleIdentifierKey) {
-        result[key] = value;
+        const safeKey = key.includes('.') ? key.replace(/\./g, '_') : key;
+        result[safeKey] = value;
       } else {
         const parts = key.split('.');
         let current = result;
@@ -34,7 +36,8 @@ function nestMessages(messages: any) {
         if (canNest && typeof current === 'object' && current !== null) {
           current[parts[parts.length - 1]] = value;
         } else {
-          result[key] = value;
+          const safeKey = key.includes('.') ? key.replace(/\./g, '_') : key;
+          result[safeKey] = value;
         }
       }
     }
