@@ -1,15 +1,11 @@
-import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
-import HowToSchema from '@/components/seo/HowToSchema';
-import FAQSchema from '@/components/seo/FAQSchema';
 import WebPageSchema from '@/components/seo/WebPageSchema';
-import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
-import ToolContentSection from '@/components/sections/ToolContentSection';
 import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
-import { getCanonicalUrl, getAlternateLanguages, CATEGORY_TOOLS, RELATED_TOOLS } from '@/lib/seo';
+import { getCanonicalUrl, getAlternateLanguages, CATEGORY_TOOLS } from '@/lib/seo';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
+import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
@@ -17,7 +13,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const description = 'Browse all free online tools and pages on ConvertAllNow: PDF tools, image tools, video tools, archive tools, and more.';
 
   return {
-    title, description,
+    title,
+    description,
     robots: { index: true, follow: true },
     alternates: {
       canonical: getCanonicalUrl(locale, '/sitemap'),
@@ -69,81 +66,105 @@ const staticPages = [
   { name: 'Terms of Service', path: '/terms', desc: 'Terms and conditions for using ConvertAllNow' },
 ];
 
-import { getTranslations } from 'next-intl/server';
-
 export default async function SitemapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
-  
-  
-
   const t = await getTranslations({ locale, namespace: 'Sitemap' });
-
-  
-const faqs = [
-  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
-  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
-  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
-  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
-  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
-];
-
-const howToSteps = [
-  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
-  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
-  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
-];
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Sitemap', href: '/sitemap' },
   ];
-  const relatedTools = RELATED_TOOLS['sitemap'] || [];
 
   return (
     <>
-      
-      <HowToSchema name={`How to ${t('title')}`} description={t('description')} steps={howToSteps} totalTime="PT1M" />
-      <FAQSchema faqs={faqs} />
-      <WebPageSchema title={t('title')} description={t('description')} path="/sitemap" locale={locale} breadcrumb={breadcrumbItems} />
+      <WebPageSchema
+        title={t('title')}
+        description={t('subtitle')}
+        path="/sitemap"
+        locale={locale}
+        breadcrumb={breadcrumbItems}
+      />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <ToolLayoutWithAds
-        relatedTools={relatedTools}
-        relatedToolsTitle="Related Tools"
-        categoryName="Online Tools"
-        categoryPath="/"
-      >
-        <div className="flex flex-col space-y-6 pb-12">
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-12">
           <VisualBreadcrumb items={breadcrumbItems} />
-          <BreadcrumbSchema />
-          <ToolContentSection
-            toolName={t('title')}
-            introduction={
-              <>
-                <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
-                </p>
-                <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
-                </p>
-              </>
-            }
-            features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
-            ]}
-            howToSteps={howToSteps}
-            faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
-          />
+
+          <div className="text-center space-y-4">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+              {t('title')}
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+              {t('subtitle')}
+            </p>
+          </div>
+
+          {/* General Pages Section */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6 sm:p-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              {t('generalPages')}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {staticPages.map((page) => (
+                <Link
+                  key={page.path}
+                  href={page.path}
+                  className="group flex flex-col justify-between p-4 rounded-xl border border-gray-100 dark:border-gray-800 hover:border-blue-500/30 hover:bg-blue-50/30 dark:hover:bg-blue-900/10 transition duration-200"
+                >
+                  <div className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition">
+                    {page.name}
+                  </div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    {page.desc}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Tool Categories & Links */}
+          <div className="space-y-10">
+            {categories.map((cat) => (
+              <div
+                key={cat.path}
+                className={`rounded-2xl border ${cat.border} ${cat.bg} p-6 sm:p-8 transition duration-300`}
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                  <h2 className={`text-2xl font-bold ${cat.color}`}>
+                    {cat.name}
+                  </h2>
+                  <Link
+                    href={cat.path}
+                    className={`inline-flex items-center gap-1 text-sm font-semibold ${cat.color} hover:underline`}
+                  >
+                    {t('viewCategory')}
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {cat.tools.map((tool) => (
+                    <Link
+                      key={tool.path}
+                      href={tool.path}
+                      className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm p-4 rounded-xl border border-gray-200/60 dark:border-gray-800 hover:shadow-md hover:scale-[1.02] transition duration-200 flex flex-col justify-between"
+                    >
+                      <div>
+                        <div className="font-semibold text-gray-900 dark:text-white text-sm">
+                          {tool.name}
+                        </div>
+                        {tool.desc && (
+                          <div className="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">
+                            {tool.desc}
+                          </div>
+                        )}
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </ToolLayoutWithAds>
+      </div>
     </>
   );
 }

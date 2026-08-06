@@ -84,81 +84,85 @@ const categorySchema = {
 
 export default async function ArchiveToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
-  
-  
-
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
-
-  // Group archive tools
-  const organizeTools = CATEGORY_TOOLS.archive.slice(0, 8);
-  const convertToZip = CATEGORY_TOOLS.archive.slice(8);
-
-  
-const faqs = [
-  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
-  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
-  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
-  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
-  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
-];
-
-const howToSteps = [
-  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
-  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
-  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
-];
+  const title = tHub('archiveTitle');
+  const subtitle = tHub('archiveSubtitle');
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Archive Tools', href: '/archive-tools' },
+    { name: 'Archive & ZIP Tools', href: '/archive-tools' },
   ];
-  const relatedTools = RELATED_TOOLS['archive-tools'] || [];
 
   return (
     <>
-      
-      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(categorySchema) }} />
       <FAQSchema faqs={faqs} />
-      <WebPageSchema title={title} description={description} path="/archive-tools" locale={locale} breadcrumb={breadcrumbItems} />
+      <WebPageSchema title={title} description={subtitle} path="/archive-tools" locale={locale} breadcrumb={breadcrumbItems} />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <ToolLayoutWithAds
-        relatedTools={relatedTools}
-        relatedToolsTitle="Related Tools"
-        categoryName="Online Tools"
-        categoryPath="/"
-      >
-        <div className="flex flex-col space-y-6 pb-12">
+      <div className="min-h-screen bg-gradient-to-b from-orange-50/40 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-12">
           <VisualBreadcrumb items={breadcrumbItems} />
-          <FAQSchema />
-          <ToolContentSection
-            toolName={title}
-            introduction={
-              <>
-                <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
-                </p>
-                <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
-                </p>
-              </>
-            }
-            features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
-            ]}
-            howToSteps={howToSteps}
-            faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
-          />
+
+          {/* Hero Section */}
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center p-3 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-2xl mb-2">
+              <ArchiveBoxIcon className="w-8 h-8" />
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+              {title}
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 leading-relaxed">
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Tools Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {CATEGORY_TOOLS.archive.map((tool) => (
+              <Link
+                key={tool.path}
+                href={tool.path}
+                className="group relative bg-white dark:bg-gray-800/80 p-6 rounded-2xl border border-gray-200 dark:border-gray-700/60 hover:border-orange-500/50 dark:hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/5 dark:hover:shadow-orange-500/10 transition-all duration-300 flex flex-col justify-between"
+              >
+                <div className="space-y-3">
+                  <div className="font-bold text-xl text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                    {tool.name}
+                  </div>
+                  {tool.desc && (
+                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-normal">
+                      {tool.desc}
+                    </p>
+                  )}
+                </div>
+                <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-orange-600 dark:text-orange-400 group-hover:translate-x-1 transition-transform">
+                  <span>Open Tool</span>
+                  <ArrowRightIcon className="w-4 h-4" />
+                </div>
+              </Link>
+            ))}
+          </div>
+
+          {/* FAQs Section */}
+          <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 p-8 mt-16">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+              Frequently Asked Questions
+            </h2>
+            <div className="space-y-6">
+              {faqs.map((faq, index) => (
+                <div key={index} className="border-b border-gray-100 dark:border-gray-800 pb-6 last:border-0 last:pb-0">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-      </ToolLayoutWithAds>
+      </div>
     </>
   );
 }
