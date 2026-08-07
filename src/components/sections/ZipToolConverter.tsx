@@ -11,6 +11,7 @@ export { ZIP_TOOL_CONFIGS } from '@/lib/zip-tools';
 
 export default function ZipToolConverter({ slug }: { slug: string }) {
   const t = useTranslations('Navigation');
+  const tCommon = useTranslations('CommonContent');
   const config = ZIP_TOOL_CONFIGS[slug];
   const [file, setFile] = useState<File | null>(null);
   const [files, setFiles] = useState<File[]>([]);
@@ -159,7 +160,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
           const fileList = Object.keys(zip.files).map((name) => ({
             name,
             dir: zip.files[name].dir,
-            size: zip.files[name]._data?.uncompressedSize || 0,
+            size: (zip.files[name] as any)._data?.uncompressedSize || 0,
           }));
           setResultUrl(JSON.stringify(fileList));
           setStep('complete');
@@ -374,7 +375,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
               <FiArchive className="h-5 w-5 text-indigo-600" />
             )}
             <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              {config.toolName}
+              {t(config.toolName)}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6 tracking-tight">
@@ -382,7 +383,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
             <span className="text-indigo-600 dark:text-indigo-400">to {config.toFormat}</span>
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {config.description}
+            {t(config.description)}
           </p>
         </motion.div>
 
@@ -396,9 +397,9 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
           <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
-                { s: 'upload', label: 'Upload', icon: FiUpload },
-                { s: 'processing', label: 'Process', icon: FiArchive },
-                { s: 'complete', label: 'Download', icon: FiDownload },
+                { s: 'upload', label: tCommon('ztcUpload'), icon: FiUpload },
+                { s: 'processing', label: tCommon('ztcProcess'), icon: FiArchive },
+                { s: 'complete', label: tCommon('ztcDownload'), icon: FiDownload },
               ].map(({ s, label, icon: Icon }, index) => (
                 <div key={s} className="flex items-center gap-4">
                   <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
@@ -458,7 +459,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                     {/* Drop Zone */}
                     <div className="mb-6">
                       <label className="block sm:text-sm text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">
-                        {isMultiFile ? 'Upload Files' : `Upload ${config.fromFormat} File`}
+                        {isMultiFile ? tCommon('ztcUploadFiles') : tCommon('ztcUploadFormatFile', { format: config.fromFormat })}
                       </label>
                       <div
                         {...getRootProps()}
@@ -473,7 +474,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                           <p className="text-sm text-gray-500 dark:text-gray-400">
                             {isMultiFile && files.length > 0 ? (
                               <span className="font-medium text-indigo-600 dark:text-indigo-400">
-                                {files.length} file(s) selected
+                                {tCommon('ztcFilesSelected', { count: files.length })}
                               </span>
                             ) : file ? (
                               <span className="font-medium text-indigo-600 dark:text-indigo-400 truncate max-w-xs">
@@ -481,13 +482,13 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                               </span>
                             ) : (
                               <>
-                                <span className="font-medium text-gray-700 dark:text-gray-300">Drag & drop files or</span>{' '}
-                                <span className="text-indigo-600 dark:text-indigo-400 underline">browse</span>
+                                <span className="font-medium text-gray-700 dark:text-gray-300">{tCommon('ztcDragDrop')}</span>{' '}
+                                <span className="text-indigo-600 dark:text-indigo-400 underline">{tCommon('ztcBrowse')}</span>
                               </>
                             )}
                           </p>
                           <p className="text-xs text-gray-400 dark:text-gray-500">
-                            Supported format: {config.fromFormat} (Max 100MB)
+                            {tCommon('ztcSupported', { format: config.fromFormat })}
                           </p>
                         </div>
                       </div>
@@ -630,16 +631,16 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                       >
                         <FiArchive className="w-5 h-5" />
                         {slug === 'view-zip'
-                          ? 'View Archive Contents'
+                          ? tCommon('ztcViewArchive')
                           : slug === 'protect-zip'
-                            ? 'Encrypt & Save ZIP'
+                            ? tCommon('ztcEncryptSave')
                             : slug === 'unlock-zip-file'
-                              ? 'Decrypt & Unlock ZIP'
+                              ? tCommon('ztcDecryptUnlock')
                               : slug === 'split-zip'
-                                ? 'Split ZIP into Parts'
+                                ? tCommon('ztcSplitParts')
                                 : slug === 'edit-zip'
-                                  ? 'Save Modified ZIP'
-                                  : `Convert to ${config.toFormat}`}
+                                  ? tCommon('ztcSaveModified')
+                                  : tCommon('ztcConvertTo', { format: config.toFormat })}
                       </button>
                       {hasFiles && (
                         <button
@@ -647,7 +648,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                           className=" inline-flex items-center whitespace-nowrap justify-center gap-2 py-4 px-6 rounded-xl font-bold text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
                         >
                           <FiUpload className="w-5 h-5" />
-                          Choose Different File
+                          {tCommon('ztcChooseDifferent')}
                         </button>
                       )}
                     </div>
@@ -776,7 +777,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                       onClick={resetConverter}
                       className=" inline-flex items-center whitespace-nowrap gap-2 py-3 px-6 rounded-xl font-medium text-gray-600 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 cursor-pointer"
                     >
-                      Process Another File
+                      {tCommon('ztcProcessAnother')}
                     </button>
                   </motion.div>
                 )}
@@ -806,19 +807,19 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                     )}
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Upload to Start
+                    {tCommon('ztcUploadToStart')}
                   </h3>
                   <p className="text-sm text-gray-500 dark:text-gray-400">
-                    Your converted file will appear here
+                    {tCommon('ztcConvertedAppear')}
                   </p>
                 </div>
               ) : (
                 <div className="space-y-6">
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Features</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{tCommon('ztcFeatures')}</h3>
                   {[
-                    { title: 'Lightning Fast', desc: 'Powered by advanced WebAssembly engine' },
-                    { title: '100% Private', desc: 'Files processed locally inside your browser' },
-                    { title: 'Zero Uploads', desc: 'Your confidential archives never touch any server' },
+                    { title: tCommon('ztcLightning'), desc: tCommon('ztcLightningDesc') },
+                    { title: tCommon('ztcPrivate'), desc: tCommon('ztcPrivateDesc') },
+                    { title: tCommon('ztcZero'), desc: tCommon('ztcZeroDesc') },
                   ].map((feature, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <div className="w-8 h-8 rounded-lg bg-indigo-50 dark:bg-indigo-900/30 inline-flex items-center whitespace-nowrap justify-center flex-shrink-0">
@@ -832,12 +833,12 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                   ))}
 
                   <div className="mt-8 p-4 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-indigo-900/20 dark:to-violet-900/20 rounded-xl border border-indigo-100 dark:border-indigo-800/50">
-                    <p className="text-xs font-medium text-indigo-700 dark:text-indigo-300">Privacy & Security Guarantee:</p>
+                    <p className="text-xs font-medium text-indigo-700 dark:text-indigo-300">{tCommon('ztcPrivacyGuarantee')}</p>
                     <ul className="mt-2 space-y-1.5 text-xs text-indigo-600 dark:text-indigo-400">
-                      <li>• Max recommended file size: 100MB</li>
-                      <li>• All processing runs completely offline in browser</li>
-                      <li>• No passwords or data are sent over the internet</li>
-                      <li>• Virtual memory is wiped immediately after download</li>
+                      <li>• {tCommon('ztcMaxRec')}</li>
+                      <li>• {tCommon('ztcOffline')}</li>
+                      <li>• {tCommon('ztcNoPass')}</li>
+                      <li>• {tCommon('ztcMemWipe')}</li>
                     </ul>
                   </div>
                 </div>

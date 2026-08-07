@@ -1,10 +1,21 @@
 'use client';
+'use client';
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { useGetT } from '@/hooks/useGetT';
 import { FiUpload, FiDownload, FiCheck, FiFile, FiArchive, FiX, FiShield, FiAlertCircle, FiLoader } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone, FileRejection } from 'react-dropzone';
-import type { ConversionStage, WorkerInputMessage, WorkerOutputMessage } from '@/workers/archive-converter.worker';
+import type { WorkerInputMessage, WorkerOutputMessage } from '@/workers/archive-converter.worker';
+
+export type ConversionStage = 
+  | 'Loading converter'
+  | 'Reading ZIP'
+  | 'Extracting files'
+  | 'Creating 7Z archive'
+  | 'Preparing download'
+  | 'Completed'
+  | string;
 
 const STAGES: ConversionStage[] = [
   'Loading converter',
@@ -16,6 +27,7 @@ const STAGES: ConversionStage[] = [
 ];
 
 export default function ArchiveConverter(): React.ReactElement {
+  const getT = useGetT();
   const [file, setFile] = useState<File | null>(null);
   const [step, setStep] = useState<'upload' | 'processing' | 'complete'>('upload');
   const [error, setError] = useState<string | null>(null);
@@ -80,7 +92,7 @@ export default function ArchiveConverter(): React.ReactElement {
 
       // Validate ZIP format extension and basic characteristics
       if (!acceptedFile.name.toLowerCase().endsWith('.zip') && acceptedFile.type !== 'application/zip' && acceptedFile.type !== 'application/x-zip-compressed') {
-        setError('Wrong file format: Please select a valid .zip file.');
+        setError(getT('Wrong file format: Please select a valid .zip file.'));
         return;
       }
 
@@ -102,9 +114,9 @@ export default function ArchiveConverter(): React.ReactElement {
       if (fileRejections.length > 0) {
         const rejection = fileRejections[0];
         if (rejection.errors.some(e => e.code === 'file-too-large')) {
-          setError(`File exceeds maximum allowed size of ${maxFileSizeMB} MB for your device.`);
+          setError(`${getT('File exceeds maximum allowed size of')} ${maxFileSizeMB} MB ${getT('for your device.')}`);
         } else {
-          setError('Wrong file format: Please select a valid .zip archive.');
+          setError(getT('Wrong file format: Please select a valid .zip archive.'));
         }
         return;
       }
@@ -141,7 +153,7 @@ export default function ArchiveConverter(): React.ReactElement {
   const handleConvert = async (): Promise<void> => {
     if (!file) return;
     if (!isBrowserSupported) {
-      setError('Your browser does not support browser-based archive conversion. Please update your browser and try again.');
+      setError('{getT("Your browser does not support browser-based archive conversion. Please update your browser and try again.")}');
       return;
     }
 
@@ -173,14 +185,14 @@ export default function ArchiveConverter(): React.ReactElement {
           // Terminate worker immediately after task completes to release WASM memory
           terminateWorker();
         } else if (data.type === 'error') {
-          setError(data.message || 'An error occurred during conversion.');
+          setError(data.message || getT('An error occurred during conversion.'));
           setStep('upload');
           terminateWorker();
         }
       };
 
       worker.onerror = () => {
-        setError('An unexpected error occurred during worker execution. Please try again.');
+        setError(getT('An unexpected error occurred during worker execution. Please try again.'));
         setStep('upload');
         terminateWorker();
       };
@@ -197,7 +209,7 @@ export default function ArchiveConverter(): React.ReactElement {
     } catch (err: unknown) {
       terminateWorker();
       const msg = err instanceof Error ? err.message : String(err);
-      setError(`Failed to initiate conversion: ${msg}`);
+      setError(`${getT('Failed to initiate conversion:')} ${msg}`);
       setStep('upload');
     }
   };
@@ -238,16 +250,16 @@ export default function ArchiveConverter(): React.ReactElement {
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-5">
-            Convert ZIP <span className="text-indigo-600 dark:text-indigo-400">to 7Z</span>
+            {getT("Convert ZIP to 7Z")}
           </h1>
           <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-6">
-            Convert ZIP archives to the highly efficient 7Z compression format without uploading anything to a server.
+            {getT("Convert ZIP archives to the highly efficient 7Z compression format without uploading anything to a server.")}
           </p>
 
           {/* Prominent Privacy Message */}
           <div className=" inline-flex items-center whitespace-nowrap gap-2.5 px-6 py-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-950 dark:text-indigo-200 text-sm sm:text-base font-medium shadow-sm">
             <FiShield className="w-5 h-5 flex-shrink-0 text-indigo-600 dark:text-indigo-400" />
-            <span>Your files never leave your device. Conversion happens entirely inside your browser.</span>
+            <span>{getT("Your files never leave your device. Conversion happens entirely inside your browser.")}</span>
           </div>
         </motion.div>
 
@@ -275,9 +287,9 @@ export default function ArchiveConverter(): React.ReactElement {
           <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-gray-200 dark:border-gray-700/50">
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
               {[
-                { s: 'upload', label: 'Select ZIP', icon: FiUpload },
-                { s: 'processing', label: 'Convert to 7Z', icon: FiArchive },
-                { s: 'complete', label: 'Download', icon: FiDownload },
+                { s: 'upload', label: getT('Select ZIP'), icon: FiUpload },
+                { s: 'processing', label: getT('Convert to 7Z'), icon: FiArchive },
+                { s: 'complete', label: getT('Download'), icon: FiDownload },
               ].map(({ s, label, icon: Icon }, index) => (
                 <div key={s} className="flex items-center gap-4">
                   <div
@@ -342,7 +354,7 @@ export default function ArchiveConverter(): React.ReactElement {
                   >
                     <div>
                       <label className="block sm:text-sm text-xs font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wider">
-                        Upload ZIP Archive
+                        {getT("Upload ZIP Archive")}
                       </label>
                       <div
                         {...getRootProps()}
@@ -372,13 +384,13 @@ export default function ArchiveConverter(): React.ReactElement {
                           ) : (
                             <div className="space-y-1">
                               <p className="text-base font-semibold text-gray-800 dark:text-gray-200">
-                                Drag & drop a .zip file here, or{' '}
+                                {getT("Drag & drop a .zip file here, or")}{' '}
                                 <span className="text-indigo-600 dark:text-indigo-400 underline hover:text-indigo-700 dark:hover:text-indigo-300">
                                   browse
                                 </span>
                               </p>
                               <p className="text-xs text-gray-400 dark:text-gray-500">
-                                Max size: {maxFileSizeMB} MB ({isMobile ? 'Mobile' : 'Desktop'})
+                                {getT('Max size:')} {maxFileSizeMB} MB ({isMobile ? getT('Mobile') : getT('Desktop')})
                               </p>
                             </div>
                           )}
@@ -493,7 +505,7 @@ export default function ArchiveConverter(): React.ReactElement {
                         {currentStage}...
                       </p>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
-                        Please do not close or reload this tab while conversion is in progress.
+                        {getT("Please do not close or reload this tab while conversion is in progress.")}
                       </p>
                     </div>
 
@@ -559,9 +571,9 @@ export default function ArchiveConverter(): React.ReactElement {
                     </div>
 
                     <div className="text-center space-y-1">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">Conversion Complete!</h3>
+                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{getT("Conversion Complete!")}</h3>
                       <p className="text-sm text-gray-500 dark:text-gray-400">
-                        Your file was successfully converted to 7Z archive format.
+                        {getT("Your file was successfully converted to 7Z archive format.")}
                       </p>
                     </div>
 

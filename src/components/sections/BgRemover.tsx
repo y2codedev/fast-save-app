@@ -261,7 +261,7 @@ export default function BgRemover() {
                 </div>
               </div>
 
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-600 h-96 inline-flex items-center whitespace-nowrap justify-center">
+              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-2xl border-2 border-dashed border-gray-200 dark:border-gray-600 h-96 flex w-full items-center justify-center">
                 <AnimatePresence mode="wait">
                   {isProcessing ? (
                     <motion.div

@@ -75,7 +75,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Ig Downloader', href: '/ig-downloader' },
+    { name: 'Video & Audio Tools', href: '/video-tools' },
+    { name: 'IG Downloader', href: '/ig-downloader' },
   ];
   const relatedTools = RELATED_TOOLS['ig-downloader'] || [];
 

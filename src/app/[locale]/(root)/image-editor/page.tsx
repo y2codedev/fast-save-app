@@ -73,7 +73,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Image Editor', href: '/image-editor' },
+    { name: 'Image Tools', href: '/image-tools' },
+    { name: 'Pro Image Editor', href: '/image-editor' },
   ];
   const relatedTools = RELATED_TOOLS['image-editor'] || [];
 

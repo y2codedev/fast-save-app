@@ -10,6 +10,7 @@ import ToolContentSection from '@/components/sections/ToolContentSection';
 import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
+import { getTranslations } from 'next-intl/server';
 import { getCanonicalUrl, getAlternateLanguages, getOgLocale, TOOL_KEYWORDS, RELATED_TOOLS } from '@/lib/seo';
 
 const SLUG = 'xz-to-zip';
@@ -17,8 +18,11 @@ const config = ZIP_TOOL_CONFIGS[SLUG];
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const title = `${config.toolName} Converter - Free Online Archive Tool | ConvertAllNow`;
-  const description = config.description;
+  const tNav = await getTranslations({ locale, namespace: 'Navigation' });
+  const translatedName = tNav(config.toolName) || config.toolName;
+  const translatedDesc = tNav(config.description) || config.description;
+  const title = `${translatedName} - Free Online Archive Tool | ConvertAllNow`;
+  const description = translatedDesc;
 
   return {
     title,
@@ -31,6 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'ConvertAllNow',
       locale: getOgLocale(locale),
       type: 'website',
+      images: [{ url: '/images/zip-tools.png', width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -38,6 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description,
       creator: '@convertallnow',
       site: '@convertallnow',
+      images: ['/images/zip-tools.png'],
     },
     alternates: {
       canonical: getCanonicalUrl(locale, `/${SLUG}`),
@@ -48,8 +54,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = typeof config !== "undefined" && config.toolName ? `${config.toolName} Converter` : "Online Tool";
-  const description = typeof config !== "undefined" && config.description ? config.description : "Free online tool.";
+  const tNav = await getTranslations({ locale, namespace: 'Navigation' });
+  const tCommon = await getTranslations({ locale, namespace: 'CommonContent' });
+  const translatedName = tNav(config.toolName) || config.toolName;
+  const translatedDesc = tNav(config.description) || config.description;
+  const title = typeof config !== "undefined" && config.toolName ? `${translatedName} Converter` : "Online Tool";
+  const description = typeof config !== "undefined" && config.description ? translatedDesc : "Free online tool.";
 
   
   
@@ -65,22 +75,23 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
 
   
 const faqs = [
-  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
-  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
-  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
-  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
-  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+  { question: tCommon('faq1Q'), answer: tCommon('faq1A') },
+  { question: tCommon('faq2Q'), answer: tCommon('faq2A') },
+  { question: tCommon('faq3Q'), answer: tCommon('faq3A') },
+  { question: tCommon('faq4Q'), answer: tCommon('faq4A') },
+  { question: tCommon('faq5Q'), answer: tCommon('faq5A') },
 ];
 
 const howToSteps = [
-  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
-  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
-  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+  { name: tCommon('step1Name'), text: tCommon('step1Text') },
+  { name: tCommon('step2Name'), text: tCommon('step2Text') },
+  { name: tCommon('step3Name'), text: tCommon('step3Text') },
 ];
 
   const breadcrumbItems = [
-    { name: 'Home', href: '/' },
-    { name: 'Xz To Zip', href: '/xz-to-zip' },
+    { name: tCommon('crumbHome'), href: '/' },
+    { name: tNav('Archive Tools'), href: '/archive-tools' },
+    { name: translatedName, href: `/${SLUG}` },
   ];
   const relatedTools = RELATED_TOOLS['xz-to-zip'] || [];
 
@@ -103,27 +114,27 @@ const howToSteps = [
           
           <ZipToolConverter slug={SLUG} />
           <ToolContentSection
-            toolName={title}
+            toolName={translatedName}
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  {tCommon('intro1', { toolName: translatedName })}
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  {tCommon('intro2')}
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: tCommon('feat1Title'), description: tCommon('feat1Desc') },
+              { title: tCommon('feat2Title'), description: tCommon('feat2Desc') },
+              { title: tCommon('feat3Title'), description: tCommon('feat3Desc') },
+              { title: tCommon('feat4Title'), description: tCommon('feat4Desc') },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+            supportedFormats={tCommon('supportedFmt')}
+            privacyNote={tCommon('privacyNote')}
           />
         </div>
       </ToolLayoutWithAds>

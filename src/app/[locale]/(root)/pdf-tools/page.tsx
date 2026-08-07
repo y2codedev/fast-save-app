@@ -134,7 +134,7 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Pdf Tools', href: '/pdf-tools' },
+    { name: 'PDF Tools', href: '/pdf-tools' },
   ];
   const relatedTools = RELATED_TOOLS['pdf-tools'] || [];
 

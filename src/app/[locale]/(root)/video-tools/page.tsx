@@ -119,7 +119,7 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Video Tools', href: '/video-tools' },
+    { name: 'Video & Audio Tools', href: '/video-tools' },
   ];
   const relatedTools = RELATED_TOOLS['video-tools'] || [];
 

@@ -82,7 +82,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Md Converter', href: '/md-converter' },
+    { name: 'PDF Tools', href: '/pdf-tools' },
+    { name: 'Markdown to PDF', href: '/md-converter' },
   ];
   const relatedTools = RELATED_TOOLS['md-converter'] || [];
 

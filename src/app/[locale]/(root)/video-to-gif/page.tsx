@@ -74,7 +74,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Video To Gif', href: '/video-to-gif' },
+    { name: 'Video & Audio Tools', href: '/video-tools' },
+    { name: 'Video to GIF', href: '/video-to-gif' },
   ];
   const relatedTools = RELATED_TOOLS['video-to-gif'] || [];
 

@@ -74,7 +74,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Audio', href: '/audio' },
+    { name: 'Video & Audio Tools', href: '/video-tools' },
+    { name: 'Audio Converter', href: '/audio' },
   ];
   const relatedTools = RELATED_TOOLS['audio'] || [];
 

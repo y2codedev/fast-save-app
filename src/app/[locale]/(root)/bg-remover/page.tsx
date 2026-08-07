@@ -77,7 +77,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Image Tools', href: '/image-tools' },
-    { name: t('title') },
+    { name: 'Remove Background' },
   ];
 
   const relatedTools = RELATED_TOOLS['bg-remover'] || [];

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import { useGetT } from '@/hooks/useGetT';
 import { 
   Code, Sparkles, Check, Copy, Download, Trash2, 
   RefreshCw, Play, AlertCircle, CheckCircle2, FileText, 
@@ -21,6 +22,7 @@ const SAMPLE_DATA: Record<DataFormat, string> = {
 };
 
 export default function DataFormatter() {
+  const getT = useGetT();
   const [format, setFormat] = useState<DataFormat>('JSON');
   const [targetFormat, setTargetFormat] = useState<DataFormat>('YAML');
   const [indent, setIndent] = useState<IndentSize>('2 spaces');
@@ -83,7 +85,7 @@ export default function DataFormatter() {
     return formatted.trim();
   };
 
-  // Helper: Minify XML
+  // Helper: {getT('Minify')} XML
   const minifyXml = (xmlStr: string): string => {
     return xmlStr.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ').trim();
   };
@@ -281,7 +283,7 @@ export default function DataFormatter() {
     }
   };
 
-  // Validate Action
+  // {getT('Validate')} Action
   const handleValidate = () => {
     setActiveAction('validate');
     try {
@@ -403,10 +405,10 @@ export default function DataFormatter() {
           100% Client-Side In-Browser Engine
         </div>
         <h1 className="text-3xl sm:text-5xl font-black text-gray-900 dark:text-white tracking-tight">
-          Pro <span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">Data Formatter</span> & Converter
+          {getT('Pro Data Formatter & Converter')}
         </h1>
         <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Beautify, minify, validate, and convert between JSON, XML, YAML, and CSV directly in your browser. Zero server data uploads for complete document privacy.
+          {getT('Beautify, minify, validate, and convert between JSON, XML, YAML, and CSV directly in your browser. Zero server data uploads for complete document privacy.')}
         </p>
       </div>
 
@@ -417,7 +419,7 @@ export default function DataFormatter() {
           {/* Left Controls: Format & Indent */}
           <div className="flex flex-wrap items-center justify-start gap-3 sm:gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex-shrink-0">Format:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex-shrink-0">{getT('Format:')}</span>
               <select
                 value={format}
                 onChange={(e) => {
@@ -437,7 +439,7 @@ export default function DataFormatter() {
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex-shrink-0">Indent:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 flex-shrink-0">{getT('Indent:')}</span>
               <select
                 value={indent}
                 onChange={(e) => setIndent(e.target.value as IndentSize)}
@@ -446,8 +448,8 @@ export default function DataFormatter() {
                 <option value="2 spaces">2 spaces</option>
                 <option value="4 spaces">4 spaces</option>
                 <option value="8 spaces">8 spaces</option>
-                <option value="Tab">Tab (\t)</option>
-                <option value="Compact">Compact / Minify</option>
+                <option value="Tab">{getT('Tab')} (\t)</option>
+                <option value="Compact">{getT('Compact / Minify')}</option>
               </select>
             </div>
           </div>
@@ -493,7 +495,7 @@ export default function DataFormatter() {
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 text-sm">
           {/* Conversion Toolbar */}
           <div className="flex flex-wrap items-center gap-2 bg-gray-50 dark:bg-gray-800/70 p-2 rounded-xl border border-gray-200/80 dark:border-gray-700/70 w-full sm:w-auto">
-            <span className="text-xs font-bold px-1 text-gray-700 dark:text-gray-300">Convert to:</span>
+            <span className="text-xs font-bold px-1 text-gray-700 dark:text-gray-300">{getT('Convert to:')}</span>
             <select
               value={targetFormat}
               onChange={(e) => setTargetFormat(e.target.value as DataFormat)}
@@ -509,13 +511,13 @@ export default function DataFormatter() {
               className="flex-1 sm:flex-initial inline-flex items-center whitespace-nowrap justify-center gap-1.5 px-4 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm shadow transition-all"
             >
               <RefreshCw className="h-3.5 w-3.5" />
-              Convert Now
+              {getT('Convert Now')}
             </button>
           </div>
 
           {/* View Mode Toggle */}
           <div className=" inline-flex items-center whitespace-nowrap gap-1.5 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl self-end sm:self-auto w-full sm:w-auto justify-end">
-            <span className="text-xs font-semibold text-gray-500 mr-2 pl-2 hidden lg:inline">Layout:</span>
+            <span className="text-xs font-semibold text-gray-500 mr-2 pl-2 hidden lg:inline">{getT('Layout:')}</span>
             <button
               onClick={() => setLayoutMode('split')}
               className={`flex-1 sm:flex-initial flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg font-semibold text-xs transition-all ${
@@ -526,7 +528,7 @@ export default function DataFormatter() {
               title="Side-by-side view (Recommended for large screens)"
             >
               <Columns className="w-3.5 h-3.5" />
-              Split View
+              {getT('Split View')}
             </button>
             <button
               onClick={() => setLayoutMode('stacked')}
@@ -538,7 +540,7 @@ export default function DataFormatter() {
               title="Top and bottom vertical stacked view"
             >
               <Rows className="w-3.5 h-3.5" />
-              Stacked View
+              {getT('Stacked View')}
             </button>
           </div>
         </div>
@@ -598,7 +600,7 @@ export default function DataFormatter() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onScroll={(e) => handleScroll(e, 'left')}
-              placeholder={`Paste or type your ${format} data here...\n\nTip: Press Ctrl+Shift+F (Cmd+Shift+F on Mac) to quick format`}
+              placeholder={getT(`Paste or type your data here...`)}
               className="flex-1 p-4 bg-transparent text-gray-200 font-mono text-xs sm:text-sm leading-6 resize-none focus:outline-none placeholder-gray-600 selection:bg-indigo-900/80 overflow-auto"
               spellCheck={false}
               wrap="off"
@@ -607,7 +609,7 @@ export default function DataFormatter() {
 
           {/* Footer Sample Loader */}
           <div className="px-4 py-2.5 bg-gray-950 border-t border-gray-800/80 flex flex-wrap items-center justify-between gap-2 text-xs text-gray-400">
-            <span className="font-medium">Load Sample Payload:</span>
+            <span className="font-medium">{getT('Load Sample Payload:')}</span>
             <div className="flex items-center gap-1.5">
               {(['JSON', 'XML', 'YAML', 'CSV'] as DataFormat[]).map((fmt) => (
                 <button
@@ -657,7 +659,7 @@ export default function DataFormatter() {
                 className=" inline-flex items-center whitespace-nowrap gap-1.5 px-3 py-1.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-semibold shadow transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Download className="w-3.5 h-3.5" />
-                Download File
+                {getT('Download File')}
               </button>
             </div>
           </div>
@@ -679,7 +681,7 @@ export default function DataFormatter() {
               value={output}
               onScroll={(e) => handleScroll(e, 'right')}
               readOnly
-              placeholder="Formatted or converted output will appear here automatically..."
+              placeholder={getT("Formatted or converted output will appear here automatically...")}
               className="flex-1 p-4 bg-transparent text-emerald-300 font-mono text-xs sm:text-sm leading-6 resize-none focus:outline-none placeholder-gray-600 selection:bg-emerald-900/80 overflow-auto"
               spellCheck={false}
               wrap="off"
@@ -688,8 +690,8 @@ export default function DataFormatter() {
 
           {/* Footer Guide Note */}
           <div className="px-4 py-2.5 bg-gray-950 border-t border-gray-800/80 flex flex-wrap items-center justify-between gap-2 text-[11px] text-gray-500 font-medium">
-            <span>🔒 Executing 100% locally inside your web browser engine</span>
-            <span>Shortcut: Ctrl+Shift+F</span>
+            <span>🔒 {getT('Executing 100% locally inside your web browser engine')}</span>
+            <span>{getT('Shortcut: Ctrl+Shift+F')}</span>
           </div>
         </div>
 
@@ -699,34 +701,34 @@ export default function DataFormatter() {
       <div className="mt-14 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-200/80 dark:border-gray-800 p-6 sm:p-10 shadow-sm">
         <h2 className="text-2xl sm:text-3xl font-black text-gray-900 dark:text-white mb-6 flex items-center gap-3">
           <HelpCircle className="h-7 w-7 text-indigo-500 flex-shrink-0" />
-          Why Use Our In-Browser Data Formatter & Converter?
+          {getT('Why Use Our In-Browser Data Formatter & Converter?')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
           <div className="space-y-2.5">
             <h3 className="font-bold text-gray-900 dark:text-white text-lg flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-              100% Document Privacy
+              {getT('100% Document Privacy')}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Unlike standard online JSON or YAML validators that upload your private API payloads and system secrets to remote servers, ConvertAllNow parses and transforms your data inside your local JavaScript Engine.
+              {getT('Unlike standard online JSON or YAML validators that upload your private API payloads and system secrets to remote servers, ConvertAllNow parses and transforms your data inside your local JavaScript Engine.')}
             </p>
           </div>
           <div className="space-y-2.5">
             <h3 className="font-bold text-gray-900 dark:text-white text-lg flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-              Instant Format Conversion
+              {getT('Instant Format Conversion')}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Seamlessly bridge data types across platforms. Quickly transform complex JSON payloads into clean YAML configurations for Docker and Kubernetes, or extract CSV database rows into JSON arrays with a single click.
+              {getT('Seamlessly bridge data types across platforms. Quickly transform complex JSON payloads into clean YAML configurations for Docker and Kubernetes, or extract CSV database rows into JSON arrays with a single click.')}
             </p>
           </div>
           <div className="space-y-2.5">
             <h3 className="font-bold text-gray-900 dark:text-white text-lg flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              Pro Syntax Validation
+              {getT('Pro Syntax Validation')}
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Debug broken JSON syntax, trailing commas, or improperly indented YAML configs instantly. Our real-time validator highlights syntax errors immediately so you can fix malformed structures effortlessly.
+              {getT('Debug broken JSON syntax, trailing commas, or improperly indented YAML configs instantly. Our real-time validator highlights syntax errors immediately so you can fix malformed structures effortlessly.')}
             </p>
           </div>
         </div>

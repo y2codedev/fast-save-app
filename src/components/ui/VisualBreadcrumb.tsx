@@ -3,6 +3,7 @@
 import React from 'react';
 import { ChevronRightIcon, HomeIcon } from '@heroicons/react/24/outline';
 import { Link } from '@/i18n/routing';
+import { useGetT } from '@/hooks/useGetT';
 
 interface BreadcrumbItem {
   name: string;
@@ -15,6 +16,8 @@ interface VisualBreadcrumbProps {
 }
 
 export default function VisualBreadcrumb({ items, className = '' }: VisualBreadcrumbProps) {
+  const getT = useGetT();
+
   return (
     <nav
       aria-label="Breadcrumb"
@@ -28,29 +31,33 @@ export default function VisualBreadcrumb({ items, className = '' }: VisualBreadc
             aria-label="Home"
           >
             <HomeIcon className="h-3.5 w-3.5 flex-shrink-0" width={14} height={14} style={{ width: '14px', height: '14px', minWidth: '14px', minHeight: '14px' }} />
-            <span className="hidden sm:inline">Home</span>
+            <span className="hidden sm:inline">{getT('Home')}</span>
           </Link>
         </li>
-        {items.map((item, index) => (
-          <li key={index} className="flex items-center gap-1">
-            <ChevronRightIcon className="h-3.5 w-3.5 flex-shrink-0 text-gray-400 dark:text-gray-600" width={14} height={14} style={{ width: '14px', height: '14px', minWidth: '14px', minHeight: '14px' }} />
-            {item.href ? (
-              <Link
-                href={item.href}
-                className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors truncate max-w-[160px] sm:max-w-none"
-              >
-                {item.name}
-              </Link>
-            ) : (
-              <span
-                className="text-gray-800 dark:text-gray-200 font-medium truncate max-w-[160px] sm:max-w-none"
-                aria-current="page"
-              >
-                {item.name}
-              </span>
-            )}
-          </li>
-        ))}
+        {items.map((item, index) => {
+          if ((item.name === 'Home' || item.name === getT('Home')) && item.href === '/') return null;
+          
+          return (
+            <li key={index} className="flex items-center gap-1">
+              <ChevronRightIcon className="h-3.5 w-3.5 flex-shrink-0 text-gray-400 dark:text-gray-600" width={14} height={14} style={{ width: '14px', height: '14px', minWidth: '14px', minHeight: '14px' }} />
+              {item.href ? (
+                <Link
+                  href={item.href}
+                  className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors truncate max-w-[160px] sm:max-w-none"
+                >
+                  {getT(item.name)}
+                </Link>
+              ) : (
+                <span
+                  className="text-gray-800 dark:text-gray-200 font-medium truncate max-w-[160px] sm:max-w-none"
+                  aria-current="page"
+                >
+                  {getT(item.name)}
+                </span>
+              )}
+            </li>
+          );
+        })}
       </ol>
     </nav>
   );

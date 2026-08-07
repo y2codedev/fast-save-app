@@ -89,7 +89,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Pdf To Docx', href: '/pdf-to-docx' },
+    { name: 'PDF Tools', href: '/pdf-tools' },
+    { name: 'PDF to Word', href: '/pdf-to-docx' },
   ];
   const relatedTools = RELATED_TOOLS['pdf-to-docx'] || [];
 

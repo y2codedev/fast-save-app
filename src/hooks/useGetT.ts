@@ -28,6 +28,9 @@ export function useGetT() {
       messages?.Steps,
       messages?.Form,
       messages?.Explore,
+      messages?.DataFormatter,
+      messages?.Navigation,
+      messages?.CommonContent,
     ];
 
     const clean = key.trim();

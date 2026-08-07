@@ -27,11 +27,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       siteName: 'ConvertAllNow',
       locale: getOgLocale(locale),
       type: 'website',
+      images: [{ url: '/images/word-to-pdf.png', width: 1200, height: 630, alt: title }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
+      images: ['/images/word-to-pdf.png'],
       creator: "@convertallnow",
       site: "@convertallnow",
     },
@@ -73,7 +75,8 @@ const howToSteps = [
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Word To Pdf', href: '/word-to-pdf' },
+    { name: 'PDF Tools', href: '/pdf-tools' },
+    { name: 'Word to PDF', href: '/word-to-pdf' },
   ];
   const relatedTools = RELATED_TOOLS['word-to-pdf'] || [];
 

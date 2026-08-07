@@ -77,8 +77,8 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
-    { name: 'Video Tools', href: '/video-tools' },
-    { name: t('title') },
+    { name: 'Video & Audio Tools', href: '/video-tools' },
+    { name: 'Video Compressor' },
   ];
 
   const relatedTools = RELATED_TOOLS['video-compressor'] || [];

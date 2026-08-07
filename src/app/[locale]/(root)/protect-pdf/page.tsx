@@ -76,7 +76,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'PDF Tools', href: '/pdf-tools' },
-    { name: t('title') },
+    { name: 'Protect PDF' },
   ];
 
   const relatedTools = RELATED_TOOLS['protect-pdf'] || [];

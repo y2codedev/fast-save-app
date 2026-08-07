@@ -4,8 +4,10 @@ import { useRef, useState } from "react";
 import { FiUpload, FiCode, FiDownload, FiCheck, FiFileText, FiCopy, FiEye } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDropzone } from "react-dropzone";
+import { useGetT } from "@/hooks/useGetT";
 
 export default function PdfToHtmlConverter() {
+  const getT = useGetT();
   const [isLoading, setIsLoading] = useState(false);
   const [htmlBlobURL, setHtmlBlobURL] = useState<string | null>(null);
   const [htmlCode, setHtmlCode] = useState<string>("");
@@ -252,10 +254,10 @@ ${pagesHtml.join('\n')}
             </span>
           </div>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6 tracking-tight">
-            PDF to <span className="text-indigo-600 dark:text-indigo-400">HTML Converter</span>
+            {getT('PDF to HTML Converter')}
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            Convert PDF documents into structured HTML webpages with distinct page formatting directly in your browser without uploading files.
+            {getT('Convert PDF documents into structured HTML webpages with distinct page formatting directly in your browser without uploading files.')}
           </p>
         </motion.div>
 
