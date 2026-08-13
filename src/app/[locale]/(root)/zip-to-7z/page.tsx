@@ -42,10 +42,8 @@ const FAQ_ITEMS = [
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const tNav = await getTranslations({ locale, namespace: 'Navigation' });
-  const translatedName = tNav(config.toolName) || config.toolName;
-  const translatedDesc = tNav(config.description) || config.description;
-  const title = `${translatedName} - Free Online Archive Tool | ConvertAllNow`;
-  const description = translatedDesc;
+  const title = `ZIP to 7Z Converter - Free Online Archive Tool | ConvertAllNow`;
+  const description = PAGE_DESCRIPTION;
 
   return {
     title: PAGE_TITLE,
@@ -95,13 +93,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
-  
-  
-
-
+  const tCommon = await getTranslations({ locale, namespace: 'CommonContent' });
+  const tNav = await getTranslations({ locale, namespace: 'Navigation' });
+  const title = tNav('ZIP to 7Z') || PAGE_TITLE;
+  const description = tCommon('intro1', { toolName: 'ZIP to 7Z' });
+  const translatedName = tNav('ZIP to 7Z') || 'ZIP to 7Z';
   const softwareSchema = createToolSchema({
     name: 'ZIP to 7Z Converter – Client-Side Browser Tool',
     description: PAGE_DESCRIPTION,
@@ -181,10 +177,10 @@ const howToSteps = [
               </>
             }
             features={[
-              { title: tCommon('feat1Title'), description: tCommon('feat1Desc') },
-              { title: tCommon('feat2Title'), description: tCommon('feat2Desc') },
-              { title: tCommon('feat3Title'), description: tCommon('feat3Desc') },
-              { title: tCommon('feat4Title'), description: tCommon('feat4Desc') },
+              { title: 'Browser-Based Conversion', description: 'Convert files directly in your browser without uploading to any server.' },
+              { title: 'High Compression Ratio', description: '7Z format provides superior compression compared to ZIP.' },
+              { title: 'Fast Processing', description: 'Powered by WebAssembly for near-native performance.' },
+              { title: 'Completely Free', description: 'No registration, no limits, totally free to use.' },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

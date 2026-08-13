@@ -281,7 +281,7 @@ export default function WordToHtmlConverter() {
                   >
                     <div className="mb-6">
                       <label className="block sm:text-sm text-xs font-medium text-gray-700 dark:text-gray-300 mb-3">
-                        Upload Microsoft Word File (.docx or .doc)
+                        {getT("Upload Microsoft Word File (.docx or .doc)")}
                       </label>
                       <div
                         {...getRootProps()}
@@ -294,17 +294,17 @@ export default function WordToHtmlConverter() {
                             <FiUpload className="text-xl sm:text-2xl text-white" />
                           </div>
                           <p className="text-sm text-gray-500 dark:text-gray-400">
-                            <span className="font-medium text-gray-700 dark:text-gray-300">Drag & drop your Word file or</span>{' '}
-                            <span className="text-indigo-600 dark:text-indigo-400 underline">browse</span>
+                            <span className="font-medium text-gray-700 dark:text-gray-300">{getT("Drag & drop your Word file or")}</span>{' '}
+                            <span className="text-indigo-600 dark:text-indigo-400 underline">{getT("browse")}</span>
                           </p>
                           <p className="text-xs text-gray-400 dark:text-gray-500">
-                            Supported formats: DOCX & DOC (Max 30MB)
+                            {getT("Supported formats: DOCX & DOC (Max 30MB)")}
                           </p>
                         </div>
                       </div>
                     </div>
                     <div className="text-center text-xs font-semibold text-indigo-600 dark:text-indigo-400 bg-indigo-50 dark:bg-indigo-900/20 py-2.5 px-4 rounded-xl border border-indigo-100 dark:border-indigo-800/50">
-                      ⚡ 100% Client-Side & Private • Zero Server File Storage
+                      {getT("⚡ 100% Client-Side & Private • Zero Server File Storage")}
                     </div>
                   </motion.div>
                 )}
@@ -322,7 +322,7 @@ export default function WordToHtmlConverter() {
                         <FiFile className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
                         <div className="min-w-0 flex-1">
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            Word Document Ready
+                            {getT("Word Document Ready")}
                           </p>
                           <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
                             <span className="truncate block" title={wordFile.name}>{wordFile.name}</span>
@@ -343,12 +343,12 @@ export default function WordToHtmlConverter() {
                         {isLoading ? (
                           <>
                             <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            Generating HTML...
+                            {getT("Generating HTML...")}
                           </>
                         ) : (
                           <>
                             <FiCode className="w-4 h-4" />
-                            Convert to HTML Now
+                            {getT("Convert to HTML Now")}
                           </>
                         )}
                       </button>
@@ -359,7 +359,7 @@ export default function WordToHtmlConverter() {
                         className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-bold py-3 px-4 rounded-xl text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiUpload className="w-4 h-4" />
-                        Different File
+                        {getT("Different File")}
                       </button>
                     </div>
                   </motion.div>
@@ -378,10 +378,10 @@ export default function WordToHtmlConverter() {
                         <FiCheck className="h-5 w-5 text-green-600" />
                         <div>
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            HTML Ready for Publishing!
+                            {getT("HTML Ready for Publishing!")}
                           </p>
                           <p className="text-sm text-green-700 dark:text-green-300 mt-1">
-                            Your Word document has been converted to responsive, professional HTML code.
+                            {getT("Your Word document has been converted to responsive, professional HTML code.")}
                           </p>
                         </div>
                       </div>
@@ -394,14 +394,14 @@ export default function WordToHtmlConverter() {
                         className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white font-bold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg hover:-translate-y-0.5 text-center"
                       >
                         <FiDownload className="h-5 w-5" />
-                        Download .html File
+                        {getT("Download .html File")}
                       </a>
                       <button
                         onClick={copyToClipboard}
                         className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-900/40 dark:hover:bg-indigo-900/60 text-indigo-600 dark:text-indigo-300 font-bold py-3.5 px-6 rounded-xl transition-all duration-300 cursor-pointer text-center"
                       >
                         <FiCopy className="h-5 w-5" />
-                        {copied ? "Copied to Clipboard!" : "Copy HTML Code"}
+                        {copied ? getT("Copied to Clipboard!") : getT("Copy HTML Code")}
                       </button>
                     </div>
 
@@ -409,7 +409,7 @@ export default function WordToHtmlConverter() {
                       onClick={resetConverter}
                       className="w-full inline-flex items-center whitespace-nowrap justify-center gap-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-semibold py-3 px-6 rounded-xl transition-all duration-300 cursor-pointer"
                     >
-                      Convert Another File
+                      {getT("Convert Another File")}
                     </button>
                   </motion.div>
                 )}
@@ -437,7 +437,7 @@ export default function WordToHtmlConverter() {
                             : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
                         }`}
                       >
-                        <FiEye className="w-4 h-4" /> Live Web Preview
+                        <FiEye className="w-4 h-4" /> {getT("Live Web Preview")}
                       </button>
                       <button
                         onClick={() => setActiveTab('code')}
@@ -447,7 +447,7 @@ export default function WordToHtmlConverter() {
                             : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
                         }`}
                       >
-                        <FiCode className="w-4 h-4" /> Raw HTML Source
+                        <FiCode className="w-4 h-4" /> {getT("Raw HTML Source")}
                       </button>
                     </div>
                     <span className="text-xs font-mono text-gray-400">{(htmlCode.length / 1024).toFixed(1)} KB</span>
@@ -474,9 +474,9 @@ export default function WordToHtmlConverter() {
                     <FiCode className="w-10 h-10 text-indigo-600 dark:text-indigo-400" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">Interactive Preview & Code Viewer</h3>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">{getT("Interactive Preview & Code Viewer")}</h3>
                     <p className="text-sm text-gray-500 dark:text-gray-400 max-w-sm mt-2">
-                      Once converted, you can preview your webpage layout directly here and copy the generated HTML code with one click.
+                      {getT("Once converted, you can preview your webpage layout directly here and copy the generated HTML code with one click.")}
                     </p>
                   </div>
                 </div>

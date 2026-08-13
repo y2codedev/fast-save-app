@@ -466,7 +466,17 @@
   },
   "IgDownloaderSEO": {
     "description": "Download Instagram Reels in HD with ConvertAllNow. No watermark, no login, 100% free. Save public Reels as MP4 videos in seconds.",
-    "title": "Instagram Reels Downloader - ConvertAllNow"
+    "title": "Instagram Reels Downloader - ConvertAllNow",
+    "step1Name": "Find Reel",
+    "step1Text": "Open Instagram and find the Reel you want to download.",
+    "step2Name": "Copy URL",
+    "step2Text": "Copy the Reel URL from the Instagram app or website.",
+    "step3Name": "Paste URL",
+    "step3Text": "Paste the URL into ConvertAllNow.",
+    "step4Name": "Download",
+    "step4Text": "Click the Download button to process the video.",
+    "step5Name": "Save Video",
+    "step5Text": "Save the available video to your device."
   },
   "ImageCompressor": {
     "2d": "2d",
@@ -996,7 +1006,12 @@
     "wordToPdfSubtitle": "Convert Microsoft Word documents (.docx) to professional PDF files instantaneously in your browser with zero data uploads.",
     "wordToPdfTitle": "Word to PDF Converter",
     "zeroCloudStorage": "Zero Cloud Storage",
-    "zeroCloudStorageDesc": "Confidential corporate contracts and letters stay on your machine"
+    "zeroCloudStorageDesc": "Confidential corporate contracts and letters stay on your machine",
+    "uploadDropText": "Drag & drop files or",
+    "uploadBrowseText": "browse",
+    "supportedFormat": "Supported format: PDF (Max 20MB)",
+    "readyToConvert": "Ready to Convert",
+    "chooseDifferentFile": "Choose Different File"
   },
   "PdfToDocxSEO": {
     "description": "Convert PDF documents to high-quality editable Word (DOCX) files online for free. Preserves formatting, tables, and images.",
@@ -3517,7 +3532,29 @@
   },
   "UnlockPdfSEO": {
     "description": "Remove password protection and unlock PDF files securely online for free.",
-    "title": "Unlock PDF Online - Remove Password Free - ConvertAllNow"
+    "title": "Unlock PDF Online - Remove Password Free - ConvertAllNow",
+    "faq1Q": "What types of PDF restrictions can be removed?",
+    "faq1A": "We can remove owner restrictions such as printing restrictions, copying restrictions, and editing restrictions. User password (open password) removal requires knowing the original password.",
+    "faq2Q": "Is Unlock PDF legal to use?",
+    "faq2A": "This tool is intended for use on PDFs you own or have legal permission to access. Removing restrictions from PDFs you don't own may violate copyright law or terms of service.",
+    "faq3Q": "Can I unlock a PDF without knowing the password?",
+    "faq3A": "If the PDF has an owner restriction (permission password), we can remove those restrictions. If it has a user password (open password) — required to open the file — you must know it to unlock.",
+    "faq4Q": "Are my PDF files uploaded to a server?",
+    "faq4A": "No. All unlocking is performed locally in your browser. Your PDF files never leave your device.",
+    "faq5Q": "What encryption standards are supported?",
+    "faq5A": "The tool supports 40-bit RC4, 128-bit RC4, and 128-bit AES encrypted PDFs. 256-bit AES encrypted PDFs may require the correct password.",
+    "faq6Q": "Will unlocking change the PDF content?",
+    "faq6A": "No. Only the security restrictions are removed. All text, images, formatting, and pages remain exactly as in the original.",
+    "faq7Q": "Why can't I print or copy text from my PDF?",
+    "faq7A": "The PDF creator may have applied printing and copying restrictions (owner permissions). Our Unlock PDF tool removes these restrictions while preserving all content.",
+    "step1Name": "Upload PDF",
+    "step1Text": "Click the upload area or drag and drop your password-protected PDF.",
+    "step2Name": "Enter Password (if needed)",
+    "step2Text": "If the PDF requires a password to open, enter it in the field provided.",
+    "step3Name": "Unlock",
+    "step3Text": "Click \"Unlock PDF\". Security restrictions are removed using client-side JavaScript.",
+    "step4Name": "Download Unlocked PDF",
+    "step4Text": "Download the unlocked PDF — now printable, copyable, and editable."
   },
   "VideoCompressor": {
     "@ffmpeg/ffmpeg": "@ffmpeg/ffmpeg",

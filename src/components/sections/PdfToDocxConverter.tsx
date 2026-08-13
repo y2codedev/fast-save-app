@@ -252,11 +252,11 @@ function PdfToDocxConverter() {
                       accept={{ 'application/pdf': ['.pdf'] }}
                       title={t('uploadTitle')}
                       subtitle={t('uploadDesc')}
-                      dropText="Drag & drop files or"
-                      browseText="browse"
+                      dropText={t('uploadDropText')}
+                      browseText={t('uploadBrowseText')}
                     />
                     <div className="text-center text-gray-500 dark:text-gray-400">
-                      <p>Supported format: PDF (Max 20MB)</p>
+                      <p>{t('supportedFormat')}</p>
                     </div>
                   </motion.div>
                 )}
@@ -274,7 +274,7 @@ function PdfToDocxConverter() {
                         <FiFile className="h-5 w-5 flex-shrink-0 text-green-600 mt-0.5 sm:mt-0" />
                         <div className="min-w-0 flex-1">
                           <p className="font-medium text-green-800 dark:text-green-200">
-                            Ready to Convert
+                            {t('readyToConvert')}
                           </p>
                           <div className="text-sm text-green-700 dark:text-green-300 mt-1 flex flex-col sm:flex-row sm:items-center sm:gap-1 min-w-0">
                             <span className="truncate block" title={pdfFile.name}>{pdfFile.name}</span>
@@ -308,7 +308,7 @@ function PdfToDocxConverter() {
                         className="flex-1 inline-flex items-center whitespace-nowrap justify-center gap-2 border border-transparent bg-gray-100 hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium py-2 px-4 rounded-[8px] text-sm transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
                         <FiUpload className="w-4 h-4" />
-                        Choose Different File
+                        {t('chooseDifferentFile')}
                       </button>
                     </div>
                   </motion.div>

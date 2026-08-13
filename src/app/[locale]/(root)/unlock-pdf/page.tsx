@@ -39,32 +39,32 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const faqs = [
-  { question: 'What types of PDF restrictions can be removed?', answer: 'We can remove owner restrictions such as printing restrictions, copying restrictions, and editing restrictions. User password (open password) removal requires knowing the original password.' },
-  { question: 'Is Unlock PDF legal to use?', answer: 'This tool is intended for use on PDFs you own or have legal permission to access. Removing restrictions from PDFs you don\'t own may violate copyright law or terms of service.' },
-  { question: 'Can I unlock a PDF without knowing the password?', answer: 'If the PDF has an owner restriction (permission password), we can remove those restrictions. If it has a user password (open password) — required to open the file — you must know it to unlock.' },
-  { question: 'Are my PDF files uploaded to a server?', answer: 'No. All unlocking is performed locally in your browser. Your PDF files never leave your device.' },
-  { question: 'What encryption standards are supported?', answer: 'The tool supports 40-bit RC4, 128-bit RC4, and 128-bit AES encrypted PDFs. 256-bit AES encrypted PDFs may require the correct password.' },
-  { question: 'Will unlocking change the PDF content?', answer: 'No. Only the security restrictions are removed. All text, images, formatting, and pages remain exactly as in the original.' },
-  { question: 'Why can\'t I print or copy text from my PDF?', answer: 'The PDF creator may have applied printing and copying restrictions (owner permissions). Our Unlock PDF tool removes these restrictions while preserving all content.' },
+const getFAQs = (t: any) => [
+  { question: t('faq1Q'), answer: t('faq1A') },
+  { question: t('faq2Q'), answer: t('faq2A') },
+  { question: t('faq3Q'), answer: t('faq3A') },
+  { question: t('faq4Q'), answer: t('faq4A') },
+  { question: t('faq5Q'), answer: t('faq5A') },
+  { question: t('faq6Q'), answer: t('faq6A') },
+  { question: t('faq7Q'), answer: t('faq7A') },
 ];
 
-const howToSteps = [
-  { name: 'Upload PDF', text: 'Click the upload area or drag and drop your password-protected PDF.' },
-  { name: 'Enter Password (if needed)', text: 'If the PDF requires a password to open, enter it in the field provided.' },
-  { name: 'Unlock', text: 'Click "Unlock PDF". Security restrictions are removed using client-side JavaScript.' },
-  { name: 'Download Unlocked PDF', text: 'Download the unlocked PDF — now printable, copyable, and editable.' },
+const getHowToSteps = (t: any) => [
+  { name: t('step1Name'), text: t('step1Text') },
+  { name: t('step2Name'), text: t('step2Text') },
+  { name: t('step3Name'), text: t('step3Text') },
+  { name: t('step4Name'), text: t('step4Text') },
 ];
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
   const title = "Online Tool";
   const description = "Free online tool.";
-
   
-  
-
   const t = await getTranslations({ locale, namespace: 'UnlockPdfSEO' });
+
+  const faqs = getFAQs(t);
+  const howToSteps = getHowToSteps(t);
 
   const schemaData = createToolSchema({
     name: t('title'), description: t('description'),
@@ -84,8 +84,8 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   return (
     <>
       <SchemaMarkup data={schemaData} />
-      <HowToSchema name={`How to ${t('title')}`} description={t('description')} steps={howToSteps} totalTime="PT1M" />
-      <FAQSchema faqs={faqs} />
+      <HowToSchema name={`How to ${t('title')}`} description={t('description')} steps={getHowToSteps(t)} totalTime="PT1M" />
+      <FAQSchema faqs={getFAQs(t)} />
       <WebPageSchema title={t('title')} description={t('description')} path="/unlock-pdf" locale={locale} breadcrumb={breadcrumbItems} />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
@@ -121,7 +121,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
               { title: 'Multiple Encryption Support', description: 'Handles RC4 (40-bit, 128-bit) and AES (128-bit) encryption.' },
               { title: 'Content Preserved', description: 'Only restrictions removed — all content stays identical.' },
             ]}
-            howToSteps={howToSteps}
+            howToSteps={getHowToSteps(t)}
             useCases={[
               'Unlocking PDFs you own to enable printing at a print shop',
               'Removing copy restrictions to extract quotes from research PDFs',
@@ -137,7 +137,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
               'After unlocking, consider saving with a new password if you need to maintain some security.',
               'Use our Protect PDF tool to add a new password once you\'ve made your edits.',
             ]}
-            faqs={faqs}
+            faqs={getFAQs(t)}
           />
         </div>
       </ToolLayoutWithAds>

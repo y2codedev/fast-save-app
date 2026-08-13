@@ -43,12 +43,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
   
-  
-
   const t = await getTranslations({ locale, namespace: 'IgDownloaderSEO' });
 
   const schemaData = createToolSchema({
@@ -58,26 +53,28 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
     screenshot: '/images/insta.png',
   });
 
-  
-const faqs = [
-  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
-  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
-  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
-  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
-  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
-];
+  const faqs = [
+    { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
+    { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
+    { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
+    { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
+    { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+  ];
 
-const howToSteps = [
-  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
-  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
-  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
-];
+  const howToSteps = [
+    { name: t('step1Name'), text: t('step1Text') },
+    { name: t('step2Name'), text: t('step2Text') },
+    { name: t('step3Name'), text: t('step3Text') },
+    { name: t('step4Name'), text: t('step4Text') },
+    { name: t('step5Name'), text: t('step5Text') },
+  ];
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Video & Audio Tools', href: '/video-tools' },
     { name: 'IG Downloader', href: '/ig-downloader' },
   ];
+  
   const relatedTools = RELATED_TOOLS['ig-downloader'] || [];
 
   return (

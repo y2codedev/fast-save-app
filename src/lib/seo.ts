@@ -493,13 +493,7 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Images to PDF' },
   ],
-  'word-to-pdf': [
-    { name: 'PDF to Word', path: '/pdf-to-docx', desc: 'Convert PDF to Word' },
-    { name: 'Merge PDF', path: '/merge-pdf', desc: 'Combine multiple PDFs' },
-    { name: 'Word to HTML', path: '/word-to-html', desc: 'Convert Word to HTML' },
-    { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },
-    { name: 'Markdown to PDF', path: '/md-converter', desc: 'Markdown to PDF' },
-  ],
+
   'word-to-html': [
     { name: 'Word to PDF', path: '/word-to-pdf', desc: 'Convert Word to PDF' },
     { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },

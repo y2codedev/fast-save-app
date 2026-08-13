@@ -60,16 +60,7 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
       "media utilities",
       "browser based tools",
     ],
-    icons: {
-      icon: [
-        { url: '/icon.png', type: 'image/png', sizes: '512x512' },
-        { url: '/images/icon.png', type: 'image/png', sizes: '192x192' },
-      ],
-      shortcut: '/icon.png',
-      apple: [
-        { url: '/images/icon.png', sizes: '180x180', type: 'image/png' },
-      ],
-    },
+
 
     authors: [{ name: "ConvertAllNow", url: siteUrl }],
     publisher: "ConvertAllNow",

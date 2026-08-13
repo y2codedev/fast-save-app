@@ -323,8 +323,8 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
                 : fData.slice().buffer;
               
               const cleanName = fname.replace(/^output/, baseName);
-              splitFiles.push({ name: cleanName, buffer: buf });
-              transferList.push(buf);
+              splitFiles.push({ name: cleanName, buffer: buf as ArrayBuffer });
+              transferList.push(buf as ArrayBuffer);
             }
           } catch (e) {
             console.error('Failed reading split part:', fname, e);
@@ -336,7 +336,7 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
         }
 
         self.postMessage({ type: 'status', stage: 'Completed' });
-        self.postMessage(
+        (self as any).postMessage(
           {
             type: 'complete',
             outputBuffer: splitFiles[0].buffer,
@@ -369,13 +369,13 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
 
       // Stage 6: Completed
       self.postMessage({ type: 'status', stage: 'Completed' });
-      self.postMessage(
+      (self as any).postMessage(
         {
           type: 'complete',
           outputBuffer: transferBuffer,
           outputName,
         },
-        [transferBuffer]
+        [transferBuffer as ArrayBuffer]
       );
     } finally {
       cleanVirtualFilesystem(sevenZip.FS);
