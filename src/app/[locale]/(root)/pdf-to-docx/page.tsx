@@ -116,18 +116,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  PDF to DOCX Converter is an essential free online tool that transforms your uneditable PDF documents back into fully editable Microsoft Word format. Whether you need to update a resume, edit a contract, or reuse content from a report, our tool reconstructs the document structure directly in your browser.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Unlike simple text extractors, our advanced conversion engine intelligently recognizes paragraphs, lists, tables, and images, attempting to preserve the original layout as closely as possible. Because everything runs client-side using WebAssembly, your sensitive documents are never uploaded to external servers, guaranteeing total privacy.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: 'Accurate Layout Retention', description: 'Maintains paragraphs, tables, and font styles where possible.' },
+              { title: 'Client-Side Processing', description: '100% private conversion. Your PDFs never leave your device.' },
+              { title: 'No File Size Limits', description: 'Convert large documents without cloud storage restrictions.' },
+              { title: 'Instant Download', description: 'Get your editable DOCX file immediately after local conversion.' },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

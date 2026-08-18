@@ -43,6 +43,8 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
         </header>
 
         <article className="prose dark:prose-invert prose-lg max-w-none">
+          <p className="mb-8">{t('intro')}</p>
+
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">{t('s1Title')}</h2>
             <p>{t('s1Desc')}</p>
@@ -51,7 +53,9 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
               <li>{t('s1L2')}</li>
               <li>{t('s1L3')}</li>
               <li>{t('s1L4')}</li>
+              <li>{t('s1L5')}</li>
             </ul>
+            <p className="mt-4">{t('s1Post')}</p>
           </section>
 
           <section className="mb-8">
@@ -60,9 +64,6 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
             <ul className="list-disc ps-6 mt-2 space-y-1">
               <li>{t('s2L1')}</li>
               <li>{t('s2L2')}</li>
-              <li>{t('s2L3')}</li>
-              <li>{t('s2L4')}</li>
-              <li>{t('s2L5')}</li>
             </ul>
           </section>
 
@@ -73,28 +74,46 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
               <li>{t('s3L1')}</li>
               <li>{t('s3L2')}</li>
               <li>{t('s3L3')}</li>
+              <li>{t('s3L4')}</li>
             </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">{t('s4Title')}</h2>
-            <p>
-              {t('s4Desc')}
-            </p>
+            <p>{t('s4Desc')}</p>
+            <ul className="list-disc ps-6 mt-2 space-y-1">
+              <li>{t('s4L1')}</li>
+              <li>{t('s4L2')}</li>
+            </ul>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold mb-4">{t('s5Title')}</h2>
-            <p>
-              {t('s5Desc')}
-            </p>
+            <p>{t('s5Desc')}</p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">{t('s6Title')}</h2>
+            <p>{t('s6Desc')}</p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">{t('s7Title')}</h2>
+            <p>{t('s7Desc')}</p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold mb-4">{t('s8Title')}</h2>
+            <p>{t('s8Desc')}</p>
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold mb-4">{t('s6Title')}</h2>
-            <p>
-              {t('s6Desc')}
-            </p>
+            <h2 className="text-2xl font-semibold mb-4">{t('s9Title')}</h2>
+            <p>{t('s9Desc')}</p>
+            <ul className="list-disc ps-6 mt-2 space-y-1">
+              <li>{t('s9L1')}</li>
+              <li>{t('s9L2')}</li>
+            </ul>
           </section>
         </article>
       </main>

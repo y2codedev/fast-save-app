@@ -171,18 +171,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  The Archive Tools Hub offers secure, in-browser utilities for extracting and creating compressed archive files. Whether you need to unzip a downloaded folder, open a RAR file on a Mac, or compress multiple documents into a single ZIP for sharing, our tools make archive management effortless.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Traditionally, handling formats like 7Z or RAR required downloading specialized third-party software. Our platform uses WebAssembly ports of robust unarchiving libraries to extract files directly in your browser's memory. Your files are never uploaded, ensuring complete privacy for your archived data.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Broad Compatibility", description: "Extract ZIP, RAR, 7Z, TAR, and GZ files instantly." },
+              { title: "No Software Needed", description: "Manage archives directly in the browser without installing apps." },
+              { title: "Zero Uploads", description: "Files are extracted locally in memory for absolute privacy." },
+              { title: "Fast Compression", description: "Quickly bundle multiple files into a single ZIP for easy sharing." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

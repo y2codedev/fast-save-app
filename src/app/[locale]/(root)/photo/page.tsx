@@ -100,18 +100,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  The Photo Utilities collection is designed for quick, everyday enhancements and manipulations of your photographs. Whether you need to quickly resize an image for a passport application, crop a photo for a profile picture, or apply a quick filter, these tools are built for speed and simplicity.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  All photo processing relies on your device's native browser capabilities. This ensures that your personal memories and sensitive photographs are kept strictly on your device. Enjoy the convenience of cloud-like tools with the security of offline software.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Quick Enhancements", description: "Apply standard fixes and filters in just a few clicks." },
+              { title: "No Registration", description: "Access all photo tools immediately without making an account." },
+              { title: "100% Private", description: "Your personal photos are never transmitted over the internet." },
+              { title: "Mobile Friendly", description: "Perfectly optimized for quick edits on smartphones and tablets." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

@@ -102,18 +102,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Word to PDF Converter is a secure, fast, and completely free tool to transform your Microsoft Word documents into universally compatible PDF files. Converting to PDF ensures that your document's formatting, fonts, and layout look exactly the same on any device, making it perfect for sharing professional documents.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Our tool processes your DOCX files locally in your web browser. This means you don't have to upload confidential business proposals, resumes, or school assignments to the cloud. You get enterprise-grade document conversion instantly, with zero privacy risks and no software installation required.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: 'Universal Compatibility', description: 'Produces standard PDF files readable on any OS or device.' },
+              { title: 'Preserves Formatting', description: 'Locks in your fonts, margins, and layouts perfectly.' },
+              { title: 'Browser-Based Security', description: 'Files are processed locally; no server uploads involved.' },
+              { title: 'Fast & Unlimited', description: 'Convert as many Word documents as you need for free.' },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

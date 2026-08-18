@@ -154,7 +154,6 @@ export default async function RootLayout({
       }}
     />
     <meta name="google-adsense-account" content={adsenseClientId} />
-    <link rel="manifest" href="/site.webmanifest" />
     {/* AdSense - loaded after page interactive to avoid render blocking */}
     <Script
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}

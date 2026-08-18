@@ -101,18 +101,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  The Audio Tools suite provides professional-grade utilities to trim, cut, and convert audio files directly in your web browser. Whether you are extracting a segment for a ringtone, editing a podcast, or converting a WAV file to MP3, our tools deliver high-fidelity results instantly.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Powered by the FFmpeg audio engine running natively in WebAssembly, we guarantee that your audio processing is 100% private. Your voice recordings, music tracks, and podcast files never leave your device, ensuring no third party can access your audio data.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "High-Fidelity Output", description: "Maintains original audio bitrate and quality during processing." },
+              { title: "Millisecond Precision", description: "Trim and cut audio tracks with extreme accuracy." },
+              { title: "Local Processing", description: "Zero upload wait times and complete offline-capable privacy." },
+              { title: "Format Conversion", description: "Convert freely between MP3, WAV, OGG, AAC, and FLAC." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

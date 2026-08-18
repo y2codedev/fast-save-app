@@ -102,18 +102,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  PDF to HTML Converter is an innovative browser-based tool that transforms static PDF documents into responsive, web-ready HTML5 pages. This is perfect for web developers, publishers, and marketers who want to embed PDF content directly into their websites without forcing users to download a file or use a PDF viewer.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  The conversion extracts text, images, and layout information to generate clean HTML and CSS code. Best of all, the entire extraction process runs locally. You can convert massive reports or private newsletters into web code instantly without any data leaving your local environment.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: 'Web-Ready Output', description: 'Generates clean HTML5 and CSS for easy web embedding.' },
+              { title: 'Extracts Text & Images', description: 'Pulls out text and assets to recreate the document for the web.' },
+              { title: 'No Server Required', description: 'Converts securely inside your browser using JavaScript.' },
+              { title: 'Improves SEO', description: 'HTML content is crawlable by search engines, unlike flat PDFs.' },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

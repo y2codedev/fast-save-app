@@ -182,18 +182,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  The PDF Tools Hub provides a complete collection of utilities to manage, edit, and secure your PDF documents. Whether you need to merge multiple reports into one file, extract specific pages, or convert PDFs into editable Word documents, our suite handles it all without requiring software installations.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  We prioritize your security above all else. Every tool in this hub utilizes client-side processing algorithms. When you unlock a bank statement or merge confidential legal contracts, the processing happens on your local device. We never see, store, or upload your sensitive documents.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Comprehensive Suite", description: "Merge, split, convert, lock, and unlock PDFs in one place." },
+              { title: "Client-Side Processing", description: "100% private document manipulation using your local hardware." },
+              { title: "No Subscriptions", description: "Access enterprise-grade PDF tools completely free of charge." },
+              { title: "Cross-Platform", description: "Works flawlessly on Windows, Mac, Linux, and mobile browsers." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

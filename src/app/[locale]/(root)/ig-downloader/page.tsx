@@ -101,18 +101,18 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Instagram Downloader is a fast, reliable utility designed to help you save Instagram Reels, Videos, and Photos directly to your device in original high definition. When you find inspiring content, educational reels, or memorable photos on Instagram, our tool allows you to archive them locally for offline viewing.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Unlike many downloaders that compress files or add intrusive watermarks, we extract the direct media URL provided by Instagram's public servers, ensuring you receive the exact, unmodified file. Please ensure you only download public content and respect the copyright of the original creators.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Original Quality", description: "Downloads media in the highest available resolution." },
+              { title: "No Watermarks", description: "Saves clean videos and photos without added logos." },
+              { title: "Fast Extraction", description: "Quickly processes public Instagram URLs to fetch media links." },
+              { title: "Multi-Format", description: "Supports downloading both MP4 videos and JPG photos." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

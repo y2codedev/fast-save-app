@@ -109,18 +109,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Markdown Converter is an essential tool for developers and writers to instantly preview and translate Markdown (.md) syntax into clean HTML or PDF formats. Markdown is universally used in GitHub, documentation, and blogging, and our tool makes it trivial to render that text into beautifully formatted web elements.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Our live-preview editor lets you type Markdown on the left and instantly see the rendered result on the right. We support GitHub Flavored Markdown (GFM), including tables, code blocks, syntax highlighting, and task lists, all processed locally within your browser.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Live Preview", description: "See your Markdown rendered in real-time as you type." },
+              { title: "GitHub Flavored", description: "Full support for GFM including tables and code blocks." },
+              { title: "Export Options", description: "Download your rendered text as HTML or a styled PDF." },
+              { title: "No Server Lag", description: "Instant, offline-capable parsing running on your device." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

@@ -103,23 +103,18 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
             introduction={
               <>
                 <p>
-                  Protect PDF is a free online tool that adds password protection and access restrictions to your PDF files — entirely in your browser without uploading to any server. Securing PDF documents is essential when sharing sensitive information such as legal contracts, financial reports, medical records, confidential business plans, or personal identification documents.
+                  Protect PDF is a free, highly secure tool that encrypts your PDF documents with a strong password. Whether you are sending confidential financial records, personal health information, or proprietary business data, adding password protection ensures only authorized individuals can open your file.
                 </p>
                 <p className="mt-3">
-                  Our tool applies AES-128 encryption to your PDF, which is the industry standard supported by all major PDF readers including Adobe Acrobat, Apple Preview, Foxit, and browser-based PDF viewers. You can set an open password (required to view the document) and separately configure owner permissions to restrict printing, text copying, editing, and annotation.
-                </p>
-                <p className="mt-3">
-                  Since all encryption happens locally in your browser, neither your PDF content nor your password is ever transmitted to our servers. This makes our tool uniquely trustworthy for protecting highly sensitive documents. After protecting your PDF, you may later <strong><a href="/unlock-pdf" className="text-indigo-600 dark:text-indigo-400 hover:underline">remove the password</a></strong> if needed, or <strong><a href="/merge-pdf" className="text-indigo-600 dark:text-indigo-400 hover:underline">merge it with other protected PDFs</a></strong>.
+                  We utilize industry-standard encryption algorithms natively within your browser. Because the encryption process happens locally on your machine, your unencrypted original file and your chosen password are never transmitted over the internet, providing true end-to-end security.
                 </p>
               </>
             }
             features={[
-              { title: 'AES-128 Encryption', description: 'Industry-standard encryption supported by all PDF readers.' },
-              { title: 'Open Password', description: 'Require a password to view or open the PDF document.' },
-              { title: 'Permission Controls', description: 'Restrict printing, copying, editing, and annotation separately.' },
-              { title: 'Browser-Based', description: 'All encryption happens locally — files never leave your device.' },
-              { title: 'Standard PDF Output', description: 'Protected PDF works in all standard PDF readers and apps.' },
-              { title: 'Instant Processing', description: 'Password protection applied instantly without any delay.' },
+              { title: 'Strong Encryption', description: 'Applies standard encryption to prevent unauthorized access.' },
+              { title: 'Password Security', description: 'Require a custom password to open and view the document.' },
+              { title: 'Local Processing', description: 'Encryption happens offline in your browser for maximum safety.' },
+              { title: 'No File Size Limits', description: 'Secure large documents without hitting server limits.' },
             ]}
             howToSteps={howToSteps}
             useCases={[

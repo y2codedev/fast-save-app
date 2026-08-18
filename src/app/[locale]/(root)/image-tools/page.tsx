@@ -167,18 +167,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  The Image Tools Hub is a powerful collection of browser-based utilities designed to optimize, convert, and enhance your digital images. From reducing file sizes for faster website loading to removing backgrounds using AI, we offer professional tools for designers, developers, and everyday users.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  By utilizing HTML5 Canvas APIs and WebAssembly, our image tools perform complex processing directly on your device. This eliminates the need to upload your proprietary designs or personal photos to the cloud, ensuring your intellectual property remains secure while delivering instant results.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Instant Processing", description: "Leverage your GPU/CPU for immediate image rendering." },
+              { title: "AI-Powered Features", description: "Utilize advanced machine learning for background removal." },
+              { title: "Strict Privacy", description: "Your photos and design assets are never uploaded to our servers." },
+              { title: "Modern Formats", description: "Full support for next-gen formats like WebP, SVG, and AVIF." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

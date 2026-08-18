@@ -102,18 +102,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Word to HTML Converter is a developer-friendly utility that translates your Microsoft Word (DOCX) documents into clean, semantic HTML5 code. This tool is specifically designed for content managers, bloggers, and web developers who need to move document content onto the web without carrying over messy, proprietary Word formatting.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  The conversion extracts paragraphs, headings, bold/italic styles, lists, and tables, stripping out the hidden XML bloat that Word typically generates. Everything runs in your browser, meaning your proprietary business documents are never uploaded to our servers, ensuring your data remains strictly confidential.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Clean Semantic Code", description: "Produces W3C-compliant HTML5 without inline style bloat." },
+              { title: "Preserves Structure", description: "Intelligently maps Word headings (H1-H6) and lists to HTML tags." },
+              { title: "Browser-Based Parsing", description: "Uses local processing to extract content safely." },
+              { title: "Instant Output", description: "Copy the HTML code or download the file instantly." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

@@ -1089,7 +1089,21 @@
     "s5Title": "5. Üçüncü Taraf Hizmetleri",
     "s6Desc": "Gizlilik Politikamızı zaman zaman güncelleyebiliriz. Herhangi bir değişikliği bu sayfada yayınlayarak size bildireceğiz.",
     "s6Title": "6. Bu Politikadaki Değişiklikler",
-    "title": "Gizlilik Politikası"
+    "title": "Gizlilik Politikası",
+    "intro": "At ConvertAllNow, we respect your privacy and aim to keep our data practices simple and transparent. This Privacy Policy explains how information is handled when you use ConvertAllNow and our online tools.",
+    "s1L5": "IP address and other technical information used for security, analytics, and service operation",
+    "s1Post": "We do not sell your personal information.",
+    "s3L4": "You can learn more about how Google uses information from websites that use its services through Google's privacy and advertising policies.",
+    "s4L1": "You can manage Google's personalized advertising settings through Google Ads Settings.",
+    "s4L2": "Where required by applicable law, visitors may also be provided with a consent interface to manage choices relating to cookies, advertising, and related data processing.",
+    "s7Title": "7. Third-Party Services",
+    "s7Desc": "ConvertAllNow may contain links to or interact with third-party websites and services. These third parties operate under their own terms and privacy policies. We are not responsible for the privacy practices or content of third-party websites or services.",
+    "s8Title": "8. Changes to This Privacy Policy",
+    "s8Desc": "We may update this Privacy Policy from time to time to reflect changes to our services, technologies, or legal requirements. When changes are made, we will update the Last Updated date shown at the top of this page.",
+    "s9Title": "9. Contact Us",
+    "s9Desc": "If you have questions or concerns about this Privacy Policy or our privacy practices, you can contact us at:",
+    "s9L1": "Email: support@convertallnow.com",
+    "s9L2": "Website: ConvertAllNow — Contact Us"
   },
   "ProtectPdf": {
     "bestPractices": "Güvenlik İpuçları:",

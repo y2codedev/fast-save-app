@@ -100,18 +100,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Pro Image Editor is a comprehensive, browser-based photo manipulation suite that rivals desktop software. If you need to crop, resize, apply filters, adjust color balances, or annotate an image, you can do it all right here without installing heavy applications or registering for an account.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  The editor leverages HTML5 Canvas and WebGL to apply real-time effects and adjustments directly on your device. This means zero upload times, no file size restrictions, and absolute privacy for your personal photos and proprietary design assets.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "Advanced Adjustments", description: "Control brightness, contrast, saturation, and hue." },
+              { title: "Filters & Effects", description: "Apply professional-grade filters and vintage effects instantly." },
+              { title: "Annotation Tools", description: "Add text, draw shapes, and blur sensitive information." },
+              { title: "Local Rendering", description: "Fast, hardware-accelerated rendering inside your browser." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

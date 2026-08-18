@@ -121,26 +121,18 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             introduction={
               <>
                 <p>
-                  Merge PDF is a free online tool that lets you combine multiple PDF files into a single document instantly, entirely within your web browser. Whether you're consolidating reports, combining scanned documents, assembling a portfolio, or preparing a multi-chapter document, our PDF merger makes it effortless with no software installation, no signup, and no file size restrictions.
+                  Merge PDF is a powerful browser-based utility that lets you combine multiple PDF documents into a single, organized file. Stop sending multiple attachments in emails — easily join invoices, reports, scanned pages, or chapters into one cohesive document.
                 </p>
                 <p className="mt-3">
-                  Unlike traditional desktop software like Adobe Acrobat, our Merge PDF tool works directly in your browser using modern JavaScript APIs. This means your PDF files are never uploaded to any server — all processing is done locally on your device, ensuring complete privacy and security for sensitive documents such as legal contracts, medical records, or financial statements.
-                </p>
-                <p className="mt-3">
-                  The tool supports drag-and-drop reordering, allowing you to arrange your PDFs in any order before merging. You can combine as many files as your device's memory supports — typically dozens of PDFs without any issues. The resulting merged PDF preserves all original content including text, images, hyperlinks, fonts, bookmarks, and formatting exactly as they appear in the source files.
-                </p>
-                <p className="mt-3">
-                  After merging, you may want to <strong><a href="/protect-pdf" className="text-indigo-600 dark:text-indigo-400 hover:underline">Protect the PDF</a></strong> with a password, or <strong><a href="/pdf-to-jpg" className="text-indigo-600 dark:text-indigo-400 hover:underline">convert it to JPG images</a></strong> for easy sharing.
+                  Using the robust pdf-lib library directly within your browser, our tool allows you to rearrange the order of your PDFs before merging. Because there is no server upload, you can merge highly sensitive financial or legal documents instantly without worrying about data leaks or waiting for slow uploads.
                 </p>
               </>
             }
             features={[
-              { title: 'Browser-Based Processing', description: 'All merging happens locally — files never leave your device.' },
-              { title: 'Unlimited Files', description: 'Combine as many PDFs as needed with no artificial cap.' },
-              { title: 'Drag & Drop Reorder', description: 'Rearrange uploaded PDFs before merging with intuitive drag-and-drop.' },
-              { title: 'Preserves Quality', description: 'Original fonts, images, hyperlinks, and formatting fully preserved.' },
-              { title: 'No Watermarks', description: 'Output PDF is completely clean with no added branding.' },
-              { title: 'Free Forever', description: 'No subscription, no credits, no hidden costs — always free.' },
+              { title: 'Drag & Drop Ordering', description: 'Easily rearrange the sequence of files before merging.' },
+              { title: 'Zero Upload Wait Time', description: "Merge files instantly using your computer's own processing power." },
+              { title: '100% Privacy Guaranteed', description: 'Confidential files are never sent over the internet.' },
+              { title: 'Preserves Original Quality', description: 'The merged PDF retains the exact quality of the source files.' },
             ]}
             howToSteps={howToSteps}
             useCases={[

@@ -101,18 +101,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Video to GIF Converter allows you to extract segments from your video files and turn them into high-quality, looping animated GIFs. Whether you are creating reaction memes, social media content, or demonstrating a software feature for a tutorial, this tool provides precise control over the GIF creation process.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Powered by FFmpeg compiled to WebAssembly, the entire conversion happens on your local device. You can set the frame rate (FPS), adjust the resolution, and select exact start and end times to ensure the resulting GIF is optimized for the web without requiring any server uploads.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "FFmpeg Powered", description: "Uses industry-standard FFmpeg for high-quality palette generation." },
+              { title: "Custom Frame Rate", description: "Adjust FPS to balance smooth animation with file size." },
+              { title: "Total Privacy", description: "Your personal videos are never uploaded; processing is 100% local." },
+              { title: "Resolution Control", description: "Scale down videos to create lightweight, web-friendly GIFs." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}

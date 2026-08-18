@@ -103,23 +103,18 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
             introduction={
               <>
                 <p>
-                  Unlock PDF is a free online tool that removes password protection and editing/printing restrictions from PDF files, directly in your web browser. Whether a PDF you own is preventing you from printing, copying text, or editing content, our tool restores full access without any software installation or file uploads.
+                  Unlock PDF is a specialized client-side tool designed to remove passwords and access restrictions from your PDF documents. If you have the password but are tired of entering it every time you open a document, this tool will strip the security layer and give you a clean, accessible file.
                 </p>
                 <p className="mt-3">
-                  PDF security comes in two forms: user passwords (required to open the PDF) and owner restrictions (permissions that prevent printing, copying, or editing). Our tool handles both scenarios. For PDFs with owner restrictions, removal is automatic. For PDFs with a user/open password, you'll need to enter the correct password — after which all restrictions can be removed.
-                </p>
-                <p className="mt-3">
-                  All unlocking is performed locally in your browser using JavaScript. Your PDF files never leave your device. This is particularly important for sensitive documents such as legal contracts, financial statements, or confidential business reports. After unlocking, you can then <strong><a href="/protect-pdf" className="text-indigo-600 dark:text-indigo-400 hover:underline">re-protect with a new password</a></strong> or <strong><a href="/pdf-to-docx" className="text-indigo-600 dark:text-indigo-400 hover:underline">convert to an editable Word document</a></strong>.
+                  Security is paramount when dealing with encrypted files. That's why our unlocker runs entirely in your web browser. You enter your password locally, the file is decrypted locally, and the new unlocked PDF is generated on your device. We never see your password or your file contents.
                 </p>
               </>
             }
             features={[
-              { title: 'Removes Printing Restrictions', description: 'Restore the ability to print PDFs that have printing disabled.' },
-              { title: 'Removes Copy Restrictions', description: 'Enable text selection and copying from restricted PDFs.' },
-              { title: 'Removes Edit Restrictions', description: 'Allow editing and annotation of restricted PDF documents.' },
-              { title: 'Browser-Based', description: 'All processing is local — files never leave your device.' },
-              { title: 'Multiple Encryption Support', description: 'Handles RC4 (40-bit, 128-bit) and AES (128-bit) encryption.' },
-              { title: 'Content Preserved', description: 'Only restrictions removed — all content stays identical.' },
+              { title: 'Removes Password Protection', description: 'Permanently removes the need to enter a password to view.' },
+              { title: 'Removes Restrictions', description: 'Unlocks printing, copying, and editing restrictions.' },
+              { title: 'Absolute Privacy', description: 'Your password and document never leave your computer.' },
+              { title: 'Instant Decryption', description: 'Uses local hardware for lightning-fast file unlocking.' },
             ]}
             howToSteps={getHowToSteps(t)}
             useCases={[

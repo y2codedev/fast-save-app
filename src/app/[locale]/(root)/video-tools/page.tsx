@@ -167,18 +167,18 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  {title} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  Welcome to the Video Tools Hub, your centralized suite for processing, editing, and optimizing video files entirely within your web browser. Traditionally, video editing required expensive, heavy desktop software. We've changed that by bringing industry-standard tools directly to the web.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  Our platform leverages FFmpeg compiled to WebAssembly. This breakthrough technology means your browser uses your computer's own CPU to compress, trim, and convert videos. Your large video files are never uploaded to external servers, providing unmatched speed, zero file-size limits, and guaranteed privacy.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: "FFmpeg WebAssembly", description: "Desktop-class video processing running natively in your browser." },
+              { title: "No Upload Limits", description: "Process massive 4K videos without waiting for cloud uploads." },
+              { title: "Total Data Privacy", description: "Your personal videos remain strictly on your local device." },
+              { title: "Universal Formats", description: "Full support for MP4, WebM, MOV, MKV, and AVI files." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}
