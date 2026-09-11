@@ -23,12 +23,6 @@ import { HiLightningBolt } from 'react-icons/hi';
 
 export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
     {
-        id: 1,
-        href: '/',
-        icon: FiInstagram,
-        ariaLabel: 'Instagram profile'
-    },
-    {
         id: 2,
         href: '/audio',
         icon: MdAudiotrack,
@@ -88,6 +82,11 @@ export const DEFAULT_LEGAL_LINKS: LegalLink[] = [
         id: 4,
         href: '/contact',
         label: 'Contact Us'
+    },
+    {
+        id: 5,
+        href: '/file-privacy-security',
+        label: 'File Privacy & Security'
     },
 ];
 
@@ -190,6 +189,7 @@ export const MEGA_MENU_ITEMS = [
       { name: "Pro Image Editor", path: "/image-editor", icon: Sparkles, desc: "Resize, crop, and edit" },
       { name: "Remove Background", path: "/bg-remover", icon: Sparkles, desc: "AI background removal" },
       { name: "Compress Image", path: "/image-compressor", icon: ArrowPathIcon, desc: "Reduce image size" },
+      { name: "Resize Image", path: "/resize-image", icon: ImageIcon, desc: "Change image dimensions" },
       { name: "Image Converter", path: "/photo", icon: MdInsertPhoto, desc: "Convert image formats" },
     ]
   },
@@ -197,6 +197,7 @@ export const MEGA_MENU_ITEMS = [
     category: "PDF Tools",
     items: [
       { name: "Merge PDF", path: "/merge-pdf", icon: Layers, desc: "Combine PDFs" },
+      { name: "Split PDF", path: "/split-pdf", icon: Scissors, desc: "Extract or divide pages" },
       { name: "Image to PDF", path: "/image-to-pdf", icon: DocumentTextIcon, desc: "Convert images to PDF" },
       { name: "PDF to JPG", path: "/pdf-to-jpg", icon: ImagePlus, desc: "Extract images" },
       { name: "MD to PDF", path: "/md-converter", icon: FileText, desc: "Markdown to PDF" },
@@ -209,7 +210,7 @@ export const MEGA_MENU_ITEMS = [
     ]
   },
   {
-    category: "Social",
+    category: "IG Downloader",
     items: [
       { name: "IG Downloader", path: "/ig-downloader", icon: FiInstagram, desc: "Download Instagram content" },
     ]
@@ -259,7 +260,6 @@ export const ZIP_MENU_ITEMS = [
   {
     header: "CONVERT FROM ZIP",
     items: [
-      { name: "ZIP to RAR", path: "/zip-to-rar", icon: Archive, desc: "Convert to RAR" },
       { name: "ZIP to 7Z", path: "/zip-to-7z", icon: FileArchive, desc: "Convert to 7Z" },
       { name: "ZIP to TAR", path: "/zip-to-tar", icon: Package, desc: "Convert to TAR" },
       { name: "ZIP to TAR-GZ", path: "/zip-to-tar-gz", icon: FolderArchive, desc: "Convert to TAR-GZ" },
@@ -268,7 +268,6 @@ export const ZIP_MENU_ITEMS = [
       { name: "ZIP to GZ", path: "/zip-to-gz", icon: Package, desc: "Convert to GZ" },
       { name: "ZIP to BZ2", path: "/zip-to-bz2", icon: FolderArchive, desc: "Convert to BZ2" },
       { name: "ZIP to XZ", path: "/zip-to-xz", icon: Archive, desc: "Convert to XZ" },
-      { name: "ZIP to ISO", path: "/zip-to-iso", icon: Disc, desc: "Convert to ISO" },
     ]
   }
 ];

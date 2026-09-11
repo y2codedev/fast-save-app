@@ -586,6 +586,7 @@ locales.forEach(locale => {
     if (typeof enNs === 'object' && !Array.isArray(enNs)) {
       Object.keys(enNs).forEach(key => {
         const enVal = enNs[key];
+        if (typeof enVal !== 'string') return;
         let currentVal = target[ns][key];
 
         // 1. Check Master Dictionary

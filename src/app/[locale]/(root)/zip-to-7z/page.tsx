@@ -93,11 +93,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const tCommon = await getTranslations({ locale, namespace: 'CommonContent' });
-  const tNav = await getTranslations({ locale, namespace: 'Navigation' });
-  const title = tNav('ZIP to 7Z') || PAGE_TITLE;
-  const description = tCommon('intro1', { toolName: 'ZIP to 7Z' });
-  const translatedName = tNav('ZIP to 7Z') || 'ZIP to 7Z';
+  const title = PAGE_TITLE;
+  const description = PAGE_DESCRIPTION;
+
+  
+  
+
+
   const softwareSchema = createToolSchema({
     name: 'ZIP to 7Z Converter – Client-Side Browser Tool',
     description: PAGE_DESCRIPTION,

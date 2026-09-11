@@ -8,14 +8,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useDropzone, FileRejection } from 'react-dropzone';
 import type { WorkerInputMessage, WorkerOutputMessage } from '@/workers/archive-converter.worker';
 
-export type ConversionStage = 
-  | 'Loading converter'
-  | 'Reading ZIP'
-  | 'Extracting files'
-  | 'Creating 7Z archive'
-  | 'Preparing download'
-  | 'Completed'
-  | string;
+type ConversionStage = string;
 
 const STAGES: ConversionStage[] = [
   'Loading converter',
@@ -191,8 +184,9 @@ export default function ArchiveConverter(): React.ReactElement {
         }
       };
 
-      worker.onerror = () => {
-        setError(getT('An unexpected error occurred during worker execution. Please try again.'));
+      worker.onerror = (event) => {
+        console.error('Archive worker failed:', event.message, event.filename, event.lineno);
+        setError('An unexpected error occurred during worker execution. Please try again.');
         setStep('upload');
         terminateWorker();
       };
@@ -203,6 +197,7 @@ export default function ArchiveConverter(): React.ReactElement {
         type: 'convert',
         inputBuffer: arrayBuffer,
         inputName: file.name,
+        targetFormat: '7z',
       };
 
       worker.postMessage(message, [arrayBuffer]);
@@ -234,43 +229,43 @@ export default function ArchiveConverter(): React.ReactElement {
   const currentStageIndex = STAGES.indexOf(currentStage);
 
   return (
-    <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div className="w-full py-2">
       <div className="relative max-w-5xl mx-auto w-full">
         {/* Title & Privacy Badge Section */}
         <motion.div
-          className="text-center mb-10"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-5 py-2.5 mb-5 border border-gray-200 dark:border-gray-700 shadow-sm">
-            <FiArchive className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
-            <span className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+          <div className="inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3 border border-gray-200 dark:border-gray-700 shadow-sm">
+            <FiArchive className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
+            <span className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-200">
               100% Client-Side Archive Converter
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-5">
-            {getT("Convert ZIP to 7Z")}
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3">
+            Convert ZIP <span className="text-indigo-600 dark:text-indigo-400">to 7Z</span>
           </h1>
-          <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-6">
-            {getT("Convert ZIP archives to the highly efficient 7Z compression format without uploading anything to a server.")}
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed mb-3">
+            Convert ZIP archives to the highly efficient 7Z compression format without uploading anything to a server.
           </p>
 
           {/* Prominent Privacy Message */}
-          <div className=" inline-flex items-center whitespace-nowrap gap-2.5 px-6 py-3 rounded-2xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-950 dark:text-indigo-200 text-sm sm:text-base font-medium shadow-sm">
-            <FiShield className="w-5 h-5 flex-shrink-0 text-indigo-600 dark:text-indigo-400" />
-            <span>{getT("Your files never leave your device. Conversion happens entirely inside your browser.")}</span>
+          <div className="inline-flex items-center whitespace-nowrap gap-2 px-4 py-1.5 rounded-xl bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-950 dark:text-indigo-200 text-xs sm:text-sm font-medium shadow-sm">
+            <FiShield className="w-4 h-4 flex-shrink-0 text-indigo-600 dark:text-indigo-400" />
+            <span>Your files never leave your device. Conversion happens entirely inside your browser.</span>
           </div>
         </motion.div>
 
         {/* Unsupported Browser Alert */}
         {!isBrowserSupported && (
           <div
-            className="mb-8 p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 inline-flex items-center whitespace-nowrap gap-3 text-amber-900 dark:text-amber-200"
+            className="mb-6 p-4 rounded-2xl bg-amber-50 dark:bg-amber-900/30 border border-amber-300 dark:border-amber-700 inline-flex items-center whitespace-nowrap gap-3 text-amber-900 dark:text-amber-200"
             role="alert"
             aria-live="assertive"
           >
-            <FiAlertCircle className="w-6 h-6 flex-shrink-0 text-amber-600 dark:text-amber-400" />
+            <FiAlertCircle className="w-5 h-5 flex-shrink-0 text-amber-600 dark:text-amber-400" />
             <p className="text-sm sm:text-base font-medium">
               Your browser does not support browser-based archive conversion. Please update your browser and try again.
             </p>
@@ -279,21 +274,21 @@ export default function ArchiveConverter(): React.ReactElement {
 
         {/* Step Indicators */}
         <motion.div
-          className="flex justify-center mb-10"
-          initial={{ opacity: 0, y: 20 }}
+          className="flex justify-center mb-6"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-gray-200 dark:border-gray-700/50">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+          <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-sm border border-gray-200 dark:border-gray-700/50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
               {[
                 { s: 'upload', label: getT('Select ZIP'), icon: FiUpload },
                 { s: 'processing', label: getT('Convert to 7Z'), icon: FiArchive },
                 { s: 'complete', label: getT('Download'), icon: FiDownload },
               ].map(({ s, label, icon: Icon }, index) => (
-                <div key={s} className="flex items-center gap-4">
+                <div key={s} className="flex items-center gap-3 sm:gap-4">
                   <div
-                    className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+                    className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 transition-all duration-300 ${
                       step === s
                         ? 'bg-gradient-to-br from-indigo-600 to-violet-600 border-transparent text-white shadow-md'
                         : step === 'complete' && s === 'complete'
@@ -304,13 +299,13 @@ export default function ArchiveConverter(): React.ReactElement {
                     }`}
                   >
                     {step === 'complete' && s === 'complete' ? (
-                      <FiCheck className="w-6 h-6" />
+                      <FiCheck className="w-5 h-5" />
                     ) : (
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-5 h-5" />
                     )}
                   </div>
                   <span
-                    className={`font-medium ${
+                    className={`text-sm sm:text-base font-medium ${
                       step === s || (step === 'complete' && s === 'complete')
                         ? 'text-indigo-600 dark:text-indigo-400'
                         : 'text-gray-500 dark:text-gray-400'
@@ -320,7 +315,7 @@ export default function ArchiveConverter(): React.ReactElement {
                   </span>
                   {index < 2 && (
                     <div
-                      className={`w-8 h-0.5 mx-4 hidden sm:block ${
+                      className={`w-6 sm:w-8 h-0.5 mx-2 sm:mx-4 hidden sm:block ${
                         index === 0 || step === 'processing' || step === 'complete'
                           ? 'bg-indigo-600 dark:bg-indigo-400'
                           : 'bg-gray-200 dark:bg-gray-700'

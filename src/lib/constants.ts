@@ -1,5 +1,5 @@
 export const ALL_TOOLS = [
-  { name: 'Social Downloader', path: '/' },
+  { name: 'Online File Converter', path: '/' },
   { name: 'Background Remover', path: '/bg-remover' },
   { name: 'Video Trimmer', path: '/video-trimmer' },
   { name: 'Image Compressor', path: '/image-compressor' },
@@ -20,11 +20,11 @@ export const ALL_TOOLS = [
   { name: 'Unlock PDF', path: '/unlock-pdf' },
   { name: 'Pro Image Editor', path: '/image-editor' },
   { name: 'IG Downloader', path: '/ig-downloader' },
-  // Social downloaders
-  { name: 'FB Video Downloader', path: '/fb-video' },
-  { name: 'Snapchat Downloader', path: '/snapchat' },
   // PDF tools
+  { name: 'Split PDF', path: '/split-pdf' },
   { name: 'Protect PDF', path: '/protect-pdf' },
+  // Image tools
+  { name: 'Resize Image', path: '/resize-image' },
   // ZIP tools
   { name: 'Create ZIP', path: '/create-zip' },
   { name: 'Unzip ZIP', path: '/unzip-zip' },
@@ -46,7 +46,6 @@ export const ALL_TOOLS = [
   { name: 'XZ to ZIP', path: '/xz-to-zip' },
   { name: 'ISO to ZIP', path: '/iso-to-zip' },
   // ZIP to other format converters
-  { name: 'ZIP to RAR', path: '/zip-to-rar' },
   { name: 'ZIP to 7Z', path: '/zip-to-7z' },
   { name: 'ZIP to TAR', path: '/zip-to-tar' },
   { name: 'ZIP to TAR.GZ', path: '/zip-to-tar-gz' },
@@ -55,5 +54,24 @@ export const ALL_TOOLS = [
   { name: 'ZIP to GZ', path: '/zip-to-gz' },
   { name: 'ZIP to BZ2', path: '/zip-to-bz2' },
   { name: 'ZIP to XZ', path: '/zip-to-xz' },
-  { name: 'ZIP to ISO', path: '/zip-to-iso' },
 ];
+
+/**
+ * Low-volume, pairwise thin archive conversion tools that are set to noindex
+ * to protect the site against doorway page and thin content penalties.
+ */
+export const NOINDEX_TOOLS = [
+  '/tar-bz2-to-zip',
+  '/tar-xz-to-zip',
+  '/gz-to-zip',
+  '/bz2-to-zip',
+  '/xz-to-zip',
+  '/iso-to-zip',
+  '/zip-to-tar',
+  '/zip-to-tar-bz2',
+  '/zip-to-tar-xz',
+  '/zip-to-gz',
+  '/zip-to-bz2',
+  '/zip-to-xz',
+];
+

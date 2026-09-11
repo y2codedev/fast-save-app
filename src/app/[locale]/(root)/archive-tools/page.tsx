@@ -1,37 +1,52 @@
-import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
-import HowToSchema from '@/components/seo/HowToSchema';
 import FAQSchema from '@/components/seo/FAQSchema';
 import WebPageSchema from '@/components/seo/WebPageSchema';
-import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
-import ToolContentSection from '@/components/sections/ToolContentSection';
 import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
 import { getTranslations } from 'next-intl/server';
-import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS, RELATED_TOOLS } from '@/lib/seo';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale, CATEGORY_TOOLS } from '@/lib/seo';
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
-import { ArrowRightIcon, ArchiveBoxIcon } from '@heroicons/react/24/outline';
+import { 
+  ArrowRightIcon, 
+  ArchiveBoxIcon, 
+  SparklesIcon, 
+  ArrowsRightLeftIcon, 
+  LockClosedIcon, 
+  FolderPlusIcon,
+  ShieldExclamationIcon,
+  CheckCircleIcon
+} from '@heroicons/react/24/outline';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const title = 'Free Archive & ZIP Tools Online — Create, Extract, Convert ZIP Files';
+  const title = 'Free Archive & ZIP Tools Online — Create, Extract, Convert ZIP Files | ConvertAllNow';
   const description =
-    'Free browser-based archive tools: create ZIP files, extract ZIP, convert RAR/7Z/TAR to ZIP, protect archives with passwords, and more. No signup required.';
+    'Free browser-based archive tools: create ZIP files, extract ZIP, convert RAR/7Z/TAR to ZIP, and password-protect archives. 100% in-browser with zero server uploads.';
 
   return {
-    title, description,
+    title,
+    description,
     keywords: [
       'zip tools online free', 'create zip file', 'extract zip', 'unzip online',
       'rar to zip', '7z to zip', 'tar to zip', 'zip converter', 'archive tools',
-      'password protect zip', 'zip file online free',
+      'password protect zip', 'zip file online free', 'private zip extractor',
     ],
     openGraph: {
-      title, description,
+      title,
+      description,
       url: getCanonicalUrl(locale, '/archive-tools'),
-      siteName: 'ConvertAllNow', locale: getOgLocale(locale), type: 'website',
+      siteName: 'ConvertAllNow',
+      locale: getOgLocale(locale),
+      type: 'website',
     },
-    twitter: { card: 'summary_large_image', title, description, site: '@convertallnow', creator: '@convertallnow' },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      site: '@convertallnow',
+      creator: '@convertallnow',
+    },
     alternates: {
       canonical: getCanonicalUrl(locale, '/archive-tools'),
       languages: getAlternateLanguages('/archive-tools'),
@@ -39,30 +54,129 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+const CREATE_EXTRACT_TOOLS = [
+  {
+    name: 'Create ZIP',
+    path: '/create-zip',
+    desc: 'Compress multiple files and folders into a single organized .zip archive directly in your browser.',
+    badge: 'Popular',
+  },
+  {
+    name: 'Unzip ZIP',
+    path: '/unzip-zip',
+    desc: 'Extract and download all files or individual items from any ZIP archive without installing software.',
+    badge: 'Fast',
+  },
+  {
+    name: 'View ZIP',
+    path: '/view-zip',
+    desc: 'Inspect, browse, and search the internal folder hierarchy of a ZIP file without decompressing it.',
+    badge: 'Inspection',
+  },
+];
+
+const MANAGE_SECURITY_TOOLS = [
+  {
+    name: 'Protect ZIP',
+    path: '/protect-zip',
+    desc: 'Add AES-256 password protection to your ZIP archives to keep sensitive files safe from unauthorized access.',
+    badge: 'AES-256',
+  },
+  {
+    name: 'Unlock ZIP',
+    path: '/unlock-zip-file',
+    desc: 'Decrypt password-protected ZIP archives when you know the password, producing an unlocked archive.',
+    badge: 'Decryption',
+  },
+  {
+    name: 'Edit ZIP',
+    path: '/edit-zip',
+    desc: 'Add new files, delete obsolete items, or rename contents within an existing ZIP archive in-place.',
+    badge: 'Modifier',
+  },
+  {
+    name: 'Merge ZIP',
+    path: '/merge-zip',
+    desc: 'Combine multiple ZIP archive packages into a single consolidated archive package.',
+    badge: 'Joiner',
+  },
+  {
+    name: 'Split ZIP',
+    path: '/split-zip',
+    desc: 'Divide large ZIP archives into smaller multi-part volumes for easy email sending or cloud storage.',
+    badge: 'Splitter',
+  },
+];
+
+const CONVERT_ARCHIVE_TOOLS = [
+  {
+    name: 'RAR to ZIP',
+    path: '/rar-to-zip',
+    desc: 'Convert WinRAR .rar archives into universal standard .zip files that open natively on Mac, Windows, and mobile.',
+    badge: 'Most Popular',
+  },
+  {
+    name: '7Z to ZIP',
+    path: '/7z-to-zip',
+    desc: 'Convert 7-Zip (.7z) compressed archives into standard .zip archives with zero software installation.',
+    badge: 'Fast',
+  },
+  {
+    name: 'TAR to ZIP',
+    path: '/tar-to-zip',
+    desc: 'Convert Unix TAR tarball archives into standard ZIP format for Windows and macOS users.',
+    badge: 'Unix/Linux',
+  },
+  {
+    name: 'TAR.GZ to ZIP',
+    path: '/tar-gz-to-zip',
+    desc: 'Convert Gzipped TAR archives (.tar.gz / .tgz) directly into standard ZIP format in your browser.',
+    badge: 'Developer',
+  },
+  {
+    name: 'GZ to ZIP',
+    path: '/gz-to-zip',
+    desc: 'Convert single GZ compressed files into standard ZIP format.',
+    badge: 'Utility',
+  },
+  {
+    name: 'ZIP to 7Z',
+    path: '/zip-to-7z',
+    desc: 'Convert ZIP archives to high-compression 7-Zip (.7z) format for maximum file size reduction.',
+    badge: 'High Ratio',
+  },
+  {
+    name: 'ZIP to TAR.GZ',
+    path: '/zip-to-tar-gz',
+    desc: 'Convert standard ZIP archives into Unix .tar.gz format for Linux server deployments.',
+    badge: 'DevOps',
+  },
+];
+
 const faqs = [
   {
-    question: 'What archive formats are supported?',
-    answer: 'We support ZIP, RAR, 7Z, TAR, TAR.GZ (TGZ), TAR.BZ2, TAR.XZ, GZ, BZ2, XZ, and ISO formats across our various archive tools.',
+    question: 'What archive formats can I convert and extract?',
+    answer: 'ConvertAllNow supports ZIP, RAR, 7Z, TAR, TAR.GZ (TGZ), TAR.BZ2, TAR.XZ, GZ, BZ2, and XZ formats across our specialized archive tools.',
   },
   {
-    question: 'Can I create a password-protected ZIP file?',
-    answer: 'Yes! Use our Protect ZIP tool to add AES-256 password encryption to any ZIP archive. The protected file can be opened with any standard ZIP application using the password.',
+    question: 'How do browser-based archive tools work without uploading files?',
+    answer: 'Our tools use client-side JavaScript and WebAssembly compiled versions of standard compression engines (such as JSZip and libarchive). Your computer reads and writes archive streams directly in local RAM memory without sending any archive contents to remote servers.',
   },
   {
-    question: 'How do I extract a ZIP file in my browser?',
-    answer: 'Navigate to the Unzip ZIP tool, upload your ZIP file, and our tool will extract all contents. You can download individual files or all files as a new archive.',
+    question: 'Can I create a password-protected ZIP on Mac or mobile without third-party software?',
+    answer: 'Yes! Our Protect ZIP tool runs directly in your browser on macOS Safari, iOS, Android, or Windows. It applies standard AES-256 encryption that can be opened by any standard unzipping software worldwide.',
   },
   {
-    question: 'Can I convert RAR to ZIP without software?',
-    answer: 'Yes! Our RAR to ZIP converter processes everything in your browser — upload the RAR file and download the converted ZIP instantly.',
+    question: 'What is the maximum archive size I can create or extract?',
+    answer: 'Because processing runs in your browser, the only practical constraint is your device’s available RAM memory. Most modern laptops and smartphones handle archives up to 500MB to 1GB smoothly.',
   },
   {
-    question: 'Is there a file size limit for ZIP archives?',
-    answer: 'Since all processing is done locally in your browser, the practical limit depends on your device\'s available memory. Most modern devices handle archives of several hundred megabytes easily.',
+    question: 'Can I convert RAR files without installing WinRAR?',
+    answer: 'Yes. WinRAR files can be decompressed and converted to standard ZIP format directly in your browser using our RAR to ZIP tool. You do not need to install WinRAR or any desktop software.',
   },
   {
-    question: 'Can I add or remove files from an existing ZIP?',
-    answer: 'Yes! Our Edit ZIP tool lets you open an existing ZIP archive, add new files, remove existing ones, or rename them — all without re-downloading the original.',
+    question: 'Can I edit the contents of a ZIP file without extracting everything?',
+    answer: 'Yes. Our Edit ZIP tool lets you open an existing ZIP archive, view its contents, add new files, remove unwanted items, or rename files, then save the updated archive in one click.',
   },
 ];
 
@@ -91,35 +205,9 @@ export default async function ArchiveToolsPage({ params }: { params: Promise<{ l
   
 
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
-
-  const getT = (text: string) => {
-    if (!text) return text;
-    const key = text.replace(/\./g, '_');
-    try {
-      if (tHub.has(key)) return tHub(key);
-      if (tHub.has(text)) return tHub(text);
-    } catch {}
-    return text;
-  };
-
-  // Group archive tools
-  const organizeTools = CATEGORY_TOOLS.archive.slice(0, 8);
-  const convertToZip = CATEGORY_TOOLS.archive.slice(8);
-
-  
-const faqs = [
-  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
-  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
-  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
-  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
-  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
-];
-
-const howToSteps = [
-  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
-  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
-  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
-];
+  const title = tHub('archiveTitle');
+  const heading = tHub('archiveHeading');
+  const subtitle = tHub('archiveSubtitle');
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
@@ -135,60 +223,183 @@ const howToSteps = [
       <WebPageSchema title={title} description={description} path="/archive-tools" locale={locale} breadcrumb={breadcrumbItems} />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
 
-      <ToolLayoutWithAds
-        relatedTools={relatedTools}
-        relatedToolsTitle="Related Tools"
-        categoryName="Online Tools"
-        categoryPath="/"
-      >
-        <div className="flex flex-col space-y-6 pb-12">
+      <div className="bg-gradient-to-b from-amber-50/40 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto space-y-8 sm:space-y-12">
           <VisualBreadcrumb items={breadcrumbItems} />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2 pb-6">
-            {CATEGORY_TOOLS.archive?.map((tool) => (
-              <Link
-                key={tool.path}
-                href={tool.path}
-                className="group p-6 bg-white dark:bg-gray-800/80 rounded-2xl border border-gray-200/80 dark:border-gray-700/50 hover:border-indigo-500 dark:hover:border-indigo-500 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-3">
-                    <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                      {getT(tool.name)}
-                    </h3>
-                    <span className="w-8 h-8 flex items-center justify-center rounded-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white dark:group-hover:bg-indigo-500 transition-all duration-300">
-                      →
-                    </span>
+
+          {/* Hero Section */}
+          <div className="text-center space-y-4 max-w-3xl mx-auto">
+            <div className="inline-flex items-center justify-center p-3.5 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-2xl shadow-sm mb-2">
+              <ArchiveBoxIcon className="w-9 h-9" />
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
+              {title}
+            </h1>
+            <h2 className="text-xl sm:text-2xl font-semibold text-gray-700 dark:text-gray-300">
+              {heading}
+            </h2>
+            <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
+              {subtitle}
+            </p>
+          </div>
+
+          {/* Section 1: Create & Extract Archives */}
+          <section className="space-y-6" aria-labelledby="create-extract-hub">
+            <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
+              <FolderPlusIcon className="w-6 h-6 text-orange-500" />
+              <h2 id="create-extract-hub" className="text-2xl font-bold text-gray-900 dark:text-white">
+                {tHub('archiveCreateTitle')}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {CREATE_EXTRACT_TOOLS.map((tool) => (
+                <Link
+                  key={tool.path}
+                  href={tool.path}
+                  className="group relative bg-white dark:bg-gray-800/80 p-6 rounded-2xl border border-gray-200 dark:border-gray-700/60 hover:border-orange-500/50 dark:hover:border-orange-500/50 hover:shadow-lg hover:shadow-orange-500/5 dark:hover:shadow-orange-500/10 transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-bold text-xl text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                        {tool.name}
+                      </h3>
+                      <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300">
+                        {tool.badge}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+                      {tool.desc}
+                    </p>
                   </div>
-                  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                    {getT(tool.desc)}
+                  <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-orange-600 dark:text-orange-400 group-hover:translate-x-1 transition-transform">
+                    <span>Open Tool</span>
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Section 2: Manage & Secure Archives */}
+          <section className="space-y-6" aria-labelledby="manage-secure-hub">
+            <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
+              <LockClosedIcon className="w-6 h-6 text-orange-500" />
+              <h2 id="manage-secure-hub" className="text-2xl font-bold text-gray-900 dark:text-white">
+                {tHub('archiveManageTitle')}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {MANAGE_SECURITY_TOOLS.map((tool) => (
+                <Link
+                  key={tool.path + tool.name}
+                  href={tool.path}
+                  className="group relative bg-white dark:bg-gray-800/80 p-6 rounded-2xl border border-gray-200 dark:border-gray-700/60 hover:border-orange-500/50 dark:hover:border-orange-500/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                        {tool.name}
+                      </h3>
+                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                        {tool.badge}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-normal">
+                      {tool.desc}
+                    </p>
+                  </div>
+                  <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-orange-600 dark:text-orange-400 group-hover:translate-x-1 transition-transform">
+                    <span>Manage Archive</span>
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Section 3: Popular Archive Converters */}
+          <section className="space-y-6" aria-labelledby="convert-archives-hub">
+            <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
+              <ArrowsRightLeftIcon className="w-6 h-6 text-orange-500" />
+              <h2 id="convert-archives-hub" className="text-2xl font-bold text-gray-900 dark:text-white">
+                {tHub('archiveConvertTitle')}
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              {CONVERT_ARCHIVE_TOOLS.map((tool) => (
+                <Link
+                  key={tool.path + tool.name}
+                  href={tool.path}
+                  className="group relative bg-white dark:bg-gray-800/80 p-6 rounded-2xl border border-gray-200 dark:border-gray-700/60 hover:border-orange-500/50 dark:hover:border-orange-500/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
+                >
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-bold text-lg text-gray-900 dark:text-white group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                        {tool.name}
+                      </h3>
+                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                        {tool.badge}
+                      </span>
+                    </div>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-normal">
+                      {tool.desc}
+                    </p>
+                  </div>
+                  <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-orange-600 dark:text-orange-400 group-hover:translate-x-1 transition-transform">
+                    <span>Convert Archive</span>
+                    <ArrowRightIcon className="w-4 h-4" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* Section 4: Why Our Archive Tools Are Private */}
+          <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl space-y-6" aria-labelledby="archive-privacy-breakdown">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-orange-500/20 border border-orange-500/30 rounded-2xl">
+                <ShieldExclamationIcon className="w-7 h-7 text-orange-400" />
+              </div>
+              <div>
+                <h2 id="archive-privacy-breakdown" className="text-2xl font-bold text-white">
+                  {tHub('archivePrivacyTitle')}
+                </h2>
+                <p className="text-gray-300 text-sm">
+                  Full client-side decompression and encryption without remote file transfers.
+                </p>
+              </div>
+            </div>
+            <div className="prose prose-invert max-w-none text-gray-300 text-sm sm:text-base leading-relaxed space-y-4">
+              <p>
+                ZIP and compressed archive files frequently contain collections of private documents, sensitive business backups, code repositories, or personal memories. Traditional web converters upload the entire archive to remote servers where it must be extracted and repacked.
+              </p>
+              <p>
+                ConvertAllNow executes all archive operations directly inside your web browser. Utilizing optimized JavaScript engines and compiled WebAssembly compression libraries, your device parses the archive file structure, uncompresses data chunks, and creates output archives locally in your browser memory.
+              </p>
+              <p>
+                No archive files, file names, or uncompressed contents are ever uploaded to our servers. Your data remains strictly on your device.
+              </p>
+            </div>
+          </section>
+
+          {/* Section 5: FAQs */}
+          <div className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 p-8 sm:p-10">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-8">
+              Frequently Asked Questions About Archive & ZIP Tools
+            </h2>
+            <div className="space-y-6">
+              {faqs.map((faq, index) => (
+                <div key={index} className="border-b border-gray-100 dark:border-gray-800 pb-6 last:border-0 last:pb-0">
+                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                    {faq.question}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base leading-relaxed">
+                    {faq.answer}
                   </p>
                 </div>
-              </Link>
-            ))}
+              ))}
+            </div>
           </div>
-          <ToolContentSection
-            toolName={title}
-            introduction={
-              <>
-                <p>
-                  The Archive Tools Hub offers secure, in-browser utilities for extracting and creating compressed archive files. Whether you need to unzip a downloaded folder, open a RAR file on a Mac, or compress multiple documents into a single ZIP for sharing, our tools make archive management effortless.
-                </p>
-                <p className="mt-3">
-                  Traditionally, handling formats like 7Z or RAR required downloading specialized third-party software. Our platform uses WebAssembly ports of robust unarchiving libraries to extract files directly in your browser's memory. Your files are never uploaded, ensuring complete privacy for your archived data.
-                </p>
-              </>
-            }
-            features={[
-              { title: "Broad Compatibility", description: "Extract ZIP, RAR, 7Z, TAR, and GZ files instantly." },
-              { title: "No Software Needed", description: "Manage archives directly in the browser without installing apps." },
-              { title: "Zero Uploads", description: "Files are extracted locally in memory for absolute privacy." },
-              { title: "Fast Compression", description: "Quickly bundle multiple files into a single ZIP for easy sharing." },
-            ]}
-            howToSteps={howToSteps}
-            faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
-          />
         </div>
       </ToolLayoutWithAds>
     </>

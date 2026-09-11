@@ -58,10 +58,12 @@ const getHowToSteps = (t: any) => [
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
+
   
   const t = await getTranslations({ locale, namespace: 'UnlockPdfSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const faqs = getFAQs(t);
   const howToSteps = getHowToSteps(t);

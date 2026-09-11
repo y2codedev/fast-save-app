@@ -1,6 +1,8 @@
 'use client';
 
 import React, { ReactNode } from 'react';
+import { usePathname } from '@/i18n/routing';
+import { canShowAds } from '@/lib/advertising';
 import AdsenseAd from '@/components/AdsenseAd';
 import RelatedTools from '@/components/sections/RelatedTools';
 
@@ -27,16 +29,18 @@ export default function ToolLayoutWithAds({
 }: ToolLayoutWithAdsProps) {
   const adsenseSlotId = process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID as string;
 
+  const showAds = canShowAds(usePathname()) && !!adsenseSlotId;
+
   return (
-    <div suppressHydrationWarning className="flex flex-col min-h-screen py-4 md:py-8">
-      <div suppressHydrationWarning className="mx-auto w-full max-w-[1600px] px-2 sm:px-4 flex flex-col xl:flex-row gap-4 lg:gap-6 flex-1">
+    <div suppressHydrationWarning className="flex flex-col py-4 sm:py-6">
+      <div suppressHydrationWarning className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col xl:flex-row gap-6 lg:gap-8 flex-1">
 
         {/* Left Sidebar (Desktop Only) */}
-        <aside className="hidden xl:block w-[160px] 2xl:w-[200px] flex-shrink-0">
-          <div className="pt-4">
-            <AdsenseAd height="h-[600px]" slot={adsenseSlotId} className="rounded-xl shadow-sm border border-gray-200 dark:border-gray-800" />
+        {showAds && <aside className="hidden xl:block w-[160px] 2xl:w-[180px] flex-shrink-0">
+          <div className="pt-4 sticky top-24">
+            <AdsenseAd height="h-[600px]" slot={adsenseSlotId} className="rounded-2xl shadow-xs border border-gray-200 dark:border-gray-800" />
           </div>
-        </aside>
+        </aside>}
 
         {/* Main Content Area */}
         <main className="flex-1 min-w-0 w-full">
@@ -44,18 +48,18 @@ export default function ToolLayoutWithAds({
         </main>
 
         {/* Right Sidebar (Desktop Only) */}
-        <aside className="hidden xl:block w-[160px] 2xl:w-[200px] flex-shrink-0">
-          <div className="pt-4">
-            <AdsenseAd height="h-[600px]" slot={adsenseSlotId} className="rounded-xl shadow-sm border border-gray-200 dark:border-gray-800" />
+        {showAds && <aside className="hidden xl:block w-[160px] 2xl:w-[180px] flex-shrink-0">
+          <div className="pt-4 sticky top-24">
+            <AdsenseAd height="h-[600px]" slot={adsenseSlotId} className="rounded-2xl shadow-xs border border-gray-200 dark:border-gray-800" />
           </div>
-        </aside>
+        </aside>}
       </div>
 
       {/* Multiplex Ad / Pre-Footer Ad */}
-      {adsenseSlotId && (
-        <div className="mx-auto w-full max-w-7xl px-4 mt-16 mb-4">
+      {showAds && (
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8 mt-12 mb-4">
           <div className="text-center text-xs text-gray-400 mb-2 uppercase tracking-wider font-semibold">Advertisement</div>
-          <AdsenseAd height="h-[250px] sm:h-[300px]" slot={adsenseSlotId} className="rounded-2xl shadow-md border border-gray-200 dark:border-gray-800" />
+          <AdsenseAd height="h-[250px] sm:h-[300px]" slot={adsenseSlotId} className="rounded-2xl shadow-xs border border-gray-200 dark:border-gray-800" />
         </div>
       )}
 

@@ -55,13 +55,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
 
   
   
 
   const t = await getTranslations({ locale, namespace: 'PdfToDocxSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const schemaData = createToolSchema({
     name: t('title'),
@@ -112,27 +113,32 @@ const howToSteps = [
           <VisualBreadcrumb items={breadcrumbItems} />
           <PdfToDocxConverter />
           <ToolContentSection
-            toolName={t('title')}
+            toolName="PDF to Word Converter"
             introduction={
               <>
                 <p>
-                  PDF to DOCX Converter is an essential free online tool that transforms your uneditable PDF documents back into fully editable Microsoft Word format. Whether you need to update a resume, edit a contract, or reuse content from a report, our tool reconstructs the document structure directly in your browser.
+                  PDF to Word Converter converts text-based PDF documents into editable Microsoft Word (.docx) files directly in your web browser. It extracts paragraphs, headings, and text content while attempting to preserve basic document structure where supported.
                 </p>
                 <p className="mt-3">
-                  Unlike simple text extractors, our advanced conversion engine intelligently recognizes paragraphs, lists, tables, and images, attempting to preserve the original layout as closely as possible. Because everything runs client-side using WebAssembly, your sensitive documents are never uploaded to external servers, guaranteeing total privacy.
+                  All conversion logic runs client-side on your device without transmitting documents across external servers. Please note: this tool is engineered for digital, text-based PDF files. Scanned, flattened paper documents require dedicated Optical Character Recognition (OCR) to reconstruct editable text.
                 </p>
               </>
             }
             features={[
-              { title: 'Accurate Layout Retention', description: 'Maintains paragraphs, tables, and font styles where possible.' },
-              { title: 'Client-Side Processing', description: '100% private conversion. Your PDFs never leave your device.' },
-              { title: 'No File Size Limits', description: 'Convert large documents without cloud storage restrictions.' },
-              { title: 'Instant Download', description: 'Get your editable DOCX file immediately after local conversion.' },
+              { title: 'Editable DOCX Output', description: 'Converts text-based PDF pages into standard Word documents you can open in Microsoft Word, Google Docs, or LibreOffice.' },
+              { title: 'Local In-Browser Conversion', description: 'Documents are processed locally on your device — confidential agreements and records never upload to cloud servers.' },
+              { title: 'No Installation or Sign-Up', description: 'Works instantly on desktop and mobile web browsers without software downloads or registration.' },
+              { title: 'Free to Use', description: 'No hidden paywalls, document limits, or watermarks added to your output.' },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+            supportedFormats={['PDF (Text-based)', 'Outputs DOCX']}
+            relatedLinks={[
+              { label: 'Convert Word DOCX back to PDF', href: '/word-to-pdf', context: 'Need to convert your edited Word file back into a PDF?' },
+              { label: 'Merge multiple PDFs together', href: '/merge-pdf', context: 'Want to combine multiple documents before converting?' },
+              { label: 'Extract PDF pages as images', href: '/pdf-to-jpg', context: 'Need individual pages as images instead of Word text?' },
+            ]}
+            privacyNote="Your files remain private. Document parsing and DOCX generation happen entirely within your browser."
           />
         </div>
       </ToolLayoutWithAds>

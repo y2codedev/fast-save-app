@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ImagePlus, UploadCloud, Download, AlertCircle, Loader2, RefreshCcw } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 import { useTranslations } from 'next-intl';
+import PrivacyBadge from '@/components/ui/PrivacyBadge';
 
 export default function PdfToJpg() {
   const t = useTranslations('PdfToJpg');
@@ -23,10 +24,11 @@ export default function PdfToJpg() {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const selectedFile = acceptedFiles[0];
     if (selectedFile) {
+      if (selectedFile.type !== 'application/pdf') {
+        setError('Please upload a valid PDF file.');
+        return;
+      }
       setFile(selectedFile);
-      setImages([]);
-      setError(null);
-      setProgress(0);
       processPdf(selectedFile);
     }
   }, []);
@@ -39,34 +41,29 @@ export default function PdfToJpg() {
 
   const processPdf = async (pdfFile: File) => {
     setLoading(true);
+    setError(null);
+    setImages([]);
+    setProgress(0);
+
     try {
       const arrayBuffer = await pdfFile.arrayBuffer();
-      // Use getDocument without .promise to get the loading task in v3
-      const loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
-      const pdf = await loadingTask.promise;
+      const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
       const numPages = pdf.numPages;
-      const extractedImages = [];
+      const extractedImages: { url: string; index: number }[] = [];
 
       for (let i = 1; i <= numPages; i++) {
         const page = await pdf.getPage(i);
-        const viewport = page.getViewport({ scale: 2.0 }); // 2x scale for high quality
-
+        const viewport = page.getViewport({ scale: 2.0 }); // High quality render
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        if (!context) continue;
-
-        // White background (PDF pages are transparent by default)
         canvas.height = viewport.height;
         canvas.width = viewport.width;
-        context.fillStyle = '#FFFFFF';
-        context.fillRect(0, 0, canvas.width, canvas.height);
 
         const renderContext = {
-          canvasContext: context,
-          viewport: viewport,
+          canvasContext: context!,
+          viewport: viewport
         };
 
-        // In v3, render() returns a promise directly 
         await page.render(renderContext).promise;
         const imgUrl = canvas.toDataURL('image/jpeg', 0.9);
         extractedImages.push({ url: imgUrl, index: i });
@@ -100,34 +97,35 @@ export default function PdfToJpg() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl space-y-8 px-4 sm:px-6">
-      <div className="text-center mb-8">
-        <div className=" inline-flex items-center whitespace-nowrap justify-center w-16 h-16 rounded-full bg-cyan-100 dark:bg-cyan-900/30 mb-4">
-            <ImagePlus className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
+    <div className="mx-auto w-full max-w-5xl space-y-5 px-4 sm:px-6 py-2">
+      <div className="text-center mb-4">
+        <div className="inline-flex items-center whitespace-nowrap justify-center w-12 h-12 rounded-full bg-cyan-100 dark:bg-cyan-900/30 mb-2">
+            <ImagePlus className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
         </div>
-        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
             {t('titleMain')} {t('titleHighlight')}
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-3">
             {t('subtitle')}
         </p>
+        <PrivacyBadge text="PDF pages are rendered locally via PDF.js. Your documents never touch external servers." />
       </div>
 
       {!file && !loading && (
         <div 
           {...getRootProps()} 
-          className={`relative group cursor-pointer border-2 border-dashed rounded-3xl p-12 text-center transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm ${isDragActive ? 'border-cyan-500 bg-cyan-50/50 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-700 hover:border-cyan-400 hover:bg-cyan-50/30 dark:hover:bg-cyan-900/10'}`}
+          className={`relative group cursor-pointer border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm ${isDragActive ? 'border-cyan-500 bg-cyan-50/50 dark:bg-cyan-900/20' : 'border-gray-300 dark:border-gray-700 hover:border-cyan-400 hover:bg-cyan-50/30 dark:hover:bg-cyan-900/10'}`}
         >
           <input {...getInputProps()} />
-          <div className="flex flex-col items-center justify-center space-y-4">
-            <div className={`p-4 rounded-full transition-colors duration-300 ${isDragActive ? 'bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-400' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-cyan-50 dark:group-hover:bg-cyan-900/30 group-hover:text-cyan-500'}`}>
-              <UploadCloud className="w-10 h-10" />
+          <div className="flex flex-col items-center justify-center space-y-2 sm:space-y-3">
+            <div className={`p-3 rounded-full transition-colors duration-300 ${isDragActive ? 'bg-cyan-100 dark:bg-cyan-900/50 text-cyan-600 dark:text-cyan-400' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-cyan-50 dark:group-hover:bg-cyan-900/30 group-hover:text-cyan-500'}`}>
+              <UploadCloud className="w-8 h-8" />
             </div>
             <div>
-              <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+              <p className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-200">
                 {isDragActive ? t('uploadDesc') : t('uploadTitle')}
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
                 Only single .pdf file is supported.
               </p>
             </div>

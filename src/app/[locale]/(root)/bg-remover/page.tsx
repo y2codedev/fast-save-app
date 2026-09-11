@@ -59,13 +59,14 @@ const howToSteps = [
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
 
   
   
 
   const t = await getTranslations({ locale, namespace: 'BgRemoverSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const schemaData = createToolSchema({
     name: t('title'), description: t('description'),

@@ -58,13 +58,14 @@ const howToSteps = [
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
 
   
   
 
   const t = await getTranslations({ locale, namespace: 'PdfToJpgSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const schemaData = createToolSchema({
     name: t('title'), description: t('description'),
@@ -76,7 +77,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'PDF Tools', href: '/pdf-tools' },
-    { name: 'PDF To JPG' },
+    { name: t('title') },
   ];
 
   const relatedTools = RELATED_TOOLS['pdf-to-jpg'] || [];
@@ -103,19 +104,24 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
             introduction={
               <>
                 <p>
-                  PDF to JPG Converter allows you to instantly extract pages from any PDF document and save them as high-quality JPG images. This is incredibly useful when you need to share a specific page on social media, insert a document into a presentation, or bypass systems that don't accept PDF uploads.
+                  PDF to JPG Converter is a free online tool that extracts and converts every page of a PDF document into high-resolution JPG images — entirely in your browser without any file uploads. Whether you need to extract charts, images, diagrams, or individual pages from a PDF for editing, sharing, or embedding in presentations, this tool delivers professional results instantly.
                 </p>
                 <p className="mt-3">
-                  Our tool utilizes advanced client-side rendering (PDF.js) to draw each page of your document directly onto an HTML canvas, which is then saved as a JPG. Since the rendering happens entirely on your GPU/CPU, it is extremely fast and completely private. No documents are uploaded to any server.
+                  Our tool uses PDF.js, Mozilla's open-source PDF rendering library, to process your documents locally. Each page is rendered at high resolution and exported as a separate JPG image. You can convert all pages or select specific pages to extract. All images are available for individual download or as a single ZIP archive.
+                </p>
+                <p className="mt-3">
+                  Converting PDFs to images is commonly needed when you want to embed PDF content in documents that don't support PDFs, share on platforms that only accept images (like Instagram or Twitter), edit content in photo editors, or create thumbnail previews of document pages.
                 </p>
               </>
             }
             features={[
-              { title: 'High-Quality Rendering', description: 'Produces crisp, clear JPG images of your PDF pages.' },
-              { title: 'Page-by-Page Extraction', description: 'Converts each page of a multi-page PDF into separate images.' },
-              { title: 'Total Privacy', description: 'Files are rendered locally; zero server uploads.' },
-              { title: 'Fast Conversion', description: "Leverages your device's processing power for instant results." },
-            ]}
+              { title: 'High-Resolution Output', description: 'Pages rendered at 150-300 DPI for crisp, clear images.' },
+              { title: 'All Pages or Select Pages', description: 'Convert the full PDF or choose specific page ranges.' },
+              { title: 'JPG & PNG Output', description: 'Choose JPG for smaller files or PNG for lossless quality.' },
+              { title: 'Browser-Based (PDF.js)', description: 'No file upload — all rendering happens on your device.' },
+              { title: 'Batch ZIP Download', description: 'Download all converted images as a single ZIP archive.' },
+              { title: 'No Watermarks', description: 'Images are clean with no added branding or watermarks.' },
+            ]}
             howToSteps={howToSteps}
             useCases={[
               'Extracting charts and diagrams from PDF reports',

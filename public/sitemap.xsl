@@ -86,8 +86,6 @@
             <thead>
               <tr>
                 <th>URL</th>
-                <th>Priority</th>
-                <th>Change Freq</th>
                 <th>Last Modified</th>
               </tr>
             </thead>
@@ -99,8 +97,6 @@
                       <xsl:value-of select="sitemap:loc"/>
                     </a>
                   </td>
-                  <td><xsl:value-of select="sitemap:priority"/></td>
-                  <td><xsl:value-of select="sitemap:changefreq"/></td>
                   <td><xsl:value-of select="sitemap:lastmod"/></td>
                 </tr>
               </xsl:for-each>

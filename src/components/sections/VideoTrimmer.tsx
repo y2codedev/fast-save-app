@@ -328,25 +328,25 @@ function VideoTrimmer() {
   const playbackProgressPercent = (relativeCurrentTime / trimmedLength) * 100;
 
   return (
-    <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
-      <div className="relative max-w-5xl mx-auto w-full">
+    <div className="w-full py-2">
+      <div className="relative max-w-4xl mx-auto w-full">
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.4 }}
         >
-          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-            <FiScissors className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div className="inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3 border border-gray-200 dark:border-gray-700">
+            <FiScissors className="h-4 w-4 text-indigo-600" />
+            <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3">
             {t('titleMain')}
             <span className="block text-indigo-600 dark:text-indigo-400">{t('titleHighlight')}</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
         </motion.div>
@@ -357,7 +357,7 @@ function VideoTrimmer() {
             ref={trimmerRef}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="mb-12 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 border border-white/20 dark:border-gray-700/50 shadow-2xl scroll-mt-4"
+            className="mb-6 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-3xl p-6 border border-white/20 dark:border-gray-700/50 shadow-2xl scroll-mt-4"
           >
             {!loaded ? (
               <div className="flex flex-col items-center justify-center py-12 space-y-4">
@@ -663,16 +663,16 @@ function VideoTrimmer() {
             )}
           </motion.div>
         ) : (
-          <div className="grid grid-cols-1 gap-8 mb-12">
+          <div className="w-full mb-6">
             <AnimatePresence mode="wait">
               {conversionStep === 'upload' && (
                 <motion.div
-                  className="relative max-w-2xl mx-auto w-full"
-                  initial={{ opacity: 0, y: 20 }}
+                  className="relative max-w-3xl mx-auto w-full"
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                 >
-                  <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-8 h-full">
+                  <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 h-full">
                     <FileUploader
                       videoFile={videoFile}
                       handleFileChange={handleFileChange}

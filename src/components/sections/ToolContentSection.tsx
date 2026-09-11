@@ -108,37 +108,32 @@ export default function ToolContentSection({
   privacyNote,
 }: ToolContentSectionProps) {
   const t = useTranslations('ToolContent');
+  const guidanceT = useTranslations('SiteGuidance');
   const locale = useLocale();
   const getT = useGetT();
-  const today = lastUpdated || new Date().toISOString().split('T')[0];
+  const today = lastUpdated;
 
   return (
-    <section className="w-full space-y-8 mt-8" aria-label={`Information about ${toolName}`}>
+    <section className="w-full space-y-5 mt-4 sm:mt-6" aria-label={`Information about ${toolName}`}>
       {/* Meta Bar */}
-      <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded-xl px-4 py-3 border border-gray-200/60 dark:border-gray-700/40">
+      <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800/50 rounded-xl px-4 py-2.5 border border-gray-200/60 dark:border-gray-700/40">
         <span className="flex items-center gap-1.5">
-          <svg className="h-3.5 w-3.5 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          <svg className="h-3.5 w-3.5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
           </svg>
-          <span><strong className="text-gray-700 dark:text-gray-300">{t('byAuthor')}</strong></span>
+          <strong className="text-gray-700 dark:text-gray-300">{guidanceT('privacyTitle')}</strong>
         </span>
-        <span className="flex items-center gap-1.5">
+        {today && <span className="flex items-center gap-1.5">
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
           <span>{t('updated')} <time dateTime={today}>{today}</time></span>
-        </span>
-        <span className="flex items-center gap-1.5">
-          <svg className="h-3.5 w-3.5 text-green-500" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-          </svg>
-          <span className="text-green-600 dark:text-green-400 font-medium">{t('badgeText')}</span>
-        </span>
+        </span>}
       </div>
 
       {/* Introduction */}
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 md:p-6">
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-3">
           {t('whatIs', { toolName: getT(toolName) })}
         </h2>
         <div className="prose prose-sm sm:prose dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -170,8 +165,8 @@ export default function ToolContentSection({
 
       {/* Features */}
       {features && features.length > 0 && (
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('keyFeatures')}</h2>
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 md:p-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('keyFeatures')}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {features.map((feature, i) => (
               <div key={i} className="flex gap-3">
@@ -194,8 +189,8 @@ export default function ToolContentSection({
 
       {/* How It Works */}
       {howToSteps && howToSteps.length > 0 && (
-        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{t('howItWorks')}</h2>
+        <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 md:p-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-4">{t('howItWorks')}</h2>
           <ol className="space-y-4">
             {howToSteps.map((step, i) => (
               <li key={i} className="flex gap-4">

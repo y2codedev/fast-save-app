@@ -14,8 +14,11 @@ function nestMessages(messages: any) {
       const isSimpleIdentifierKey = /^[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(key);
 
       if (!isSimpleIdentifierKey) {
-        const safeKey = key.includes('.') ? key.replace(/\./g, '_') : key;
-        result[safeKey] = value;
+        // next-intl reserves dots for nested paths and rejects the entire
+        // namespace when a sentence-style or extension key contains one.
+        // Those legacy entries are display-text fallbacks handled by useGetT;
+        // omit them here so valid semantic translation keys remain usable.
+        if (!key.includes('.')) result[key] = value;
       } else {
         const parts = key.split('.');
         let current = result;
@@ -35,9 +38,6 @@ function nestMessages(messages: any) {
 
         if (canNest && typeof current === 'object' && current !== null) {
           current[parts[parts.length - 1]] = value;
-        } else {
-          const safeKey = key.includes('.') ? key.replace(/\./g, '_') : key;
-          result[safeKey] = value;
         }
       }
     }

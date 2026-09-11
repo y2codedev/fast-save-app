@@ -11,7 +11,7 @@ export { ZIP_TOOL_CONFIGS } from '@/lib/zip-tools';
 
 export default function ZipToolConverter({ slug }: { slug: string }) {
   const t = useTranslations('Navigation');
-  const tCommon = useTranslations('CommonContent');
+  const guidance = useTranslations('SiteGuidance');
   const config = ZIP_TOOL_CONFIGS[slug];
   const [file, setFile] = useState<File | null>(null);
   const [files, setFiles] = useState<File[]>([]);
@@ -81,17 +81,17 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
   }, [slug]);
 
   const onDrop = useCallback((acceptedFiles: File[], fileRejections: any[]) => {
+    if (fileRejections.length > 0 || acceptedFiles.some(file => file.size === 0)) {
+      setError(guidance('fileError'));
+      return;
+    }
+    setError(null);
     if (isMultiFile) {
       setFiles(prev => [...prev, ...acceptedFiles]);
     } else if (acceptedFiles.length > 0) {
       handleFileChange(acceptedFiles[0]);
-    } else if (fileRejections.length > 0) {
-      if (fileRejections[0]?.file) {
-        handleFileChange(fileRejections[0].file);
-      }
     }
-    setError(null);
-  }, [handleFileChange, isMultiFile]);
+  }, [handleFileChange, isMultiFile, guidance]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -157,10 +157,13 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
         setProgress(100);
 
         if (slug === 'view-zip') {
-          const fileList = Object.keys(zip.files).map((name) => ({
-            name,
-            dir: zip.files[name].dir,
-            size: (zip.files[name] as any)._data?.uncompressedSize || 0,
+          const fileList = await Promise.all(Object.keys(zip.files).map(async (name) => {
+            const entry = zip.files[name];
+            return {
+              name,
+              dir: entry.dir,
+              size: entry.dir ? 0 : (await entry.async('uint8array')).byteLength,
+            };
           }));
           setResultUrl(JSON.stringify(fileList));
           setStep('complete');
@@ -355,54 +358,54 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
   const hasFiles = isMultiFile ? files.length > 0 : !!file;
 
   return (
-    <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div className="w-full py-2">
       <div className="relative max-w-5xl mx-auto w-full">
         {/* Title Section */}
         <motion.div
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+          <div className="inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3 border border-gray-200 dark:border-gray-700 shadow-sm">
             {slug === 'protect-zip' ? (
-              <FiLock className="h-5 w-5 text-indigo-600" />
+              <FiLock className="h-4 w-4 text-indigo-600" />
             ) : slug === 'unlock-zip-file' ? (
-              <FiUnlock className="h-5 w-5 text-indigo-600" />
+              <FiUnlock className="h-4 w-4 text-indigo-600" />
             ) : slug === 'split-zip' ? (
-              <FiLayers className="h-5 w-5 text-indigo-600" />
+              <FiLayers className="h-4 w-4 text-indigo-600" />
             ) : (
-              <FiArchive className="h-5 w-5 text-indigo-600" />
+              <FiArchive className="h-4 w-4 text-indigo-600" />
             )}
-            <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-              {t(config.toolName)}
+            <span className="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-300">
+              {config.toolName}
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3 tracking-tight">
             {config.fromFormat}{" "}
             <span className="text-indigo-600 dark:text-indigo-400">to {config.toFormat}</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {t(config.description)}
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            {config.description}
           </p>
         </motion.div>
 
         {/* Step Indicators */}
         <motion.div
-          className="flex justify-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          className="flex justify-center mb-6"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-sm border border-white/20 dark:border-gray-700/50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
               {[
                 { s: 'upload', label: tCommon('ztcUpload'), icon: FiUpload },
                 { s: 'processing', label: tCommon('ztcProcess'), icon: FiArchive },
                 { s: 'complete', label: tCommon('ztcDownload'), icon: FiDownload },
               ].map(({ s, label, icon: Icon }, index) => (
-                <div key={s} className="flex items-center gap-4">
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+                <div key={s} className="flex items-center gap-3 sm:gap-4">
+                  <div className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 transition-all duration-300 ${
                     step === s
                       ? 'bg-gradient-to-br from-indigo-500 to-violet-500 border-transparent text-white shadow-md'
                       : step === 'complete' && s === 'complete'
@@ -412,12 +415,12 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                           : 'bg-gray-100 border-gray-300 text-gray-400 dark:bg-gray-700 dark:border-gray-600'
                   }`}>
                     {step === 'complete' && s === 'complete' ? (
-                      <FiCheck className="w-6 h-6" />
+                      <FiCheck className="w-5 h-5" />
                     ) : (
-                      <Icon className="w-6 h-6" />
+                      <Icon className="w-5 h-5" />
                     )}
                   </div>
-                  <span className={`font-medium ${
+                  <span className={`text-sm sm:text-base font-medium ${
                     step === s || (step === 'complete' && s === 'complete')
                       ? 'text-indigo-600 dark:text-indigo-400'
                       : 'text-gray-500 dark:text-gray-400'
@@ -425,7 +428,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
                     {label}
                   </span>
                   {index < 2 && (
-                    <div className={`w-8 h-0.5 mx-4 ${
+                    <div className={`w-6 sm:w-8 h-0.5 mx-2 sm:mx-4 ${
                       index === 0 || step === 'processing' || step === 'complete'
                         ? 'bg-indigo-600'
                         : 'bg-gray-300 dark:bg-gray-600'

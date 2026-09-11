@@ -77,6 +77,14 @@ export const TOOL_KEYWORDS: Record<string, string[]> = {
     'merge pdf without signup', 'free pdf combiner', 'combine pdf no watermark',
     'merge multiple pdf files online', 'pdf joiner free', 'merge pdf documents',
   ],
+  'split-pdf': [
+    'split pdf online free', 'extract pdf pages', 'split pdf pages', 'pdf splitter',
+    'separate pdf pages', 'extract pages from pdf free', 'pdf page extractor online',
+  ],
+  'resize-image': [
+    'resize image online free', 'change image dimensions', 'resize photo online',
+    'scale image online', 'image resizer free', 'resize jpg png webp',
+  ],
   'image-to-pdf': [
     'image to pdf converter', 'jpg to pdf', 'png to pdf', 'convert image to pdf',
     'photo to pdf', 'picture to pdf converter free', 'multiple images to pdf',
@@ -287,7 +295,7 @@ export const TOOL_KEYWORDS: Record<string, string[]> = {
 export function getSitemapPriority(path: string): number {
   if (path === '' || path === '/') return 1.0;
   if (['/pdf-tools', '/image-tools', '/video-tools', '/archive-tools'].includes(path)) return 0.9;
-  if (['/about', '/privacy', '/terms', '/contact', '/sitemap'].includes(path)) return 0.5;
+  if (['/about', '/privacy', '/terms', '/contact', '/sitemap', '/file-privacy-security'].includes(path)) return 0.5;
   return 0.8; // Tool pages
 }
 
@@ -299,12 +307,28 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
   'merge-pdf': [
     { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract images from PDF' },
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
+    { name: 'Split PDF', path: '/split-pdf', desc: 'Extract pages from PDF' },
     { name: 'PDF to Word', path: '/pdf-to-docx', desc: 'Convert PDF to editable Word' },
     { name: 'Word to PDF', path: '/word-to-pdf', desc: 'Convert Word docs to PDF' },
     { name: 'Unlock PDF', path: '/unlock-pdf', desc: 'Remove PDF password' },
     { name: 'Protect PDF', path: '/protect-pdf', desc: 'Add password to PDF' },
     { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },
     { name: 'Markdown to PDF', path: '/md-converter', desc: 'Markdown to PDF converter' },
+  ],
+  'split-pdf': [
+    { name: 'Merge PDF', path: '/merge-pdf', desc: 'Combine multiple PDFs' },
+    { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract images from PDF' },
+    { name: 'PDF to Word', path: '/pdf-to-docx', desc: 'Convert PDF to editable Word' },
+    { name: 'Protect PDF', path: '/protect-pdf', desc: 'Add password to PDF' },
+    { name: 'Unlock PDF', path: '/unlock-pdf', desc: 'Remove PDF password' },
+    { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
+  ],
+  'resize-image': [
+    { name: 'Image Compressor', path: '/image-compressor', desc: 'Compress images online' },
+    { name: 'Pro Image Editor', path: '/image-editor', desc: 'Edit and crop images' },
+    { name: 'Image Converter', path: '/photo', desc: 'Convert image formats' },
+    { name: 'Remove Background', path: '/bg-remover', desc: 'AI background removal' },
+    { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
   ],
   'pdf-to-jpg': [
     { name: 'Merge PDF', path: '/merge-pdf', desc: 'Combine multiple PDFs' },
@@ -373,7 +397,6 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
     { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract images from PDF' },
     { name: 'Video Compressor', path: '/video-compressor', desc: 'Reduce video file size' },
-    { name: 'Image to SVG', path: '/image-to-svg', desc: 'Convert image to SVG' },
     { name: 'Video to GIF', path: '/video-to-gif', desc: 'Create GIFs from videos' },
   ],
   'image-editor': [
@@ -383,7 +406,6 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
     { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract images from PDF' },
     { name: 'Video to GIF', path: '/video-to-gif', desc: 'Create GIFs from videos' },
-    { name: 'Image to SVG', path: '/image-to-svg', desc: 'Convert image to SVG' },
     { name: 'Video Compressor', path: '/video-compressor', desc: 'Reduce video size' },
   ],
   'bg-remover': [
@@ -393,7 +415,6 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Images to PDF' },
     { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract images from PDF' },
     { name: 'Video to GIF', path: '/video-to-gif', desc: 'Create GIFs from videos' },
-    { name: 'Image to SVG', path: '/image-to-svg', desc: 'Convert image to SVG' },
     { name: 'Video Compressor', path: '/video-compressor', desc: 'Reduce video size' },
   ],
   'photo': [
@@ -402,7 +423,6 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'Remove Background', path: '/bg-remover', desc: 'AI background removal' },
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
     { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract images from PDF' },
-    { name: 'Image to SVG', path: '/image-to-svg', desc: 'Convert image to SVG' },
     { name: 'Video to GIF', path: '/video-to-gif', desc: 'Create GIFs from videos' },
     { name: 'Video Compressor', path: '/video-compressor', desc: 'Reduce video size' },
   ],
@@ -493,7 +513,6 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Images to PDF' },
   ],
-
   'word-to-html': [
     { name: 'Word to PDF', path: '/word-to-pdf', desc: 'Convert Word to PDF' },
     { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },
@@ -510,12 +529,6 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
     { name: 'Markdown to PDF', path: '/md-converter', desc: 'Markdown to PDF' },
     { name: 'Word to HTML', path: '/word-to-html', desc: 'Convert Word to HTML' },
     { name: 'PDF to HTML', path: '/pdf-to-html', desc: 'Convert PDF to HTML' },
-  ],
-  'image-to-svg': [
-    { name: 'Image Converter', path: '/photo', desc: 'Convert image formats' },
-    { name: 'Remove Background', path: '/bg-remover', desc: 'AI background removal' },
-    { name: 'Image Compressor', path: '/image-compressor', desc: 'Reduce image size' },
-    { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert images to PDF' },
   ],
   'fb-video': [
     { name: 'IG Downloader', path: '/ig-downloader', desc: 'Download Instagram videos' },
@@ -692,6 +705,7 @@ export const RELATED_TOOLS: Record<string, { name: string; path: string; desc: s
  */
 export const TOOL_CATEGORY_MAP: Record<string, { name: string; path: string }> = {
   '/merge-pdf': { name: 'PDF Tools', path: '/pdf-tools' },
+  '/split-pdf': { name: 'PDF Tools', path: '/pdf-tools' },
   '/pdf-to-jpg': { name: 'PDF Tools', path: '/pdf-tools' },
   '/image-to-pdf': { name: 'PDF Tools', path: '/pdf-tools' },
   '/unlock-pdf': { name: 'PDF Tools', path: '/pdf-tools' },
@@ -702,10 +716,10 @@ export const TOOL_CATEGORY_MAP: Record<string, { name: string; path: string }> =
   '/pdf-to-html': { name: 'PDF Tools', path: '/pdf-tools' },
   '/md-converter': { name: 'PDF Tools', path: '/pdf-tools' },
   '/image-compressor': { name: 'Image Tools', path: '/image-tools' },
+  '/resize-image': { name: 'Image Tools', path: '/image-tools' },
   '/image-editor': { name: 'Image Tools', path: '/image-tools' },
   '/bg-remover': { name: 'Image Tools', path: '/image-tools' },
   '/photo': { name: 'Image Tools', path: '/image-tools' },
-  '/image-to-svg': { name: 'Image Tools', path: '/image-tools' },
   '/video-compressor': { name: 'Video & Audio Tools', path: '/video-tools' },
   '/video-trimmer': { name: 'Video & Audio Tools', path: '/video-tools' },
   '/video-to-gif': { name: 'Video & Audio Tools', path: '/video-tools' },
@@ -748,6 +762,7 @@ export const TOOL_CATEGORY_MAP: Record<string, { name: string; path: string }> =
 export const CATEGORY_TOOLS: Record<string, { name: string; path: string; desc: string }[]> = {
   pdf: [
     { name: 'Merge PDF', path: '/merge-pdf', desc: 'Combine multiple PDF files into one document online for free' },
+    { name: 'Split PDF', path: '/split-pdf', desc: 'Extract pages or split PDF files into separate documents online' },
     { name: 'PDF to JPG', path: '/pdf-to-jpg', desc: 'Extract and convert PDF pages to high-quality JPG images' },
     { name: 'Image to PDF', path: '/image-to-pdf', desc: 'Convert JPG, PNG, and other images to a PDF document' },
     { name: 'PDF to Word', path: '/pdf-to-docx', desc: 'Convert PDF files to editable Microsoft Word documents' },
@@ -760,6 +775,7 @@ export const CATEGORY_TOOLS: Record<string, { name: string; path: string; desc: 
   ],
   image: [
     { name: 'Image Compressor', path: '/image-compressor', desc: 'Compress JPG, PNG, WebP images without losing quality' },
+    { name: 'Resize Image', path: '/resize-image', desc: 'Resize image dimensions in pixels or percentage without losing quality' },
     { name: 'Pro Image Editor', path: '/image-editor', desc: 'Resize, crop, rotate, and edit images in your browser' },
     { name: 'Remove Background', path: '/bg-remover', desc: 'AI-powered background removal for any image' },
     { name: 'Image Converter', path: '/photo', desc: 'Convert between JPG, PNG, WebP, GIF, and more formats' },
@@ -788,9 +804,7 @@ export const CATEGORY_TOOLS: Record<string, { name: string; path: string; desc: 
     { name: 'TAR to ZIP', path: '/tar-to-zip', desc: 'Convert TAR archives to ZIP format' },
     { name: 'TAR.GZ to ZIP', path: '/tar-gz-to-zip', desc: 'Convert TAR.GZ archives to ZIP' },
     { name: 'GZ to ZIP', path: '/gz-to-zip', desc: 'Convert GZ files to ZIP format' },
-    { name: 'ZIP to RAR', path: '/zip-to-rar', desc: 'Convert ZIP archives to RAR format' },
     { name: 'ZIP to 7Z', path: '/zip-to-7z', desc: 'Convert ZIP archives to 7-Zip format' },
     { name: 'ZIP to TAR.GZ', path: '/zip-to-tar-gz', desc: 'Convert ZIP to TAR.GZ format' },
   ],
 };
-
