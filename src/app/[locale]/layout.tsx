@@ -136,8 +136,7 @@ export default async function RootLayout({
       strategy="afterInteractive"
       crossOrigin="anonymous"
     />
-    {/* Analytics remains opt-in until consent handling is configured. */}
-    {process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" && <>
+    {/* Google Analytics */}
     <Script
       src="https://www.googletagmanager.com/gtag/js?id=G-D77QJC0T0J"
       strategy="afterInteractive"
@@ -150,7 +149,6 @@ export default async function RootLayout({
         gtag('config', 'G-D77QJC0T0J');
       `}
     </Script>
-    </>}
   </head>
   <body className="overflow-x-hidden min-h-screen flex flex-col" suppressHydrationWarning>
         <Script id="register-sw" strategy="afterInteractive">
