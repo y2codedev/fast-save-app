@@ -93,6 +93,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const tNav = await getTranslations({ locale, namespace: 'Navigation' });
+  const tCommon = await getTranslations({ locale, namespace: 'CommonContent' });
+  const translatedName = tNav('ZIP to 7Z');
   const title = PAGE_TITLE;
   const description = PAGE_DESCRIPTION;
 

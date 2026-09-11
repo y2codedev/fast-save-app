@@ -28,6 +28,8 @@ try {
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  // Keep production builds within the memory available on the deployment host.
+  productionBrowserSourceMaps: false,
   async headers() {
     // Only apply COOP/COEP to routes that need SharedArrayBuffer (FFmpeg WASM, 7z-wasm)
     const coopCoepRoutes = [
@@ -87,6 +89,9 @@ const nextConfig: NextConfig = {
   output: 'standalone',
   experimental: {
     optimizePackageImports: ['@/constants', 'lucide-react', 'react-icons', '@heroicons/react'],
+    serverSourceMaps: false,
+    webpackBuildWorker: true,
+    webpackMemoryOptimizations: true,
   },
   webpack: (config, { isServer }) => {
     config.resolve.alias.canvas = false;

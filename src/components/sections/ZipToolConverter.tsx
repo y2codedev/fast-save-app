@@ -11,6 +11,7 @@ export { ZIP_TOOL_CONFIGS } from '@/lib/zip-tools';
 
 export default function ZipToolConverter({ slug }: { slug: string }) {
   const t = useTranslations('Navigation');
+  const tCommon = useTranslations('CommonContent');
   const guidance = useTranslations('SiteGuidance');
   const config = ZIP_TOOL_CONFIGS[slug];
   const [file, setFile] = useState<File | null>(null);

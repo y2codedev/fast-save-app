@@ -127,7 +127,7 @@ export default async function RootLayout({
   return (
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
-    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     {/* Google AdSense Site Verification & Delivery */}
     <Script
       id="google-adsense"

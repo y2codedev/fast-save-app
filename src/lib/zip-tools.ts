@@ -9,7 +9,7 @@ export interface ZipToolConfig {
 }
 
 export const ZIP_TOOL_CONFIGS: Record<string, ZipToolConfig> = {
-  'create-zip': { slug: 'create-zip', toolName: 'Create ZIP', description: 'Create a new ZIP archive from your files', fromFormat: 'Files', toFormat: 'ZIP', acceptMime: { '*/*': [] }, color: 'indigo' },
+  'create-zip': { slug: 'create-zip', toolName: 'Create ZIP', description: 'Create a new ZIP archive from your files', fromFormat: 'Files', toFormat: 'ZIP', acceptMime: {}, color: 'indigo' },
   'unzip-zip': { slug: 'unzip-zip', toolName: 'Unzip ZIP', description: 'Extract files from a ZIP archive', fromFormat: 'ZIP', toFormat: 'Files', acceptMime: { 'application/zip': ['.zip'] }, color: 'emerald' },
   'edit-zip': { slug: 'edit-zip', toolName: 'Edit ZIP', description: 'Modify contents of a ZIP archive', fromFormat: 'ZIP', toFormat: 'ZIP', acceptMime: { 'application/zip': ['.zip'] }, color: 'amber' },
   'merge-zip': { slug: 'merge-zip', toolName: 'Merge ZIP', description: 'Combine multiple ZIP archives into one', fromFormat: 'ZIP', toFormat: 'ZIP', acceptMime: { 'application/zip': ['.zip'] }, color: 'rose' },

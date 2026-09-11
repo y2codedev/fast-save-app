@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const tNav = await getTranslations({ locale, namespace: 'Navigation' });
   const translatedName = tNav(config.toolName) || config.toolName;
-  const translatedDesc = tNav(config.description) || config.description;
+  const translatedDesc = config.description;
   const title = `${translatedName} - Free Online Archive Tool | ConvertAllNow`;
   const description = translatedDesc;
 
@@ -57,7 +57,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const tNav = await getTranslations({ locale, namespace: 'Navigation' });
   const tCommon = await getTranslations({ locale, namespace: 'CommonContent' });
   const translatedName = tNav(config.toolName) || config.toolName;
-  const translatedDesc = tNav(config.description) || config.description;
+  const translatedDesc = config.description;
   const title = typeof config !== "undefined" && config.toolName ? `${translatedName} Converter` : "Online Tool";
   const description = typeof config !== "undefined" && config.description ? translatedDesc : "Free online tool.";
 
