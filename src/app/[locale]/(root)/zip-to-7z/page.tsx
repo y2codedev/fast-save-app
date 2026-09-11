@@ -89,8 +89,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+  const title = PAGE_TITLE;
+  const description = PAGE_DESCRIPTION;
 
   
   

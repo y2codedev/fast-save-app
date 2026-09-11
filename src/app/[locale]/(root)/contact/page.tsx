@@ -1,13 +1,17 @@
 import React from 'react';
-import { Mail, Clock, MapPin, ExternalLink } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
-import { getCanonicalUrl, RELATED_TOOLS, getAlternateLanguages, getOgLocale } from '@/lib/seo';
+import { getCanonicalUrl, getAlternateLanguages, getOgLocale } from '@/lib/seo';
+import WebPageSchema from '@/components/seo/WebPageSchema';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
+import FAQSchema from '@/components/seo/FAQSchema';
+import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
+import ContactSection from '@/components/sections/ContactSection';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Contact' });
-  const title = `${t('title')} ${t('titleHighlight')} - ConvertAllNow`;
+  const title = `${t('title')} ${t('titleHighlight')} - ConvertAllNow Support`;
   const description = t('subtitle');
 
   return {
@@ -28,95 +32,65 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+const FAQS = [
+  {
+    question: 'Are my uploaded files ever stored or viewed on your servers?',
+    answer: 'No, absolutely not. ConvertAllNow tools process your files directly inside your web browser using WebAssembly and client-side JavaScript. Your files never leave your device, ensuring total confidentiality and privacy.'
+  },
+  {
+    question: 'Why did my file conversion fail or freeze?',
+    answer: 'Because processing happens entirely on your device, conversions rely on your available system RAM and browser performance. If a file is unusually large or the browser is low on memory, try closing other heavy browser tabs and re-running the conversion.'
+  },
+  {
+    question: 'Is ConvertAllNow completely free to use?',
+    answer: 'Yes! All 50+ file conversion, compression, and editing tools on ConvertAllNow are 100% free for both personal and commercial use. No account creation, payment, or watermark is ever required.'
+  },
+  {
+    question: 'How do I request support for a new file format?',
+    answer: 'Select "New Tool Request" above and send us an email specifying the input and desired output formats. We constantly evaluate user requests when expanding our tool suite.'
+  }
+];
+
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-
-  
-
   const t = await getTranslations({ locale, namespace: 'Contact' });
 
+  const breadcrumbItems = [
+    { name: 'Home', href: '/' },
+    { name: `${t('title')} ${t('titleHighlight')}`, href: '/contact' },
+  ];
+
+  const translations = {
+    title: t('title'),
+    titleHighlight: t('titleHighlight'),
+    subtitle: t('subtitle'),
+    emailSupport: t('emailSupport'),
+    emailDesc: t('emailDesc'),
+    responseTime: t('responseTime'),
+    responseDesc: t('responseDesc'),
+    company: t('company'),
+    companyName: t('companyName'),
+    companyDesc: t('companyDesc'),
+    ctaBtn: t('ctaBtn'),
+    ctaTitle: t('ctaTitle'),
+  };
+
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-      <div className="max-w-3xl w-full">
-        
-        {/* Header */}
-        <div className="text-center space-y-4 mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white">
-            {t('title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-violet-600">{t('titleHighlight')}</span>
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {t('subtitle')}
-          </p>
-        </div>
+    <>
+      <WebPageSchema
+        title={`${t('title')} ${t('titleHighlight')} – ConvertAllNow Support`}
+        description={t('subtitle')}
+        path="/contact"
+        locale={locale}
+        breadcrumb={breadcrumbItems}
+      />
+      <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
+      <FAQSchema faqs={FAQS} />
 
-        {/* Contact Information Cards */}
-        <div className="bg-white dark:bg-gray-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
-          <div className="flex flex-col md:flex-row items-center md:items-start gap-8 justify-between">
-            
-            <div className="space-y-8 flex-1">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Mail className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">{t('emailSupport')}</h4>
-                  <a 
-                    href="mailto:support@convertallnow.com" 
-                    className="text-lg font-bold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition-colors inline-flex items-center gap-2"
-                  >
-                    support@convertallnow.com
-                    <ExternalLink className="w-4 h-4" />
-                  </a>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                    {t('emailDesc')}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center shrink-0">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">{t('responseTime')}</h4>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {t('responseDesc')}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 bg-rose-100 dark:bg-rose-900/40 text-rose-600 dark:text-rose-400 rounded-xl flex items-center justify-center shrink-0">
-                  <MapPin className="w-6 h-6" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-2">{t('company')}</h4>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    {t('companyName')}<br/>
-                    {t('companyDesc')}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Visual Element / CTA */}
-            <div className="flex-1 w-full flex flex-col items-center justify-center p-8 bg-gradient-to-br from-indigo-50 to-violet-50 dark:from-gray-700/30 dark:to-gray-800/50 rounded-2xl border border-indigo-100 dark:border-gray-700">
-               <Mail className="w-16 h-16 text-indigo-300 dark:text-indigo-900/50 mb-4" />
-               <p className="text-center text-gray-600 dark:text-gray-300 font-medium mb-6">
-                 {t('ctaTitle')}
-               </p>
-               <a 
-                 href="mailto:support@convertallnow.com"
-                 className="w-full text-center px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg"
-               >
-                 {t('ctaBtn')}
-               </a>
-            </div>
-
-          </div>
-        </div>
+      <div className="w-full min-h-screen bg-slate-50 dark:bg-gray-950 py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+        <VisualBreadcrumb items={breadcrumbItems} className="mb-4 sm:mb-8" />
+        <ContactSection translations={translations} />
       </div>
-    </div>
+    </>
   );
 }

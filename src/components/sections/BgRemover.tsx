@@ -3,10 +3,11 @@
 import { Button, ErrorMessage, FileUploadArea, Loader, ResetButton, AdsenseAd } from "@/constants"
 import Image from "next/image"
 import { useState, useRef, useEffect } from 'react'
-import { FiUpload, FiDownload, FiImage, FiCheckCircle, FiTrash2, FiZap } from 'react-icons/fi'
+import { FiUpload, FiDownload, FiImage, FiCheckCircle, FiTrash2 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkle } from "lucide-react";
 import { useTranslations } from 'next-intl';
+import PrivacyBadge from '@/components/ui/PrivacyBadge';
 
 export default function BgRemover() {
   const t = useTranslations('BgRemover');
@@ -16,6 +17,12 @@ export default function BgRemover() {
   const [isProcessing, setIsProcessing] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    return () => {
+      if (resultImage) URL.revokeObjectURL(resultImage)
+    }
+  }, [resultImage])
 
   const handleFileUpload = (file: File) => {
     setError(null)
@@ -61,6 +68,7 @@ export default function BgRemover() {
   }
 
   const resetAll = () => {
+    if (resultImage) URL.revokeObjectURL(resultImage)
     setImage(null)
     setResultImage(null)
     setError(null)
@@ -69,78 +77,34 @@ export default function BgRemover() {
     }
   }
 
-  const features = [
-    {
-      icon: FiZap,
-      title: t('feature1Title'),
-      description: t('feature1Desc')
-    },
-    {
-      icon: FiDownload,
-      title: t('feature2Title'),
-      description: t('feature2Desc')
-    },
-    {
-      icon: Sparkle,
-      title: t('feature3Title'),
-      description: t('feature3Desc')
-    }
-  ]
-
   return (
     <>
       <div className="relative max-w-7xl mx-auto">
         {/* Header Section */}
         <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-6"
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-            <Sparkle className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div className="inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3 border border-gray-200 dark:border-gray-700">
+            <Sparkle className="h-4 w-4 text-indigo-600" />
+            <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3">
             {t('titleMain')}
             <span className="block text-indigo-600 dark:text-indigo-400">{t('titleHighlight')}</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
-        </motion.div>
-
-        {/* Features Grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {features.map((feature, index) => (
-            <div 
-              key={index}
-              className="bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm p-6 rounded-2xl text-center group hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
-            >
-              <div className="flex justify-center mb-4">
-                <div className="bg-gradient-to-br from-indigo-500 to-violet-500 p-3 rounded-xl group-hover:scale-110 transition-transform duration-300">
-                  <feature.icon className="h-6 w-6 text-white" />
-                </div>
-              </div>
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-                {feature.title}
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {feature.description}
-              </p>
-            </div>
-          ))}
+          <PrivacyBadge className="mt-4" />
         </motion.div>
 
         {/* Main Converter Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           {/* Upload Panel */}
           <motion.div 
             className="relative"
@@ -333,7 +297,7 @@ export default function BgRemover() {
                       animate={{ opacity: 1, y: 0 }}
                       className="w-full h-full p-4 space-y-6"
                     >
-                      <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-600 dark:to-gray-700 rounded-xl overflow-hidden">
+                      <div className="relative h-64 rounded-xl overflow-hidden bg-[linear-gradient(45deg,#e5e7eb_25%,transparent_25%),linear-gradient(-45deg,#e5e7eb_25%,transparent_25%),linear-gradient(45deg,transparent_75%,#e5e7eb_75%),linear-gradient(-45deg,transparent_75%,#e5e7eb_75%)] bg-[length:20px_20px] bg-[position:0_0,0_10px,10px_-10px,-10px_0px] dark:bg-gray-700">
                         <Image
                           src={resultImage}
                           alt="Background removed"

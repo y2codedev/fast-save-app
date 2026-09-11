@@ -14,10 +14,10 @@ type IndentSize = '2 spaces' | '4 spaces' | '8 spaces' | 'Tab' | 'Compact';
 type LayoutMode = 'split' | 'stacked';
 
 const SAMPLE_DATA: Record<DataFormat, string> = {
-  JSON: `{\n  "company": "ConvertAllNow",\n  "version": 2.5,\n  "isFree": true,\n  "features": [\n    "100% In-Browser Execution",\n    "Zero Server Uploads",\n    "Lightning Fast Processing"\n  ],\n  "stats": {\n    "tools": 35,\n    "users": 500000\n  }\n}`,
-  XML: `<root>\n  <company>ConvertAllNow</company>\n  <version>2.5</version>\n  <isFree>true</isFree>\n  <features>\n    <feature>100% In-Browser Execution</feature>\n    <feature>Zero Server Uploads</feature>\n    <feature>Lightning Fast Processing</feature>\n  </features>\n  <stats>\n    <tools>35</tools>\n    <users>500000</users>\n  </stats>\n</root>`,
-  YAML: `company: ConvertAllNow\nversion: 2.5\nisFree: true\nfeatures:\n  - 100% In-Browser Execution\n  - Zero Server Uploads\n  - Lightning Fast Processing\nstats:\n  tools: 35\n  users: 500000`,
-  CSV: `id,name,category,rating,is_free\n1,Data Formatter,Developer Tools,4.9,true\n2,Word to HTML,Document Converter,4.8,true\n3,PDF to DOCX,PDF Utilities,5.0,true\n4,Pro Image Editor,Graphics,4.9,true`
+  JSON: `{\n  "user": {\n    "id": 1042,\n    "name": "Asha Rao",\n    "email": "asha@example.com",\n    "active": true\n  },\n  "preferences": {\n    "theme": "dark",\n    "notifications": false\n  }\n}`,
+  XML: `<server>\n  <environment>production</environment>\n  <region>ap-south-1</region>\n  <logging enabled="true">info</logging>\n  <cache>\n    <ttlSeconds>900</ttlSeconds>\n  </cache>\n</server>`,
+  YAML: `server:\n  host: api.example.com\n  port: 443\n  tls: true\n  timeouts:\n    connectSeconds: 5\n    requestSeconds: 30`,
+  CSV: `sku,name,category,price,in_stock\nTSHIRT-001,Cotton T-Shirt,Apparel,24.99,true\nMUG-002,Ceramic Mug,Home,12.50,true\nBAG-003,Canvas Tote,Accessories,18.00,false`
 };
 
 export default function DataFormatter() {

@@ -55,13 +55,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
 
   
   
 
   const t = await getTranslations({ locale, namespace: 'PdfToDocxSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const schemaData = createToolSchema({
     name: t('title'),
@@ -111,27 +112,32 @@ const howToSteps = [
           <VisualBreadcrumb items={breadcrumbItems} />
           <PdfToDocxConverter />
           <ToolContentSection
-            toolName={t('title')}
+            toolName="PDF to Word Converter"
             introduction={
               <>
                 <p>
-                  {t('title')} is a free online tool to process your files securely in your browser. Our tool ensures your data remains private while delivering fast results. No installation or registration is required.
+                  PDF to Word Converter converts text-based PDF documents into editable Microsoft Word (.docx) files directly in your web browser. It extracts paragraphs, headings, and text content while attempting to preserve basic document structure where supported.
                 </p>
                 <p className="mt-3">
-                  This tool operates entirely on your device using advanced web technologies. This means your files are never uploaded to our servers, eliminating privacy risks and avoiding file size limits typically imposed by cloud services.
+                  All conversion logic runs client-side on your device without transmitting documents across external servers. Please note: this tool is engineered for digital, text-based PDF files. Scanned, flattened paper documents require dedicated Optical Character Recognition (OCR) to reconstruct editable text.
                 </p>
               </>
             }
             features={[
-              { title: '100% Free & Unlimited', description: 'Use the tool as many times as you want without any restrictions or fees.' },
-              { title: 'Private & Secure', description: 'All processing happens locally in your browser. Your files never leave your device.' },
-              { title: 'No Installation', description: 'Works directly in Chrome, Safari, Firefox, and Edge on any device.' },
-              { title: 'Fast Processing', description: 'Leverages your device\'s hardware for near-instant results.' },
+              { title: 'Editable DOCX Output', description: 'Converts text-based PDF pages into standard Word documents you can open in Microsoft Word, Google Docs, or LibreOffice.' },
+              { title: 'Local In-Browser Conversion', description: 'Documents are processed locally on your device — confidential agreements and records never upload to cloud servers.' },
+              { title: 'No Installation or Sign-Up', description: 'Works instantly on desktop and mobile web browsers without software downloads or registration.' },
+              { title: 'Free to Use', description: 'No hidden paywalls, document limits, or watermarks added to your output.' },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+            supportedFormats={['PDF (Text-based)', 'Outputs DOCX']}
+            relatedLinks={[
+              { label: 'Convert Word DOCX back to PDF', href: '/word-to-pdf', context: 'Need to convert your edited Word file back into a PDF?' },
+              { label: 'Merge multiple PDFs together', href: '/merge-pdf', context: 'Want to combine multiple documents before converting?' },
+              { label: 'Extract PDF pages as images', href: '/pdf-to-jpg', context: 'Need individual pages as images instead of Word text?' },
+            ]}
+            privacyNote="Your files remain private. Document parsing and DOCX generation happen entirely within your browser."
           />
         </div>
       </ToolLayoutWithAds>

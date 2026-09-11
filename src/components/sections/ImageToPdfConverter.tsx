@@ -10,6 +10,7 @@ import { DndContext, closestCenter, KeyboardSensor, MouseSensor, TouchSensor, us
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, rectSortingStrategy, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { useTranslations } from 'next-intl';
+import PrivacyBadge from '@/components/ui/PrivacyBadge';
 
 type PdfImage = {
   id: string;
@@ -237,46 +238,46 @@ export default function ImageToPdfConverter() {
   };
 
   return (
-    <div className="w-full min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <div className="w-full py-2">
       <div className="relative max-w-7xl mx-auto w-full">
         {/* Header Section */}
         <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-6"
+          initial={false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className=" inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200 dark:border-gray-700">
-            <FiFileText className="h-5 w-5 text-indigo-600" />
-            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div className="inline-flex items-center whitespace-nowrap gap-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full px-4 py-1.5 mb-3 border border-gray-200 dark:border-gray-700">
+            <FiFileText className="h-4 w-4 text-indigo-600" />
+            <span className="text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300">
               {t('titleBadge')}
             </span>
           </div>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-6">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3">
             {t('titleMain')}
             <span className="block text-indigo-600 dark:text-indigo-400"> {t('titleHighlight')}</span>
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>
         </motion.div>
 
         {/* Conversion Steps */}
         <motion.div 
-          className="flex justify-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          className="flex justify-center mb-6"
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/20 dark:border-gray-700/50">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+          <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-2xl p-3 sm:p-4 shadow-sm border border-white/20 dark:border-gray-700/50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
               {[
                 { step: 'upload', label: 'Select Images', icon: FiImage },
                 { step: 'convert', label: 'Generate PDF', icon: FiLayers },
                 { step: 'complete', label: 'Download', icon: FiDownload },
               ].map(({ step, label, icon: Icon }, index) => (
-                <div key={step} className="flex items-center gap-4">
-                  <div className={`flex items-center justify-center w-12 h-12 rounded-full border-2 transition-all duration-300 ${
+                <div key={step} className="flex items-center gap-3 sm:gap-4">
+                  <div className={`flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full border-2 transition-all duration-300 ${
                     conversionStep === step 
                       ? 'bg-indigo-600 border-indigo-600 text-white' 
                       : conversionStep === 'complete' && step === 'complete'
@@ -287,7 +288,7 @@ export default function ImageToPdfConverter() {
                   }`}>
                     <Icon className="h-5 w-5" />
                   </div>
-                  <span className={`font-medium ${
+                  <span className={`text-sm sm:text-base font-medium ${
                     conversionStep === step || (conversionStep === 'complete' && step === 'complete')
                       ? 'text-gray-900 dark:text-white'
                       : 'text-gray-400 dark:text-gray-500'
@@ -295,7 +296,7 @@ export default function ImageToPdfConverter() {
                     {label}
                   </span>
                   {index < 2 && (
-                    <div className="hidden sm:block w-12 h-[2px] bg-gray-200 dark:bg-gray-700 ms-4" />
+                    <div className="hidden sm:block w-8 sm:w-12 h-[2px] bg-gray-200 dark:bg-gray-700 ms-2 sm:ms-4" />
                   )}
                 </div>
               ))}
@@ -304,7 +305,7 @@ export default function ImageToPdfConverter() {
         </motion.div>
 
         {/* Main Interface Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 items-stretch">
           {/* Left Panel: Upload & Manage Images */}
           <motion.div 
             className="relative lg:col-span-8 flex flex-col"
@@ -323,6 +324,8 @@ export default function ImageToPdfConverter() {
                 onChange={handleFileChange}
               />
                 
+              <PrivacyBadge className="mb-4" />
+
               {pdfImages.length === 0 ? (
                 <div 
                   className={`border-2 border-dashed rounded-2xl p-8 text-center transition-all duration-300 cursor-pointer flex-1 flex flex-col items-center justify-center min-h-[300px] ${

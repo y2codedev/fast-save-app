@@ -131,6 +131,9 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
   const logs: string[] = [];
 
   try {
+    if (['rar', 'iso'].includes((targetFormat || '').toLowerCase().replace(/^\./, ''))) {
+      throw new Error('This browser engine cannot create RAR or ISO files. Choose ZIP or 7Z instead.');
+    }
     const inputData = new Uint8Array(inputBuffer);
     if (inputData.byteLength < 4) {
       throw new Error('Wrong file format: The selected file is too small to be a valid archive.');
@@ -251,7 +254,7 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
       let outputFilename = `output.${fmt}`;
       logs.length = 0;
 
-      const baseCompressArgs = ['a', `-t${fmt === 'rar' || fmt === '7z' ? '7z' : fmt === 'iso' || fmt === 'zip' ? 'zip' : 'zip'}`, outputFilename, '/work/*', '-r'];
+      const baseCompressArgs = ['a', `-t${fmt === '7z' ? '7z' : 'zip'}`, outputFilename, '/work/*', '-r'];
       
       if (compressPassword) {
         baseCompressArgs.push(`-p${compressPassword}`);
@@ -264,7 +267,7 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
       }
 
       try {
-        if (fmt === 'zip' || fmt === '7z' || fmt === 'rar' || fmt === 'iso' || compressPassword || splitSize) {
+        if (fmt === 'zip' || fmt === '7z' || compressPassword || splitSize) {
           sevenZip.callMain(baseCompressArgs);
         } else if (fmt === 'tar') {
           sevenZip.callMain(['a', '-ttar', outputFilename, '/work/*', '-r']);
@@ -318,9 +321,9 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
           try {
             const fData = sevenZip.FS.readFile(`/${fname}`);
             if (fData && fData.byteLength > 0) {
-              const buf = fData.byteOffset === 0 && fData.byteLength === fData.buffer.byteLength
+              const buf = (fData.byteOffset === 0 && fData.byteLength === fData.buffer.byteLength
                 ? fData.buffer
-                : fData.slice().buffer;
+                : fData.slice().buffer) as ArrayBuffer;
               
               const cleanName = fname.replace(/^output/, baseName);
               splitFiles.push({ name: cleanName, buffer: buf });
@@ -343,7 +346,7 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
             outputName: splitFiles[0].name,
             splitFiles,
           },
-          transferList
+          { transfer: transferList }
         );
         return;
       }
@@ -360,10 +363,11 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
         throw new Error('Output file not generated: The generated archive is empty.');
       }
 
-      const transferBuffer =
+      const transferBuffer = (
         outputData.byteOffset === 0 && outputData.byteLength === outputData.buffer.byteLength
           ? outputData.buffer
-          : outputData.slice().buffer;
+          : outputData.slice().buffer
+      ) as ArrayBuffer;
 
       const outputName = `${baseName}${compressPassword ? '_protected' : extractPassword ? '_unlocked' : ''}.${fmt}`;
 
@@ -375,7 +379,7 @@ self.onmessage = async (event: MessageEvent<WorkerInputMessage>): Promise<void> 
           outputBuffer: transferBuffer,
           outputName,
         },
-        [transferBuffer]
+        { transfer: [transferBuffer] }
       );
     } finally {
       cleanVirtualFilesystem(sevenZip.FS);

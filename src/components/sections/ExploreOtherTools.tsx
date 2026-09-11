@@ -12,12 +12,12 @@ export default function ExploreOtherTools() {
   const t = useTranslations('Explore');
 
   return (
-    <div className="text-center mt-12 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12">
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+    <div className="text-center mt-6 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 md:p-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
               {t('Explore More Tools')}
           </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 max-w-2xl mx-auto">
               {t('Explore subtitle')}
           </p>
           <div className="flex flex-wrap justify-center gap-3">

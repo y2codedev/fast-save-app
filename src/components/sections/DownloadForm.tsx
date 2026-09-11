@@ -16,6 +16,7 @@ export default function DownloadForm() {
   const pathName = usePathname();
   const urlPath = TopHeader_Item?.find(item => item?.path === pathName) || TopHeader_Item?.find(item => item?.path === '')!;
   const t = useTranslations('Form');
+  const guidance = useTranslations('SiteGuidance');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,13 +29,13 @@ export default function DownloadForm() {
     }
 
     const trimmedUrl = url.trim();
-    
+
     // Smart Input Validation
     const isValidPlatform = (link: string) => {
       try {
         const parsedUrl = new URL(link);
         const host = parsedUrl.hostname.toLowerCase();
-        
+
         const allowedDomains = [
           'instagram.com', 'facebook.com', 'fb.watch',
           'snapchat.com', 't.snapchat.com',
@@ -42,7 +43,7 @@ export default function DownloadForm() {
           'pinterest.com', 'pin.it',
           'tiktok.com', 'twitter.com', 'x.com'
         ];
-        
+
         return allowedDomains.some(domain => host === domain || host.endsWith('.' + domain));
       } catch (e) {
         return false;
@@ -98,13 +99,14 @@ export default function DownloadForm() {
   return (
     <div id="download-section" className="relative w-full">
       <div className="relative mx-auto max-w-4xl">
+        <p className="mb-6 text-sm leading-relaxed text-gray-700 dark:text-gray-300">{guidance('privacy')}</p>
         {/* Modern Download Form Pill */}
         <div className="relative">
-          <motion.form 
+          <motion.form
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 100, damping: 15 }}
-            onSubmit={handleSubmit} 
+            onSubmit={handleSubmit}
             className="relative z-10 flex flex-col md:flex-row items-center gap-3 bg-white/40 dark:bg-gray-800/40 backdrop-blur-xl p-2 md:p-3 rounded-3xl md:rounded-full shadow-2xl border border-white/40 dark:border-gray-700/50 transition-all focus-within:ring-4 focus-within:ring-indigo-500/20"
           >
             <div className="flex items-center flex-1 w-full ps-4 md:ps-6">
@@ -126,12 +128,12 @@ export default function DownloadForm() {
                 </button>
               )}
             </div>
-            
+
             <button
               type="submit"
               disabled={isLoading || !url}
               className={`w-full md:w-auto font-bold py-4 px-10 rounded-2xl md:rounded-full flex items-center justify-center gap-2 transition-all duration-300 ${
-                isLoading || !url 
+                isLoading || !url
                 ? 'bg-gray-200 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
                 : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-500/30 hover:-translate-y-1'
               }`}
@@ -141,31 +143,12 @@ export default function DownloadForm() {
             </button>
           </motion.form>
 
-          {/* Quick Tips */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-sm font-medium text-gray-600 dark:text-gray-300"
-          >
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
-              <span>{t('No Watermark')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-indigo-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,0.5)]"></div>
-              <span>{t('High Quality')}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-violet-500 rounded-full shadow-[0_0_8px_rgba(139,92,246,0.5)]"></div>
-              <span>{t('Fast Download')}</span>
-            </div>
-          </motion.div>
+
         </div>
 
         <AnimatePresence>
           {downloadData && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, height: 0, y: -20 }}
               animate={{ opacity: 1, height: 'auto', y: 0 }}
               exit={{ opacity: 0, height: 0, y: -20 }}

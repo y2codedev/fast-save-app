@@ -56,6 +56,15 @@ const nextConfig: NextConfig = {
     ]);
     return [
       ...coopHeaders,
+      // Webpack emits dedicated workers into this directory. Their responses must
+      // opt into COEP too, otherwise isolated pages cannot start the workers.
+      {
+        source: '/_next/static/:path*',
+        headers: [
+          { key: 'Cross-Origin-Embedder-Policy', value: 'require-corp' },
+          { key: 'Cross-Origin-Resource-Policy', value: 'same-origin' },
+        ],
+      },
       {
         source: '/wasm/:path*',
         headers: [

@@ -59,13 +59,14 @@ const howToSteps = [
 
 const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
 
   
   
 
   const t = await getTranslations({ locale, namespace: 'ImageToPdfSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const schemaData = createToolSchema({
     name: t('title'), description: t('description'),
@@ -138,6 +139,12 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
               'Sort images by filename before uploading to save reordering time.',
               'Use A4 page size for standard documents and reports.',
               'For photo books, use "Fit to Image" mode to preserve each photo\'s original aspect ratio.',
+            ]}
+            relatedLinks={[
+              { label: 'Combine multiple PDFs with Merge PDF', href: '/merge-pdf', context: 'Need to combine your new PDF with existing documents?' },
+              { label: 'Compress image files first', href: '/image-compressor', context: 'Want a smaller PDF file size?' },
+              { label: 'Protect your PDF with a password', href: '/protect-pdf', context: 'Need to encrypt or secure your converted PDF?' },
+              { label: 'Extract images from PDF', href: '/pdf-to-jpg', context: 'Need to extract pictures back out from a PDF?' },
             ]}
             faqs={faqs}
           />

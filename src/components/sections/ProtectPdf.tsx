@@ -5,6 +5,7 @@ import { FiLock, FiUpload, FiDownload, FiCheck, FiFileText, FiEye, FiEyeOff } fr
 import { motion, AnimatePresence } from 'framer-motion';
 import { encryptPDF } from '@pdfsmaller/pdf-encrypt';
 import { useTranslations } from 'next-intl';
+import PrivacyBadge from '@/components/ui/PrivacyBadge';
 
 export default function ProtectPdf() {
   const t = useTranslations('ProtectPdf');
@@ -93,44 +94,32 @@ export default function ProtectPdf() {
   };
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
-      <div className="text-center mb-10">
-        <motion.div 
-          className=" inline-flex items-center whitespace-nowrap justify-center p-3 bg-indigo-100 dark:bg-indigo-900/40 rounded-2xl mb-4"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+    <div className="w-full max-w-5xl mx-auto py-2">
+      <div className="text-center mb-6">
+        <div 
+          className="inline-flex items-center whitespace-nowrap justify-center p-2.5 bg-indigo-100 dark:bg-indigo-900/40 rounded-2xl mb-3"
         >
-          <FiLock className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />
-        </motion.div>
-        <motion.h1 
-          className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
+          <FiLock className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+        </div>
+        <h1 
+          className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-3 tracking-tight"
         >
           {t('titleMain')}
-        </motion.h1>
-        <motion.p 
-          className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+        </h1>
+        <p 
+          className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
         >
           {t('subtitle')}
-        </motion.p>
+        </p>
       </div>
 
       {/* Main Interface */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 items-stretch max-w-5xl mx-auto">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6 items-stretch max-w-5xl mx-auto">
         {/* Left Panel: Upload */}
-        <motion.div 
+        <div 
           className="relative lg:col-span-8 flex flex-col"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 min-h-[400px] flex-1 flex flex-col">
+          <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-white/20 dark:border-gray-700/50 p-6 sm:p-8 min-h-[300px] flex-1 flex flex-col">
             
             <input
               type="file"
@@ -139,6 +128,8 @@ export default function ProtectPdf() {
               ref={fileInputRef}
               onChange={handleFileChange}
             />
+
+            <PrivacyBadge className="mb-4" />
               
             {!file ? (
               <div 
@@ -178,7 +169,7 @@ export default function ProtectPdf() {
               </div>
             )}
           </div>
-        </motion.div>
+        </div>
 
         {/* Right Panel: Settings & Protect */}
         <motion.div 

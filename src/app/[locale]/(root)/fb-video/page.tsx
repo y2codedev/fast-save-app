@@ -19,11 +19,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         publisher: "ConvertAllNow",
         creator: "ConvertAllNow",
         robots: {
-            index: true,
-            follow: true,
-            nocache: false,
-            "max-image-preview": "large",
-            "max-video-preview": "-1",
+            index: false,
+            follow: false,
         },
 
         alternates: {

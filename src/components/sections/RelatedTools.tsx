@@ -38,10 +38,10 @@ export default function RelatedTools({
   return (
     <section
       aria-label={displayTitle}
-      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-12 mt-4"
+      className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6 mt-4"
     >
-      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl shadow-sm hover:shadow-xl transition-shadow border border-gray-200 dark:border-gray-700/50 p-6 md:p-8">
-        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
+      <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl border border-gray-200 dark:border-gray-700/50 p-5 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-4">
           <h2 className="text-xl font-bold text-gray-900 dark:text-white">
             {displayTitle}
           </h2>

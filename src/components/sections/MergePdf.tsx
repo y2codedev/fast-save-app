@@ -6,6 +6,7 @@ import { PDFDocument } from 'pdf-lib';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Layers, UploadCloud, X, ArrowUp, ArrowDown, Download, AlertCircle, FilePlus } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import PrivacyBadge from '@/components/ui/PrivacyBadge';
 
 export default function MergePdf() {
   const t = useTranslations('MergePdf');
@@ -83,34 +84,35 @@ export default function MergePdf() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-4xl space-y-8 px-4 sm:px-6">
-      <div className="text-center mb-8">
-        <div className=" inline-flex items-center whitespace-nowrap justify-center w-16 h-16 rounded-full bg-rose-100 dark:bg-rose-900/30 mb-4">
-            <Layers className="w-8 h-8 text-rose-600 dark:text-rose-400" />
+    <div className="mx-auto w-full max-w-4xl space-y-5 px-4 sm:px-6 py-2">
+      <div className="text-center mb-4">
+        <div className="inline-flex items-center whitespace-nowrap justify-center w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-900/30 mb-2">
+            <Layers className="w-6 h-6 text-rose-600 dark:text-rose-400" />
         </div>
-        <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white mb-4">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 dark:text-white mb-2">
             {t('titleMain')}
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        </h1>
+        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-3">
             {t('subtitle')}
         </p>
+        <PrivacyBadge text="Your PDFs are merged locally in your browser using pdf-lib. No documents are uploaded to our servers." />
       </div>
 
       {/* Dropzone */}
       <div 
         {...getRootProps()} 
-        className={`relative group cursor-pointer border-2 border-dashed rounded-3xl p-12 text-center transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm ${isDragActive ? 'border-rose-500 bg-rose-50/50 dark:bg-rose-900/20' : 'border-gray-300 dark:border-gray-700 hover:border-rose-400 hover:bg-rose-50/30 dark:hover:bg-rose-900/10'}`}
+        className={`relative group cursor-pointer border-2 border-dashed rounded-2xl p-6 sm:p-8 text-center transition-all duration-300 bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm ${isDragActive ? 'border-rose-500 bg-rose-50/50 dark:bg-rose-900/20' : 'border-gray-300 dark:border-gray-700 hover:border-rose-400 hover:bg-rose-50/30 dark:hover:bg-rose-900/10'}`}
       >
         <input {...getInputProps()} />
-        <div className="flex flex-col items-center justify-center space-y-4">
-          <div className={`p-4 rounded-full transition-colors duration-300 ${isDragActive ? 'bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-rose-50 dark:group-hover:bg-rose-900/30 group-hover:text-rose-500'}`}>
-            <UploadCloud className="w-10 h-10" />
+        <div className="flex flex-col items-center justify-center space-y-2 sm:space-y-3">
+          <div className={`p-3 rounded-full transition-colors duration-300 ${isDragActive ? 'bg-rose-100 dark:bg-rose-900/50 text-rose-600 dark:text-rose-400' : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 group-hover:bg-rose-50 dark:group-hover:bg-rose-900/30 group-hover:text-rose-500'}`}>
+            <UploadCloud className="w-8 h-8" />
           </div>
           <div>
-            <p className="text-lg font-semibold text-gray-700 dark:text-gray-200">
+            <p className="text-base sm:text-lg font-semibold text-gray-700 dark:text-gray-200">
               {isDragActive ? t('uploadDesc') : t('uploadTitle')}
             </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
               Only .pdf files are supported.
             </p>
           </div>

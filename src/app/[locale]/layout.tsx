@@ -7,7 +7,8 @@ import Footer from "@/components/sections/Footer";
 import FallbackLoader from "@/components/ui/FallbackLoader";
 import ThemeProviderWrapper from "@/components/sections/ThemeProviderWrapper";
 import ToastProvider from "@/components/sections/ToastProvider";
-import AdsenseAd from "@/components/AdsenseAd";
+import AdvertisingScript from "@/components/AdvertisingScript";
+import { ADS_CLIENT_ID } from "@/lib/advertising";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import {NextIntlClientProvider} from 'next-intl';
@@ -32,33 +33,31 @@ export async function generateMetadata({ params }: { params: Promise<{locale: st
   const t = await getTranslations({locale, namespace: 'Index'});
   const navT = await getTranslations({locale, namespace: 'Navigation'});
   const siteUrl = getSiteUrl();
-  const pageTitle = `${t('title')} - ${navT('All-in-One Tools')}`;
-  const description = t('description');
+  const pageTitle = `Free Online File Converter — PDF, Image & Video Tools | ConvertAllNow`;
+  const description = `Free browser-based tools to convert, compress, and edit PDFs, images, videos, and archives. No signup, no uploads — processing happens in your browser.`;
 
   return {
     metadataBase: new URL(siteUrl),
     other: {
-      "google-adsense-account": "ca-pub-1504999187644497",
+      "google-adsense-account": ADS_CLIENT_ID,
     },
     title: {
       default: pageTitle,
-      template: '%s | ConvertAllNow',
+      template: '%s',
     },
     description: description,
     keywords: [
-      "Online Media Tools",
-      "PDF Converter",
-      "Merge PDF Online",
-      "Video Compressor",
-      "Video to Audio",
-      "Background Remover",
-      "Image Converter",
-      "Free PDF Tools",
-      "Online Video Editor",
-      "ConvertAllNow",
       "free online file converter",
-      "media utilities",
+      "PDF converter online",
+      "compress image online",
+      "merge PDF free",
+      "video to mp3",
+      "image compressor",
+      "background remover",
+      "image converter",
       "browser based tools",
+      "no upload file converter",
+      "ConvertAllNow",
     ],
     icons: {
       icon: [
@@ -132,45 +131,22 @@ export default async function RootLayout({
 
   const messages = await getMessages();
 
-  const adsenseClientId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID || 'ca-pub-1504999187644497';
+
 
   return (
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
-    <script
-      dangerouslySetInnerHTML={{
-        __html: `
-          (function() {
-            if (typeof window !== 'undefined') {
-              const filter = function(msg) {
-                return msg && (msg.includes('bis_skin_checked') || msg.includes('Hydration failed'));
-              };
-              const _err = console.error;
-              console.error = function(...args) {
-                const msg = args.map(a => (typeof a === 'string' ? a : (a && a.message) || '')).join(' ');
-                if (filter(msg)) return;
-                _err.apply(console, args);
-              };
-              window.addEventListener('error', function(e) {
-                if (filter(e.message) || (e.error && filter(e.error.message))) {
-                  e.stopImmediatePropagation();
-                  e.preventDefault();
-                }
-              }, true);
-            }
-          })();
-        `,
-      }}
-    />
-    <meta name="google-adsense-account" content={adsenseClientId} />
     <link rel="manifest" href="/site.webmanifest" />
-    {/* AdSense - loaded after page interactive to avoid render blocking */}
+    {/* Google AdSense Site Verification & Delivery */}
     <Script
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
+      id="google-adsense"
+      async
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS_CLIENT_ID}`}
       strategy="afterInteractive"
       crossOrigin="anonymous"
     />
-    {/* Google Analytics */}
+    {/* Analytics remains opt-in until consent handling is configured. */}
+    {process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" && <>
     <Script
       src="https://www.googletagmanager.com/gtag/js?id=G-D77QJC0T0J"
       strategy="afterInteractive"
@@ -183,6 +159,7 @@ export default async function RootLayout({
         gtag('config', 'G-D77QJC0T0J');
       `}
     </Script>
+    </>}
   </head>
   <body className="overflow-x-hidden min-h-screen flex flex-col" suppressHydrationWarning>
         <Script id="register-sw" strategy="afterInteractive">
@@ -213,11 +190,6 @@ export default async function RootLayout({
               shadow="0 0 10px #4f46e5,0 0 5px #4f46e5"
             />
             <Navbar />
-            {process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID && (
-              <div className="mx-auto max-w-7xl px-4 mt-4">
-                <AdsenseAd height="h-[50px] md:h-[90px]" slot={process.env.NEXT_PUBLIC_GOOGLE_ADS_SLOT_ID} className="rounded-xl" />
-              </div>
-            )}
             <Suspense fallback={<FallbackLoader />}>
               {children}
             </Suspense>

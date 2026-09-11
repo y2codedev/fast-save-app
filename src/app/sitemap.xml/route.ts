@@ -1,43 +1,35 @@
-import { getSiteUrl, getAlternateLanguages, getSitemapPriority } from '@/lib/seo';
+import { getSiteUrl, getAlternateLanguages } from '@/lib/seo';
 import { locales, defaultLocale } from '@/i18n/routing';
-import { ALL_TOOLS } from '@/lib/constants';
+import { ALL_TOOLS, NOINDEX_TOOLS } from '@/lib/constants';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   const siteUrl = getSiteUrl();
 
   const categoryPaths = ['/pdf-tools', '/image-tools', '/video-tools', '/archive-tools'];
-  const staticPaths = ['', '/about', '/contact', '/privacy', '/terms', '/sitemap'];
-  const toolPaths = Array.from(new Set(ALL_TOOLS.map(t => t.path))).filter(p => p !== '/' && p !== '');
+  const staticPaths = ['', '/about', '/contact', '/privacy', '/terms', '/sitemap', '/file-privacy-security'];
+  const toolPaths = Array.from(new Set(ALL_TOOLS.map(t => t.path))).filter(p => p !== '/' && p !== '' && !NOINDEX_TOOLS.includes(p));
   const allPaths = [...staticPaths, ...categoryPaths, ...toolPaths];
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n`;
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
-  // Use a fixed date to avoid Google penalizing dynamic "fake freshness" lastmod values.
-  // Update this date when content actually changes.
-  const date = '2026-08-05T00:00:00.000Z';
+
+  // This release updates shared site content and navigation across every route.
+  const lastmod = '2026-09-11';
 
   for (const path of allPaths) {
     const languages = getAlternateLanguages(path);
-    const priority = getSitemapPriority(path);
-    const changefreq = categoryPaths.includes(path) ? 'weekly'
-      : (path === '' || path === '/') ? 'daily'
-      : ['/about', '/privacy', '/terms', '/contact', '/sitemap'].includes(path) ? 'monthly'
-      : 'weekly';
-
     for (const locale of locales) {
       const localePrefix = locale === defaultLocale ? '' : `/${locale}`;
       const url = `${siteUrl}${localePrefix}${path}`;
 
       xml += `  <url>\n`;
       xml += `    <loc>${url}</loc>\n`;
-      xml += `    <lastmod>${date}</lastmod>\n`;
-      xml += `    <changefreq>${changefreq}</changefreq>\n`;
-      xml += `    <priority>${priority}</priority>\n`;
+      xml += `    <lastmod>${lastmod}</lastmod>\n`;
 
-      // Add hreflang links
+      // Add reciprocal hreflang links
       for (const [lang, langUrl] of Object.entries(languages)) {
         xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${langUrl}" />\n`;
       }
@@ -56,4 +48,3 @@ export async function GET() {
     },
   });
 }
-

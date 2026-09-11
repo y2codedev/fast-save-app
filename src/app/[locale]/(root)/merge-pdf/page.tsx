@@ -51,7 +51,7 @@ const faqs = [
   { question: 'Can I reorder pages before merging?', answer: 'Yes! After uploading, you can drag and drop the PDF thumbnails to rearrange the order before merging.' },
   { question: 'What is the maximum PDF file size?', answer: 'Since processing happens in your browser, the practical limit is your device RAM. Typically files up to several hundred megabytes work without issues.' },
   { question: 'Does Merge PDF work on mobile phones?', answer: 'Yes. The tool is fully responsive and works on iOS and Android devices via Chrome, Safari, or any modern mobile browser.' },
-  { question: 'How do I split a merged PDF back into separate files?', answer: 'Use our PDF to JPG tool to extract individual pages, or check back soon — we\'re working on a dedicated PDF splitter tool.' },
+  { question: 'How do I split a merged PDF back into separate files?', answer: 'Use our dedicated Split PDF tool to extract specific page ranges or break down a multi-page PDF into individual documents.' },
 ];
 
 const howToSteps = [
@@ -63,13 +63,14 @@ const howToSteps = [
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
+
 
   
   
 
   const t = await getTranslations({ locale, namespace: 'MergePdfSEO' });
+  const title = t('title');
+  const description = t('description');
 
   const schemaData = createToolSchema({
     name: t('title'),
@@ -162,9 +163,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
               'Use Chrome or Firefox for the best performance with large PDF batches.',
             ]}
             relatedLinks={[
-              { label: 'Compress the merged PDF', href: '/image-compressor', context: 'After merging, you may want to reduce the file size.' },
+              { label: 'Separate documents with Split PDF', href: '/split-pdf', context: 'Need to extract specific pages or break a PDF into parts?' },
+              { label: 'Convert PDF to JPG images', href: '/pdf-to-jpg', context: 'Need to extract individual pages as photos?' },
               { label: 'Protect PDF with a password', href: '/protect-pdf', context: 'Need to secure the merged document?' },
-              { label: 'Convert PDF to Word', href: '/pdf-to-docx', context: 'Need to edit the content?' },
+              { label: 'Convert PDF to editable Word', href: '/pdf-to-docx', context: 'Need to edit the text or layout?' },
+              { label: 'Create PDF from photos or scans', href: '/image-to-pdf', context: 'Have images you want to add to your PDF?' },
             ]}
             faqs={faqs}
           />

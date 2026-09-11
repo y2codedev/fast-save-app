@@ -24,6 +24,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     title,
     description,
     keywords: TOOL_KEYWORDS[SLUG],
+    robots: {
+      index: false,
+      follow: true,
+    },
     openGraph: {
       title,
       description,

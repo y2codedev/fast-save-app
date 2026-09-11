@@ -1,6 +1,8 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
+import { usePathname } from '@/i18n/routing'
+import { canShowAds, ADS_CLIENT_ID } from '@/lib/advertising'
 import { useInView } from 'react-intersection-observer'
 
 type Props = {
@@ -11,15 +13,18 @@ type Props = {
 
 export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = '' }: Props) {
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' })
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID || 'ca-pub-1504999187644497'
+  const clientId = ADS_CLIENT_ID
+  const pathname = usePathname()
+  const allowed = canShowAds(pathname) && !!slot
+  const adRef = useRef<HTMLModElement>(null)
   const isDevelopment = process.env.NODE_ENV === 'development'
 
   useEffect(() => {
-    if (inView && clientId && !isDevelopment) {
+    if (allowed && inView && clientId && !isDevelopment) {
       const timer = setTimeout(() => {
         try {
-          const uninitializedAds = document.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])');
-          if (uninitializedAds.length > 0) {
+          const ad = adRef.current;
+          if (ad && ad.offsetWidth > 0 && !ad.hasAttribute('data-adsbygoogle-status')) {
             (window as any).adsbygoogle = (window as any).adsbygoogle || [];
             (window as any).adsbygoogle.push({});
           }
@@ -29,7 +34,9 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
       }, 2500);
       return () => clearTimeout(timer);
     }
-  }, [inView, clientId, isDevelopment])
+  }, [allowed, inView, clientId, isDevelopment])
+
+  if (!allowed) return null;
 
   // Always show a clean placeholder in local development
   if (isDevelopment) {
@@ -58,6 +65,7 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
       {inView && (
         <div className="w-full h-full flex items-center justify-center pt-4">
           <ins
+            ref={adRef}
             className="adsbygoogle block w-full"
             style={{ display: 'block' }}
             data-ad-client={clientId}
