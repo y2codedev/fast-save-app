@@ -290,16 +290,6 @@ export const TOOL_KEYWORDS: Record<string, string[]> = {
 };
 
 /**
- * Sitemap priority mapping by route type.
- */
-export function getSitemapPriority(path: string): number {
-  if (path === '' || path === '/') return 1.0;
-  if (['/pdf-tools', '/image-tools', '/video-tools', '/archive-tools'].includes(path)) return 0.9;
-  if (['/about', '/privacy', '/terms', '/contact', '/sitemap', '/file-privacy-security'].includes(path)) return 0.5;
-  return 0.8; // Tool pages
-}
-
-/**
  * Per-tool related tools list (max 10). Used by RelatedTools component.
  * Curated by category proximity and user journey.
  */

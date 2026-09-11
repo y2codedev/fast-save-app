@@ -150,27 +150,19 @@ const categorySchema = {
 
 export default async function VideoToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
-  
-  
 
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
   const title = tHub('videoTitle');
   const heading = tHub('videoHeading');
   const subtitle = tHub('videoSubtitle');
+  const description = subtitle;
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Video & Audio Tools', href: '/video-tools' },
   ];
-  const relatedTools = RELATED_TOOLS['video-tools'] || [];
-
   return (
     <>
-      
-      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
       <FAQSchema faqs={faqs} />
       <WebPageSchema title={title} description={description} path="/video-tools" locale={locale} breadcrumb={breadcrumbItems} />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
@@ -390,7 +382,7 @@ export default async function VideoToolsPage({ params }: { params: Promise<{ loc
             </div>
           </div>
         </div>
-      </ToolLayoutWithAds>
+      </div>
     </>
   );
 }

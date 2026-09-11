@@ -1,15 +1,10 @@
-import SchemaMarkup, { createToolSchema } from '@/components/sections/SchemaMarkup';
-import HowToSchema from '@/components/seo/HowToSchema';
-import FAQSchema from '@/components/seo/FAQSchema';
 import WebPageSchema from '@/components/seo/WebPageSchema';
-import ToolLayoutWithAds from '@/components/sections/ToolLayoutWithAds';
-import ToolContentSection from '@/components/sections/ToolContentSection';
+import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import VisualBreadcrumb from '@/components/ui/VisualBreadcrumb';
 import { Metadata } from 'next';
 import React from 'react';
 import { Link } from '@/i18n/routing';
 import { getCanonicalUrl, getAlternateLanguages } from '@/lib/seo';
-import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema';
 import AllToolsHub from '@/components/sections/AllToolsHub';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
@@ -36,8 +31,6 @@ const staticPages = [
   { name: 'Terms of Service', path: '/terms', desc: 'Permitted usage, copyright disclaimers, and software terms' },
 ];
 
-import { getTranslations } from 'next-intl/server';
-
 export default async function SitemapPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
@@ -45,7 +38,6 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
     { name: 'Home', href: '/' },
     { name: 'All Tools', href: '/sitemap' },
   ];
-  const relatedTools = RELATED_TOOLS['sitemap'] || [];
 
   return (
     <>
@@ -108,7 +100,7 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
             </div>
           </div>
         </div>
-      </ToolLayoutWithAds>
+      </div>
     </>
   );
 }

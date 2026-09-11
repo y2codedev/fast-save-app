@@ -160,27 +160,19 @@ const categorySchema = {
 
 export default async function ImageToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
-  
-  
 
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
   const title = tHub('imageTitle');
   const heading = tHub('imageHeading');
   const subtitle = tHub('imageSubtitle');
+  const description = subtitle;
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'Image Tools', href: '/image-tools' },
   ];
-  const relatedTools = RELATED_TOOLS['image-tools'] || [];
-
   return (
     <>
-      
-      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
       <FAQSchema faqs={faqs} />
       <WebPageSchema title={title} description={description} path="/image-tools" locale={locale} breadcrumb={breadcrumbItems} />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
@@ -437,7 +429,7 @@ export default async function ImageToolsPage({ params }: { params: Promise<{ loc
             </div>
           </div>
         </div>
-      </ToolLayoutWithAds>
+      </div>
     </>
   );
 }

@@ -150,27 +150,19 @@ const categorySchema = {
 
 export default async function PdfToolsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const title = "Online Tool";
-  const description = "Free online tool.";
-
-  
-  
 
   const tHub = await getTranslations({ locale, namespace: 'CategoryHubs' });
   const title = tHub('pdfTitle');
   const heading = tHub('pdfHeading');
   const subtitle = tHub('pdfSubtitle');
+  const description = subtitle;
 
   const breadcrumbItems = [
     { name: 'Home', href: '/' },
     { name: 'PDF Tools', href: '/pdf-tools' },
   ];
-  const relatedTools = RELATED_TOOLS['pdf-tools'] || [];
-
   return (
     <>
-      
-      <HowToSchema name={`How to ${title}`} description={description} steps={howToSteps} totalTime="PT1M" />
       <FAQSchema faqs={faqs} />
       <WebPageSchema title={title} description={description} path="/pdf-tools" locale={locale} breadcrumb={breadcrumbItems} />
       <BreadcrumbSchema locale={locale} items={breadcrumbItems} />
@@ -434,7 +426,7 @@ export default async function PdfToolsPage({ params }: { params: Promise<{ local
             </div>
           </div>
         </div>
-      </ToolLayoutWithAds>
+      </div>
     </>
   );
 }
