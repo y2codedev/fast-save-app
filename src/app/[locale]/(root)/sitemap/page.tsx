@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const staticPages = [
   { name: 'Home', path: '/', desc: 'ConvertAllNow homepage with instant tool navigation' },
-  { name: 'File Privacy & Security', path: '/file-privacy-security', desc: 'In-depth explanation of our in-browser WebAssembly processing architecture' },
+  { name: 'File Privacy & Processing', path: '/file-privacy-security', desc: 'Detailed breakdown of in-browser client-side file processing, local memory handling, and security' },
   { name: 'About Us', path: '/about', desc: 'Learn about our team, developer mission, and technical standards' },
   { name: 'Contact & Support', path: '/contact', desc: 'Get support or send feedback directly to the development team' },
-  { name: 'Privacy Policy', path: '/privacy', desc: 'Clear terms on cookie usage, advertising, and zero-upload processing' },
-  { name: 'Terms of Service', path: '/terms', desc: 'Permitted usage, copyright disclaimers, and software terms' },
+  { name: 'Privacy Policy', path: '/privacy', desc: 'How ConvertAllNow handles personal information, cookies, analytics, advertising, and user privacy rights' },
+  { name: 'Terms of Use', path: '/terms', desc: 'Terms governing service usage, acceptable use, copyright responsibilities, and legal disclaimers' },
 ];
 
 export default async function SitemapPage({ params }: { params: Promise<{ locale: string }> }) {
