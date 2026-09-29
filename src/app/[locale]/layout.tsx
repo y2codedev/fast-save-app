@@ -17,6 +17,7 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { getCanonicalUrl, getAlternateLanguages, getOgLocale, getSiteUrl } from '@/lib/seo';
 import OrganizationSchema from '@/components/seo/OrganizationSchema';
+import CookieConsent from '@/components/ui/CookieConsent';
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -184,6 +185,7 @@ export default async function RootLayout({
             </Suspense>
             <Footer />
             <ToastProvider />
+            <CookieConsent />
           </NextIntlClientProvider>
         </ThemeProviderWrapper>
       </body>

@@ -11,6 +11,9 @@ export default function robots(): MetadataRoute.Robots {
         allow: '/',
         disallow: [
           '/api/',
+          '/ig-downloader',
+          '/fb-video',
+          '/snapchat',
         ],
       },
       {

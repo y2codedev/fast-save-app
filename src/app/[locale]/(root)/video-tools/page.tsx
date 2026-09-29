@@ -96,14 +96,7 @@ const AUDIO_TOOLS = [
   },
 ];
 
-const SOCIAL_TOOLS = [
-  {
-    name: 'Instagram Downloader',
-    path: '/ig-downloader',
-    desc: 'Save public Instagram Reels, Stories, and videos for personal offline reference and viewing.',
-    badge: 'Social Media',
-  },
-];
+
 
 const faqs = [
   {
@@ -298,42 +291,7 @@ export default async function VideoToolsPage({ params }: { params: Promise<{ loc
             </div>
           </section>
 
-          {/* Section 4: Social Tools */}
-          <section className="space-y-6" aria-labelledby="social-tools-hub">
-            <div className="flex items-center gap-2 border-b border-gray-200 dark:border-gray-800 pb-3">
-              <SpeakerWaveIcon className="w-6 h-6 text-purple-500" />
-              <h2 id="social-tools-hub" className="text-2xl font-bold text-gray-900 dark:text-white">
-                Social Video Downloaders
-              </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {SOCIAL_TOOLS.map((tool) => (
-                <Link
-                  key={tool.path}
-                  href={tool.path}
-                  className="group relative bg-white dark:bg-gray-800/80 p-6 rounded-2xl border border-gray-200 dark:border-gray-700/60 hover:border-purple-500/50 dark:hover:border-purple-500/50 hover:shadow-md transition-all duration-300 flex flex-col justify-between"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-bold text-xl text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
-                        {tool.name}
-                      </h3>
-                      <span className="text-[11px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded-md bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">
-                        {tool.badge}
-                      </span>
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
-                      {tool.desc}
-                    </p>
-                  </div>
-                  <div className="mt-6 flex items-center gap-2 text-sm font-semibold text-purple-600 dark:text-purple-400 group-hover:translate-x-1 transition-transform">
-                    <span>Open Downloader</span>
-                    <ArrowRightIcon className="w-4 h-4" />
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </section>
+
 
           {/* Section 5: Why Our Video Tools Are Private */}
           <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-3xl p-8 sm:p-10 shadow-xl space-y-6" aria-labelledby="video-privacy-breakdown">
