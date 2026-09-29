@@ -11,9 +11,10 @@ export default function middleware(request: NextRequest) {
   // 1. Redirect www to non-www (301 Permanent Redirect)
   const host = request.headers.get('host') || '';
   if (host.startsWith('www.')) {
-    const nonWwwHost = host.replace(/^www\./, '');
+    const nonWwwHost = host.replace(/^www\./, '').split(':')[0];
     const url = request.nextUrl.clone();
     url.host = nonWwwHost;
+    url.port = '';
     url.protocol = 'https';
     return NextResponse.redirect(url, { status: 301 });
   }
