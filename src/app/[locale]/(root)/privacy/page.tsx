@@ -164,7 +164,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
                   <strong>Functional Local Storage:</strong> We store local preferences on your device, such as your theme selection (Dark Mode vs Light Mode) and recent tool UI state. These tokens remain entirely on your device and are not transmitted to third-party databases.
                 </li>
                 <li>
-                  <strong>Third-Party Cookies:</strong> External service providers, including Google Analytics and Google AdSense, place cookies or web beacons through your browser to measure site engagement and deliver relevant advertisements.
+                  <strong>Third-Party Cookies:</strong> When these services are enabled and you consent, providers including Google Analytics and Google AdSense may place cookies or use similar identifiers to measure engagement and deliver advertisements.
                 </li>
               </ul>
             </section>
@@ -175,7 +175,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
                 6. Web Analytics
               </h2>
               <p>
-                We use Google Analytics (Property ID: <code>G-D77QJC0T0J</code>) to analyze aggregate visitor traffic patterns. Google Analytics collects information such as how frequently visitors view tools, bounce rates, and navigation paths. This data is aggregated and does not identify individual visitors personally.
+                When enabled and you consent, we use Google Analytics (Property ID: <code>G-D77QJC0T0J</code>) to analyze visitor traffic patterns. Google Analytics may receive information such as pages viewed, navigation paths, device details, IP address, and approximate location.
               </p>
               <p>
                 You can prevent Google Analytics from collecting your visit data by installing the{' '}
@@ -196,10 +196,10 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
                 7. Advertising &amp; Google AdSense
               </h2>
               <p>
-                ConvertAllNow provides its tools for free. To support ongoing server hosting, bandwidth, and software maintenance, we display advertisements via Google AdSense (Publisher ID: <code>ca-pub-1504999187644497</code>).
+                ConvertAllNow provides its tools for free. When advertising is enabled and you consent, the site may display advertisements via Google AdSense (Publisher ID: <code>ca-pub-1504999187644497</code>) to support hosting, bandwidth, and maintenance.
               </p>
               <p>
-                Third-party advertising vendors, including Google, use cookies to serve ads based on your prior visits to ConvertAllNow and other websites across the Internet. Google’s use of advertising cookies enables it and its partners to serve personalized ads to users based on browsing history.
+                Depending on your consent and regional settings, third-party advertising vendors including Google may use cookies or similar identifiers to serve and measure advertisements. Personalized advertising may use information from visits to ConvertAllNow and other websites.
               </p>
               <p>
                 You can opt out of personalized advertising by visiting{' '}
@@ -232,9 +232,6 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
                 ConvertAllNow may integrate with or link to third-party services:
               </p>
               <ul className="list-disc ps-6 space-y-1.5">
-                <li>
-                  <strong>Social Media Download Endpoints:</strong> When using social link utilities (such as Instagram or Facebook utilities), your browser requests our endpoint, which queries third-party API providers to identify public streaming video URLs.
-                </li>
                 <li>
                   <strong>External Links:</strong> Our website may contain links to external websites, documentation, or tools. We have no control over and assume no responsibility for the content, privacy policies, or practices of third-party platforms.
                 </li>

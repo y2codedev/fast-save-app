@@ -3,15 +3,15 @@
     "badgeText": "Dibuat oleh kreator, untuk kreator.",
     "missionDesc": "Memberdayakan kreator, siswa, dan profesional di seluruh dunia dengan perangkat digital yang andal, aman, dan secepat kilat.",
     "missionTitle": "Misi Kami",
-    "promiseDesc": "Output quality and compatibility depend on your source file, settings and browser. We do not guarantee absolute security or universal format support. For server-side tools (such as URL resolution downloaders), temporary server files are automatically deleted within 15 minutes after processing. Client-side tools process files locally on your device with no server upload.",
+    "promiseDesc": "Output quality and compatibility depend on your source file, settings, device memory, and browser. We do not guarantee absolute security or universal format support. File conversion tools process selected file content locally in the browser rather than uploading it to our servers.",
     "promiseTitle": "Janji Kami",
     "storyP1": "Internet penuh dengan alat media, tetapi mereka seringkali terlalu mahal, rumit, atau membahayakan privasi pengguna.",
-    "storyP2": "File converters process selected files directly in your browser. Social downloaders send the pasted URL to our server and an external provider to resolve streams; temporary files are deleted within 15 minutes. Browser processing uses device memory and may fail on excessively large files.",
+    "storyP2": "File converters process selected files directly in your browser. Browser processing uses your device memory and may fail on unusually large or unsupported files, so the tool pages document format and practical size limitations.",
     "storyTitle": "Mengapa Kami Membangun ConvertAllNow",
     "subtitle": "Misi kami adalah mendemokratisasi pengeditan media. Semua orang berhak mendapatkan akses ke alat profesional tanpa membayar mahal.",
     "titleHighlight": "ConvertAllNow",
     "titleMain": "About",
-    "whatDesc": "ConvertAllNow offers over 20+ specialized tools. You can compress heavy videos, trim audio files, remove backgrounds from images with AI, merge PDF documents, and even download your favorite social media content—all from one unified dashboard.",
+    "whatDesc": "ConvertAllNow offers browser-based conversion and document tools. You can compress videos, trim audio files, remove image backgrounds, merge and split PDF documents, and convert archives from one platform.",
     "whatTitle": "What You Can Do"
   },
   "AudioTrimmer": {
@@ -475,8 +475,8 @@
     "uploadTitleText": "CLICK ke UPLOAD"
   },
   "ImageConverterSEO": {
-    "description": "Convierte imágenes a SVG o cambia de formato.",
-    "title": "Convertidor de Imágenes a SVG - ConvertAllNow"
+    "description": "Konversikan PNG, JPG, WebP, dan format gambar lainnya di browser, atau buat hasil pelacakan SVG dari gambar raster.",
+    "title": "Konverter gambar online: PNG, JPG, WebP & SVG | ConvertAllNow"
   },
   "ImageEditor": {
     "/": "/",

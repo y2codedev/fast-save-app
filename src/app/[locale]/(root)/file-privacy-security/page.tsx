@@ -94,14 +94,6 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
       retention: '0 Seconds (Transient device RAM only)',
       tech: 'Client JSZip / Libarchive WebAssembly',
     },
-    {
-      category: 'Social Media Downloaders',
-      examples: 'Instagram Downloader, Facebook Video, Snapchat',
-      location: 'URL Resolution API / Direct Stream',
-      uploaded: false,
-      retention: 'Zero User File Storage (Streams from source)',
-      tech: 'Public URL Resolution / Direct CDN Stream',
-    },
   ];
 
   const faqs = [
@@ -119,11 +111,6 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
       question: 'How do I erase my processed files from temporary memory?',
       answer:
         'All client-side file data exists solely in transient browser heap memory while the tab is open. As soon as you navigate away, reload the page, or close the browser tab, your web browser automatically releases and reclaims the allocated memory.',
-    },
-    {
-      question: 'How do social media downloader tools differ from file converters?',
-      answer:
-        'Social media downloaders do not convert local private files. Instead, you provide a publicly accessible link. Our server API queries external platform endpoints to discover the direct media streaming URL, which is returned to your browser. ConvertAllNow does not store, archive, or host downloaded videos on its servers.',
     },
     {
       question: 'Why do very large files sometimes fail to convert?',
@@ -265,6 +252,11 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                 Our <Link href="/pdf-tools" className="text-indigo-600 dark:text-indigo-400 underline font-medium">PDF Tools</Link> (such as Merge PDF, Protect PDF, and Unlock PDF) utilize client-side engines including <code>pdf-lib</code> and <code>PDF.js</code>. The document structure, text, form fields, and embedded fonts are manipulated purely in your browser’s JavaScript engine without transmitting any document bytes to remote servers.
               </p>
+              <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2 list-disc list-inside">
+                <li>Files remain inside your computer or smartphone RAM buffer.</li>
+                <li>No network packet containing your file content is sent across the internet.</li>
+                <li>When you close the browser tab, the browser releases the page and its temporary memory according to the browser&rsquo;s own memory-management rules.</li>
+              </ul>
             </div>
 
             <div className="bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 border border-gray-200 dark:border-gray-800 space-y-3 shadow-xs">
@@ -298,23 +290,20 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
             </div>
           </section>
 
-          {/* Section 4: Server-Side and Third-Party Interaction */}
+          {/* Section 4: Supporting code and model downloads */}
           <section className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-200 dark:border-gray-800 p-6 sm:p-8 space-y-4 shadow-xs">
             <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2.5">
               <ServerStackIcon className="w-6 h-6 text-indigo-600 dark:text-indigo-400" />
-              <span>Server-Side Interaction &amp; Downloader Tools</span>
+              <span>Supporting Code &amp; Model Downloads</span>
             </h2>
             <div className="text-sm sm:text-base text-gray-700 dark:text-gray-300 space-y-3 leading-relaxed">
               <p>
-                We clearly separate our client-side file converters from our social media download utilities:
+                Some tools need supporting code, a WebAssembly engine, or a machine-learning model before local processing can begin:
               </p>
               <ul className="list-disc ps-6 space-y-2">
-                <li>
-                  <strong>File Converters (No Server Involvement):</strong> Tools for PDF, images, audio, video, archives, Markdown, and formatted data do not send your files or documents to any server. The server solely delivers the web application bundle (HTML, CSS, JS, and WASM binary assets) when you load the page.
-                </li>
-                <li>
-                  <strong>Social Media Downloaders (URL Resolution Only):</strong> When using utilities such as Instagram Downloader or Facebook Video, you paste a public web link. That link is sent to an API endpoint solely to resolve public media stream URLs. ConvertAllNow does not store, archive, or cache downloaded video files on its servers; the stream delivers directly to your browser.
-                </li>
+                <li>Your browser may download these application assets from ConvertAllNow or the library provider.</li>
+                <li>The selected file remains in browser memory and is not included in those asset requests.</li>
+                <li>Initial processing can take longer while a large engine or model is downloaded and initialized.</li>
               </ul>
             </div>
           </section>
@@ -386,7 +375,7 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
             </h2>
             <div className="text-sm sm:text-base text-gray-700 dark:text-gray-300 space-y-3 leading-relaxed">
               <p>
-                While client-side processing guarantees that your files remain private on your device, it is governed by device-side hardware boundaries:
+                Local browser processing keeps selected file content on your device, but it remains governed by device-side hardware boundaries:
               </p>
               <ul className="list-disc ps-6 space-y-2">
                 <li>

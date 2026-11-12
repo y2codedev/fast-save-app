@@ -21,7 +21,7 @@ import {
 const CORE_BENEFITS = [
   {
     icon: ShieldCheck,
-    title: '100% Private & In-Browser',
+    title: 'Local & In-Browser',
     description: 'Files process locally on your device via WebAssembly. Your sensitive documents and photos are never uploaded or stored on any server.',
     color: 'emerald',
     badge: 'Zero Uploads'
@@ -35,8 +35,8 @@ const CORE_BENEFITS = [
   },
   {
     icon: Sparkles,
-    title: 'Completely Free & Open',
-    description: 'Enjoy unrestricted access to all 50+ file tools without creating an account, paying for subscriptions, or getting watermarks on your files.',
+    title: 'Free to Use',
+    description: 'Use the currently listed file tools without creating an account or paying for a subscription. Individual tool pages describe their supported outputs and limitations.',
     color: 'purple',
     badge: 'No Watermarks'
   }
@@ -84,7 +84,7 @@ const CATEGORY_SHOWCASE = [
 const HOMEPAGE_FAQS = [
   {
     question: 'How do ConvertAllNow tools work without uploading my files?',
-    answer: 'ConvertAllNow leverages modern browser standards including WebAssembly (WASM), Web Workers, and HTML5 Canvas. These technologies run compiled processing engines directly inside your web browser. Your data stays entirely in your device’s local memory (RAM) and is cleared the moment you close the tab.'
+    answer: 'ConvertAllNow uses browser standards including WebAssembly (WASM), Web Workers, and HTML5 Canvas. These technologies run processing engines in the browser. Selected file content stays in the page’s local memory, which the browser releases according to its memory-management rules after the page is closed.'
   },
   {
     question: 'Is there a limit on how many files I can convert?',
@@ -162,7 +162,7 @@ export default function HomeSEOContent() {
             href="/sitemap"
             className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition-colors"
           >
-            <span>View All 50+ Tools</span>
+            <span>View All Tools</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>

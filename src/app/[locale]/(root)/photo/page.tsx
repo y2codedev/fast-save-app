@@ -53,23 +53,23 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
   const schemaData = createToolSchema({
     name: t('title'), description: t('description'),
     path: '/photo', locale,
-    featureList: ['Convert PNG to JPG', 'Convert JPG to WebP', 'SVG to PNG', 'Batch image conversion'],
+    featureList: ['Convert PNG to JPG', 'Convert JPG to WebP', 'Convert raster images to SVG', 'Batch image format conversion'],
     screenshot: '/images/photo-converter.png',
   });
 
   
 const faqs = [
-  { question: 'Is this tool free to use?', answer: 'Yes, this tool is 100% free with no hidden fees or signups required.' },
-  { question: 'Are my files uploaded to a server?', answer: 'No. All processing happens locally in your web browser. Your files never leave your device, ensuring total privacy.' },
-  { question: 'Is there a file size limit?', answer: 'Since processing happens in your browser, the limit depends on your device RAM, usually supporting files up to several hundred megabytes.' },
-  { question: 'Does this work on mobile devices?', answer: 'Yes! The tool works seamlessly on both desktop and mobile browsers.' },
-  { question: 'What browsers are supported?', answer: 'We support all modern browsers including Chrome, Safari, Firefox, and Edge.' },
+  { question: 'Which image formats can I convert?', answer: 'The format converter accepts common raster formats including JPG, PNG, GIF, BMP, WebP, ICO, TIFF, RAW, and TGA. Available output formats are shown after you add a file.' },
+  { question: 'Can I create an SVG from a photo?', answer: 'Yes. Open the SVG tab and add a PNG, JPG, or WebP image. The tool traces the raster image and lets you download the resulting SVG or copy its code.' },
+  { question: 'Are my image files uploaded to your server?', answer: 'No. The selected image content is processed in your browser. The format converter downloads a supporting conversion engine before processing.' },
+  { question: 'Can I convert more than one image?', answer: 'Yes. The format converter accepts multiple images and lets you choose an output format for each file.' },
+  { question: 'Why can a large image be slow?', answer: 'Conversion speed and practical file size depend on your browser, device memory, image dimensions, and chosen output format.' },
 ];
 
 const howToSteps = [
-  { name: 'Upload File', text: 'Select or drag and drop your file into the tool.' },
-  { name: 'Process', text: 'Click the action button to begin processing. Wait a few moments.' },
-  { name: 'Download', text: 'Once completed, download your newly processed file directly to your device.' },
+  { name: 'Add images', text: 'Select or drag one or more supported raster image files into the format converter.' },
+  { name: 'Choose a format', text: 'Choose the required output format for each image, or use the SVG tab to trace a PNG, JPG, or WebP file.' },
+  { name: 'Convert and download', text: 'Start the conversion, then download each completed image to your device.' },
 ];
 
   const breadcrumbItems = [
@@ -101,23 +101,23 @@ const howToSteps = [
             introduction={
               <>
                 <p>
-                  The Photo Utilities collection is designed for quick, everyday enhancements and manipulations of your photographs. Whether you need to quickly resize an image for a passport application, crop a photo for a profile picture, or apply a quick filter, these tools are built for speed and simplicity.
+                  This browser-based image converter changes common raster files between formats such as JPG, PNG, WebP, GIF, BMP, ICO, and TIFF. You can add several images, choose an output format for each one, and download the converted results.
                 </p>
                 <p className="mt-3">
-                  All photo processing relies on your device's native browser capabilities. This ensures that your personal memories and sensitive photographs are kept strictly on your device. Enjoy the convenience of cloud-like tools with the security of offline software.
+                  The separate SVG workspace traces a PNG, JPG, or WebP image into vector paths. Selected image content is processed locally in your browser; the format converter first downloads its supporting conversion engine.
                 </p>
               </>
             }
             features={[
-              { title: "Quick Enhancements", description: "Apply standard fixes and filters in just a few clicks." },
-              { title: "No Registration", description: "Access all photo tools immediately without making an account." },
-              { title: "100% Private", description: "Your personal photos are never transmitted over the internet." },
-              { title: "Mobile Friendly", description: "Perfectly optimized for quick edits on smartphones and tablets." },
+              { title: "Multiple Output Formats", description: "Choose from the output formats shown for each raster image." },
+              { title: "Batch Workflow", description: "Add multiple images and configure each conversion in one workspace." },
+              { title: "Raster-to-SVG Tracing", description: "Create an eight-color SVG trace from a PNG, JPG, or WebP image." },
+              { title: "Local File Processing", description: "Selected image content is processed in your browser rather than uploaded to our server." },
             ]}
             howToSteps={howToSteps}
             faqs={faqs}
-            supportedFormats="Supports all standard formats."
-            privacyNote="Your files are completely safe. All processing happens in your browser and files are never uploaded to any server."
+            supportedFormats="Format conversion: JPG, JPEG, PNG, GIF, BMP, WebP, ICO, TIF, TIFF, RAW, and TGA. SVG tracing: PNG, JPG, and WebP."
+            privacyNote="Selected image content is processed locally in your browser. The format converter downloads a supporting WebAssembly conversion engine before it processes your files."
           />
         </div>
       </ToolLayoutWithAds>

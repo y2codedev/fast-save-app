@@ -115,7 +115,7 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
               <ul className="list-disc ps-6 space-y-1.5">
                 <li>Converting, merging, splitting, compressing, or securing document files you legally own or hold authorization to modify.</li>
                 <li>Formatting, re-encoding, or resizing your personal or company images, videos, audio clips, and archive packages.</li>
-                <li>Utilizing URL tools to preview or back up publicly accessible media where you hold necessary rights or statutory fair-use authorization.</li>
+                <li>Processing third-party files only when you hold the necessary permission, license, or applicable legal authorization.</li>
               </ul>
             </section>
 
@@ -162,26 +162,26 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
               </p>
             </section>
 
-            {/* 7. Copyright & Third-Party Content (Downloader Notice) */}
+            {/* 7. Copyright & Third-Party Content */}
             <section className="space-y-3 p-5 rounded-2xl bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40">
               <h2 className="text-xl sm:text-2xl font-bold text-amber-950 dark:text-amber-200">
                 7. Copyright &amp; Third-Party Content
               </h2>
               <p className="text-amber-950/90 dark:text-amber-200/90">
-                ConvertAllNow includes utilities that resolve publicly accessible links (such as Instagram, Facebook, and Snapchat downloaders). These tools are provided strictly as technical link resolution aids for personal reference, fair-use analysis, or archiving content you are authorized to access.
+                ConvertAllNow processes files selected by users. You remain responsible for those files and for ensuring that your use of the source material and resulting output is lawful.
               </p>
               <ul className="list-disc ps-6 space-y-1.5 text-amber-950/90 dark:text-amber-200/90">
                 <li>
-                  <strong>User Responsibility:</strong> You are solely responsible for ensuring you have the content owner&rsquo;s authorization, a valid license, or applicable legal exemption before downloading, saving, or distributing third-party media.
+                  <strong>User Responsibility:</strong> You are solely responsible for ensuring you have the copyright holder&rsquo;s authorization, a valid license, or applicable legal exemption before processing or distributing third-party content.
                 </li>
                 <li>
                   <strong>No Endorsement:</strong> ConvertAllNow does not endorse, encourage, or facilitate copyright infringement.
                 </li>
                 <li>
-                  <strong>No Platform Affiliation:</strong> ConvertAllNow is an independent entity and is not affiliated with, sponsored by, or endorsed by Instagram, Meta Platforms, Inc., Snap Inc., or any other third-party service provider.
+                  <strong>No Hosted Library:</strong> ConvertAllNow does not provide a catalogue of third-party media or claim ownership of files processed by users.
                 </li>
                 <li>
-                  <strong>DMCA &amp; Copyright Notices:</strong> If you are a copyright owner or an agent thereof and believe content referenced through our tools infringes your intellectual property, please submit an infringement notice to <a href="mailto:support@y2code.com" className="text-indigo-600 dark:text-indigo-400 underline font-medium">support@y2code.com</a> with complete verification details.
+                  <strong>DMCA &amp; Copyright Notices:</strong> If you are a copyright owner or an authorized agent and believe use of the service infringes your intellectual property, submit a notice to <a href="mailto:support@y2code.com" className="text-indigo-600 dark:text-indigo-400 underline font-medium">support@y2code.com</a> with complete verification details.
                 </li>
               </ul>
             </section>

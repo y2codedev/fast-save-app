@@ -1,5 +1,3 @@
-import { FiInstagram } from 'react-icons/fi';
-import { FaSnapchat, FaFacebook } from "react-icons/fa";
 import { MdAudiotrack, MdInsertPhoto } from "react-icons/md";
 
 import {
@@ -34,12 +32,6 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
         icon: MdInsertPhoto,
         ariaLabel: 'Photo',
     },
-    // {
-    //     id: 4,
-    //     href: '/fb-video',
-    //     icon: FaFacebook,
-    //     ariaLabel: 'FB Video',
-    // },
     {
         id: 5,
         href: '/bg-remover',
@@ -52,12 +44,6 @@ export const DEFAULT_SOCIAL_LINKS: SocialLink[] = [
         icon: ArrowPathIcon,
         ariaLabel: 'Image Compressor'
     },
-    // {
-    //     id: 7,
-    //     href: '/snapchat',
-    //     icon: FaSnapchat,
-    //     ariaLabel: 'Snapchat'
-    // },
 
 ];
 
@@ -210,12 +196,6 @@ export const MEGA_MENU_ITEMS = [
     ]
   },
   {
-    category: "IG Downloader",
-    items: [
-      { name: "IG Downloader", path: "/ig-downloader", icon: FiInstagram, desc: "Download Instagram content" },
-    ]
-  },
-  {
     category: "Dev Tools",
     items: [
       { name: "Data Formatter", path: "/data-formatter", icon: Code, desc: "Format JSON, XML, YAML, CSV" },
@@ -273,18 +253,6 @@ export const ZIP_MENU_ITEMS = [
 ];
 
 export const NAVITEMS: SocialLink[] = [
-    // {
-    //     id: 1,
-    //     href: '/fb-video',
-    //     icon: FaFacebook,
-    //     ariaLabel: 'Facebook',
-    // },
-    // {
-    //     id: 2,
-    //     href: '/snapchat',
-    //     icon: FaSnapchat,
-    //     ariaLabel: 'Snapchat'
-    // },
     {
         id: 3,
         href: '/photo',
@@ -330,12 +298,9 @@ export const TopHeader_Item: TopHeaderItem[] = [
     { path: '/audio', titleKey: 'audio.title', descriptionKey: 'audio.description' },
     { path: '/photo', titleKey: 'photo.title', descriptionKey: 'photo.description' },
     { path: '/stories', titleKey: 'stories.title', descriptionKey: 'stories.description' },
-    { path: '/fb-video', titleKey: 'fb_video.title', descriptionKey: 'fb_video.description' },
     { path: '/bg-remover', titleKey: 'bg_remover.title', descriptionKey: 'bg_remover.description' },
     { path: '', titleKey: 'default.title', descriptionKey: 'default.description' },
-    { path: '/ig-downloader', titleKey: 'ig_downloader.title', descriptionKey: 'ig_downloader.description' },
     { path: '/image-compressor', titleKey: 'image_compressor.title', descriptionKey: 'image_compressor.description' },
-    { path: '/snapchat', titleKey: 'snapchat.title', descriptionKey: 'snapchat.description' },
     { path: '/video-to-gif', titleKey: 'video_to_gif.title', descriptionKey: 'video_to_gif.description' },
     { path: '/video-compressor', titleKey: 'video_compressor.title', descriptionKey: 'video_compressor.description' },
     { path: '/video-trimmer', titleKey: 'video_trimmer.title', descriptionKey: 'video_trimmer.description' },

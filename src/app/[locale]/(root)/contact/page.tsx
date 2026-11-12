@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 const FAQS = [
   {
     question: 'Are my uploaded files ever stored or viewed on your servers?',
-    answer: 'No, absolutely not. ConvertAllNow tools process your files directly inside your web browser using WebAssembly and client-side JavaScript. Your files never leave your device, ensuring total confidentiality and privacy.'
+    answer: 'The file-conversion tools process selected file content inside your browser using client-side JavaScript and WebAssembly rather than uploading it to our servers. Supporting application code or models may still be downloaded before processing.'
   },
   {
     question: 'Why did my file conversion fail or freeze?',
@@ -43,7 +43,7 @@ const FAQS = [
   },
   {
     question: 'Is ConvertAllNow completely free to use?',
-    answer: 'Yes! All 50+ file conversion, compression, and editing tools on ConvertAllNow are 100% free for both personal and commercial use. No account creation, payment, or watermark is ever required.'
+    answer: 'The tools currently listed on ConvertAllNow are free to use without creating an account. Check each tool page for supported formats, output behavior, and limitations.'
   },
   {
     question: 'How do I request support for a new file format?',

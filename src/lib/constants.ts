@@ -19,7 +19,6 @@ export const ALL_TOOLS = [
   { name: 'Data Formatter', path: '/data-formatter' },
   { name: 'Unlock PDF', path: '/unlock-pdf' },
   { name: 'Pro Image Editor', path: '/image-editor' },
-  { name: 'IG Downloader', path: '/ig-downloader' },
   // PDF tools
   { name: 'Split PDF', path: '/split-pdf' },
   { name: 'Protect PDF', path: '/protect-pdf' },

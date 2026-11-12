@@ -30,6 +30,9 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig: NextConfig = {
   // Keep production builds within the memory available on the deployment host.
   productionBrowserSourceMaps: false,
+  // This repository lives below another lockfile; keep standalone tracing scoped
+  // to the actual application rather than the inferred parent directory.
+  outputFileTracingRoot: process.cwd(),
   async headers() {
     // Only apply COOP/COEP to routes that need SharedArrayBuffer (FFmpeg WASM, 7z-wasm)
     const coopCoepRoutes = [
@@ -74,14 +77,6 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
-  },
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
   },
    typescript: {
     ignoreBuildErrors: true,  

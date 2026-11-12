@@ -8,6 +8,7 @@ import FallbackLoader from "@/components/ui/FallbackLoader";
 import ThemeProviderWrapper from "@/components/sections/ThemeProviderWrapper";
 import ToastProvider from "@/components/sections/ToastProvider";
 import AdvertisingScript from "@/components/AdvertisingScript";
+import AnalyticsScript from "@/components/AnalyticsScript";
 import { ADS_CLIENT_ID } from "@/lib/advertising";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -17,6 +18,7 @@ import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import { getCanonicalUrl, getAlternateLanguages, getOgLocale, getSiteUrl } from '@/lib/seo';
 import OrganizationSchema from '@/components/seo/OrganizationSchema';
+import CookieConsent from '@/components/ui/CookieConsent';
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -128,27 +130,7 @@ export default async function RootLayout({
   <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'} className={inter.className} suppressHydrationWarning>
   <head>
     <link rel="manifest" href="/manifest.webmanifest" />
-    {/* Google AdSense Site Verification & Delivery */}
-    <Script
-      id="google-adsense"
-      async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADS_CLIENT_ID}`}
-      strategy="afterInteractive"
-      crossOrigin="anonymous"
-    />
-    {/* Google Analytics */}
-    <Script
-      src="https://www.googletagmanager.com/gtag/js?id=G-D77QJC0T0J"
-      strategy="afterInteractive"
-    />
-    <Script id="google-analytics" strategy="afterInteractive">
-      {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-D77QJC0T0J');
-      `}
-    </Script>
+    {/* Ownership remains verifiable through metadata and ads.txt. Delivery is consent-gated. */}
   </head>
   <body className="overflow-x-hidden min-h-screen flex flex-col" suppressHydrationWarning>
         <Script id="register-sw" strategy="afterInteractive">
@@ -184,6 +166,9 @@ export default async function RootLayout({
             </Suspense>
             <Footer />
             <ToastProvider />
+            <CookieConsent />
+            <AdvertisingScript />
+            <AnalyticsScript />
           </NextIntlClientProvider>
         </ThemeProviderWrapper>
       </body>

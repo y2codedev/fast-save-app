@@ -17,6 +17,19 @@ export default function ImageToSVG() {
   const [showCode, setShowCode] = useState<boolean>(false);
 
   const handleFile = (file: File) => {
+    const supportedTypes = ['image/png', 'image/jpeg', 'image/webp'];
+    const maxSize = 5 * 1024 * 1024;
+
+    if (!supportedTypes.includes(file.type)) {
+      setError(getT('Please choose a PNG, JPG, or WebP image.'));
+      return;
+    }
+
+    if (file.size > maxSize) {
+      setError(getT('Please choose an image no larger than 5 MB.'));
+      return;
+    }
+
     setLoading(true);
     setError(null);
     setSvg(null);
@@ -98,7 +111,7 @@ export default function ImageToSVG() {
 
   return (
     <div className="mx-auto w-full space-y-6">
-      
+
       {!svg && !loading && (
         <FileUploadArea onFileUpload={handleFile} loading={false} subtitle={getT("PNG, JPG (Max. 5MB)")} />
       )}
@@ -133,32 +146,32 @@ export default function ImageToSVG() {
             <div className="flex-1 bg-white dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 flex flex-col items-center p-6 shadow-inner">
               <span className="font-bold text-sm text-indigo-500 mb-4 uppercase tracking-wider">{getT('Vector SVG')}</span>
               <div className="relative w-full h-64 inline-flex items-center whitespace-nowrap justify-center bg-gray-50/50 dark:bg-gray-800/50 rounded-lg overflow-hidden">
-                <img 
-                  src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`} 
-                  className="max-w-full max-h-full object-contain drop-shadow-md" 
-                  alt="Vector SVG" 
+                <img
+                  src={`data:image/svg+xml;utf8,${encodeURIComponent(svg)}`}
+                  className="max-w-full max-h-full object-contain drop-shadow-md"
+                  alt="Vector SVG"
                 />
               </div>
             </div>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-center gap-4 max-w-3xl mx-auto">
-            <button 
-              onClick={handleDownload} 
+            <button
+              onClick={handleDownload}
               className="flex-1 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 text-white font-semibold px-6 py-4 rounded-xl shadow-md transition-all hover:-translate-y-0.5 inline-flex items-center whitespace-nowrap justify-center gap-2"
             >
               <FiDownload className="w-5 h-5" />
               {getT('Download SVG')}
             </button>
-            <button 
-              onClick={handleCopyCode} 
+            <button
+              onClick={handleCopyCode}
               className="flex-1 bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 border border-gray-300 dark:border-gray-600 font-semibold px-6 py-4 rounded-xl shadow-sm transition-all inline-flex items-center whitespace-nowrap justify-center gap-2 hover:-translate-y-0.5"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
               {showCode ? getT('Copied to Clipboard!') : getT('Copy SVG Code')}
             </button>
-            <button 
-              onClick={resetWorkspace} 
+            <button
+              onClick={resetWorkspace}
               className="flex-1 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 border border-transparent hover:border-red-200 dark:hover:border-red-800 font-semibold px-6 py-4 rounded-xl hover:bg-red-100 dark:hover:bg-red-900/40 transition-colors inline-flex items-center whitespace-nowrap justify-center hover:-translate-y-0.5"
             >
               Convert Another

@@ -13,7 +13,7 @@ import { getCanonicalUrl, getAlternateLanguages, getOgLocale, RELATED_TOOLS } fr
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const title = "Free PDF to HTML Converter Online - 100% Private & Client-Side | ConvertAllNow";
+  const title = "Free PDF to HTML Converter Online - Client-Side | ConvertAllNow";
   const description = "Convert PDF documents to clean, structured HTML5 web pages instantly inside your browser with interactive live preview and zero uploads.";
 
   return {

@@ -16,9 +16,6 @@ export async function GET() {
   xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
 
 
-  // This release updates shared site content and navigation across every route.
-  const lastmod = '2026-09-11';
-
   for (const path of allPaths) {
     const languages = getAlternateLanguages(path);
     for (const locale of locales) {
@@ -27,8 +24,6 @@ export async function GET() {
 
       xml += `  <url>\n`;
       xml += `    <loc>${url}</loc>\n`;
-      xml += `    <lastmod>${lastmod}</lastmod>\n`;
-
       // Add reciprocal hreflang links
       for (const [lang, langUrl] of Object.entries(languages)) {
         xml += `    <xhtml:link rel="alternate" hreflang="${lang}" href="${langUrl}" />\n`;

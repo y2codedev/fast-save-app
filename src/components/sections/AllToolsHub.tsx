@@ -246,17 +246,6 @@ const TOOLS_DATABASE: ToolItem[] = [
     desc: 'Convert any video clip into a looping, animated GIF file.',
     processingType: 'local',
   },
-  {
-    name: 'Instagram Downloader',
-    path: '/ig-downloader',
-    category: 'video',
-    categoryLabel: 'Social Downloader',
-    task: 'extract',
-    taskLabel: 'Extract',
-    desc: 'Download public Instagram Reels and Stories for personal offline reference.',
-    processingType: 'hybrid',
-  },
-
   // Archive & ZIP Tools
   {
     name: 'Create ZIP',

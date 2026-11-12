@@ -3,15 +3,15 @@
     "badgeText": "由创作者打造，为创作者服务。",
     "missionDesc": "To empower creators, students, and professionals around the world with a reliable, safe, and lightning-fast digital toolkit. We are a dedicated team of independent developers (Convert All Now) passionate about making the web a more productive place.",
     "missionTitle": "我们的使命",
-    "promiseDesc": "Output quality and compatibility depend on your source file, settings and browser. We do not guarantee absolute security or universal format support. For server-side tools (such as URL resolution downloaders), temporary server files are automatically deleted within 15 minutes after processing. Client-side tools process files locally on your device with no server upload.",
+    "promiseDesc": "Output quality and compatibility depend on your source file, settings, device memory, and browser. We do not guarantee absolute security or universal format support. File conversion tools process selected file content locally in the browser rather than uploading it to our servers.",
     "promiseTitle": "我们的承诺",
     "storyP1": "互联网上充满了媒体工具，但我们发现了一个长期存在的问题：它们要么太贵，要么太复杂，或者通过强迫您将敏感文件上传到远程服务器来损害您的隐私。",
-    "storyP2": "File converters process selected files directly in your browser. Social downloaders send the pasted URL to our server and an external provider to resolve streams; temporary files are deleted within 15 minutes. Browser processing uses device memory and may fail on excessively large files.",
+    "storyP2": "File converters process selected files directly in your browser. Browser processing uses your device memory and may fail on unusually large or unsupported files, so the tool pages document format and practical size limitations.",
     "storyTitle": "我们为什么构建 ConvertAllNow",
     "subtitle": "我们的使命是让媒体编辑变得大众化。我们相信每个人都应该能够获得快速、安全和专业的工具，而无需支付昂贵的软件费用。",
     "titleHighlight": "ConvertAllNow",
     "titleMain": "关于",
-    "whatDesc": "ConvertAllNow 提供 20 多种专业工具。您可以压缩大型视频、修剪音频文件、使用 AI 从图像中删除背景、合并 PDF 文档，甚至下载您最喜欢的社交媒体内容——所有这些都可以在一个统一的仪表板中完成。",
+    "whatDesc": "ConvertAllNow offers browser-based conversion and document tools. You can compress videos, trim audio files, remove image backgrounds, merge and split PDF documents, and convert archives from one platform.",
     "whatTitle": "您可以做什么"
   },
   "AudioTrimmer": {
@@ -475,8 +475,8 @@
     "uploadTitleText": "CLICK 转 UPLOAD"
   },
   "ImageConverterSEO": {
-    "description": "转换图片格式，生成SVG矢量图。",
-    "title": "图像转换器与SVG生成器 - ConvertAllNow"
+    "description": "在浏览器中转换 PNG、JPG、WebP 等图像格式，或将光栅图像描摹为 SVG。",
+    "title": "在线图像转换器：PNG、JPG、WebP 与 SVG | ConvertAllNow"
   },
   "ImageEditor": {
     "/": "/",

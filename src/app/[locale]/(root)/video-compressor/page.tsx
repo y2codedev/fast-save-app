@@ -123,7 +123,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
               { title: 'FFmpeg WebAssembly', description: 'Industry-standard video processing runs natively in your browser.' },
               { title: 'Quality Control', description: 'Adjustable CRF slider to balance output size and visual quality.' },
               { title: 'H.264 Encoding', description: 'Universal MP4 output compatible with all devices and platforms.' },
-              { title: 'No Server Upload', description: 'Video processing is 100% local — complete privacy guaranteed.' },
+              { title: 'No Server Upload', description: 'Video content is processed locally by FFmpeg WebAssembly in this browser tab.' },
               { title: 'All Major Formats', description: 'Supports MP4, WebM, MOV, AVI, MKV input formats.' },
               { title: 'Progress Indicator', description: 'Real-time compression progress with estimated time remaining.' },
             ]}
