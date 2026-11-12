@@ -50,7 +50,7 @@ const INQUIRY_TOPICS = [
 const FAQS = [
   {
     question: 'Are my uploaded files ever stored or viewed on your servers?',
-    answer: 'No, absolutely not. ConvertAllNow tools process your files directly inside your web browser using WebAssembly and client-side JavaScript. Your files never leave your device, ensuring total confidentiality and privacy.'
+    answer: 'The file-conversion tools process selected file content inside your browser using client-side JavaScript and WebAssembly rather than uploading it to our servers. Supporting application code or models may still be downloaded before processing.'
   },
   {
     question: 'Why did my file conversion fail or freeze?',
@@ -58,7 +58,7 @@ const FAQS = [
   },
   {
     question: 'Is ConvertAllNow completely free to use?',
-    answer: 'Yes! All 50+ file conversion, compression, and editing tools on ConvertAllNow are 100% free for both personal and commercial use. No account creation, payment, or watermark is ever required.'
+    answer: 'The tools currently listed on ConvertAllNow are free to use without creating an account. Check each tool page for supported formats, output behavior, and limitations.'
   },
   {
     question: 'How do I request support for a new file format?',
@@ -126,7 +126,7 @@ export default function ContactSection({ translations }: ContactSectionProps) {
         <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 pt-2">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 text-xs font-medium border border-emerald-200/60 dark:border-emerald-800/40">
             <ShieldCheck className="w-3.5 h-3.5" />
-            <span>100% In-Browser Privacy</span>
+            <span>Local File Processing</span>
           </div>
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-300 text-xs font-medium border border-indigo-200/60 dark:border-indigo-800/40">
             <Clock className="w-3.5 h-3.5" />
@@ -407,7 +407,7 @@ export default function ContactSection({ translations }: ContactSectionProps) {
             Ready to Convert or Edit Your Files?
           </h3>
           <p className="text-sm sm:text-base text-indigo-200 max-w-xl">
-            Over 50+ free browser tools for PDFs, Images, Videos, Audio, and Archives with zero setup.
+            Browser tools for PDFs, images, video, audio, and archives with no account setup.
           </p>
         </div>
         <Link

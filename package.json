@@ -27,7 +27,6 @@
     "@radix-ui/react-tabs": "^1.1.12",
     "@types/marked": "^5.0.2",
     "7z-wasm": "^1.2.0",
-    "axios": "^1.11.0",
     "browser-image-compression": "^2.0.2",
     "cheerio": "^1.1.2",
     "class-variance-authority": "^0.7.0",
@@ -43,7 +42,7 @@
     "lucide-react": "^0.522.0",
     "mammoth": "^1.12.0",
     "marked": "^18.0.7",
-    "next": "15.3.8",
+    "next": "15.5.29",
     "next-intl": "^4.13.4",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.4.6",
@@ -61,8 +60,7 @@
     "react-share": "^5.2.2",
     "react-toastify": "^11.0.5",
     "tailwind-merge": "^1.14.0",
-    "tailwindcss-animate": "^1.0.7",
-    "ytdl-core": "^4.11.5"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -74,5 +72,8 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
+  },
+  "overrides": {
+    "tar": "^7.5.21"
   }
 }

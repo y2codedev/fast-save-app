@@ -1,8 +1,13 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { usePathname } from '@/i18n/routing'
-import { canShowAds, ADS_CLIENT_ID } from '@/lib/advertising'
+import {
+  ADS_CLIENT_ID,
+  canShowAds,
+  COOKIE_CONSENT_EVENT,
+  COOKIE_CONSENT_KEY,
+} from '@/lib/advertising'
 import { useInView } from 'react-intersection-observer'
 
 type Props = {
@@ -15,9 +20,23 @@ export default function AdsenseAd({ slot, height = 'min-h-[280px]', className = 
   const { ref, inView } = useInView({ triggerOnce: true, rootMargin: '200px 0px' })
   const clientId = ADS_CLIENT_ID
   const pathname = usePathname()
-  const allowed = canShowAds(pathname) && !!slot
+  const [hasConsent, setHasConsent] = useState(false)
+  const allowed = hasConsent && canShowAds(pathname) && !!slot
   const adRef = useRef<HTMLModElement>(null)
   const isDevelopment = process.env.NODE_ENV === 'development'
+
+  useEffect(() => {
+    const updateConsent = () => {
+      try {
+        setHasConsent(localStorage.getItem(COOKIE_CONSENT_KEY) === 'accepted')
+      } catch {
+        setHasConsent(false)
+      }
+    }
+    updateConsent()
+    window.addEventListener(COOKIE_CONSENT_EVENT, updateConsent)
+    return () => window.removeEventListener(COOKIE_CONSENT_EVENT, updateConsent)
+  }, [])
 
   useEffect(() => {
     if (allowed && inView && clientId && !isDevelopment) {

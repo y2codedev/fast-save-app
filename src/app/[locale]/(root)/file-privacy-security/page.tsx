@@ -89,14 +89,6 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
       retention: '0 Seconds (Cleared on tab close)',
       tech: 'Client JSZip & Libarchive WASM',
     },
-    {
-      category: 'Social Media Downloaders',
-      examples: 'Instagram Downloader, Facebook Video, Snapchat',
-      location: 'URL Resolution via Server API',
-      uploaded: false,
-      retention: 'Zero File Retention (Media streams directly)',
-      tech: 'Public URL Resolution / Direct Stream',
-    },
   ];
 
   return (
@@ -207,7 +199,7 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
               <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2 list-disc list-inside">
                 <li>Files remain inside your computer or smartphone RAM buffer.</li>
                 <li>No network packet containing your file content is sent across the internet.</li>
-                <li>When you close the browser tab, the browser immediately wipes the allocated memory.</li>
+                <li>When you close the browser tab, the browser releases the page and its temporary memory according to the browser&rsquo;s own memory-management rules.</li>
               </ul>
             </div>
 
@@ -216,15 +208,15 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
                 <ServerStackIcon className="w-7 h-7" />
               </div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">
-                Social Video Downloaders
+                Supporting Code &amp; Model Downloads
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                Our social media download tools (such as Instagram Reels, Facebook Video, and Snapchat downloaders) require resolving public links:
+                Some tools need supporting code, a WebAssembly engine, or a machine-learning model before local processing can begin:
               </p>
               <ul className="text-sm text-gray-600 dark:text-gray-400 space-y-2 list-disc list-inside">
-                <li>You provide a public URL; that link is sent to an API to discover media streaming streams.</li>
-                <li>We do not store or mirror downloaded videos on our web servers.</li>
-                <li>Downloaded files stream directly to your device storage.</li>
+                <li>Your browser may download these application assets from ConvertAllNow or the library provider.</li>
+                <li>The selected file remains in browser memory and is not included in those asset requests.</li>
+                <li>Initial processing can take longer while a large engine or model is downloaded and initialized.</li>
               </ul>
             </div>
           </section>
@@ -273,7 +265,7 @@ export default async function FilePrivacySecurityPage({ params }: { params: Prom
             </h2>
             <div className="prose dark:prose-invert max-w-none text-sm text-gray-600 dark:text-gray-400 space-y-3 leading-relaxed">
               <p>
-                ConvertAllNow provides all tools completely free of charge. To cover infrastructure hosting, domain maintenance, and ongoing development costs, we display third-party advertisements via Google AdSense.
+                ConvertAllNow provides its tools free of charge. When advertising is enabled and you consent, the site may display third-party advertisements via Google AdSense to help cover hosting and development costs.
               </p>
               <p>
                 Third-party vendors, including Google, use cookies to serve ads based on a user’s prior visits to ConvertAllNow or other websites. Google’s use of advertising cookies enables it and its partners to serve ads to users based on their visit to our sites and/or other sites on the Internet.

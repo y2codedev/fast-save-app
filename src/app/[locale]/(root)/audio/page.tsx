@@ -105,7 +105,7 @@ const howToSteps = [
                   The Audio Tools suite provides professional-grade utilities to trim, cut, and convert audio files directly in your web browser. Whether you are extracting a segment for a ringtone, editing a podcast, or converting a WAV file to MP3, our tools deliver high-fidelity results instantly.
                 </p>
                 <p className="mt-3">
-                  Powered by the FFmpeg audio engine running natively in WebAssembly, we guarantee that your audio processing is 100% private. Your voice recordings, music tracks, and podcast files never leave your device, ensuring no third party can access your audio data.
+                  The FFmpeg audio engine runs in WebAssembly inside this browser tab. Selected file content is processed locally rather than uploaded to our servers; supporting FFmpeg code may be downloaded before processing begins.
                 </p>
               </>
             }

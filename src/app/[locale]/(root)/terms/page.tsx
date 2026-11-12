@@ -84,14 +84,13 @@ export default async function TermsPage({ params }: { params: Promise<{ locale: 
             </section>
 
             <section className="space-y-3">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">3. Social Media Downloaders &amp; Third-Party Rights</h2>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-white">3. User Content &amp; Third-Party Rights</h2>
               <p>
-                ConvertAllNow provides online utilities that resolve publicly accessible media links (including Instagram, Facebook, and Snapchat utilities).
+                ConvertAllNow processes files selected by the user. You remain responsible for the files you choose to process and for ensuring that your use of those files and the resulting output is lawful.
               </p>
               <ul className="list-disc ps-6 space-y-1">
-                <li><strong>No Affiliation:</strong> ConvertAllNow is not affiliated with, endorsed by, or partnered with Instagram, Meta Platforms, Inc., Snap Inc., or any other third-party platform.</li>
-                <li><strong>User Responsibility:</strong> You are solely responsible for ensuring that you have the copyright holder&rsquo;s authorization, a valid license, or applicable fair-use exemption before downloading or using any third-party media content.</li>
-                <li><strong>Personal Reference Only:</strong> Download tools are provided for personal, non-commercial reference and backup purposes only.</li>
+                <li><strong>User Responsibility:</strong> You are solely responsible for ensuring that you have the copyright holder&rsquo;s authorization, a valid license, or applicable fair-use exemption before processing or using third-party content.</li>
+                <li><strong>No Hosted Library:</strong> ConvertAllNow does not provide a catalogue of third-party media or claim ownership of files processed by users.</li>
               </ul>
             </section>
 

@@ -132,7 +132,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             features={[
               { title: 'Drag & Drop Ordering', description: 'Easily rearrange the sequence of files before merging.' },
               { title: 'Zero Upload Wait Time', description: "Merge files instantly using your computer's own processing power." },
-              { title: '100% Privacy Guaranteed', description: 'Confidential files are never sent over the internet.' },
+              { title: 'Local File Processing', description: 'PDF contents are processed in this browser tab rather than uploaded to our servers.' },
               { title: 'Preserves Original Quality', description: 'The merged PDF retains the exact quality of the source files.' },
             ]}
             howToSteps={howToSteps}

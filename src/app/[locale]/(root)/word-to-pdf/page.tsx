@@ -13,7 +13,7 @@ import { getCanonicalUrl, getAlternateLanguages, getOgLocale, RELATED_TOOLS } fr
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  const title = "Free Word to PDF Converter Online - 100% Private & Client-Side | ConvertAllNow";
+  const title = "Free Word to PDF Converter Online - Client-Side | ConvertAllNow";
   const description = "Convert Microsoft Word documents (.docx, .doc) to high-quality PDF files instantly inside your browser. Zero file uploads, lightning-fast execution, and 100% data privacy.";
 
   return {

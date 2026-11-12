@@ -20,8 +20,6 @@ export default function WebPageSchema({
   const siteUrl = getSiteUrl();
   const localePrefix = locale === 'en' ? '' : `/${locale}`;
   const pageUrl = `${siteUrl}${localePrefix}${path}`;
-  const today = new Date().toISOString().split('T')[0];
-
   const schema: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'WebPage',
@@ -29,7 +27,6 @@ export default function WebPageSchema({
     description,
     url: pageUrl,
     inLanguage: locale,
-    dateModified: dateModified || today,
     isPartOf: {
       '@type': 'WebSite',
       name: 'ConvertAllNow',
@@ -50,6 +47,10 @@ export default function WebPageSchema({
       },
     },
   };
+
+  if (dateModified) {
+    schema.dateModified = dateModified;
+  }
 
   if (breadcrumb && breadcrumb.length > 0) {
     schema.breadcrumb = {

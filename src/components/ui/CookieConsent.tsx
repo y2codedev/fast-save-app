@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import { Cookie, X, Check, ShieldCheck, ExternalLink } from 'lucide-react';
+import { COOKIE_CONSENT_EVENT, COOKIE_CONSENT_KEY } from '@/lib/advertising';
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     try {
-      const consent = localStorage.getItem('cookie_consent');
+      const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
       if (!consent) {
         // Small delay so it doesn't flash on initial paint
         const t = setTimeout(() => setVisible(true), 1200);
@@ -20,12 +21,18 @@ export default function CookieConsent() {
   }, []);
 
   const accept = () => {
-    try { localStorage.setItem('cookie_consent', 'accepted'); } catch {}
+    try {
+      localStorage.setItem(COOKIE_CONSENT_KEY, 'accepted');
+      window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
+    } catch {}
     setVisible(false);
   };
 
   const decline = () => {
-    try { localStorage.setItem('cookie_consent', 'declined'); } catch {}
+    try {
+      localStorage.setItem(COOKIE_CONSENT_KEY, 'declined');
+      window.dispatchEvent(new Event(COOKIE_CONSENT_EVENT));
+    } catch {}
     setVisible(false);
   };
 
@@ -51,9 +58,9 @@ export default function CookieConsent() {
             We use cookies &amp; third-party ads
           </p>
           <p className="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-            ConvertAllNow uses cookies for site functionality, Google Analytics, and Google AdSense advertising. 
-            Ads help keep all tools free. Third-party vendors including Google may use cookies to serve 
-            personalized ads based on your visits.{' '}
+            With your permission, ConvertAllNow uses Google Analytics and may use Google AdSense advertising.
+            Declining keeps those Google scripts disabled. If enabled, Google may use cookies to measure visits
+            or personalize ads.{' '}
             <a href="/privacy" className="text-indigo-600 dark:text-indigo-400 underline hover:text-indigo-700 font-medium">
               Privacy Policy
             </a>

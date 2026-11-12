@@ -3,15 +3,15 @@
     "badgeText": "Создано создателями для создателей.",
     "missionDesc": "Расширить возможности создателей, студентов и профессионалов по всему миру с помощью надежного, безопасного и молниеносного цифрового набора инструментов.",
     "missionTitle": "Наша миссия",
-    "promiseDesc": "Output quality and compatibility depend on your source file, settings and browser. We do not guarantee absolute security or universal format support. For server-side tools (such as URL resolution downloaders), temporary server files are automatically deleted within 15 minutes after processing. Client-side tools process files locally on your device with no server upload.",
+    "promiseDesc": "Output quality and compatibility depend on your source file, settings, device memory, and browser. We do not guarantee absolute security or universal format support. File conversion tools process selected file content locally in the browser rather than uploading it to our servers.",
     "promiseTitle": "Наше обещание",
     "storyP1": "В Интернете полно инструментов, но мы заметили проблему: они либо слишком дорогие, либо слишком сложные, либо ставят под угрозу вашу конфиденциальность.",
-    "storyP2": "File converters process selected files directly in your browser. Social downloaders send the pasted URL to our server and an external provider to resolve streams; temporary files are deleted within 15 minutes. Browser processing uses device memory and may fail on excessively large files.",
+    "storyP2": "File converters process selected files directly in your browser. Browser processing uses your device memory and may fail on unusually large or unsupported files, so the tool pages document format and practical size limitations.",
     "storyTitle": "Почему мы создали ConvertAllNow",
     "subtitle": "Наша миссия — демократизировать редактирование медиа. Мы считаем, что каждый заслуживает доступа к быстрым и профессиональным инструментам.",
     "titleHighlight": "ConvertAllNow",
     "titleMain": "О",
-    "whatDesc": "ConvertAllNow предлагает более 20 специализированных инструментов. Вы можете сжимать видео, удалять фон, объединять PDF-файлы и скачивать контент из социальных сетей.",
+    "whatDesc": "ConvertAllNow offers browser-based conversion and document tools. You can compress videos, trim audio files, remove image backgrounds, merge and split PDF documents, and convert archives from one platform.",
     "whatTitle": "Что вы можете сделать"
   },
   "AudioTrimmer": {
@@ -475,8 +475,8 @@
     "uploadTitleText": "CLICK в UPLOAD"
   },
   "ImageConverterSEO": {
-    "description": "Convierte imágenes a SVG o cambia de formato.",
-    "title": "Convertidor de Imágenes a SVG - ConvertAllNow"
+    "description": "Конвертируйте PNG, JPG, WebP и другие форматы изображений в браузере или создавайте SVG-трассировку растрового изображения.",
+    "title": "Онлайн-конвертер изображений: PNG, JPG, WebP и SVG | ConvertAllNow"
   },
   "ImageEditor": {
     "/": "/",
