@@ -7,7 +7,7 @@ export async function GET() {
   const siteUrl = getSiteUrl();
 
   const categoryPaths = ['/pdf-tools', '/image-tools', '/video-tools', '/archive-tools'];
-  const staticPaths = ['', '/about', '/contact', '/privacy', '/terms', '/sitemap', '/file-privacy-security'];
+  const staticPaths = ['', '/about', '/contact', '/privacy', '/terms', '/file-privacy-security'];
   const toolPaths = Array.from(new Set(ALL_TOOLS.map(t => t.path))).filter(p => p !== '/' && p !== '' && !NOINDEX_TOOLS.includes(p));
   const allPaths = [...staticPaths, ...categoryPaths, ...toolPaths];
 

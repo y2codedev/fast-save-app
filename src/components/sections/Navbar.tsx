@@ -1,6 +1,6 @@
 'use client';
 
-import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes, FaGlobe, FaChevronRight } from 'react-icons/fa';
+import { FaShareAlt, FaSun, FaMoon, FaBars, FaTimes, FaChevronRight } from 'react-icons/fa';
 import { Link, usePathname } from '@/i18n/routing';
 import { useTheme } from 'next-themes';
 import { MEGA_MENU_ITEMS, ZIP_MENU_ITEMS } from '@/constants/data';
@@ -10,7 +10,6 @@ import { ChevronDownIcon, Sparkles } from 'lucide-react';
 import ShareDialog from '@/components/ui/ShareDialog';
 import AppLogo from '@/components/AppLogo';
 import { motion, AnimatePresence } from 'framer-motion';
-import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useTranslations } from 'next-intl';
 import { useGetT } from '@/hooks/useGetT';
 
@@ -219,7 +218,6 @@ const Navbar = () => {
             {/* Actions & Mobile Menu */}
             <div className="flex items-center gap-1.5 sm:gap-2">
               <div className="hidden lg:flex items-center gap-1.5 sm:gap-2">
-                <LanguageSwitcher />
                 <button
                   type="button"
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -304,14 +302,6 @@ const Navbar = () => {
 
                 {/* Mobile Drawer Settings */}
                 <div className="mt-4 pt-4 border-t border-gray-100 dark:border-gray-800 space-y-2">
-                  <div className=" inline-flex items-center whitespace-nowrap justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
-                    <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
-                      <FaGlobe className="w-4 h-4" />
-                      {t('Language')}
-                    </div>
-                    <LanguageSwitcher />
-                  </div>
-                  
                   <div className=" inline-flex items-center whitespace-nowrap justify-between w-full px-4 py-3 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
                     <div className="flex items-center gap-3 text-sm font-semibold text-gray-700 dark:text-gray-300">
                       {theme === 'dark' ? <FaMoon className="w-4 h-4" /> : <FaSun className="w-4 h-4" />}

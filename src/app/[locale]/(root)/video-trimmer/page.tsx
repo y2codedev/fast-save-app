@@ -99,6 +99,7 @@ const Page = async ({ params }: { params: Promise<{ locale: string }> }) => {
       >
         <div className="flex flex-col space-y-6 pb-12">
           <VisualBreadcrumb items={breadcrumbItems.slice(1)} />
+          <h1 className="sr-only">{t('title')}</h1>
           <NoSSRWrapper><VideoTrimmer /></NoSSRWrapper>
           <ToolContentSection
             toolName="Video Trimmer"

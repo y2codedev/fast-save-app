@@ -38,7 +38,7 @@ const CORE_BENEFITS = [
     title: 'Free to Use',
     description: 'Use the currently listed file tools without creating an account or paying for a subscription. Individual tool pages describe their supported outputs and limitations.',
     color: 'purple',
-    badge: 'No Watermarks'
+    badge: 'No Sign-Up'
   }
 ];
 
@@ -88,15 +88,15 @@ const HOMEPAGE_FAQS = [
   },
   {
     question: 'Is there a limit on how many files I can convert?',
-    answer: 'No. There are no daily conversion caps, rate limits, or paywalls. You can process as many files as your device hardware comfortably handles.'
+    answer: 'The site does not currently impose a daily conversion counter. Practical limits depend on the tool, file size, browser memory, and your device hardware.'
   },
   {
     question: 'Are the tools compatible with mobile phones and tablets?',
-    answer: 'Yes. All tools are fully responsive and work seamlessly on modern mobile browsers (Safari on iOS, Chrome on Android) without installing any third-party apps.'
+    answer: 'The interface supports current mobile browsers, but memory-intensive PDF, video, and archive jobs may work better on a desktop device with more available memory.'
   },
   {
     question: 'Why does conversion speed vary between different devices?',
-    answer: 'Because processing happens on-device rather than in a cloud server farm, processing speed is tied to your device’s processor (CPU) and available memory (RAM). Newer computers and phones will convert files in seconds.'
+    answer: 'Because processing happens on-device, speed depends on your processor, available memory, source-file size, output format, and browser implementation.'
   }
 ];
 

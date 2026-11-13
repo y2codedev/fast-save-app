@@ -4,9 +4,12 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { load } from 'cheerio';
 const base = process.argv[2] || 'http://localhost:3100';
 const registry = readFileSync('src/lib/constants.ts', 'utf8');
+const routing = readFileSync('src/i18n/routing.ts', 'utf8');
 const paths = [...new Set(['/', '/about', '/contact', '/privacy', '/terms', '/pdf-tools', '/image-tools', '/archive-tools', '/video-tools', '/sitemap', ...[...registry.matchAll(/path: '([^']+)'/g)].map(m => m[1])])];
 const noindexBlock = registry.match(/NOINDEX_TOOLS\s*=\s*\[([\s\S]*?)\]/)?.[1] || '';
-const noindexPaths = new Set([...noindexBlock.matchAll(/'([^']+)'/g)].map(m => m[1]));
+const noindexPaths = new Set(['/sitemap', ...[...noindexBlock.matchAll(/'([^']+)'/g)].map(m => m[1])]);
+const publishedLocaleBlock = routing.match(/export const locales\s*=\s*\[([^\]]*)\]/)?.[1] || '';
+const expectedHreflangCount = [...publishedLocaleBlock.matchAll(/'([^']+)'/g)].length + 1;
 const results = [];
 for (const path of [
   ...paths,
@@ -32,9 +35,12 @@ for (const path of [
   const serverHeading = $('h1').text();
   if (!retired && !withdrawn && !$('link[rel=canonical]').attr('href')) issues.push('Missing canonical');
   const robotsMeta = $('meta[name="robots"]').attr('content') || '';
-  if (noindexPaths.has(path) && !/noindex/i.test(robotsMeta)) issues.push('Missing intentional noindex');
-  if (!noindexPaths.has(path) && !retired && !withdrawn && /noindex/i.test(robotsMeta)) issues.push('Unexpected noindex');
-  if (!retired && !withdrawn && $('link[rel="alternate"][hreflang]').length !== 11) issues.push('Incomplete hreflang set');
+  const robotsHeader = response.headers.get('x-robots-tag') || '';
+  const robotsDirective = `${robotsMeta},${robotsHeader}`;
+  if (noindexPaths.has(path) && !/noindex/i.test(robotsDirective)) issues.push('Missing intentional noindex');
+  if (!noindexPaths.has(path) && !retired && !withdrawn && /noindex/i.test(robotsDirective)) issues.push('Unexpected noindex');
+  if (!retired && !withdrawn && !serverHeading.trim()) issues.push('Missing server-rendered H1');
+  if (!retired && !withdrawn && $('link[rel="alternate"][hreflang]').length !== expectedHreflangCount) issues.push('Incomplete hreflang set');
   if ($('ins.adsbygoogle').length || $('script[src*="adsbygoogle.js"]').length) issues.push('Ads active');
   if ($('a[href$="/zip-to-rar"],a[href$="/zip-to-iso"]').length) issues.push('Link to withdrawn tool');
   $('script,style').remove();
@@ -47,7 +53,13 @@ const xml = await sitemapResponse.text();
 const robots = await (await fetch(base + '/robots.txt')).text();
 const adsTxt = await (await fetch(base + '/ads.txt')).text();
 const retiredApiResponse = await fetch(base + '/api/download?url=https%3A%2F%2Fexample.com');
-const summary = {base, checkedAt:new Date().toISOString(), pages:results.length, failures:results.filter(r=>r.issues.length), sitemapStatus:sitemapResponse.status, sitemapUrlCount:(xml.match(/<loc>/g) || []).length, withdrawnInSitemap:/(?:zip-to-(?:rar|iso)|ig-downloader|fb-video|snapchat)/.test(xml), blocksRenderingAssets:/Disallow: \/(_next|wasm)/.test(robots), publisherVerified:adsTxt.includes('pub-1504999187644497'), retiredApiStatus:retiredApiResponse.status, results};
+const legacyRedirects = await Promise.all(['/es', '/fr/photo', '/ar/pdf-tools'].map(async path => {
+  const response = await fetch(base + path, {redirect: 'manual'});
+  return {path, status: response.status, location: response.headers.get('location')};
+}));
+const invalidLegacyRedirects = legacyRedirects.filter(({status, location}) => status !== 308 || !location);
+const noindexInSitemap = [...noindexPaths].filter(path => xml.includes(`<loc>${path}</loc>`) || xml.includes(`${path}</loc>`));
+const summary = {base, checkedAt:new Date().toISOString(), pages:results.length, failures:results.filter(r=>r.issues.length), sitemapStatus:sitemapResponse.status, sitemapUrlCount:(xml.match(/<loc>/g) || []).length, noindexInSitemap, withdrawnInSitemap:/(?:zip-to-(?:rar|iso)|ig-downloader|fb-video|snapchat)/.test(xml), legacyRedirects, blocksRenderingAssets:/Disallow: \/(_next|wasm)/.test(robots), publisherVerified:adsTxt.includes('pub-1504999187644497'), retiredApiStatus:retiredApiResponse.status, results};
 writeFileSync('/tmp/adsense-http-audit.json',JSON.stringify(summary,null,2));
 console.log(JSON.stringify({...summary,results:undefined},null,2));
-if(summary.failures.length || summary.withdrawnInSitemap || summary.blocksRenderingAssets || !summary.publisherVerified || summary.retiredApiStatus !== 410) process.exitCode=1;
+if(summary.failures.length || summary.noindexInSitemap.length || summary.withdrawnInSitemap || invalidLegacyRedirects.length || summary.blocksRenderingAssets || !summary.publisherVerified || summary.retiredApiStatus !== 410) process.exitCode=1;

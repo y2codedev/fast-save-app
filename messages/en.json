@@ -1,7 +1,7 @@
 {
   "About": {
     "badgeText": "Built by creators, for creators.",
-    "missionDesc": "To empower creators, students, and professionals around the world with a reliable, safe, and lightning-fast digital toolkit. We are a dedicated team of independent developers (Convert All Now) passionate about making the web a more productive place.",
+    "missionDesc": "ConvertAllNow is operated by Y2Code, an independent software development team. We build browser-based utilities for creators, students, and professionals and maintain the tools, support mailbox, and privacy documentation.",
     "missionTitle": "Our Mission",
     "promiseDesc": "Output quality and compatibility depend on your source file, settings, device memory, and browser. We do not guarantee absolute security or universal format support. File conversion tools process selected file content locally in the browser rather than uploading it to our servers.",
     "promiseTitle": "Our Promise",
@@ -129,8 +129,8 @@
   },
   "Contact": {
     "company": "Company",
-    "companyDesc": "Digital Media Tools",
-    "companyName": "Convert All Now",
+    "companyDesc": "Independent software team operating ConvertAllNow",
+    "companyName": "Y2Code",
     "ctaBtn": "Email Us Now",
     "ctaTitle": "Click below to open your default email client.",
     "emailDesc": "Send us an email anytime. This is the fastest way to get support.",
@@ -3767,9 +3767,9 @@
     "image": "Images: use compression to reduce file size and conversion to change format. JPEG removes transparency; PNG preserves it. Lossy compression can remove detail, so compare the preview before downloading.",
     "archive": "Archives: ZIP works with many file managers; 7Z can require another app. Password protection requires a compatible reader. Keep your password: the unlock tool requires it and cannot recover a forgotten password. Most archive tools accept up to 100 MB per file; ZIP to 7Z accepts 500 MB on desktop and 100 MB on mobile.",
     "privacyTitle": "Processing and privacy",
-    "privacy": "File converters process selected files in your browser. Social downloaders send the pasted URL to our server and an external provider; opening results also contacts third-party servers. Do not submit private links or content you lack permission to download. Browser processing still uses memory and may fail on large files.",
+    "privacy": "File converters process selected file content in your browser. Supporting WebAssembly engines or models may be downloaded before processing begins. Browser processing uses device memory and may fail on unusually large or unsupported files.",
     "limitsTitle": "Service limits",
-    "limits": "Output quality and compatibility depend on your source file, settings and browser. We do not guarantee security, immediate deletion by external providers, or support for every format. Keep backups and contact support with the tool name, browser and error message; avoid sending sensitive files.",
+    "limits": "Output quality and compatibility depend on your source file, settings, device memory, and browser. We do not guarantee absolute security or support for every format. Keep backups and contact support with the tool name, browser, and error message; do not email sensitive files.",
     "cookiesTitle": "Cookies and third-party services",
     "cookies": "The site stores preferences such as theme on your device. When enabled, Google Analytics and Google AdSense may use cookies or similar identifiers and receive device, IP and usage information. Advertising providers may use this information to personalize or measure ads. Browser settings can clear or block cookies. See Google's data-use explanation and ad settings below.",
     "fileError": "Select a supported, non-empty file up to 100 MB."

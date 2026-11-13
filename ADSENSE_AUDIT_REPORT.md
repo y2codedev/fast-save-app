@@ -12,7 +12,9 @@ The audit confirmed several material problems: Google advertising and analytics 
 
 The implemented fixes consent-gate Google scripts, remove retired downloaders from navigation, return explicit `410 Gone` responses, retire the resolver API, clean up policy copy, remove synthetic dates, narrow the image optimizer's attack surface, update Next.js, remove unused downloader dependencies, and update safe transitive dependencies. A 68-route HTTP audit now passes with zero failures.
 
-The largest remaining content-quality risk is the archive-converter cluster. Twelve deliberately thin variants remain `noindex` and excluded from the sitemap; several indexable archive pages still share substantial `CommonContent` template copy. They require human, tool-specific content and functionality review before AdSense resubmission. The supplied Search Console screenshots provide representative examples but not complete URL exports, so the totals cannot yet be mapped exhaustively to route behavior.
+The follow-up content crawl found a broader review risk than the original technical crawl: the XML sitemap exposed 470 URLs across ten locales even though 238 of 423 non-English tool pages contained substantial English copy, several legal/directory pages were exact cross-locale duplicates, four JavaScript-heavy converters had no server-rendered H1, and the archive cluster contained many near-template pages. For the next AdSense review, the public/indexable surface is now deliberately limited to 35 reviewed English URLs. Unfinished locale URLs permanently redirect to their English equivalents, repetitive archive utilities remain usable but are `noindex, follow`, and the HTML directory is noindex and absent from the XML sitemap. This is a quality-control measure, not a claim that multilingual publishing is undesirable; each locale can return after native-language editorial and functional review.
+
+AdSense approval still cannot be guaranteed. Google makes the decision using its own crawl, account history, policy systems, and traffic/content assessment. Do not resubmit immediately after deployment: allow Google to recrawl the smaller site surface, confirm the redirects and sitemap in Search Console, and finish the account-side consent steps described below.
 
 ## Search Console evidence supplied November 13, 2026
 
@@ -35,7 +37,18 @@ The three screenshots are point-in-time Google reports, not three defects that s
    - The live `/es/photo` page was indexable but its title overemphasized SVG, while supporting copy claimed passport cropping, filters, and photo enhancements that the actual tool does not offer.
    - Fix: `/photo` now describes the implemented raster format conversion, batch workflow, and raster-to-SVG tracing; unsupported claims were removed; SVG input type and 5 MB limits are enforced; and SEO title/description text was corrected in all ten locale catalogs.
 
-Recommended Search Console handling: leave normal redirects, alternate canonicals, and intentional `noindex` URLs alone; deploy the repository fixes; submit the sitemap once; then inspect a small representative set of genuinely indexable localized pages. Use “Validate fix” only for a group whose underlying cause was actually changed.
+Recommended Search Console handling after this release: submit the 35-URL sitemap once and let the old locale reports age out through the new permanent redirects. Leave normal redirects, alternate canonicals, and intentional `noindex` URLs alone. Use “Validate fix” only for a group whose underlying cause was actually changed; it does not force Google to index a URL.
+
+## Follow-up content-quality hardening
+
+- Published locales are temporarily limited to English. `/es`, `/fr/photo`, and `/ar/pdf-tools` were explicitly verified as HTTP 308 redirects to `/`, `/photo`, and `/pdf-tools`; the same middleware rule covers all nine unfinished locale prefixes while preserving the remaining path and query string.
+- The XML sitemap now contains 35 canonical English URLs instead of 470 mixed-quality locale URLs. It excludes every intentional noindex tool, the noindex HTML directory, retired downloaders, and withdrawn tools.
+- Twenty-three archive routes with highly repetitive templates are now `noindex, follow`. They remain reachable for users and internal discovery but are withheld from search and AdSense landing-page inventory until they have distinct, tested value.
+- The four client-only converter interfaces now expose one server-rendered H1 for crawlers and assistive technology. Their animated visual title is no longer a second semantic H1 after hydration.
+- ZIP converter headings now use each tool's configured name instead of generating generic `ZIP to ZIP` headings.
+- The language switcher is hidden while only English has passed editorial review.
+- About and Contact now identify Y2Code as the operator of ConvertAllNow, resolving the brand/support-domain ambiguity.
+- Homepage and site-guidance claims were softened where performance, capacity, device support, or privacy depends on the source file, browser, and hardware.
 
 ## 1. Confirmed issues and supporting evidence
 
@@ -91,12 +104,12 @@ Recommended Search Console handling: leave normal redirects, alternate canonical
 
 These are risks requiring editorial or account-level verification, not confirmed rejection reasons.
 
-- **Near-template archive pages:** many archive routes use the same `CommonContent` introduction, feature, FAQ, and step structure with only format names changed. The 12 thinnest routes are intentionally `noindex`, but the remaining archive pages should be individually tested and rewritten only where the actual format behavior, constraints, or troubleshooting differs.
-- **Localization quality:** a static catalog comparison found roughly 22–26% of strings identical to English in each non-English catalog. Some are brand names, formats, or technical tokens, but others are untranslated prose. Large substantially identical locale sets can contribute to Google choosing a different canonical and to low-value perceptions.
-- **Support identity:** the site brand is ConvertAllNow while support uses `support@y2code.com`. This can be legitimate, but the domain relationship should be explained on About/Contact and the mailbox must be monitored.
+- **Near-template archive pages:** many archive routes use the same `CommonContent` structure with only format names changed. Twenty-three are now intentionally `noindex`; they should be individually tested and given tool-specific limitations, examples, and troubleshooting before any are returned to the sitemap.
+- **Localization quality:** the nine unfinished non-English locale prefixes now redirect to English. The catalog files are retained for future work, but a locale must not be republished until native-language editorial review confirms that its metadata, headings, legal text, guidance, and tool UI are complete and natural.
+- **Support operations:** About and Contact now explain that Y2Code operates ConvertAllNow. The `support@y2code.com` mailbox still must be monitored and capable of handling privacy and user-support requests.
 - **Operational claims:** response-time claims, free commercial use, format support, maximum file sizes, "frame-accurate" editing, and no-watermark statements must be manually verified against each converter. Do not retain claims merely because they are favorable.
 - **Ad placement:** when ads are eventually enabled, verify on mobile and desktop that no ad resembles or sits too close to upload, convert, or download controls. Current code labels display units as "Advertisement" and limits inventory, but live Auto Ads settings can change placement.
-- **Consent management:** the implemented first-party choice now controls scripts. Before serving personalized ads in regulated regions, verify the production consent solution and Google's certified CMP requirements for the account and target regions.
+- **Consent management:** the implemented first-party choice controls scripts, but a custom banner is not evidence of a Google-certified CMP. Before enabling personalized ads for the EEA, UK, or Switzerland, configure a Google-certified CMP through AdSense Privacy & messaging (or another certified provider), publish the message, and test consent signals in production.
 - **Dependency migrations:** remaining high advisories should be resolved through planned PDF.js and background-removal migrations with malicious-file and output regression tests.
 - **No blog audit was possible:** the repository contains no blog routes or article registry. Do not advertise a blog or include nonexistent article URLs in Search Console/sitemaps.
 
@@ -108,6 +121,7 @@ These are risks requiring editorial or account-level verification, not confirmed
 - Trust/content: About entries in all `messages/*.json` catalogs, `terms/page.tsx`, `file-privacy-security/page.tsx`, `merge-pdf/page.tsx`, `video-compressor/page.tsx`, and `audio/page.tsx`
 - Security/dependencies: `package.json`, `package-lock.json`
 - Verification: `scripts/audit-site.mjs`
+- Follow-up review surface: `src/i18n/routing.ts`, `src/middleware.ts`, `src/lib/constants.ts`, `src/app/sitemap.xml/route.ts`, `src/app/[locale]/(root)/sitemap/page.tsx`, `src/components/sections/Navbar.tsx`, `src/components/sections/ZipToolConverter.tsx`, `src/components/sections/HomeSEOContent.tsx`, the four client-only converter pages/components, and `messages/en.json`
 
 ## 4. Technical fixes completed
 
@@ -135,7 +149,10 @@ These are risks requiring editorial or account-level verification, not confirmed
 
 - `npm exec tsc -- --noEmit`: passed.
 - `npm run build`: passed on Next.js 15.5.29 after network access was allowed for `next/font`.
-- Built-site audit: 68 routes checked; 0 failures; 470 sitemap URLs.
+- Built-site audit after follow-up hardening: 68 routes checked; 0 failures; 35 sitemap URLs.
+- Server HTML: every audited HTTP 200 page has a canonical, the expected English/x-default hreflang set, and a server-rendered H1.
+- Indexing controls: no intentional noindex URL appears in the XML sitemap; repetitive archive tools return `X-Robots-Tag: noindex, follow`; the HTML directory emits meta noindex.
+- Locale consolidation: representative Spanish, French, and Arabic paths return HTTP 308 to the matching English URL.
 - Browser consent test: before a choice, zero Google scripts and zero AdSense units were present; after acceptance, Analytics loaded, while AdSense remained absent because delivery was disabled.
 - Retired downloader paths: verified `410 Gone` for default and prefixed locale examples.
 - Retired API: verified HTTP 410.
@@ -154,26 +171,28 @@ The repository's `npm run lint` script invokes `next lint`, which is not a suppo
 
 1. Export Search Console indexing examples as CSV for every reported reason. Without exact URLs, the supplied totals cannot be mapped to route behavior.
 2. Test every converter with a valid file, invalid file, empty file, practical maximum-size file, reset/retry, and downloaded-output validation. Prioritize the indexable archive tools, PDF-to-DOCX, protected PDF/ZIP tools, and large FFmpeg tools.
-3. Review the 12 intentionally noindexed archive routes. Keep them noindex until they offer distinct demand, working format behavior, and original guidance; retire them with 410 if there is no user value.
-4. Rewrite genuinely untranslated locale prose with native-language editorial review. Do not mass-generate near-identical SEO text.
-5. Confirm `support@y2code.com` is monitored and disclose the relationship between Y2Code and ConvertAllNow.
+3. Review the 23 intentionally noindexed archive routes. Keep them noindex until they offer distinct demand, working format behavior, original guidance, and validated output; retire them with 410 if there is no user value.
+4. Rewrite genuinely untranslated locale prose with native-language editorial review. Do not re-enable locale routing or mass-generate near-identical SEO text until each locale passes a full crawl and human review.
+5. Confirm `support@y2code.com` is monitored; the site now discloses the Y2Code/ConvertAllNow relationship.
 6. Complete breaking dependency migrations for `pdfjs-dist` and `@imgly/background-removal`, then rerun malicious-file, worker, and conversion-output tests.
-7. Replace the legacy `next lint` script with an ESLint CLI configuration.
-8. Review production Core Web Vitals in Search Console/CrUX. Local build sizes indicate especially heavy first loads for image-to-PDF, merge/split/protect/unlock PDF, and middleware; real-user data is required before optimizing.
-9. Verify live server/CDN redirects for HTTP→HTTPS and www→non-www. The repository contains middleware and sample Nginx configuration, but deployment behavior was not changed or deployed.
-10. Validate production consent behavior and ad placement in all target jurisdictions and viewport sizes before enabling `NEXT_PUBLIC_ADS_ENABLED=true`.
+7. In AdSense, publish a Google-certified consent message for the EEA/UK/Switzerland before enabling personalized ads. This is an account-side step and cannot be completed by repository code alone.
+8. After deployment, wait for Google to recrawl the reduced sitemap and redirects (often at least one to two weeks) before requesting another AdSense review. Confirm the live deployment first; local test results do not prove the server has the new commit.
+9. Replace the legacy `next lint` script with an ESLint CLI configuration.
+10. Review production Core Web Vitals in Search Console/CrUX. Local build sizes indicate especially heavy first loads for image-to-PDF, merge/split/protect/unlock PDF, and middleware; real-user data is required before optimizing.
+11. Verify live server/CDN redirects for HTTP→HTTPS and www→non-www. The repository contains middleware and sample Nginx configuration, but deployment behavior was not changed or deployed.
+12. Validate production consent behavior and ad placement in all target jurisdictions and viewport sizes before enabling `NEXT_PUBLIC_ADS_ENABLED=true`.
 
 ## 8. Google Search Console actions required
 
 1. Export URL examples for all nine supplied indexing categories.
 2. Resubmit the updated XML sitemap only after deployment.
 3. Use URL Inspection on representative URLs:
-   - `/`, `/merge-pdf`, `/rar-to-zip`, `/about`, `/privacy`
-   - one prefixed locale route such as `/es/merge-pdf`
-   - one intentional noindex route such as `/zip-to-gz`
+   - `/`, `/merge-pdf`, `/create-zip`, `/about`, `/privacy`
+   - one prefixed locale route such as `/es/merge-pdf` (expect a permanent redirect to `/merge-pdf`)
+   - one intentional noindex route such as `/rar-to-zip`
    - one retired route such as `/ig-downloader` (expect 410)
 4. Confirm Google's rendered HTML contains the main heading/content and can load `_next`, WASM, and worker assets.
-5. For "Google chose different canonical," compare user-declared and Google-selected canonical URL pairs; prioritize locale pairs with untranslated content.
+5. For "Google chose different canonical," compare user-declared and Google-selected canonical URL pairs. Old unfinished locale URLs should now consolidate through redirects rather than compete as near-duplicate pages.
 6. For "Crawled/Discovered – currently not indexed," inspect indexable pages for working tools, unique visible content, and internal links. Do not request indexing for intentional noindex, redirects, 404, or 410 URLs.
 7. Mark validation only for issue groups whose exported URLs are actually fixed. Normal alternate-canonical and redirect exclusions do not need to become indexed.
 
@@ -182,6 +201,7 @@ The repository's `npm run lint` script invokes `next lint`, which is not a suppo
 - Deploy these changes and complete a fresh production crawl.
 - Ensure the Policy Center and AdSense Sites page show no unresolved account/site action.
 - Keep ads disabled until consent behavior, placement, and reviewed route inventory are verified in production.
+- Publish and test a Google-certified consent message for the EEA, UK, and Switzerland before enabling personalized ads there.
 - Resolve or formally risk-accept the remaining high dependency advisories after testing the required breaking upgrades.
 - Manually verify every indexable converter works and its claims match observed behavior.
 - Improve or keep noindex on template-like archive pages; do not expand the sitemap for index count alone.

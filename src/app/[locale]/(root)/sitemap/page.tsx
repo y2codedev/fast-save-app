@@ -10,11 +10,11 @@ import AllToolsHub from '@/components/sections/AllToolsHub';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const title = 'All Free Online File Tools — Convert, Compress & Edit | ConvertAllNow';
-  const description = 'Browse all free online tools on ConvertAllNow: PDF tools, image compressors, video converters, audio trimmers, and archive managers. 100% private in-browser processing.';
+  const description = 'Browse ConvertAllNow PDF, image, video, audio, and archive tools with direct links to each available utility.';
 
   return {
     title, description,
-    robots: { index: true, follow: true },
+    robots: { index: false, follow: true },
     alternates: {
       canonical: getCanonicalUrl(locale, '/sitemap'),
       languages: getAlternateLanguages('/sitemap'),
@@ -43,7 +43,7 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
     <>
       <WebPageSchema
         title="All Free Online File Tools"
-        description="Explore our comprehensive directory of 100% private, browser-based utilities for PDF, image, video, audio, and archive conversions."
+        description="Browse the available ConvertAllNow tools and platform documentation."
         path="/sitemap"
         locale={locale}
         breadcrumb={breadcrumbItems}
@@ -59,7 +59,7 @@ export default async function SitemapPage({ params }: { params: Promise<{ locale
               All Free Online File Tools
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-              Explore our comprehensive suite of 100% private, browser-based utilities for PDF documents, image editing, video &amp; audio compression, and archive conversions.
+              Browse the currently available browser-based utilities for PDF documents, images, video, audio, and archives.
             </p>
           </div>
 

@@ -60,6 +60,20 @@ export const ALL_TOOLS = [
  * to protect the site against doorway page and thin content penalties.
  */
 export const NOINDEX_TOOLS = [
+  // Working but highly template-similar archive utilities. Keep them available
+  // to users while withholding them from search/AdSense inventory until each
+  // page has distinct, tested guidance and examples.
+  '/edit-zip',
+  '/merge-zip',
+  '/split-zip',
+  '/view-zip',
+  '/protect-zip',
+  '/unlock-zip-file',
+  '/rar-to-zip',
+  '/7z-to-zip',
+  '/tar-to-zip',
+  '/tar-gz-to-zip',
+  '/zip-to-tar-gz',
   '/tar-bz2-to-zip',
   '/tar-xz-to-zip',
   '/gz-to-zip',

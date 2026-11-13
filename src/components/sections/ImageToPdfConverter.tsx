@@ -253,10 +253,10 @@ export default function ImageToPdfConverter() {
               {t('titleBadge')}
             </span>
           </div>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3">
+          <div aria-hidden="true" className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3">
             {t('titleMain')}
             <span className="block text-indigo-600 dark:text-indigo-400"> {t('titleHighlight')}</span>
-          </h1>
+          </div>
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t('subtitle')}
           </p>

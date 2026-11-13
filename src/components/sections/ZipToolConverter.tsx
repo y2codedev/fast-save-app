@@ -383,8 +383,7 @@ export default function ZipToolConverter({ slug }: { slug: string }) {
             </span>
           </div>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-black bg-gradient-to-r from-gray-900 via-indigo-900 to-violet-600 dark:from-white dark:via-indigo-200 dark:to-violet-400 bg-clip-text text-transparent mb-3 tracking-tight">
-            {config.fromFormat}{" "}
-            <span className="text-indigo-600 dark:text-indigo-400">to {config.toFormat}</span>
+            {config.toolName}
           </h1>
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {config.description}
